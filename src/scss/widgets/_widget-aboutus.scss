@@ -6,11 +6,12 @@
 
 
 .widget-aboutus {
-    @include card();
+  @include card();
 
-    padding: 28px;
+  padding: 28px;
 }
+
 .widget-aboutus__socials {
-    display: block;
-    margin-top: 20px;
+  display: block;
+  margin-top: 20px;
 }

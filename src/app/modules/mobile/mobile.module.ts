@@ -13,23 +13,24 @@ import { MobileLinksComponent } from './components/mobile-links/mobile-links.com
 import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.component';
 
 @NgModule({
-    declarations: [
-        // components
-        MobileHeaderComponent,
-        MobileLinksComponent,
-        MobileMenuComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        RouterModule,
-        // modules
-        SharedModule
-    ],
-    exports: [
-        // components
-        MobileHeaderComponent,
-        MobileMenuComponent
-    ]
+  declarations: [
+    // components
+    MobileHeaderComponent,
+    MobileLinksComponent,
+    MobileMenuComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules
+    SharedModule
+  ],
+  exports: [
+    // components
+    MobileHeaderComponent,
+    MobileMenuComponent
+  ]
 })
-export class MobileModule { }
+export class MobileModule {
+}

@@ -9,43 +9,44 @@ import { PageComponentsComponent } from './pages/page-components/page-components
 import { PageTypographyComponent } from './pages/page-typography/page-typography.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'about-us'
-    },
-    {
-        path: 'about-us',
-        component: PageAboutUsComponent
-    },
-    {
-        path: 'contact-us',
-        component: PageContactUsComponent
-    },
-    {
-        path: 'contact-us-alt',
-        component: PageContactUsAltComponent
-    },
-    {
-        path: 'terms',
-        component: PageTermsComponent
-    },
-    {
-        path: 'faq',
-        component: PageFaqComponent
-    },
-    {
-        path: 'components',
-        component: PageComponentsComponent
-    },
-    {
-        path: 'typography',
-        component: PageTypographyComponent
-    }
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'about-us'
+  },
+  {
+    path: 'about-us',
+    component: PageAboutUsComponent
+  },
+  {
+    path: 'contact-us',
+    component: PageContactUsComponent
+  },
+  {
+    path: 'contact-us-alt',
+    component: PageContactUsAltComponent
+  },
+  {
+    path: 'terms',
+    component: PageTermsComponent
+  },
+  {
+    path: 'faq',
+    component: PageFaqComponent
+  },
+  {
+    path: 'components',
+    component: PageComponentsComponent
+  },
+  {
+    path: 'typography',
+    component: PageTypographyComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [ RouterModule.forChild(routes) ],
+  exports: [ RouterModule ]
 })
-export class SiteRoutingModule { }
+export class SiteRoutingModule {
+}

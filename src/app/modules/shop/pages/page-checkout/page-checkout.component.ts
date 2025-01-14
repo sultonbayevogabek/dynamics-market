@@ -6,30 +6,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RootService } from '../../../../shared/services/root.service';
 
 @Component({
-    selector: 'app-checkout',
-    templateUrl: './page-checkout.component.html',
-    styleUrls: ['./page-checkout.component.scss']
+  selector: 'app-checkout',
+  templateUrl: './page-checkout.component.html',
+  styleUrls: [ './page-checkout.component.scss' ]
 })
 export class PageCheckoutComponent implements OnInit, OnDestroy {
-    private destroy$: Subject<void> = new Subject();
+  private destroy$: Subject<void> = new Subject();
 
-    constructor(
-        public root: RootService,
-        public cart: CartService,
-        private route: ActivatedRoute,
-        private router: Router
-    ) { }
+  constructor(
+    public root: RootService,
+    public cart: CartService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
 
-    ngOnInit(): void {
-        this.cart.quantity$.pipe(takeUntil(this.destroy$)).subscribe(quantity => {
-            if (!quantity) {
-                this.router.navigate(['../cart'], {relativeTo: this.route}).then();
-            }
-        });
-    }
+  ngOnInit(): void {
+    this.cart.quantity$.pipe(takeUntil(this.destroy$)).subscribe(quantity => {
+      if (!quantity) {
+        this.router.navigate([ '../cart' ], { relativeTo: this.route }).then();
+      }
+    });
+  }
 
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

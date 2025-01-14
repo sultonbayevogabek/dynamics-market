@@ -1,21 +1,21 @@
 export {
-    getBestsellers,
-    getFeatured,
-    getLatestProducts,
-    getProduct,
-    getRelatedProducts,
-    getSpecialOffers,
-    getTopRated,
+  getBestsellers,
+  getFeatured,
+  getLatestProducts,
+  getProduct,
+  getRelatedProducts,
+  getSpecialOffers,
+  getTopRated
 } from './database/products';
 export {
-    getShopCategoriesBySlugs,
-    getShopCategoriesTree,
-    getShopCategory,
-    getBlogCategoriesTree,
+  getShopCategoriesBySlugs,
+  getShopCategoriesTree,
+  getShopCategory,
+  getBlogCategoriesTree
 } from './database/categories';
 export {
-    getBrands,
+  getBrands
 } from './database/brands';
 export {
-    getProductsList,
+  getProductsList
 } from './products-list';

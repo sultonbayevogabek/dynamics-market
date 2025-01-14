@@ -21,25 +21,26 @@ import { PageOrderDetailsComponent } from './pages/page-order-details/page-order
 import { PageEditAddressComponent } from './pages/page-edit-address/page-edit-address.component';
 
 @NgModule({
-    declarations: [
-        // components
-        LayoutComponent,
-        // pages
-        PageAddressesListComponent,
-        PageDashboardComponent,
-        PageLoginComponent,
-        PageOrdersListComponent,
-        PagePasswordComponent,
-        PageProfileComponent,
-        PageOrderDetailsComponent,
-        PageEditAddressComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        // modules
-        AccountRoutingModule,
-        SharedModule
-    ]
+  declarations: [
+    // components
+    LayoutComponent,
+    // pages
+    PageAddressesListComponent,
+    PageDashboardComponent,
+    PageLoginComponent,
+    PageOrdersListComponent,
+    PagePasswordComponent,
+    PageProfileComponent,
+    PageOrderDetailsComponent,
+    PageEditAddressComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    // modules
+    AccountRoutingModule,
+    SharedModule
+  ]
 })
-export class AccountModule { }
+export class AccountModule {
+}

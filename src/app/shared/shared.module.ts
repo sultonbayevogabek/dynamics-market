@@ -45,82 +45,83 @@ import { ProductGalleryComponent } from './components/product-gallery/product-ga
 
 
 @NgModule({
-    declarations: [
-        // directives
-        ClickDirective,
-        CollapseContentDirective,
-        CollapseDirective,
-        CollapseItemDirective,
-        DepartmentsAreaDirective,
-        DropdownDirective,
-        FakeSlidesDirective,
-        OutsideTouchClickDirective,
-        OwlPreventClickDirective,
-        TouchClickDirective,
-        // components
-        AlertComponent,
-        IconComponent,
-        InputNumberComponent,
-        LoadingBarComponent,
-        PageHeaderComponent,
-        PaginationComponent,
-        PostCardComponent,
-        ProductCardComponent,
-        ProductComponent,
-        QuickviewComponent,
-        RatingComponent,
-        SearchComponent,
-        ShareButtonsComponent,
-        SocialLinksComponent,
-        // pipes
-        AbsoluteUrlPipe,
-        ColorTypePipe,
-        CurrencyFormatPipe,
-        ProductGalleryComponent,
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        RouterModule,
-        // modules (third-party)
-        CarouselModule,
-        ModalModule.forRoot(),
-        RedZoomModule,
-    ],
-    exports: [
-        // directives
-        ClickDirective,
-        CollapseContentDirective,
-        CollapseDirective,
-        CollapseItemDirective,
-        DepartmentsAreaDirective,
-        DropdownDirective,
-        FakeSlidesDirective,
-        OutsideTouchClickDirective,
-        OwlPreventClickDirective,
-        TouchClickDirective,
-        // components
-        AlertComponent,
-        IconComponent,
-        InputNumberComponent,
-        LoadingBarComponent,
-        PageHeaderComponent,
-        PaginationComponent,
-        PostCardComponent,
-        ProductCardComponent,
-        ProductComponent,
-        QuickviewComponent,
-        RatingComponent,
-        SearchComponent,
-        SocialLinksComponent,
-        // pipes
-        AbsoluteUrlPipe,
-        ColorTypePipe,
-        CurrencyFormatPipe,
-        ShareButtonsComponent,
-    ]
+  declarations: [
+    // directives
+    ClickDirective,
+    CollapseContentDirective,
+    CollapseDirective,
+    CollapseItemDirective,
+    DepartmentsAreaDirective,
+    DropdownDirective,
+    FakeSlidesDirective,
+    OutsideTouchClickDirective,
+    OwlPreventClickDirective,
+    TouchClickDirective,
+    // components
+    AlertComponent,
+    IconComponent,
+    InputNumberComponent,
+    LoadingBarComponent,
+    PageHeaderComponent,
+    PaginationComponent,
+    PostCardComponent,
+    ProductCardComponent,
+    ProductComponent,
+    QuickviewComponent,
+    RatingComponent,
+    SearchComponent,
+    ShareButtonsComponent,
+    SocialLinksComponent,
+    // pipes
+    AbsoluteUrlPipe,
+    ColorTypePipe,
+    CurrencyFormatPipe,
+    ProductGalleryComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule,
+    // modules (third-party)
+    CarouselModule,
+    ModalModule.forRoot(),
+    RedZoomModule
+  ],
+  exports: [
+    // directives
+    ClickDirective,
+    CollapseContentDirective,
+    CollapseDirective,
+    CollapseItemDirective,
+    DepartmentsAreaDirective,
+    DropdownDirective,
+    FakeSlidesDirective,
+    OutsideTouchClickDirective,
+    OwlPreventClickDirective,
+    TouchClickDirective,
+    // components
+    AlertComponent,
+    IconComponent,
+    InputNumberComponent,
+    LoadingBarComponent,
+    PageHeaderComponent,
+    PaginationComponent,
+    PostCardComponent,
+    ProductCardComponent,
+    ProductComponent,
+    QuickviewComponent,
+    RatingComponent,
+    SearchComponent,
+    SocialLinksComponent,
+    // pipes
+    AbsoluteUrlPipe,
+    ColorTypePipe,
+    CurrencyFormatPipe,
+    ShareButtonsComponent
+  ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

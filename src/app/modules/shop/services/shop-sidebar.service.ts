@@ -3,17 +3,18 @@ import { Subject, Observable } from 'rxjs';
 
 @Injectable()
 export class ShopSidebarService {
-    private isOpenSubject$: Subject<boolean> = new Subject();
+  private isOpenSubject$: Subject<boolean> = new Subject();
 
-    isOpen$: Observable<boolean> = this.isOpenSubject$.asObservable();
+  isOpen$: Observable<boolean> = this.isOpenSubject$.asObservable();
 
-    constructor() { }
+  constructor() {
+  }
 
-    open(): void {
-        this.isOpenSubject$.next(true);
-    }
+  open(): void {
+    this.isOpenSubject$.next(true);
+  }
 
-    close(): void {
-        this.isOpenSubject$.next(false);
-    }
+  close(): void {
+    this.isOpenSubject$.next(false);
+  }
 }

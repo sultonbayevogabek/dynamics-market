@@ -21,25 +21,26 @@ import { PageTermsComponent } from './pages/page-terms/page-terms.component';
 import { PageTypographyComponent } from './pages/page-typography/page-typography.component';
 
 @NgModule({
-    declarations: [
-        // pages
-        PageAboutUsComponent,
-        PageComponentsComponent,
-        PageContactUsAltComponent,
-        PageContactUsComponent,
-        PageFaqComponent,
-        PageTermsComponent,
-        PageTypographyComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        // modules (third-party)
-        CarouselModule,
-        // modules
-        BlocksModule,
-        SharedModule,
-        SiteRoutingModule
-    ]
+  declarations: [
+    // pages
+    PageAboutUsComponent,
+    PageComponentsComponent,
+    PageContactUsAltComponent,
+    PageContactUsComponent,
+    PageFaqComponent,
+    PageTermsComponent,
+    PageTypographyComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    // modules (third-party)
+    CarouselModule,
+    // modules
+    BlocksModule,
+    SharedModule,
+    SiteRoutingModule
+  ]
 })
-export class SiteModule { }
+export class SiteModule {
+}

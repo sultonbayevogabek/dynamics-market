@@ -20,30 +20,31 @@ import { NavComponent } from './components/nav/nav.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 
 @NgModule({
-    declarations: [
-        // components
-        AccountMenuComponent,
-        DepartmentsComponent,
-        DropcartComponent,
-        HeaderComponent,
-        IndicatorComponent,
-        LinksComponent,
-        MegamenuComponent,
-        MenuComponent,
-        NavComponent,
-        TopbarComponent,
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        RouterModule,
-        // modules
-        SharedModule
-    ],
-    exports: [
-        // components
-        HeaderComponent,
-        DropcartComponent
-    ]
+  declarations: [
+    // components
+    AccountMenuComponent,
+    DepartmentsComponent,
+    DropcartComponent,
+    HeaderComponent,
+    IndicatorComponent,
+    LinksComponent,
+    MegamenuComponent,
+    MenuComponent,
+    NavComponent,
+    TopbarComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules
+    SharedModule
+  ],
+  exports: [
+    // components
+    HeaderComponent,
+    DropcartComponent
+  ]
 })
-export class HeaderModule { }
+export class HeaderModule {
+}

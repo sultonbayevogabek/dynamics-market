@@ -18,7 +18,9 @@ import { BlockFeaturesComponent } from './block-features/block-features.componen
 import { BlockMapComponent } from './block-map/block-map.component';
 import { BlockPostsComponent } from './block-posts/block-posts.component';
 import { BlockProductColumnsComponent } from './block-product-columns/block-product-columns.component';
-import { BlockProductColumnsItemComponent } from './block-product-columns/block-product-columns-item/block-product-columns-item.component';
+import {
+  BlockProductColumnsItemComponent
+} from './block-product-columns/block-product-columns-item/block-product-columns-item.component';
 import { BlockProductsCarouselComponent } from './block-products-carousel/block-products-carousel.component';
 import { BlockProductsComponent } from './block-products/block-products.component';
 import { BlockSlideshowComponent } from './block-slideshow/block-slideshow.component';
@@ -27,44 +29,45 @@ import { BlockSlideshowComponent } from './block-slideshow/block-slideshow.compo
 import { BlockHeaderComponent } from './components/block-header/block-header.component';
 
 @NgModule({
-    declarations: [
-        // blocks
-        BlockBannerComponent,
-        BlockBrandsComponent,
-        BlockCategoriesComponent,
-        BlockFeaturesComponent,
-        BlockMapComponent,
-        BlockPostsComponent,
-        BlockProductColumnsComponent,
-        BlockProductColumnsItemComponent,
-        BlockProductsCarouselComponent,
-        BlockProductsComponent,
-        BlockSlideshowComponent,
-        // components
-        BlockHeaderComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        RouterModule,
-        // modules (third-party)
-        CarouselModule,
-        // modules
-        SharedModule
-    ],
-    exports: [
-        // blocks
-        BlockBannerComponent,
-        BlockBrandsComponent,
-        BlockCategoriesComponent,
-        BlockFeaturesComponent,
-        BlockMapComponent,
-        BlockPostsComponent,
-        BlockProductColumnsComponent,
-        BlockProductColumnsItemComponent,
-        BlockProductsCarouselComponent,
-        BlockProductsComponent,
-        BlockSlideshowComponent
-    ]
+  declarations: [
+    // blocks
+    BlockBannerComponent,
+    BlockBrandsComponent,
+    BlockCategoriesComponent,
+    BlockFeaturesComponent,
+    BlockMapComponent,
+    BlockPostsComponent,
+    BlockProductColumnsComponent,
+    BlockProductColumnsItemComponent,
+    BlockProductsCarouselComponent,
+    BlockProductsComponent,
+    BlockSlideshowComponent,
+    // components
+    BlockHeaderComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules (third-party)
+    CarouselModule,
+    // modules
+    SharedModule
+  ],
+  exports: [
+    // blocks
+    BlockBannerComponent,
+    BlockBrandsComponent,
+    BlockCategoriesComponent,
+    BlockFeaturesComponent,
+    BlockMapComponent,
+    BlockPostsComponent,
+    BlockProductColumnsComponent,
+    BlockProductColumnsItemComponent,
+    BlockProductsCarouselComponent,
+    BlockProductsComponent,
+    BlockSlideshowComponent
+  ]
 })
-export class BlocksModule { }
+export class BlocksModule {
+}

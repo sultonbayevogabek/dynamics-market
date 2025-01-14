@@ -6,36 +6,37 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-quickview',
-    templateUrl: './quickview.component.html',
-    styleUrls: ['./quickview.component.scss']
+  selector: 'app-quickview',
+  templateUrl: './quickview.component.html',
+  styleUrls: [ './quickview.component.scss' ]
 })
 export class QuickviewComponent implements AfterViewInit, OnDestroy {
-    private destroy$: Subject<void> = new Subject();
+  private destroy$: Subject<void> = new Subject();
 
-    @ViewChild('modal', { read: TemplateRef }) template!: TemplateRef<any>;
+  @ViewChild('modal', { read: TemplateRef }) template!: TemplateRef<any>;
 
-    modalRef?: BsModalRef;
-    product?: Product;
+  modalRef?: BsModalRef;
+  product?: Product;
 
-    constructor(
-        private quickview: QuickviewService,
-        private modalService: BsModalService
-    ) { }
+  constructor(
+    private quickview: QuickviewService,
+    private modalService: BsModalService
+  ) {
+  }
 
-    ngAfterViewInit(): void {
-        this.quickview.show$.pipe(takeUntil(this.destroy$)).subscribe(product => {
-            if (this.modalRef) {
-                this.modalRef.hide();
-            }
+  ngAfterViewInit(): void {
+    this.quickview.show$.pipe(takeUntil(this.destroy$)).subscribe(product => {
+      if (this.modalRef) {
+        this.modalRef.hide();
+      }
 
-            this.product = product;
-            this.modalRef = this.modalService.show(this.template, {class: 'modal-dialog-centered modal-xl'});
-        });
-    }
+      this.product = product;
+      this.modalRef = this.modalService.show(this.template, { class: 'modal-dialog-centered modal-xl' });
+    });
+  }
 
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

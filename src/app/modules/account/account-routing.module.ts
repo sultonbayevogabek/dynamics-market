@@ -11,53 +11,54 @@ import { PageOrderDetailsComponent } from './pages/page-order-details/page-order
 import { PageEditAddressComponent } from './pages/page-edit-address/page-edit-address.component';
 
 const routes: Routes = [
-    {
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
         path: '',
-        component: LayoutComponent,
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: 'dashboard'
-            },
-            {
-                path: 'dashboard',
-                component: PageDashboardComponent
-            },
-            {
-                path: 'profile',
-                component: PageProfileComponent
-            },
-            {
-                path: 'addresses',
-                component: PageAddressesListComponent
-            },
-            {
-                path: 'addresses/:addressId',
-                component: PageEditAddressComponent
-            },
-            {
-                path: 'orders',
-                component: PageOrdersListComponent
-            },
-            {
-                path: 'orders/:orderId',
-                component: PageOrderDetailsComponent
-            },
-            {
-                path: 'password',
-                component: PagePasswordComponent
-            }
-        ]
-    },
-    {
-        path: 'login',
-        component: PageLoginComponent
-    }
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+      },
+      {
+        path: 'dashboard',
+        component: PageDashboardComponent
+      },
+      {
+        path: 'profile',
+        component: PageProfileComponent
+      },
+      {
+        path: 'addresses',
+        component: PageAddressesListComponent
+      },
+      {
+        path: 'addresses/:addressId',
+        component: PageEditAddressComponent
+      },
+      {
+        path: 'orders',
+        component: PageOrdersListComponent
+      },
+      {
+        path: 'orders/:orderId',
+        component: PageOrderDetailsComponent
+      },
+      {
+        path: 'password',
+        component: PagePasswordComponent
+      }
+    ]
+  },
+  {
+    path: 'login',
+    component: PageLoginComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [ RouterModule.forChild(routes) ],
+  exports: [ RouterModule ]
 })
-export class AccountRoutingModule { }
+export class AccountRoutingModule {
+}

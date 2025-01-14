@@ -3,28 +3,30 @@ import { Observable, Subject } from 'rxjs';
 import { CurrencyFormatOptions } from '../interfaces/currency-format-options';
 
 interface CurrencyServiceData {
-    options: CurrencyFormatOptions;
+  options: CurrencyFormatOptions;
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CurrencyService {
-    private data: CurrencyServiceData = {
-        options: {}
-    };
+  private data: CurrencyServiceData = {
+    options: {}
+  };
 
-    private changesSubject$: Subject<CurrencyFormatOptions> = new Subject();
+  private changesSubject$: Subject<CurrencyFormatOptions> = new Subject();
 
-    changes$: Observable<CurrencyFormatOptions> = this.changesSubject$.asObservable();
+  changes$: Observable<CurrencyFormatOptions> = this.changesSubject$.asObservable();
 
-    get options(): CurrencyFormatOptions {
-        return this.data.options;
-    }
-    set options(value: CurrencyFormatOptions) {
-        this.data.options = value;
-        this.changesSubject$.next(value);
-    }
+  get options(): CurrencyFormatOptions {
+    return this.data.options;
+  }
 
-    constructor() { }
+  set options(value: CurrencyFormatOptions) {
+    this.data.options = value;
+    this.changesSubject$.next(value);
+  }
+
+  constructor() {
+  }
 }

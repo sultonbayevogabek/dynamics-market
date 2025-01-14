@@ -15,22 +15,23 @@ import { NewsletterComponent } from './components/newsletter/newsletter.componen
 import { TotopComponent } from './components/totop/totop.component';
 
 @NgModule({
-    declarations: [
-        ContactsComponent,
-        FooterComponent,
-        LinksComponent,
-        NewsletterComponent,
-        TotopComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        RouterModule,
-        // modules
-        SharedModule
-    ],
-    exports: [
-        FooterComponent
-    ]
+  declarations: [
+    ContactsComponent,
+    FooterComponent,
+    LinksComponent,
+    NewsletterComponent,
+    TotopComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules
+    SharedModule
+  ],
+  exports: [
+    FooterComponent
+  ]
 })
-export class FooterModule { }
+export class FooterModule {
+}

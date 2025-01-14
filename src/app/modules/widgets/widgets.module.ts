@@ -23,40 +23,41 @@ import { WidgetSearchComponent } from './widget-search/widget-search.component';
 import { WidgetTagsComponent } from './widget-tags/widget-tags.component';
 
 @NgModule({
-    declarations: [
-        // widgets
-        WidgetAboutusComponent,
-        WidgetCategoriesComponent,
-        WidgetCommentsComponent,
-        WidgetFiltersComponent,
-        WidgetNewsletterComponent,
-        WidgetPostsComponent,
-        WidgetProductsComponent,
-        WidgetSearchComponent,
-        WidgetTagsComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-        // modules (third-party)
-        NgxSliderModule,
-        // modules
-        SharedModule
-    ],
-    exports: [
-        // widgets
-        WidgetAboutusComponent,
-        WidgetCategoriesComponent,
-        WidgetCommentsComponent,
-        WidgetFiltersComponent,
-        WidgetNewsletterComponent,
-        WidgetPostsComponent,
-        WidgetProductsComponent,
-        WidgetSearchComponent,
-        WidgetTagsComponent
-    ]
+  declarations: [
+    // widgets
+    WidgetAboutusComponent,
+    WidgetCategoriesComponent,
+    WidgetCommentsComponent,
+    WidgetFiltersComponent,
+    WidgetNewsletterComponent,
+    WidgetPostsComponent,
+    WidgetProductsComponent,
+    WidgetSearchComponent,
+    WidgetTagsComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    // modules (third-party)
+    NgxSliderModule,
+    // modules
+    SharedModule
+  ],
+  exports: [
+    // widgets
+    WidgetAboutusComponent,
+    WidgetCategoriesComponent,
+    WidgetCommentsComponent,
+    WidgetFiltersComponent,
+    WidgetNewsletterComponent,
+    WidgetPostsComponent,
+    WidgetProductsComponent,
+    WidgetSearchComponent,
+    WidgetTagsComponent
+  ]
 })
-export class WidgetsModule { }
+export class WidgetsModule {
+}

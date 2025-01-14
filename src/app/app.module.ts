@@ -34,37 +34,38 @@ import { PageOffcanvasCartComponent } from './pages/page-offcanvas-cart/page-off
 
 
 @NgModule({
-    declarations: [
-        // components
-        AppComponent,
-        RootComponent,
-        // pages
-        PageHomeOneComponent,
-        PageHomeTwoComponent,
-        PageNotFoundComponent,
-        PageOffcanvasCartComponent
-    ],
-    imports: [
-        // modules (angular)
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        FormsModule,
-        // modules (third-party)
-        CarouselModule,
-        ToastrModule.forRoot(),
-        // modules
-        AppRoutingModule,
-        BlocksModule,
-        FooterModule,
-        HeaderModule,
-        MobileModule,
-        SharedModule,
-        WidgetsModule
-    ],
-    providers: [
-        // { provide: LOCALE_ID, useValue: 'it' }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    // components
+    AppComponent,
+    RootComponent,
+    // pages
+    PageHomeOneComponent,
+    PageHomeTwoComponent,
+    PageNotFoundComponent,
+    PageOffcanvasCartComponent
+  ],
+  imports: [
+    // modules (angular)
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    // modules (third-party)
+    CarouselModule,
+    ToastrModule.forRoot(),
+    // modules
+    AppRoutingModule,
+    BlocksModule,
+    FooterModule,
+    HeaderModule,
+    MobileModule,
+    SharedModule,
+    WidgetsModule
+  ],
+  providers: [
+    // { provide: LOCALE_ID, useValue: 'it' }
+  ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}

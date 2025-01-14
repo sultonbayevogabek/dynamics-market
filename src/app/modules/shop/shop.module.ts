@@ -30,34 +30,35 @@ import { ProductSidebarComponent } from './components/product-sidebar/product-si
 import { PageOrderSuccessComponent } from './pages/page-order-success/page-order-success.component';
 
 @NgModule({
-    declarations: [
-        // components
-        ProductsViewComponent,
-        ProductTabsComponent,
-        ShopSidebarComponent,
-        // pages
-        PageCartComponent,
-        PageCategoryComponent,
-        PageCheckoutComponent,
-        PageCompareComponent,
-        PageProductComponent,
-        PageTrackOrderComponent,
-        PageWishlistComponent,
-        ProductSidebarComponent,
-        PageOrderSuccessComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        // modules (third-party)
-        CarouselModule,
-        // modules
-        BlocksModule,
-        SharedModule,
-        ShopRoutingModule,
-        WidgetsModule
-    ]
+  declarations: [
+    // components
+    ProductsViewComponent,
+    ProductTabsComponent,
+    ShopSidebarComponent,
+    // pages
+    PageCartComponent,
+    PageCategoryComponent,
+    PageCheckoutComponent,
+    PageCompareComponent,
+    PageProductComponent,
+    PageTrackOrderComponent,
+    PageWishlistComponent,
+    ProductSidebarComponent,
+    PageOrderSuccessComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // modules (third-party)
+    CarouselModule,
+    // modules
+    BlocksModule,
+    SharedModule,
+    ShopRoutingModule,
+    WidgetsModule
+  ]
 })
-export class ShopModule { }
+export class ShopModule {
+}

@@ -4,86 +4,87 @@ import { Category } from '../interfaces/category';
 import { Brand } from '../interfaces/brand';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class RootService {
-    constructor() { }
+  constructor() {
+  }
 
-    home(): string {
-        return '/';
+  home(): string {
+    return '/';
+  }
+
+  shop(): string {
+    return `/shop/catalog`;
+  }
+
+  category(category: Partial<Category>): string {
+    if (category.type === 'shop') {
+      const basePath = this.shop();
+
+      if ('slug' in category) {
+        return `${ basePath }/${ category.slug }`;
+      }
+      if ('id' in category) {
+        return `${ basePath }/${ category.id }`;
+      }
+
+      throw Error('Provide category with "path", "slug" or "id".');
+    }
+    if (category.type === 'blog') {
+      return this.blog();
     }
 
-    shop(): string {
-        return `/shop/catalog`;
+    throw Error('Provided category with unknown type.');
+  }
+
+  product(product: Partial<Product>): string {
+    const basePath = '/shop/products';
+
+    if ('slug' in product) {
+      return `${ basePath }/${ product.slug }`;
+    }
+    if ('id' in product) {
+      return `${ basePath }/${ product.id }`;
     }
 
-    category(category: Partial<Category>): string {
-        if (category.type === 'shop') {
-            const basePath = this.shop();
+    throw Error('Provide product with "slug" or "id".');
+  }
 
-            if ('slug' in category) {
-                return `${basePath}/${category.slug}`;
-            }
-            if ('id' in category) {
-                return `${basePath}/${category.id}`;
-            }
+  // noinspection JSUnusedLocalSymbols
+  brand(brand: Partial<Brand>): string {
+    return '/';
+  }
 
-            throw Error('Provide category with "path", "slug" or "id".');
-        }
-        if (category.type === 'blog') {
-            return this.blog();
-        }
+  cart(): string {
+    return '/shop/cart';
+  }
 
-        throw Error('Provided category with unknown type.');
-    }
+  checkout(): string {
+    return '/shop/cart/checkout';
+  }
 
-    product(product: Partial<Product>): string {
-        const basePath = '/shop/products';
+  wishlist(): string {
+    return '/shop/wishlist';
+  }
 
-        if ('slug' in product) {
-            return `${basePath}/${product.slug}`;
-        }
-        if ('id' in product) {
-            return `${basePath}/${product.id}`;
-        }
+  blog(): string {
+    return '/blog';
+  }
 
-        throw Error('Provide product with "slug" or "id".');
-    }
+  post(): string {
+    return `/blog/post-classic`;
+  }
 
-    // noinspection JSUnusedLocalSymbols
-    brand(brand: Partial<Brand>): string {
-        return '/';
-    }
+  login(): string {
+    return '/account/login';
+  }
 
-    cart(): string {
-        return '/shop/cart';
-    }
+  terms(): string {
+    return '/site/terms';
+  }
 
-    checkout(): string {
-        return '/shop/cart/checkout';
-    }
-
-    wishlist(): string {
-        return '/shop/wishlist';
-    }
-
-    blog(): string {
-        return '/blog';
-    }
-
-    post(): string {
-        return `/blog/post-classic`;
-    }
-
-    login(): string {
-        return '/account/login';
-    }
-
-    terms(): string {
-        return '/site/terms';
-    }
-
-    notFound(): string {
-        return `/site/not-found`;
-    }
+  notFound(): string {
+    return `/site/not-found`;
+  }
 }

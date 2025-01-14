@@ -18,22 +18,23 @@ import { PageCategoryComponent } from './pages/page-category/page-category.compo
 import { PagePostComponent } from './pages/page-post/page-post.component';
 
 @NgModule({
-    declarations: [
-        // components
-        CommentsListComponent,
-        PostComponent,
-        SidebarComponent,
-        // pages
-        PageCategoryComponent,
-        PagePostComponent
-    ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        // modules
-        BlogRoutingModule,
-        SharedModule,
-        WidgetsModule
-    ]
+  declarations: [
+    // components
+    CommentsListComponent,
+    PostComponent,
+    SidebarComponent,
+    // pages
+    PageCategoryComponent,
+    PagePostComponent
+  ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    // modules
+    BlogRoutingModule,
+    SharedModule,
+    WidgetsModule
+  ]
 })
-export class BlogModule { }
+export class BlogModule {
+}

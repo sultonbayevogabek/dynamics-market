@@ -8,58 +8,59 @@ import { RootService } from '../../../shared/services/root.service';
 import { ListOptions, ShopService } from '../../../shared/api/shop.service';
 
 export function parseProductsListParams(params: Params): ListOptions {
-    const options: ListOptions = {};
+  const options: ListOptions = {};
 
-    if (params['page']) {
-        options.page = parseFloat(params['page']);
-    }
-    if (params['limit']) {
-        options.limit = parseFloat(params['limit']);
-    }
-    if (params['sort']) {
-        options.sort = params['sort'];
-    }
+  if (params['page']) {
+    options.page = parseFloat(params['page']);
+  }
+  if (params['limit']) {
+    options.limit = parseFloat(params['limit']);
+  }
+  if (params['sort']) {
+    options.sort = params['sort'];
+  }
 
-    for (const param of Object.keys(params)) {
-        const mr = param.match(/^filter_([-_A-Za-z0-9]+)$/);
+  for (const param of Object.keys(params)) {
+    const mr = param.match(/^filter_([-_A-Za-z0-9]+)$/);
 
-        if (!mr) {
-            continue;
-        }
-
-        const filterSlug = mr[1];
-
-        if (!options.filterValues) {
-            options.filterValues = {};
-        }
-
-        options.filterValues[filterSlug] = params[param];
+    if (!mr) {
+      continue;
     }
 
-    return options;
+    const filterSlug = mr[1];
+
+    if (!options.filterValues) {
+      options.filterValues = {};
+    }
+
+    options.filterValues[filterSlug] = params[param];
+  }
+
+  return options;
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ProductsListResolverService implements Resolve<ProductsList> {
-    constructor(
-        private root: RootService,
-        private router: Router,
-        private shop: ShopService,
-    ) { }
+  constructor(
+    private root: RootService,
+    private router: Router,
+    private shop: ShopService
+  ) {
+  }
 
-    resolve(route: ActivatedRouteSnapshot): Observable<ProductsList> {
-        const categorySlug = route.params['categorySlug'] || route.data['categorySlug'] || null;
+  resolve(route: ActivatedRouteSnapshot): Observable<ProductsList> {
+    const categorySlug = route.params['categorySlug'] || route.data['categorySlug'] || null;
 
-        return this.shop.getProductsList(categorySlug, parseProductsListParams(route.queryParams)).pipe(
-            catchError(error => {
-                if (error instanceof HttpErrorResponse && error.status === 404) {
-                    this.router.navigate([this.root.notFound()]).then();
-                }
+    return this.shop.getProductsList(categorySlug, parseProductsListParams(route.queryParams)).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse && error.status === 404) {
+          this.router.navigate([ this.root.notFound() ]).then();
+        }
 
-                return EMPTY;
-            })
-        );
-    }
+        return EMPTY;
+      })
+    );
+  }
 }
