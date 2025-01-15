@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CurrencyService } from '../../../../shared/services/currency.service';
+import { LANGUAGES, LANGUAGES_SHORTS } from '../../../../shared/constants/languages';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Currency {
   name: string;
@@ -13,14 +15,29 @@ interface Currency {
   templateUrl: './topbar.component.html',
   styleUrls: [ './topbar.component.scss' ]
 })
+
 export class TopbarComponent {
-  languages = [
-    { name: 'English', image: 'language-1' },
-    { name: 'French', image: 'language-2' },
-    { name: 'German', image: 'language-3' },
-    { name: 'Russian', image: 'language-4' },
-    { name: 'Italian', image: 'language-5' }
-  ];
+  get languages() {
+    return LANGUAGES;
+  }
+
+  get currentLang(): string {
+    let lang: string = this.translateService.currentLang;
+
+    switch (lang) {
+      case 'uz':
+        lang = 'O\'Z'
+        break;
+      case 'ru':
+        lang = 'РУ'
+        break;
+      case 'en':
+        lang = 'EN'
+        break;
+    }
+
+    return lang;
+  }
 
   currencies = [
     { name: '€ Euro', url: '', code: 'EUR', symbol: '€' },
@@ -30,7 +47,8 @@ export class TopbarComponent {
   ];
 
   constructor(
-    public currencyService: CurrencyService
+    public currencyService: CurrencyService,
+    private translateService: TranslateService,
   ) {
   }
 
@@ -39,5 +57,13 @@ export class TopbarComponent {
       code: currency.code,
       display: currency.symbol
     };
+  }
+
+  setLanguage(lang: string): void {
+    if (this.translateService.currentLang === lang) {
+      return;
+    }
+    localStorage.setItem('lang', lang);
+    location.reload();
   }
 }

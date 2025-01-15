@@ -6,6 +6,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrls: [ './icon.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class IconComponent {
   id!: string;
   width: string | null = null;

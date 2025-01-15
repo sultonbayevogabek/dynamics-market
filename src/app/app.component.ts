@@ -7,6 +7,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { CurrencyService } from './shared/services/currency.service';
 import { filter, first } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { LANGUAGES_SHORTS } from './shared/constants/languages';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,8 @@ export class AppComponent implements OnInit {
     private wishlist: WishlistService,
     private zone: NgZone,
     private scroller: ViewportScroller,
-    private currency: CurrencyService
+    private currency: CurrencyService,
+    private translate: TranslateService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.zone.runOutsideAngular(() => {
@@ -49,6 +52,12 @@ export class AppComponent implements OnInit {
           }
         });
       });
+    }
+
+    const lang = localStorage.getItem('lang') || 'uz';
+    if (LANGUAGES_SHORTS.includes(lang)) {
+      translate.setDefaultLang(lang);
+      translate.use(lang);
     }
   }
 

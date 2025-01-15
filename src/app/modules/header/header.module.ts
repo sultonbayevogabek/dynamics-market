@@ -18,6 +18,7 @@ import { MegamenuComponent } from './components/megamenu/megamenu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { NavComponent } from './components/nav/nav.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -33,13 +34,14 @@ import { TopbarComponent } from './components/topbar/topbar.component';
     NavComponent,
     TopbarComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    RouterModule,
-    // modules
-    SharedModule
-  ],
+    imports: [
+        // modules (angular)
+        CommonModule,
+        RouterModule,
+        // modules
+        SharedModule,
+        TranslateModule
+    ],
   exports: [
     // components
     HeaderComponent,
