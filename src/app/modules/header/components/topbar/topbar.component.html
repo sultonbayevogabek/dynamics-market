@@ -43,7 +43,7 @@
       <div class="topbar__item">
         <div class="topbar-dropdown" appDropdown="topbar-dropdown--opened" #currencyDropdown="appDropdown">
           <button class="topbar-dropdown__btn" type="button" (click)="currencyDropdown.toggle()">
-            Currency: <span class="topbar__item-value">{{ currencyService.options.code }}</span>
+            {{ 'currency'| translate }}: <span class="topbar__item-value">{{ currencyService.options.code }}</span>
             <app-icon name="arrow-rounded-down-7x5" size="7x5"></app-icon>
           </button>
 
@@ -70,7 +70,7 @@
       <div class="topbar__item">
         <div class="topbar-dropdown" appDropdown="topbar-dropdown--opened" #languageDropdown="appDropdown">
           <button class="topbar-dropdown__btn" type="button" (click)="languageDropdown.toggle()">
-            Language: <span class="topbar__item-value">{{ currentLang }}</span>
+            {{ 'language'| translate }}: <span class="topbar__item-value">{{ currentLang }}</span>
             <app-icon name="arrow-rounded-down-7x5" size="7x5"></app-icon>
           </button>
 

@@ -26,7 +26,7 @@ export class TopbarComponent {
 
     switch (lang) {
       case 'uz':
-        lang = 'O\'Z'
+        lang = 'O\'z'
         break;
       case 'ru':
         lang = 'РУ'
@@ -40,8 +40,6 @@ export class TopbarComponent {
   }
 
   currencies = [
-    { name: '€ Euro', url: '', code: 'EUR', symbol: '€' },
-    { name: '£ Pound Sterling', url: '', code: 'GBP', symbol: '£' },
     { name: '$ US Dollar', url: '', code: 'USD', symbol: '$' },
     { name: '₽ Russian Ruble', url: '', code: 'RUB', symbol: '₽' }
   ];
