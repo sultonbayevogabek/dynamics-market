@@ -1,4 +1,7 @@
 {
   "language": "Язык",
-  "currency": "Валюта"
+  "currency": "Валюта",
+  "contacts": "Контакты",
+  "dollar": "Доллар",
+  "ruble": "Рубль"
 }

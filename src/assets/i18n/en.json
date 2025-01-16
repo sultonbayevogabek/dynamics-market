@@ -1,4 +1,7 @@
 {
   "language": "Language",
-  "currency": "Currency"
+  "currency": "Currency",
+  "contacts": "Contacts",
+  "dollar": "Dollar",
+  "ruble": "Ruble"
 }

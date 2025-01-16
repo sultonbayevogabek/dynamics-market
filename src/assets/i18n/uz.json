@@ -1,4 +1,7 @@
 {
   "language": "Tizim tili",
-  "currency": "Valyuta"
+  "currency": "Valyuta",
+  "contacts": "Bog'lanish",
+  "dollar": "Dollar",
+  "ruble": "Rubl"
 }
