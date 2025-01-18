@@ -3,5 +3,8 @@
   "currency": "Valyuta",
   "contacts": "Bog'lanish",
   "dollar": "Dollar",
-  "ruble": "Rubl"
+  "ruble": "Rubl",
+  "phone": "Telefon",
+  "office.address": "Toshkent shahar, Uchtepa tumani, Shirin ko'chasi, 2D 84-kvartira",
+  "work.time": "Dush - Shan, 09:00 - 19:00"
 }

@@ -6,9 +6,25 @@
   </div>
 
   <ul class="footer-contacts__contacts">
-    <li><i class="footer-contacts__icon fas fa-globe-americas"></i> {{ store.address }}</li>
-    <li><i class="footer-contacts__icon far fa-envelope"></i> {{ store.email }}</li>
-    <li><i class="footer-contacts__icon fas fa-mobile-alt"></i> {{ store.phone.join(', ') }}</li>
-    <li><i class="footer-contacts__icon far fa-clock"></i> {{ store.hours }}</li>
+    <li>
+      <a href="">
+        <i class="footer-contacts__icon fas fa-globe-americas"></i>
+        <span>{{ 'office.address'| translate }}</span>
+      </a>
+    </li>
+    <li>
+      <a href="mailto:dynamicsmarket@mail.uz">
+        <i class="footer-contacts__icon far fa-envelope"></i>
+        dynamicsmarket@mail.uz
+      </a>
+    </li>
+    <li>
+      <i class="footer-contacts__icon fas fa-mobile-alt"></i>
+      <a href="tel:+998979639773">+99899 963-97-73</a>, <a href="tel:+998971999773">+99897 199-97-73</a>
+    </li>
+    <li>
+      <i class="footer-contacts__icon far fa-clock"></i>
+      {{ 'work.time'| translate }}
+    </li>
   </ul>
 </div>

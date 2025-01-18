@@ -6,10 +6,8 @@ import { Link } from '../../../../shared/interfaces/link';
   templateUrl: './links.component.html',
   styleUrls: [ './links.component.scss' ]
 })
+
 export class LinksComponent {
   @Input() header = '';
   @Input() links: Link[] = [];
-
-  constructor() {
-  }
 }

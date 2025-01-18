@@ -13,6 +13,7 @@ import { FooterComponent } from './footer.component';
 import { LinksComponent } from './components/links/links.component';
 import { NewsletterComponent } from './components/newsletter/newsletter.component';
 import { TotopComponent } from './components/totop/totop.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,14 @@ import { TotopComponent } from './components/totop/totop.component';
     NewsletterComponent,
     TotopComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    RouterModule,
-    // modules
-    SharedModule
-  ],
+   imports: [
+      // modules (angular)
+      CommonModule,
+      RouterModule,
+      // modules
+      SharedModule,
+      TranslateModule
+   ],
   exports: [
     FooterComponent
   ]
