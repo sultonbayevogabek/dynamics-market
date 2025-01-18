@@ -63,6 +63,10 @@
 .site-header__phone-number {
   font-size: 20px;
   font-weight: $font-weight-bold;
+
+  a {
+    color: $accent-opposite-color;
+  }
 }
 
 .site-header__nav-panel {

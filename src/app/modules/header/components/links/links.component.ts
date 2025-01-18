@@ -20,6 +20,7 @@ import { HeaderService } from '../../../../shared/services/header.service';
   templateUrl: './links.component.html',
   styleUrls: [ './links.component.scss' ]
 })
+
 export class LinksComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChildren('submenuElement') submenuElements!: QueryList<ElementRef>;
   @ViewChildren('itemElement') itemElements!: QueryList<ElementRef>;

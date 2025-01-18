@@ -40,6 +40,10 @@
     color: inherit;
   }
 
+  a:hover {
+    color: $link-hover-color;
+  }
+
   li {
     padding: 4px 0;
     position: relative;

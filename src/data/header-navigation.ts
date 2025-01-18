@@ -1,7 +1,7 @@
 import { NavigationLink } from '../app/shared/interfaces/navigation-link';
 
 export const navigation: NavigationLink[] = [
-  {
+  /*{
     label: 'Home', url: '/', menu: {
       type: 'menu',
       items: [
@@ -134,10 +134,10 @@ export const navigation: NavigationLink[] = [
         { label: 'Typography', url: '/site/typography' }
       ]
     }
-  },
+  },*/
   {
-    label: 'Buy Theme',
-    url: 'https://themeforest.net/item/stroyka-tools-store-angular-7-template/23523630',
+    label: 'homepage',
+    url: '/',
     external: true
   }
 ];
