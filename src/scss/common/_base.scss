@@ -137,3 +137,13 @@ h6 {
     font-style: $h6-font-style;
   }
 }
+
+@for $i from 1 through 10 {
+  .line-clamp-#{$i} {
+    display: -webkit-box;
+    -webkit-line-clamp: #{$i}; // $i qatorlar soni
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

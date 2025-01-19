@@ -138,6 +138,31 @@ export const navigation: NavigationLink[] = [
   {
     label: 'homepage',
     url: '/',
-    external: true
+    external: false
+  },
+  {
+    label: 'about.us',
+    url: '/about-us',
+    external: false
+  },
+  {
+    label: 'news',
+    url: '/news',
+    external: false
+  },
+  {
+    label: 'contacts',
+    url: '/contact-us',
+    external: false
+  },
+  {
+    label: 'privacy.policy',
+    url: '/terms',
+    external: false
+  },
+  {
+    label: 'faq',
+    url: '/faq',
+    external: false
   }
 ];

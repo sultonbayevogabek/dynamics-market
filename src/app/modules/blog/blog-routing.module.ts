@@ -18,7 +18,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'category-grid',
+    path: 'news',
     component: PageCategoryComponent,
     data: {
       sidebarPosition: 'end', // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"

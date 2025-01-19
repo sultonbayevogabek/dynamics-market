@@ -19,11 +19,11 @@ const routes: Routes = [
     component: PageAboutUsComponent
   },
   {
-    path: 'contact-us',
+    path: 'contact-us-alt',
     component: PageContactUsComponent
   },
   {
-    path: 'contact-us-alt',
+    path: 'contact-us',
     component: PageContactUsAltComponent
   },
   {

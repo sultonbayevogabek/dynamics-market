@@ -58,7 +58,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule)
       },
       {
-        path: 'blog',
+        path: '',
         loadChildren: () => import('./modules/blog/blog.module').then(m => m.BlogModule)
       },
       {
@@ -66,7 +66,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule)
       },
       {
-        path: 'site',
+        path: '',
         loadChildren: () => import('./modules/site/site.module').then(m => m.SiteModule)
       },
       {
