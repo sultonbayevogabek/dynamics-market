@@ -12,12 +12,13 @@ interface RouterData {
   templateUrl: './root.component.html',
   styleUrls: [ './root.component.scss' ]
 })
+
 export class RootComponent {
   headerLayout: 'classic' | 'compact' = 'classic';
   dropcartType: DropcartType = 'dropdown';
 
   constructor(
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
   ) {
     this.route.data.subscribe((data: RouterData) => {
       this.headerLayout = data.headerLayout || 'classic';

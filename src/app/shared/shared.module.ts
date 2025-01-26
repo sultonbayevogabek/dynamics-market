@@ -42,6 +42,7 @@ import { AbsoluteUrlPipe } from './pipes/absolute-url.pipe';
 import { ColorTypePipe } from './pipes/color-type.pipe';
 import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
+import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ProductGalleryComponent } from './components/product-gallery/product-ga
     AbsoluteUrlPipe,
     ColorTypePipe,
     CurrencyFormatPipe,
-    ProductGalleryComponent
+    ProductGalleryComponent,
+    LoaderSpinnerComponent
   ],
   imports: [
     // modules (angular)
@@ -120,7 +122,10 @@ import { ProductGalleryComponent } from './components/product-gallery/product-ga
     AbsoluteUrlPipe,
     ColorTypePipe,
     CurrencyFormatPipe,
-    ShareButtonsComponent
+    ShareButtonsComponent,
+    LoaderSpinnerComponent
+  ],
+  providers: [
   ]
 })
 export class SharedModule {

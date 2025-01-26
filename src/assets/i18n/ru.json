@@ -25,5 +25,9 @@
   "latest.news": "Последние новости",
   "top.products": "Топ продукты",
   "special.offers": "Специальные предложения",
-  "bestsellers": "Бестселлеры"
+  "bestsellers": "Бестселлеры",
+  "categories": "Категории",
+  "sign.in": "Войти в аккаунт",
+  "sign.in.with.google": "Войти через Google",
+  "an.authorization.error.occurred": "Произошла ошибка авторизации"
 }

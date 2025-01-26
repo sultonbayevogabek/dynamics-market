@@ -15,7 +15,7 @@
   "free.shipping": "Free shipping",
   "for.all.types.of.orders": "For all types of orders",
   "24/7.support": "24/7 support",
-  "call.anytime": "Call anytime",
+  "call.anytime": "Call us anytime",
   "100%.security": "100% security",
   "reliable.and.secure.payment": "Reliable and secure payment",
   "hot.offers": "Hot offers",
@@ -25,5 +25,9 @@
   "latest.news": "Latest news",
   "top.products": "Top products",
   "special.offers": "Special offers",
-  "bestsellers": "Bestsellers"
+  "bestsellers": "Bestsellers",
+  "categories": "Categories",
+  "sign.in": "Sign in",
+  "sign.in.with.google": "Sign in with Google",
+  "an.authorization.error.occurred": "An authorization error occurred"
 }

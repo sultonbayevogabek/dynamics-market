@@ -1,9 +1,8 @@
-import { /*LOCALE_ID, */NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 // import { registerLocaleData } from '@angular/common';
 // import localeIt from '@angular/common/locales/it';
 //
 // registerLocaleData(localeIt, 'it');
-
 // modules (angular)
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,7 +38,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-
 @NgModule({
   declarations: [
     // components
@@ -74,7 +72,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
   ],
   providers: [
     // { provide: LOCALE_ID, useValue: 'it' }

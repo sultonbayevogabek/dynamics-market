@@ -6,7 +6,6 @@ import { PageHomeTwoComponent } from './pages/page-home-two/page-home-two.compon
 import { RootComponent } from './components/root/root.component';
 import { PageOffcanvasCartComponent } from './pages/page-offcanvas-cart/page-offcanvas-cart.component';
 
-
 const routes: Routes = [
   // START / ONLY_FOR_DEMO_YOU_CAN_DELETE_IT
   {
@@ -70,11 +69,15 @@ const routes: Routes = [
         loadChildren: () => import('./modules/site/site.module').then(m => m.SiteModule)
       },
       {
+        path: '',
+        loadChildren: () => import('./modules/oauth-callback/oauth-callback.module').then(m => m.OAuthCallbackModule)
+      },
+      {
         path: '**',
         component: PageNotFoundComponent
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

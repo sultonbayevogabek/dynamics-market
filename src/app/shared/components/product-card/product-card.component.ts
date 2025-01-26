@@ -31,7 +31,7 @@ export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {
   @Input() layout: 'grid-sm' | 'grid-nl' | 'grid-lg' | 'list' | 'horizontal' | null = null;
 
   addingToCart = false;
-  addingToWishlist = false;
+  addingToWishlist = true;
   addingToCompare = false;
   showingQuickview = false;
   featuredAttributes: ProductAttribute[] = [];

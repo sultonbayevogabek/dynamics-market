@@ -1,0 +1,26 @@
+@keyframes loader-spinner-animation {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.loader-spinner::before {
+  box-sizing: border-box;
+  content: '';
+  display: block;
+  position: absolute;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: 3px solid rgba(0, 0, 0, .2);
+  border-top-color: rgba(0, 0, 0, .6);
+  animation-name: loader-spinner-animation;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

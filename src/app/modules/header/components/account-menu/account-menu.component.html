@@ -1,21 +1,11 @@
 <div class="account-menu">
   <form class="account-menu__form">
-    <div class="account-menu__form-title">Log In to Your Account</div>
-    <div class="form-group">
-      <label for="header-signin-email" class="sr-only">Email address</label>
-      <input id="header-signin-email" type="email" class="form-control form-control-sm" placeholder="Email address">
-    </div>
-    <div class="form-group">
-      <label for="header-signin-password" class="sr-only">Password</label>
-      <div class="account-menu__form-forgot">
-        <input id="header-signin-password" type="password" class="form-control form-control-sm" placeholder="Password">
-        <a href="" class="account-menu__form-forgot-link">Forgot?</a>
-      </div>
-    </div>
+    <div class="account-menu__form-title">{{ 'sign.in'| translate }}</div>
     <div class="form-group account-menu__form-button">
-      <button type="submit" class="btn btn-primary btn-sm">Login</button>
-    </div>
-    <div class="account-menu__form-link"><a routerLink="/account/login" (click)="closeMenu.emit()">Create An Account</a>
+      <button type="submit" class="d-inline-flex align-items-center btn btn-primary btn-sm" (click)="openAuthWindow()">
+        <app-icon name="google" size="20x20"></app-icon>
+        <span class="ml-2">{{ 'sign.in.with.google'| translate }}</span>
+      </button>
     </div>
   </form>
   <div class="account-menu__divider"></div>

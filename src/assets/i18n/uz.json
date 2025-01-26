@@ -15,7 +15,7 @@
   "free.shipping": "Bepul yetkazish",
   "for.all.types.of.orders": "Barcha turdagi buyurtmalar uchun",
   "24/7.support": "24/7 qo'llab quvvatlash",
-  "call.anytime": "Istalgan paytda bog'laning",
+  "call.anytime": "Istalgan paytda bizga qo'ng'iroq qiling",
   "100%.security": "100% xavfsizlik",
   "reliable.and.secure.payment": "Ishonchli va xavfsiz to'lov",
   "hot.offers": "Qaynoq takliflar",
@@ -25,5 +25,9 @@
   "latest.news": "Oxirgi yangiliklar",
   "top.products": "Top tovarlar",
   "special.offers": "Maxsus takliflar",
-  "bestsellers": "Bestsellerlar"
+  "bestsellers": "Bestsellerlar",
+  "categories": "Kategoriyalar",
+  "sign.in": "Hisobga kirish",
+  "sign.in.with.google": "Google orqali kirish",
+  "an.authorization.error.occurred": "Avtorizatsiya qilishda xatolik sodir bo'ldi"
 }

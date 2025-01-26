@@ -15,11 +15,12 @@ import { LANGUAGES_SHORTS } from './shared/constants/languages';
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.scss' ]
 })
+
 export class AppComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private router: Router,
-    private toastr: ToastrService,
+    private toaster: ToastrService,
     private cart: CartService,
     private compare: CompareService,
     private wishlist: WishlistService,
@@ -62,9 +63,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // properties of the CurrencyFormatOptions interface fully complies
-    // with the arguments of the built-in pipe "currency"
-    // https://angular.io/api/common/CurrencyPipe
     this.currency.options = {
       code: 'USD'
       // display: 'symbol',
@@ -78,13 +76,13 @@ export class AppComponent implements OnInit {
       }
     });
     this.cart.onAdding$.subscribe(product => {
-      this.toastr.success(`Product "${ product.name }" added to cart!`);
+      this.toaster.success(`Product "${ product.name }" added to cart!`);
     });
     this.compare.onAdding$.subscribe(product => {
-      this.toastr.success(`Product "${ product.name }" added to compare!`);
+      this.toaster.success(`Product "${ product.name }" added to compare!`);
     });
     this.wishlist.onAdding$.subscribe(product => {
-      this.toastr.success(`Product "${ product.name }" added to wish list!`);
+      this.toaster.success(`Product "${ product.name }" added to wish list!`);
     });
   }
 }
