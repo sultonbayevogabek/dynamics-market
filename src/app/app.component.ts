@@ -53,12 +53,12 @@ export class AppComponent implements OnInit {
           }
         });
       });
-    }
 
-    const lang = localStorage.getItem('lang') || 'uz';
-    if (LANGUAGES_SHORTS.includes(lang)) {
-      translate.setDefaultLang(lang);
-      translate.use(lang);
+      const lang = localStorage.getItem('lang') || 'uz';
+      if (LANGUAGES_SHORTS.includes(lang)) {
+        translate.setDefaultLang(lang);
+        translate.use(lang);
+      }
     }
   }
 
