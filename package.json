@@ -8,7 +8,7 @@
     "sprite": "svg-sprite --config src/sprite-config.json src/svg/*.svg",
     "dev:ssr": "ng run stroyka:serve-ssr",
     "serve:ssr": "node dist/stroyka/server/main.js",
-    "build:ssr": "ng build && ng run stroyka:server",
+    "build:ssr": "ng build && ng run dist/stroyka:server",
     "prerender": "ng run stroyka:prerender"
   },
   "private": true,
