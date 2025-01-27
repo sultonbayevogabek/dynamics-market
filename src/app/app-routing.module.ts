@@ -86,7 +86,7 @@ const routes: Routes = [
     anchorScrolling: 'enabled',
     initialNavigation: 'enabled',
     relativeLinkResolution: 'legacy'
-  }) ],
+}) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {
