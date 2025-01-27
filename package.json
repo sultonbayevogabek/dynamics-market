@@ -3,8 +3,6 @@
   "version": "1.18.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "sprite": "svg-sprite --config src/sprite-config.json src/svg/*.svg",
@@ -12,7 +10,11 @@
     "dev:ssr": "ng run stroyka:serve-ssr",
     "serve:ssr": "node dist/stroyka/server/main.js",
     "build:ssr": "ng build && ng run stroyka:server",
-    "prerender": "ng run stroyka:prerender"
+    "prerender": "ng run stroyka:prerender",
+
+    "build": "ng build --prod && ng run stroyka:server",
+    "serve": "node dist/stroyka/server/main.js",
+    "start": "npm run serve"
   },
   "private": true,
   "dependencies": {
