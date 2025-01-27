@@ -7,9 +7,6 @@
   to = "/index.html"
   status = 200
 
-[[plugins]]
-  package = "@netlify/plugin-angular"
-
 [[context.production.environment]]
   NODE_ENV = "production"
 
