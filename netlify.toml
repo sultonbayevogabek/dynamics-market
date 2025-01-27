@@ -1,7 +1,25 @@
 [build]
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm install --legacy-peer-deps && npm run build:ssr"
   publish = "dist/stroyka/browser"
+
 [[redirects]]
   from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[plugins]]
+  package = "@netlify/plugin-angular"
+
+[[context.production.environment]]
+  NODE_ENV = "production"
+
+[[context.production.environment]]
+  SSR = "true"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/server/*"
   to = "/index.html"
   status = 200
