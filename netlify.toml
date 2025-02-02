@@ -1,11 +1,14 @@
 [build]
-  command = "npm run build:ssr"
+  command = "npm install --legacy-peer-deps && npm run build:ssr"
   publish = "dist/browser"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[npm]
+  comma
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
