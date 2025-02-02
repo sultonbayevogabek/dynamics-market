@@ -1,12 +1,11 @@
+[build]
+  command = "npm run build:ssr"
+  publish = "dist/browser"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[build]
-  command = "npm run build:ssr"
-  publish = "dist/browser"
-  functions = "functions"
-
 [[plugins]]
-  package = "@netlify/plugin-functions-install-core"
+  package = "@netlify/plugin-angular-universal"
