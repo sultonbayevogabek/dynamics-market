@@ -5,7 +5,7 @@
 
 [build]
   command = "npm run build:ssr"
-  publish = "dist/stroyka/browser"
+  publish = "dist/browser"
   functions = "functions"
 
 [[plugins]]

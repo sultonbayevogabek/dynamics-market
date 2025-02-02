@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "stroyka": {
+    "dynamics-market": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/stroyka/browser",
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -91,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "stroyka:build:production"
+              "browserTarget": "dynamics-market:build:production"
             },
             "development": {
-              "browserTarget": "stroyka:build:development"
+              "browserTarget": "dynamics-market:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stroyka:build"
+            "browserTarget": "dynamics-market:build"
           }
         },
         "test": {
@@ -129,7 +129,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/stroyka/server",
+            "outputPath": "dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -156,12 +156,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "stroyka:build:development",
-              "serverTarget": "stroyka:server:development"
+              "browserTarget": "dynamics-market:build:development",
+              "serverTarget": "dynamics-market:server:development"
             },
             "production": {
-              "browserTarget": "stroyka:build:production",
-              "serverTarget": "stroyka:server:production"
+              "browserTarget": "dynamics-market:build:production",
+              "serverTarget": "dynamics-market:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -175,12 +175,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "stroyka:build:production",
-              "serverTarget": "stroyka:server:production"
+              "browserTarget": "dynamics-market:build:production",
+              "serverTarget": "dynamics-market:server:production"
             },
             "development": {
-              "browserTarget": "stroyka:build:development",
-              "serverTarget": "stroyka:server:development"
+              "browserTarget": "dynamics-market:build:development",
+              "serverTarget": "dynamics-market:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -197,7 +197,7 @@
       }
     }
   },
-  "defaultProject": "stroyka",
+  "defaultProject": "dynamics-market",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

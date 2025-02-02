@@ -1,16 +1,15 @@
 {
-  "name": "stroyka",
+  "name": "dynamics-market",
   "version": "1.18.0",
   "scripts": {
     "ng": "ng",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "sprite": "svg-sprite --config src/sprite-config.json src/svg/*.svg",
-    "start:ssr": "npm run build:ssr && npm run serve:ssr",
-    "dev:ssr": "ng run stroyka:serve-ssr",
-    "serve:ssr": "node dist/stroyka/server/main.js",
-    "build:ssr": "ng build && ng run stroyka:server",
-    "prerender": "ng run stroyka:prerender"
+    "dev:ssr": "ng run dynamics-market:serve-ssr",
+    "serve:ssr": "node dist/server/main.js",
+    "build:ssr": "ng build && ng run dynamics-market:server",
+    "prerender": "ng run dynamics-market:prerender"
   },
   "private": true,
   "dependencies": {
@@ -25,8 +24,7 @@
     "@angular/platform-server": "~13.1.0",
     "@angular/router": "~13.1.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "@netlify/functions": "^3.0.0",
-    "@nguniversal/express-engine": "^13.0.1",
+    "@nguniversal/express-engine": "^13.1.1",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^4.6.1",
