@@ -7,8 +7,5 @@
   to = "/index.html"
   status = 200
 
-[npm]
-  comma
-
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
