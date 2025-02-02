@@ -14,7 +14,3 @@
 [dev]
   command = "npm run serve:ssr"
   targetPort = 4000
-
-[functions]
-  directory = "netlify/functions"
-  included_files = ["dist/server/**"]
