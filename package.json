@@ -9,7 +9,8 @@
     "dev:ssr": "ng run dynamics-market:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build && ng run dynamics-market:server",
-    "prerender": "ng run dynamics-market:prerender"
+    "prerender": "ng run dynamics-market:prerender",
+    "vercel-build": "npm run build:ssr"
   },
   "private": true,
   "dependencies": {
