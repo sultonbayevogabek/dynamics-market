@@ -7,5 +7,8 @@
   to = "/index.html"
   status = 200
 
+[npm]
+install-args = "--legacy-peer-deps"
+
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
