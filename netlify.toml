@@ -8,7 +8,7 @@
   status = 200
 
 [npm]
-install-args = "--legacy-peer-deps"
+install-args = "--force"
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
