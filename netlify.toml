@@ -1,6 +1,7 @@
 [build]
-  command = "npm install --force --legacy-peer-deps && npm run build:ssr"
+  command = "npm install --force --legacy-peer-deps && npm run build:ssr && cp -r dist/server/* dist/browser/"
   publish = "dist/browser"
+  functions = "functions"
 
 [[redirects]]
   from = "/*"
@@ -9,3 +10,8 @@
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
+
+[functions]
+  included_files = [
+    "dist/server/**/*"
+  ]
