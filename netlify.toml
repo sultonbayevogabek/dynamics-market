@@ -1,5 +1,5 @@
 [build]
-  command = "npm install --legacy-peer-deps && npm run build:ssr"
+  command = "npm install --force --legacy-peer-deps && npm run build:ssr"
   publish = "dist/browser"
 
 [[redirects]]
