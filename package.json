@@ -10,8 +10,7 @@
     "start:ssr": "npm run build:ssr && npm run serve:ssr",
     "dev:ssr": "ng run dynamics-market:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
-    "build:ssr": "ng build && ng run dynamics-market:server",
-    "prerender": "ng build && ng run dynamics-market:server && ng run dynamics-market:prerender"
+    "build:ssr": "ng build && ng run dynamics-market:server && node dist/server/main.js"
   },
   "private": true,
   "dependencies": {

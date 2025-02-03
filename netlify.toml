@@ -1,5 +1,5 @@
 [build]
-  command = "npm i --legacy-peer-deps && npm run prerender"
+  command = "npm i --legacy-peer-deps && npm run build:ssr"
   publish = "dist/browser"
   functions = "netlify/functions"
 
