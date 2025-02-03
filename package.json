@@ -11,7 +11,7 @@
     "dev:ssr": "ng run dynamics-market:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build && ng run dynamics-market:server",
-    "prerender": "ng run dynamics-market:prerender"
+    "prerender": "ng build && ng run dynamics-market:server && ng run dynamics-market:prerender"
   },
   "private": true,
   "dependencies": {
