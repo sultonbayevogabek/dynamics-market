@@ -1,7 +1,7 @@
 [build]
   command = "npm run build:ssr"
   publish = "dist/browser"
-  functions = "netlify/functions"
+  #functions = "netlify/functions"
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
