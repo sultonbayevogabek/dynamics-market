@@ -3,10 +3,6 @@
   publish = "dist/browser"
   functions = "netlify/functions"
 
-[build.environment]
-  NODE_VERSION = "18.17.0"
-  NPM_VERSION = "9.6.7"
-
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
 
