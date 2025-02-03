@@ -13,6 +13,3 @@
 
 [functions]
   directory = "netlify/functions"
-
-[build.environment]
-  PORT = "4000"
