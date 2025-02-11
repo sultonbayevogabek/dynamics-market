@@ -1,12 +1,17 @@
 import {
-  AfterViewChecked, AfterViewInit,
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   ElementRef,
-  Inject, NgZone,
+  Inject,
+  NgZone,
   OnDestroy,
   OnInit,
-  PLATFORM_ID, QueryList,
-  Renderer2, ViewChild, ViewChildren
+  PLATFORM_ID,
+  QueryList,
+  Renderer2,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';

@@ -1,5 +1,12 @@
 import {
-  AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  PLATFORM_ID,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { DirectionService } from '../../../shared/services/direction.service';

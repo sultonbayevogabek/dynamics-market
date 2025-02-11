@@ -34,14 +34,14 @@ import { TranslateModule } from '@ngx-translate/core';
     NavComponent,
     TopbarComponent
   ],
-    imports: [
-        // modules (angular)
-        CommonModule,
-        RouterModule,
-        // modules
-        SharedModule,
-        TranslateModule
-    ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules
+    SharedModule,
+    TranslateModule
+  ],
   exports: [
     // components
     HeaderComponent,

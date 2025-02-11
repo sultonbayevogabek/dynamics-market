@@ -8,17 +8,17 @@ import { ProductsList } from '../interfaces/list';
 import { SerializedFilterValues } from '../interfaces/filter';
 import {
   getBestsellers,
+  getBrands,
   getFeatured,
   getLatestProducts,
   getProduct,
+  getProductsList,
   getRelatedProducts,
-  getSpecialOffers,
-  getTopRated,
   getShopCategoriesBySlugs,
   getShopCategoriesTree,
   getShopCategory,
-  getBrands,
-  getProductsList
+  getSpecialOffers,
+  getTopRated
 } from '../../../fake-server';
 import { getSuggestions } from 'src/fake-server/database/products';
 

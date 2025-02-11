@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { posts } from '../../../data/blog-posts';
 import { Brand } from '../../shared/interfaces/brand';
-import { Observable, Subject, merge } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 import { ShopService } from '../../shared/api/shop.service';
 import { Product } from '../../shared/interfaces/product';
 import { Category } from '../../shared/interfaces/category';

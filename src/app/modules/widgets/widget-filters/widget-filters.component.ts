@@ -3,13 +3,13 @@ import { isPlatformBrowser } from '@angular/common';
 import { DirectionService } from '../../../shared/services/direction.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
+  CheckFilter,
   ColorFilter,
   ColorFilterItem,
   Filter,
-  SerializedFilterValues,
-  CheckFilter,
   FilterItem,
-  RadioFilter
+  RadioFilter,
+  SerializedFilterValues
 } from '../../../shared/interfaces/filter';
 import { RootService } from '../../../shared/services/root.service';
 import { EMPTY, merge, of, Subject } from 'rxjs';

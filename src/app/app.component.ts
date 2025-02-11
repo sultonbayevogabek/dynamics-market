@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CartService } from './shared/services/cart.service';
+import { CartService } from '@shared/services/cart.service';
 import { CompareService } from './shared/services/compare.service';
 import { WishlistService } from './shared/services/wishlist.service';
 import { NavigationEnd, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { CurrencyService } from './shared/services/currency.service';
 import { filter, first } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { LANGUAGES_SHORTS } from './shared/constants/languages';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
     private zone: NgZone,
     private scroller: ViewportScroller,
     private currency: CurrencyService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.zone.runOutsideAngular(() => {
@@ -53,16 +55,10 @@ export class AppComponent implements OnInit {
           }
         });
       });
-
-      const lang = localStorage.getItem('lang') || 'uz';
-      if (LANGUAGES_SHORTS.includes(lang)) {
-        translate.setDefaultLang(lang);
-        translate.use(lang);
-      }
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.currency.options = {
       code: 'USD'
       // display: 'symbol',
@@ -84,5 +80,14 @@ export class AppComponent implements OnInit {
     this.wishlist.onAdding$.subscribe(product => {
       this.toaster.success(`Product "${ product.name }" added to wish list!`);
     });
+
+    // Language init
+    const lang = localStorage.getItem('lang') || 'uz';
+    if (LANGUAGES_SHORTS.includes(lang)) {
+      this.translate.setDefaultLang(lang);
+      this.translate.use(lang);
+    }
+
+    await this.authService.getUserWithToken()
   }
 }

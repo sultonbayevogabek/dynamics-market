@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { posts } from '../../../data/blog-posts';
-import { ShopService } from '../../shared/api/shop.service';
+import { ShopService } from '@shared/api/shop.service';
 import { takeUntil, tap } from 'rxjs/operators';
 import { merge, Observable, Subject } from 'rxjs';
-import { Brand } from '../../shared/interfaces/brand';
+import { Brand } from '@shared/interfaces/brand';
 import { Product } from '../../shared/interfaces/product';
 import { Category } from '../../shared/interfaces/category';
 import { BlockHeaderGroup } from '../../shared/interfaces/block-header-group';

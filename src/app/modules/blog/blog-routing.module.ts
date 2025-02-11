@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PageCategoryComponent } from './pages/page-category/page-category.component';
 import { PagePostComponent } from './pages/page-post/page-post.component';
 

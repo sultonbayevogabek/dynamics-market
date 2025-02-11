@@ -1,13 +1,15 @@
 import {
   Component,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   Inject,
   Input,
   NgZone,
   OnChanges,
   OnDestroy,
-  OnInit, Output,
+  OnInit,
+  Output,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
@@ -15,7 +17,7 @@ import { Product } from '../../interfaces/product';
 import { RootService } from '../../services/root.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
-import { fromEvent, of, Subject, asyncScheduler } from 'rxjs';
+import { asyncScheduler, fromEvent, of, Subject } from 'rxjs';
 import { ShopService } from '../../api/shop.service';
 import { Category } from '../../interfaces/category';
 import { DOCUMENT } from '@angular/common';
