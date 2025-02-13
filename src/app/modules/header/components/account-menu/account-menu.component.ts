@@ -20,7 +20,8 @@ import { Subject } from 'rxjs';
 })
 export class AccountMenuComponent implements OnInit, OnDestroy {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
-  currentUser!: IUser;
+  currentUser!: IUser | null;
+  loading = true;
 
   private destroy$: Subject<void> = new Subject();
 
@@ -35,12 +36,17 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(currentUser => {
         this.currentUser = currentUser;
-        this.cdr.markForCheck();
+        this.loading = false;
+        this.cdr.detectChanges();
       });
   }
 
   openAuthWindow() {
     this.authService.openOAuthWindow();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   ngOnDestroy() {

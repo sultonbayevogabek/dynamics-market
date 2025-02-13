@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MobileMenuItem } from '../../../../shared/interfaces/mobile-menu-item';
+import { MobileMenuItem } from '@shared/interfaces/mobile-menu-item';
 
 @Component({
   selector: 'app-mobile-links',

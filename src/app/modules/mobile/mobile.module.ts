@@ -11,6 +11,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MobileHeaderComponent } from './components/mobile-header/mobile-header.component';
 import { MobileLinksComponent } from './components/mobile-links/mobile-links.component';
 import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,14 @@ import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.compon
     MobileLinksComponent,
     MobileMenuComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    RouterModule,
-    // modules
-    SharedModule
-  ],
+   imports: [
+      // modules (angular)
+      CommonModule,
+      RouterModule,
+      // modules
+      SharedModule,
+      TranslateModule
+   ],
   exports: [
     // components
     MobileHeaderComponent,

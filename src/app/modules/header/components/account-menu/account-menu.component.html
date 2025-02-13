@@ -1,5 +1,9 @@
 <div class="account-menu">
-  <ng-container *ngIf="!currentUser; else userInfo">
+  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
+  <app-loader-spinner [size]="40"></app-loader-spinner>
+  </div>
+
+  <ng-container *ngIf="!currentUser && !loading">
     <div class="account-menu__form">
       <div class="account-menu__form-title">{{ 'sign.in'| translate }}</div>
       <div class="form-group account-menu__form-button">
@@ -12,7 +16,7 @@
     <div class="account-menu__divider"></div>
   </ng-container>
 
-  <ng-template #userInfo>
+  <ng-container *ngIf="currentUser && !loading">
     <a routerLink="/account/dashboard" class="account-menu__user" (click)="closeMenu.emit()">
       <div class="account-menu__user-avatar">
         <img [src]="currentUser.image" [alt]="currentUser.firstName + ' ' + currentUser.lastName">
@@ -24,14 +28,14 @@
     </a>
     <div class="account-menu__divider"></div>
     <ul class="account-menu__links">
-      <li><a routerLink="/account/profile" (click)="closeMenu.emit()">Edit Profile</a></li>
-      <li><a routerLink="/account/orders" (click)="closeMenu.emit()">Order History</a></li>
-      <li><a routerLink="/account/addresses" (click)="closeMenu.emit()">Addresses</a></li>
-      <li><a routerLink="/account/password" (click)="closeMenu.emit()">Password</a></li>
+      <li><a routerLink="/account/profile" (click)="closeMenu.emit()">{{ 'edit.profile'| translate }}</a></li>
+      <li><a routerLink="/account/orders" (click)="closeMenu.emit()">{{ 'orders.history'| translate }}</a></li>
     </ul>
     <div class="account-menu__divider"></div>
     <ul class="account-menu__links">
-      <li><a routerLink="/account/login" (click)="closeMenu.emit()">Logout</a></li>
+      <li>
+        <a (click)="logout()">{{ 'logout'| translate }}</a>
+      </li>
     </ul>
-  </ng-template>
+  </ng-container>
 </div>

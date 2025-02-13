@@ -10,7 +10,7 @@ import { ToasterService } from './toaster.service';
 })
 
 export class AuthService {
-  currentUser$: Subject<IUser> = new Subject();
+  currentUser$: Subject<IUser | null> = new Subject();
   private _authorized = false;
 
   constructor(
@@ -90,5 +90,11 @@ export class AuthService {
 
     this.authorized = true;
     this.currentUser$.next(response);
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.authorized = false;
+    this.currentUser$.next(null);
   }
 }

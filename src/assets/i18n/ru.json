@@ -29,5 +29,9 @@
   "categories": "Категории",
   "sign.in": "Войти в аккаунт",
   "sign.in.with.google": "Войти через Google",
-  "an.authorization.error.occurred": "Произошла ошибка авторизации"
+  "an.authorization.error.occurred": "Произошла ошибка авторизации",
+  "logout": "Выйти",
+  "edit.profile": "Редактировать профиль",
+  "orders.history": "Истории заказов",
+  "menu": "Меню"
 }

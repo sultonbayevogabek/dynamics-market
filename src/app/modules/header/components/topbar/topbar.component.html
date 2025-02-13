@@ -36,7 +36,7 @@
       <div class="topbar__item">
         <div class="topbar-dropdown" appDropdown="topbar-dropdown--opened" #languageDropdown="appDropdown">
           <button class="topbar-dropdown__btn" type="button" (click)="languageDropdown.toggle()">
-            {{ 'language'| translate }}: <span class="topbar__item-value">{{ currentLangShort }}</span>
+            {{ 'language'| translate }}: <span class="topbar__item-value">{{ languageService.currentLangShort }}</span>
             <app-icon name="arrow-rounded-down-7x5" size="7x5"></app-icon>
           </button>
 
@@ -45,11 +45,11 @@
               <ul class="menu__list">
                 <li
                   class="menu__item"
-                  *ngFor="let language of languages"
+                  *ngFor="let language of languageService.languages"
                   (mouseover)="menuItem.classList.add('menu__item--hover')"
                   (mouseleave)="menuItem.classList.remove('menu__item--hover')"
                   #menuItem
-                  (click)="setLanguage(language.short); languageDropdown.close()"
+                  (click)="languageService.setLanguage(language.short); languageDropdown.close()"
                 >
                   <button class="menu__item-link" type="button">
                     <span class="menu__item-icon">
