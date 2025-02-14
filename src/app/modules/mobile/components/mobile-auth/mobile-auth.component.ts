@@ -27,7 +27,7 @@ export class MobileAuthComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(currentUser => {
         this.currentUser = currentUser;
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
       });
   }
 
