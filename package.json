@@ -6,7 +6,8 @@
     "start": "ng serve",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "sprite": "svg-sprite --config src/sprite-config.json src/svg/*.svg"
+    "sprite": "svg-sprite --config src/sprite-config.json src/svg/*.svg",
+    "build": "ng build"
   },
   "private": true,
   "dependencies": {
