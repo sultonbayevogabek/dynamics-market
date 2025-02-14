@@ -9,11 +9,11 @@ import {
   ViewChildren
 } from '@angular/core';
 import { navigation } from '../../../../../data/header-navigation';
-import { NavigationLink } from '../../../../shared/interfaces/navigation-link';
-import { DirectionService } from '../../../../shared/services/direction.service';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
+import { DirectionService } from '@shared/services/direction.service';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { HeaderService } from '../../../../shared/services/header.service';
+import { HeaderService } from '@shared/services/header.service';
 
 @Component({
   selector: 'app-header-links',

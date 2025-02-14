@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { CurrencyService } from '../../../../shared/services/currency.service';
-import { LANGUAGES } from '../../../../shared/constants/languages';
-import { TranslateService } from '@ngx-translate/core';
+import { CurrencyService } from '@shared/services/currency.service';
+import { LanguageService } from '@shared/services/language.service';
 
 interface Currency {
   name: string;
@@ -19,42 +18,8 @@ interface Currency {
 export class TopbarComponent {
   constructor(
     public currencyService: CurrencyService,
-    private translateService: TranslateService
+    public languageService: LanguageService
   ) {
-  }
-
-  get languages() {
-    return LANGUAGES;
-  }
-
-  get currentLang(): string {
-    return this.translateService.currentLang;
-  }
-
-  get currentLangShort(): string {
-    let lang: string = this.currentLang;
-
-    switch (lang) {
-      case 'uz':
-        lang = 'O\'z';
-        break;
-      case 'ru':
-        lang = 'РУ';
-        break;
-      case 'en':
-        lang = 'EN';
-        break;
-    }
-
-    return lang;
-  }
-
-  setLanguage(lang: string): void {
-    if (this.currentLang === lang) {
-      return;
-    }
-    localStorage.setItem('lang', lang);
-    location.reload();
   }
 
   currencies = [

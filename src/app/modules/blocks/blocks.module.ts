@@ -46,16 +46,16 @@ import { TranslateModule } from '@ngx-translate/core';
     // components
     BlockHeaderComponent
   ],
-   imports: [
-      // modules (angular)
-      CommonModule,
-      RouterModule,
-      // modules (third-party)
-      CarouselModule,
-      // modules
-      SharedModule,
-      TranslateModule
-   ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules (third-party)
+    CarouselModule,
+    // modules
+    SharedModule,
+    TranslateModule
+  ],
   exports: [
     // blocks
     BlockBannerComponent,

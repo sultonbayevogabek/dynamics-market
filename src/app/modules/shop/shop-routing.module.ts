@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Data, ResolveData } from '@angular/router';
+import { Data, ResolveData, RouterModule, Routes } from '@angular/router';
 import { PageCategoryComponent } from './pages/page-category/page-category.component';
 import { PageCartComponent } from './pages/page-cart/page-cart.component';
 import { PageWishlistComponent } from './pages/page-wishlist/page-wishlist.component';

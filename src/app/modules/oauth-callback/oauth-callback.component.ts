@@ -13,7 +13,8 @@ export class OAuthCallbackComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   async ngOnInit() {
     await this.authWithGoogle();
@@ -56,6 +57,6 @@ export class OAuthCallbackComponent implements OnInit {
     }
 
     const match = fragment.match(/id_token=([^&]+)/);
-    return match ? match[1] : null;
+    return match ? match[1]?.replace('id_token=', '') : null;
   }
 }

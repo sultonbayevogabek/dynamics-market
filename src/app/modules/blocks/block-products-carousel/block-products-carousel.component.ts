@@ -6,7 +6,8 @@ import {
   Inject,
   Input,
   OnChanges,
-  Output, PLATFORM_ID,
+  Output,
+  PLATFORM_ID,
   SimpleChanges,
   ViewChild
 } from '@angular/core';

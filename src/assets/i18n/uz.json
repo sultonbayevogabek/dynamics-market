@@ -29,5 +29,9 @@
   "categories": "Kategoriyalar",
   "sign.in": "Hisobga kirish",
   "sign.in.with.google": "Google orqali kirish",
-  "an.authorization.error.occurred": "Avtorizatsiya qilishda xatolik sodir bo'ldi"
+  "an.authorization.error.occurred": "Avtorizatsiya qilishda xatolik sodir bo'ldi",
+  "logout": "Chiqish",
+  "edit.profile": "Profilni tahrirlash",
+  "orders.history": "Buyurtmalar tarixi",
+  "menu": "Menyu"
 }

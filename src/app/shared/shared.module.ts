@@ -125,8 +125,7 @@ import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinn
     ShareButtonsComponent,
     LoaderSpinnerComponent
   ],
-  providers: [
-  ]
+  providers: []
 })
 export class SharedModule {
 }

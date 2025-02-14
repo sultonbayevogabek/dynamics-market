@@ -23,14 +23,14 @@ import { TranslateModule } from '@ngx-translate/core';
     NewsletterComponent,
     TotopComponent
   ],
-   imports: [
-      // modules (angular)
-      CommonModule,
-      RouterModule,
-      // modules
-      SharedModule,
-      TranslateModule
-   ],
+  imports: [
+    // modules (angular)
+    CommonModule,
+    RouterModule,
+    // modules
+    SharedModule,
+    TranslateModule
+  ],
   exports: [
     FooterComponent
   ]

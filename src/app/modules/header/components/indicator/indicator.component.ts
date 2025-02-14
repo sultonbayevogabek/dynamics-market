@@ -3,14 +3,16 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostBinding, HostListener,
+  HostBinding,
+  HostListener,
   Inject,
   Input,
   NgZone,
   OnDestroy,
   OnInit,
   Output,
-  PLATFORM_ID, ViewChild
+  PLATFORM_ID,
+  ViewChild
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { fromEvent, merge, Subject } from 'rxjs';

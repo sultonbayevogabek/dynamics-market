@@ -18,7 +18,7 @@ export class RootComponent {
   dropcartType: DropcartType = 'dropdown';
 
   constructor(
-    public route: ActivatedRoute,
+    public route: ActivatedRoute
   ) {
     this.route.data.subscribe((data: RouterData) => {
       this.headerLayout = data.headerLayout || 'classic';

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PageHomeOneComponent } from './pages/page-home-one/page-home-one.component';
 import { PageHomeTwoComponent } from './pages/page-home-two/page-home-two.component';
@@ -77,7 +77,7 @@ const routes: Routes = [
         component: PageNotFoundComponent
       }
     ]
-  },
+  }
 ];
 
 @NgModule({
@@ -86,7 +86,7 @@ const routes: Routes = [
     anchorScrolling: 'enabled',
     initialNavigation: 'enabled',
     relativeLinkResolution: 'legacy'
-}) ],
+  }) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {

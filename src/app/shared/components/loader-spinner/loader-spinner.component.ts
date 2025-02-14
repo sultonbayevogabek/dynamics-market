@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-loader-spinner',
   templateUrl: './loader-spinner.component.html',
-  styleUrls: ['./loader-spinner.component.scss']
+  styleUrls: [ './loader-spinner.component.scss' ]
 })
 
-export class LoaderSpinnerComponent {}
+export class LoaderSpinnerComponent {
+  @Input() size= 100;
+}

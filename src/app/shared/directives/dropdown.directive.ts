@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Inject, Input, OnDestroy, NgZone, PLATFORM_ID } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, NgZone, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';

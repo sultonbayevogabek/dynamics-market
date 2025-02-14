@@ -1,32 +1,41 @@
 <div class="account-menu">
-  <form class="account-menu__form">
-    <div class="account-menu__form-title">{{ 'sign.in'| translate }}</div>
-    <div class="form-group account-menu__form-button">
-      <button type="submit" class="d-inline-flex align-items-center btn btn-primary btn-sm" (click)="openAuthWindow()">
-        <app-icon name="google" size="20x20"></app-icon>
-        <span class="ml-2">{{ 'sign.in.with.google'| translate }}</span>
-      </button>
+  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
+  <app-loader-spinner [size]="40"></app-loader-spinner>
+  </div>
+
+  <ng-container *ngIf="!currentUser && !loading">
+    <div class="account-menu__form">
+      <div class="account-menu__form-title">{{ 'sign.in'| translate }}</div>
+      <div class="form-group account-menu__form-button">
+        <button type="submit" class="d-inline-flex align-items-center btn btn-primary btn-sm" (click)="openAuthWindow()">
+          <app-icon name="google" size="20x20"></app-icon>
+          <span class="ml-2">{{ 'sign.in.with.google'| translate }}</span>
+        </button>
+      </div>
     </div>
-  </form>
-  <div class="account-menu__divider"></div>
-  <a routerLink="/account/dashboard" class="account-menu__user" (click)="closeMenu.emit()">
-    <div class="account-menu__user-avatar">
-      <img src="assets/images/avatars/avatar-3.jpg" alt="">
-    </div>
-    <div class="account-menu__user-info">
-      <div class="account-menu__user-name">Helena Garcia</div>
-      <div class="account-menu__user-email">stroyka@example.com</div>
-    </div>
-  </a>
-  <div class="account-menu__divider"></div>
-  <ul class="account-menu__links">
-    <li><a routerLink="/account/profile" (click)="closeMenu.emit()">Edit Profile</a></li>
-    <li><a routerLink="/account/orders" (click)="closeMenu.emit()">Order History</a></li>
-    <li><a routerLink="/account/addresses" (click)="closeMenu.emit()">Addresses</a></li>
-    <li><a routerLink="/account/password" (click)="closeMenu.emit()">Password</a></li>
-  </ul>
-  <div class="account-menu__divider"></div>
-  <ul class="account-menu__links">
-    <li><a routerLink="/account/login" (click)="closeMenu.emit()">Logout</a></li>
-  </ul>
+    <div class="account-menu__divider"></div>
+  </ng-container>
+
+  <ng-container *ngIf="currentUser && !loading">
+    <a routerLink="/account/dashboard" class="account-menu__user" (click)="closeMenu.emit()">
+      <div class="account-menu__user-avatar">
+        <img [src]="currentUser.image" [alt]="currentUser.firstName + ' ' + currentUser.lastName">
+      </div>
+      <div class="account-menu__user-info">
+        <div class="account-menu__user-name">{{ currentUser.lastName| titlecase }} {{ currentUser.firstName| titlecase }}</div>
+        <div class="account-menu__user-email">{{ currentUser.email }}</div>
+      </div>
+    </a>
+    <div class="account-menu__divider"></div>
+    <ul class="account-menu__links">
+      <li><a routerLink="/account/profile" (click)="closeMenu.emit()">{{ 'edit.profile'| translate }}</a></li>
+      <li><a routerLink="/account/orders" (click)="closeMenu.emit()">{{ 'orders.history'| translate }}</a></li>
+    </ul>
+    <div class="account-menu__divider"></div>
+    <ul class="account-menu__links">
+      <li>
+        <a (click)="logout()">{{ 'logout'| translate }}</a>
+      </li>
+    </ul>
+  </ng-container>
 </div>
