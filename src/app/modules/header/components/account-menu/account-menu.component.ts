@@ -32,12 +32,10 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('account menu init');
     this.authService.currentUser$
       .subscribe(currentUser => {
         console.log('account menu subscribed to current user');
         this.currentUser = currentUser;
-        console.log('Cu', this.currentUser);
         this.loading = false;
         this.cdr.detectChanges();
       });

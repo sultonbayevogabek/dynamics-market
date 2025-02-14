@@ -83,10 +83,10 @@ export class AuthService {
   getUserWithToken(): Observable<IUser | unknown> {
     return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {})
       .pipe(
-        switchMap(res => {
+        switchMap(user => {
           this.authorized = true;
-          this.currentUser$.next(res);
-          return of(res);
+          this.currentUser$.next(user);
+          return of(user);
         }),
         catchError(() => {
           this.authorized = false;

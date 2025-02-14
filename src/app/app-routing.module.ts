@@ -10,14 +10,14 @@ const routes: Routes = [
   {
     path: '',
     component: RootComponent,
+    resolve: {
+      initialData: InitialResolver
+    },
     data: {
       // Header layout. Choose one of ['classic', 'compact'].
       headerLayout: 'classic',
       // Dropcart type. Choose one of ['dropdown', 'offcanvas'].
       dropcartType: 'dropdown'
-    },
-    resolve: {
-      initialData: InitialResolver
     },
     children: [
       {
