@@ -7,7 +7,7 @@
           routerLink="/account/dashboard"
           (click)="closeMobileMenu()"
         >
-          <img class="w-8 shrink-0 aspect-square rounded-full" [src]="currentUser.image" [alt]="currentUser.email">
+          <img class="w-8 shrink-0 aspect-square rounded-full" [src]="currentUser.image" alt="">
 
           <span class="grow line-clamp-1">{{ currentUser.lastName| titlecase }} {{ currentUser.firstName| titlecase }}</span>
         </a>
