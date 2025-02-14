@@ -3,7 +3,12 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      container: {
+        screens: {}
+      }
+    },
+    container: false
   },
   plugins: [
   ]
