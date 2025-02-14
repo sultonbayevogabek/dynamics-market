@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, of, Subject, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { ToasterService } from './toaster.service';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -81,50 +81,27 @@ export class AuthService {
   }
 
   getUserWithToken(): Observable<IUser | unknown> {
-    if (this.authorized) {
-      return this.currentUser$;
-    } else {
-      return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {})
-        .pipe(
-          switchMap(res => {
-            this.authorized = true;
-            this.currentUser$.next(res);
-            return of(res);
-          }),
-          catchError(() => {
-            this.authorized = false;
-            this.currentUser$.next(null);
-            return of(null);
-          })
-        )
-    }
+    return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {})
+      .pipe(
+        switchMap(res => {
+          this.authorized = true;
+          this.currentUser$.next(res);
+          return of(res);
+        }),
+        catchError(() => {
+          this.authorized = false;
+          this.currentUser$.next(null);
+          return of(null);
+        })
+      )
   }
 
   isAuthorized(): Observable<boolean> {
     if (this.authorized) {
-      return new Observable<boolean>((observer) => observer.next(true));
+      return of(true);
     }
 
-    if (!this.token) {
-      return new Observable<boolean>((observer) => observer.next(false));
-    }
-
-    return this.getUserWithToken()
-      .pipe(map(response => {
-        return !!response;
-      }),
-      catchError(() => {
-        return new Observable<boolean>((observer) => observer.next(false));
-      })
-    );
-    // return this.currentUser$
-    //   .pipe(map(response => {
-    //       return !!response;
-    //     }),
-    //     catchError(() => {
-    //       return new Observable<boolean>((observer) => observer.next(false));
-    //     })
-    //   );
+    return of(false);
   }
 
   logout(): void {
