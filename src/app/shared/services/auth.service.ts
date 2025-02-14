@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, firstValueFrom, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, of, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { ToasterService } from './toaster.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,7 @@ export class AuthService {
     private toaster: ToasterService,
     private http: HttpClient
   ) {
-    // @ts-ignore
-    window.receiveData = this.receiveData.bind(this);
+    (window as any).receiveData = this.receiveData.bind(this);
   }
 
   set token(token: string) {
@@ -39,31 +38,48 @@ export class AuthService {
     return this._authorized;
   }
 
-  openOAuthWindow() {
+  openOAuthWindow(): void {
+    const { width, height, left, top } = this.calculateWindowDimensions();
+
+    window.open(
+      this.buildOAuthUrl(),
+      '_blank',
+      `width=${width},height=${height},top=${top},left=${left}`
+    );
+  }
+
+  private calculateWindowDimensions() {
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
-    let windowWidth: number, windowHeight: number;
+    let width: number, height: number;
 
     if (screenWidth < 768) {
-      windowWidth = screenWidth;
-      windowHeight = screenHeight;
-    } else if (screenWidth >= 768 && screenWidth < 1024) {
-      windowWidth = screenWidth * 0.7;
-      windowHeight = screenHeight * 0.7;
+      width = screenWidth;
+      height = screenHeight;
+    } else if (screenWidth < 1024) {
+      width = screenWidth * 0.7;
+      height = screenHeight * 0.7;
     } else {
-      windowWidth = 840;
-      windowHeight = 500;
+      width = 840;
+      height = 500;
     }
 
-    const left = (screenWidth - windowWidth) / 2;
-    const top = (screenHeight - windowHeight) / 2;
+    return {
+      width,
+      height,
+      left: (screenWidth - width) / 2,
+      top: (screenHeight - height) / 2
+    };
+  }
 
-    const oauthWindow = window.open(
-      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${ environment.clientId }&redirect_uri=${ environment.redirectUri }&${ environment.authUrlParams }`,
-      '_blank',
-      `width=${ windowWidth },height=${ windowHeight },top=${ top },left=${ left }`
-    );
+  private buildOAuthUrl(): string {
+    const params = new URLSearchParams({
+      client_id: environment.clientId,
+      redirect_uri: environment.redirectUri,
+    });
+
+    return `https://accounts.google.com/o/oauth2/v2/auth?${params}&${environment.authUrlParams}`;
   }
 
   authWithGoogle(idToken: string): Observable<{ token: string }> {
@@ -81,6 +97,10 @@ export class AuthService {
   }
 
   getUserWithToken(): Observable<IUser | unknown> {
+    if (this.authorized) {
+      return of(this.currentUser$);
+    }
+
     return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {}).pipe(
       switchMap(user => {
         this.authorized = true;
@@ -96,11 +116,15 @@ export class AuthService {
   }
 
   isAuthorized(): Observable<boolean> {
-    if (this.authorized) {
-      return of(true);
+    if (!this.token) {
+      return of(false);
     }
 
-    return of(false);
+    return this.getUserWithToken().pipe(
+      map(currentUser => {
+        return !!currentUser;
+      })
+    );
   }
 
   logout(): void {
