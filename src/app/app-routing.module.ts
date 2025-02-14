@@ -5,6 +5,8 @@ import { PageHomeOneComponent } from './pages/page-home-one/page-home-one.compon
 import { PageHomeTwoComponent } from './pages/page-home-two/page-home-two.component';
 import { RootComponent } from './components/root/root.component';
 import { PageOffcanvasCartComponent } from './pages/page-offcanvas-cart/page-offcanvas-cart.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { InitialResolver } from './core/resolvers/initial.resolver';
 
 const routes: Routes = [
   // START / ONLY_FOR_DEMO_YOU_CAN_DELETE_IT
@@ -46,6 +48,9 @@ const routes: Routes = [
       // Dropcart type. Choose one of ['dropdown', 'offcanvas'].
       dropcartType: 'dropdown'
     },
+    resolve: {
+      initialData: InitialResolver
+    },
     children: [
       {
         path: '',
@@ -62,7 +67,8 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule)
+        loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule),
+        canActivate: [AuthGuard]
       },
       {
         path: '',

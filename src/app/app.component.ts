@@ -10,6 +10,7 @@ import { filter, first } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { LANGUAGES_SHORTS } from './shared/constants/languages';
 import { AuthService } from '@shared/services/auth.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -87,8 +88,5 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang(lang);
       this.translate.use(lang);
     }
-
-    // Get user
-    await this.authService.getUserWithToken()
   }
 }

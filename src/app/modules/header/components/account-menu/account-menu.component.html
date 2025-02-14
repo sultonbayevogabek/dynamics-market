@@ -17,7 +17,7 @@
   </ng-container>
 
   <ng-container *ngIf="currentUser && !loading">
-    <a routerLink="/account/dashboard" class="account-menu__user" (click)="closeMenu.emit()">
+    <a routerLink="/account/profile" class="account-menu__user" (click)="closeMenu.emit()">
       <div class="account-menu__user-avatar">
         <img [src]="currentUser.image" [alt]="currentUser.firstName + ' ' + currentUser.lastName">
       </div>

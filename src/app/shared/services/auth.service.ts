@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, Observable, Subject } from 'rxjs';
+import { firstValueFrom, Observable, of, Subject, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { ToasterService } from './toaster.service';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -76,22 +77,54 @@ export class AuthService {
     }
 
     this.token = data.token;
-    await this.getUserWithToken();
+    await firstValueFrom(this.getUserWithToken());
   }
 
-  async getUserWithToken() {
-    try {
-      const response = (await firstValueFrom(
-        this.http.post(environment.host + 'user/get-user-by-token', {})
-      )) as IUser;
+  getUserWithToken(): Observable<IUser | unknown> {
+    if (this.authorized) {
+      return this.currentUser$;
+    } else {
+      return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {})
+        .pipe(
+          switchMap(res => {
+            this.authorized = true;
+            this.currentUser$.next(res);
+            return of(res);
+          }),
+          catchError(() => {
+            this.authorized = false;
+            this.currentUser$.next(null);
+            return of(null);
+          })
+        )
+    }
+  }
 
-      this.authorized = true;
-      this.currentUser$.next(response);
+  isAuthorized(): Observable<boolean> {
+    if (this.authorized) {
+      return new Observable<boolean>((observer) => observer.next(true));
     }
-    catch (e) {
-      this.authorized = false;
-      this.currentUser$.next(null);
+
+    if (!this.token) {
+      return new Observable<boolean>((observer) => observer.next(false));
     }
+
+    return this.getUserWithToken()
+      .pipe(map(response => {
+        return !!response;
+      }),
+      catchError(() => {
+        return new Observable<boolean>((observer) => observer.next(false));
+      })
+    );
+    // return this.currentUser$
+    //   .pipe(map(response => {
+    //       return !!response;
+    //     }),
+    //     catchError(() => {
+    //       return new Observable<boolean>((observer) => observer.next(false));
+    //     })
+    //   );
   }
 
   logout(): void {
