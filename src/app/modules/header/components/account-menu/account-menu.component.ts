@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { AuthService } from '@shared/services/auth.service';
 import { IUser } from '@shared/interfaces/user.interface';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-menu',
@@ -21,23 +21,21 @@ import { Subject } from 'rxjs';
 export class AccountMenuComponent implements OnInit, OnDestroy {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
   currentUser!: IUser | null;
-  loading = true;
 
   private destroy$: Subject<void> = new Subject();
 
   constructor(
     private authService: AuthService,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
   ngOnInit() {
     this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
       .subscribe(currentUser => {
-        console.log('account menu subscribed to current user');
         this.currentUser = currentUser;
-        this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       });
   }
 

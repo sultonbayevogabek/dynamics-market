@@ -1,9 +1,5 @@
 <div class="account-menu">
-  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
-    <app-loader-spinner [size]="40"></app-loader-spinner>
-  </div>
-
-  <ng-container *ngIf="!currentUser && !loading">
+  <ng-container *ngIf="!currentUser">
     <div class="account-menu__form">
       <div class="account-menu__form-title">{{ 'sign.in'| translate }}</div>
       <div class="form-group account-menu__form-button">
@@ -16,10 +12,10 @@
     <div class="account-menu__divider"></div>
   </ng-container>
 
-  <ng-container *ngIf="currentUser && !loading">
+  <ng-container *ngIf="currentUser">
     <a routerLink="/account/profile" class="account-menu__user" (click)="closeMenu.emit()">
       <div class="account-menu__user-avatar">
-        <img [src]="currentUser.image" [alt]="currentUser.firstName + ' ' + currentUser.lastName">
+        <img class="aspect-square" [src]="currentUser.image" alt="">
       </div>
       <div class="account-menu__user-info">
         <div class="account-menu__user-name">{{ currentUser.lastName| titlecase }} {{ currentUser.firstName| titlecase }}</div>

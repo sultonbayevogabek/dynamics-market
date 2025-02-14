@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, Observable, of, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, of, Subject, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { ToasterService } from './toaster.service';
 import { catchError } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 })
 
 export class AuthService {
-  currentUser$: Subject<IUser | null> = new Subject();
+  currentUser$ = new BehaviorSubject<IUser | null>(null);
   private _authorized = false;
 
   constructor(
@@ -81,19 +81,18 @@ export class AuthService {
   }
 
   getUserWithToken(): Observable<IUser | unknown> {
-    return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {})
-      .pipe(
-        switchMap(user => {
-          this.authorized = true;
-          this.currentUser$.next(user);
-          return of(user);
-        }),
-        catchError(() => {
-          this.authorized = false;
-          this.currentUser$.next(null);
-          return of(null);
-        })
-      )
+    return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {}).pipe(
+      switchMap(user => {
+        this.authorized = true;
+        this.currentUser$.next(user);
+        return of(user);
+      }),
+      catchError(() => {
+        this.authorized = false;
+        this.currentUser$.next(null);
+        return of(null);
+      })
+    );
   }
 
   isAuthorized(): Observable<boolean> {
