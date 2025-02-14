@@ -1,0 +1,31 @@
+<ul class="mobile-links mobile-links--level--0">
+  <li *ngIf="currentUser">
+    <div class="mobile-links__item">
+      <div class="mobile-links__item-title">
+        <a
+          class="mobile-links__item-link flex items-center gap-2"
+          routerLink="/account/dashboard"
+          (click)="closeMobileMenu()"
+        >
+          <img class="w-8 shrink-0 aspect-square rounded-full" [src]="currentUser.image" [alt]="currentUser.email">
+
+          <span class="grow line-clamp-1">{{ currentUser.lastName| titlecase }} {{ currentUser.firstName| titlecase }}</span>
+        </a>
+      </div>
+    </div>
+  </li>
+  <li *ngIf="!currentUser">
+    <div class="mobile-links__item">
+      <div class="mobile-links__item-title">
+        <a
+          class="mobile-links__item-link flex items-center gap-2"
+          (click)="openAuthWindow()"
+        >
+          <app-icon name="google" size="24x24"></app-icon>
+
+          <span class="grow line-clamp-1">{{ 'sign.in.with.google'| translate }}</span>
+        </a>
+      </div>
+    </div>
+  </li>
+</ul>

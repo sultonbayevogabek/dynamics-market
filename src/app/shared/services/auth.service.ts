@@ -80,16 +80,18 @@ export class AuthService {
   }
 
   async getUserWithToken() {
-    if (!this.token) {
-      return;
+    try {
+      const response = (await firstValueFrom(
+        this.http.post(environment.host + 'user/get-user-by-token', {})
+      )) as IUser;
+
+      this.authorized = true;
+      this.currentUser$.next(response);
     }
-
-    const response = (await firstValueFrom(
-      this.http.post(environment.host + 'user/get-user-by-token', {})
-    )) as IUser;
-
-    this.authorized = true;
-    this.currentUser$.next(response);
+    catch (e) {
+      this.authorized = false;
+      this.currentUser$.next(null);
+    }
   }
 
   logout(): void {

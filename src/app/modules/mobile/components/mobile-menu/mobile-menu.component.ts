@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { MobileMenuService } from '@shared/services/mobile-menu.service';
 import { mobileMenu } from '../../../../../data/mobile-menu';
 import { MobileMenuItem } from '@shared/interfaces/mobile-menu-item';
+import { LanguageService } from '@shared/services/language.service';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -17,7 +18,10 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
   isOpen = false;
   links: MobileMenuItem[] = mobileMenu;
 
-  constructor(public mobileMenuService: MobileMenuService) {
+  constructor(
+    public mobileMenuService: MobileMenuService,
+    private languageService: LanguageService
+  ) {
   }
 
   ngOnInit(): void {
@@ -36,8 +40,8 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
       this.mobileMenuService.close();
     }
 
-    // if (event.data && event.data.language) {
-    //     console.log(event.data.language); // change language
-    // }
+    if (event.data && event.data.language) {
+      this.languageService.setLanguage(event.data.language);
+    }
   }
 }

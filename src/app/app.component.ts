@@ -88,6 +88,7 @@ export class AppComponent implements OnInit {
       this.translate.use(lang);
     }
 
+    // Get user
     await this.authService.getUserWithToken()
   }
 }
