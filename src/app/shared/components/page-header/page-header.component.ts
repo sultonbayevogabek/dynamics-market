@@ -6,6 +6,7 @@ import { Link } from '../../interfaces/link';
   templateUrl: './page-header.component.html',
   styleUrls: [ './page-header.component.scss' ]
 })
+
 export class PageHeaderComponent {
   @Input() header = '';
   @Input() breadcrumbs: Link[] = [];
