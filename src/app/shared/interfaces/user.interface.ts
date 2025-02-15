@@ -7,4 +7,11 @@ export interface IUser {
   role: string;
   createdAt: string;
   updatedAt: string;
+  phone: string;
+  telegram: string;
+  gender: 'male' | 'female';
+  address: string;
+  regionId: string;
+  districtId: string;
+  locations: { long: number; lat: number }[];
 }

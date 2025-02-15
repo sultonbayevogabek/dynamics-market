@@ -5,11 +5,6 @@
 @import '../svg';
 @import '../mixins/direction';
 
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
 .form-check {
   @include direction {
     #{$padding-inline-start}: 1.5rem;

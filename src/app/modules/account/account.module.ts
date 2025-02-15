@@ -16,6 +16,8 @@ import { PageOrdersListComponent } from './pages/page-orders-list/page-orders-li
 import { PageProfileComponent } from './pages/page-profile/page-profile.component';
 import { PageOrderDetailsComponent } from './pages/page-order-details/page-order-details.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxMaskModule } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,11 @@ import { TranslateModule } from '@ngx-translate/core';
     // modules
     AccountRoutingModule,
     SharedModule,
-    TranslateModule
+    TranslateModule,
+    NgxMaskModule,
+    ReactiveFormsModule
+  ],
+  providers: [
   ]
 })
 export class AccountModule {

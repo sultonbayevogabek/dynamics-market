@@ -4,41 +4,124 @@
   </div>
   <div class="card-divider"></div>
   <div class="card-body">
-    <div class="row">
+    <form class="row" [formGroup]="profileForm" (ngSubmit)="updateUserData()">
       <div class="form-group col-12 col-xl-6">
-        <label for="profile-first-name">{{ 'firstname'| translate }}</label>
-        <input type="text" class="form-control" id="profile-first-name" [placeholder]="'firstname'| translate">
+        <label for="profile-first-name">{{ 'firstname'| translate }} *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="profile-first-name"
+          [placeholder]="'firstname'| translate"
+          formControlName="firstName"
+          [patterns]="customPatterns"
+          [mask]="'NNNNNNNNNNNNNNNNNNNNN'"
+          [validation]="false"
+          [dropSpecialCharacters]="false"
+          [class.is-invalid]="profileForm.get('firstName')?.errors && profileForm.get('firstName')?.touched"
+        >
+        <div
+          *ngIf="profileForm.get('firstName')?.errors && profileForm.get('firstName')?.touched"
+          class="invalid-feedback"
+        >{{ 'required.field'| translate }}
+        </div>
       </div>
       <div class="form-group col-12 col-xl-6">
-        <label for="profile-last-name">{{ 'lastname'| translate }}</label>
-        <input type="text" class="form-control" id="profile-last-name" [placeholder]="'lastname'| translate">
+        <label for="profile-last-name">{{ 'lastname'| translate }} *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="profile-last-name"
+          [placeholder]="'lastname'| translate"
+          formControlName="lastName"
+          [patterns]="customPatterns"
+          [mask]="'NNNNNNNNNNNNNNNNNNNNN'"
+          [validation]="false"
+          [dropSpecialCharacters]="false"
+          [class.is-invalid]="profileForm.get('lastName')?.errors && profileForm.get('lastName')?.touched"
+        >
+        <div
+          *ngIf="profileForm.get('lastName')?.errors && profileForm.get('lastName')?.touched"
+          class="invalid-feedback"
+        >{{ 'required.field'| translate }}
+        </div>
       </div>
       <div class="form-group col-12 col-xl-6">
-        <label for="profile-email">{{ 'email'| translate }}</label>
-        <input type="email" class="form-control" id="profile-email" [placeholder]="'email'| translate">
+        <label for="profile-email">{{ 'email'| translate }} *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="profile-email"
+          [placeholder]="'email'| translate"
+          mask="A*@S*.S*"
+          formControlName="email"
+        >
       </div>
       <div class="form-group col-12 col-xl-6">
-        <label for="profile-phone">{{ 'phone.number'| translate }}</label>
-        <input type="text" class="form-control" id="profile-phone" [placeholder]="'phone.number'| translate">
+        <label for="profile-phone">{{ 'phone.number'| translate }} *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          id="profile-phone"
+          mask=" 00 000 00 00"
+          prefix="+998"
+          [validation]="true"
+          formControlName="phone"
+          [class.is-invalid]="profileForm.get('phone')?.errors && profileForm.get('phone')?.touched"
+        >
+        <div
+          *ngIf="profileForm.get('phone')?.errors && profileForm.get('phone')?.touched"
+          class="invalid-feedback"
+        >{{ 'required.field'| translate }}
+        </div>
       </div>
 
       <div class="form-group col-12 col-xl-6">
-        <label for="profile-phone">{{ 'telegram'| translate }}</label>
-        <input type="text" class="form-control" id="profile-telegram" [placeholder]="'telegram'| translate">
+        <label for="profile-telegram">{{ 'telegram'| translate }}</label>
+        <input
+          type="text"
+          class="form-control"
+          id="profile-telegram"
+          [placeholder]="'telegram'| translate"
+          mask="@S*"
+          formControlName="telegram"
+        >
       </div>
 
       <div class="form-group col-12 col-xl-6">
-        <label for="profile-phone">{{ 'gender'| translate }}</label>
+        <label for="profile-gender">{{ 'gender'| translate }} *</label>
 
-        <select class="form-control" id="profile-gender" [attr.placeholder]="'gender'| translate">
+        <select class="form-control" id="profile-gender" formControlName="gender">
           <option value="male">{{ 'male'| translate }}</option>
           <option value="female">{{ 'female'| translate }}</option>
         </select>
       </div>
 
-      <div class="col-12 form-group d-flex justify-end mt-3 mb-0">
-        <button class="btn btn-primary">{{ 'save'| translate }}</button>
+      <div class="form-group col-12 col-xl-6">
+        <label for="profile-address">{{ 'address'| translate }}</label>
+        <input
+          type="text"
+          class="form-control"
+          id="profile-address"
+          [placeholder]="'address'| translate"
+          formControlName="address"
+        >
       </div>
-    </div>
+
+      <div class="col-12 form-group d-flex justify-end mt-3 mb-0">
+        <button
+          [disabled]="profileForm.invalid || profileForm.disabled"
+          type="submit"
+          class="btn btn-primary">
+          <ng-container *ngIf="profileForm.enabled">{{ 'save'| translate }}</ng-container>
+          <app-loader-spinner
+            *ngIf="profileForm.disabled"
+            [size]="24"
+            [color]="'white'"
+            [borderWidth]="2"
+          ></app-loader-spinner>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

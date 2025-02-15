@@ -45,5 +45,8 @@
   "telegram": "Telegram",
   "gender": "Jins",
   "female": "Ayol",
-  "male": "Erkak"
+  "male": "Erkak",
+  "required.field": "Majburiy maydon",
+  "changes.successfully.saved": "O'zgarishlar muvaffaqiyatli saqlandi",
+  "address": "Manzil"
 }

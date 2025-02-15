@@ -1,7 +1,10 @@
 <div
   [ngStyle]="{
     width: size + 'px',
-    height: size + 'px'
+    height: size + 'px',
+    borderWidth: borderWidth + 'px'
   }"
-  class="loader-spinner">
+  class="loader-spinner"
+  [class.white]="color === 'white'"
+>
 </div>

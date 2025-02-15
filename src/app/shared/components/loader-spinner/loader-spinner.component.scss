@@ -11,11 +11,17 @@
   box-sizing: border-box;
   content: '';
   display: block;
-  border: 3px solid rgba(0, 0, 0, .2);
+  border-style: solid;
+  border-color: rgba(0, 0, 0, .2);
   border-radius: 50%;
   border-top-color: rgba(0, 0, 0, .6);
   animation-name: loader-spinner-animation;
   animation-duration: .5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+
+  &.white {
+    border-color: rgba(255, 255, 255, .5);
+    border-top-color: #ffffff;
+  }
 }

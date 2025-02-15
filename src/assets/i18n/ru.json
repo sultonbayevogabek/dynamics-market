@@ -45,5 +45,8 @@
   "telegram": "Телеграм",
   "gender": "Пол",
   "female": "Женщина",
-  "male": "Мужской"
+  "male": "Мужской",
+  "required.field": "Обязательное поле",
+  "changes.successfully.saved": "Изменения успешно сохранились",
+  "address": "Адрес"
 }

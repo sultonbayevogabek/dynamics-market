@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 
 export class LoaderSpinnerComponent {
   @Input() size= 100;
+  @Input() borderWidth = 3;
+  @Input() color: 'black' | 'white' = 'black';
 }

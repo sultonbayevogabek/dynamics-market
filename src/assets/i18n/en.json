@@ -45,5 +45,8 @@
   "telegram": "Telegram",
   "gender": "Gender",
   "female": "Female",
-  "male": "Male"
+  "male": "Male",
+  "required.field": "Mandatory field",
+  "changes.successfully.saved": "Changes successfully saved",
+  "address": "Address"
 }

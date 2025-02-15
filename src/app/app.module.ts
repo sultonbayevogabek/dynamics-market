@@ -34,6 +34,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { NgxMaskModule } from 'ngx-mask';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -71,7 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [ HttpClient ]
       }
-    })
+    }),
+    NgxMaskModule.forRoot()
   ],
   providers: [
     // { provide: LOCALE_ID, useValue: 'it' }
