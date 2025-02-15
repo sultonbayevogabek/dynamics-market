@@ -18,6 +18,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: [ './account-menu.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class AccountMenuComponent implements OnInit, OnDestroy {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
   currentUser!: IUser | null;
@@ -35,7 +36,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(currentUser => {
         this.currentUser = currentUser;
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
       });
   }
 

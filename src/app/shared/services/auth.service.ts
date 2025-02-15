@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, firstValueFrom, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { ToasterService } from './toaster.service';
 import { catchError, map } from 'rxjs/operators';
@@ -41,44 +41,48 @@ export class AuthService {
   }
 
   openOAuthWindow(): void {
-    const { width, height, left, top } = this.calculateWindowDimensions();
+    const dimensions = this.getOAuthWindowDimensions();
+    const oauthUrl = this.getOAuthUrl();
 
     window.open(
-      this.buildOAuthUrl(),
+      oauthUrl,
       '_blank',
-      `width=${width},height=${height},top=${top},left=${left}`
+      this.formatWindowOptions(dimensions)
     );
   }
 
-  private calculateWindowDimensions() {
+  private getOAuthWindowDimensions(): { width: number; height: number; left: number; top: number } {
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
-    let width: number, height: number;
+    const dimensions = {
+      width: 840,
+      height: 500
+    };
 
     if (screenWidth < 768) {
-      width = screenWidth;
-      height = screenHeight;
+      dimensions.width = screenWidth;
+      dimensions.height = screenHeight;
     } else if (screenWidth < 1024) {
-      width = screenWidth * 0.7;
-      height = screenHeight * 0.7;
-    } else {
-      width = 840;
-      height = 500;
+      dimensions.width = screenWidth * 0.7;
+      dimensions.height = screenHeight * 0.7;
     }
 
     return {
-      width,
-      height,
-      left: (screenWidth - width) / 2,
-      top: (screenHeight - height) / 2
+      ...dimensions,
+      left: (screenWidth - dimensions.width) / 2,
+      top: (screenHeight - dimensions.height) / 2
     };
   }
 
-  private buildOAuthUrl(): string {
-    const params = new URLSearchParams(environment.googleAuthParams);
+  private getOAuthUrl(): string {
+    return `https://accounts.google.com/o/oauth2/v2/auth?${ new URLSearchParams(environment.googleAuthParams) }`;
+  }
 
-    return `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
+  private formatWindowOptions(dimensions: { width: number; height: number; left: number; top: number }): string {
+    return Object.entries(dimensions)
+      .map(([ key, value ]) => `${ key }=${ Math.round(value) }`)
+      .join(',');
   }
 
   authWithGoogle(idToken: string): Observable<{ token: string }> {
@@ -97,7 +101,7 @@ export class AuthService {
 
   getUserWithToken(): Observable<IUser | unknown> {
     if (this.authorized) {
-      return of(this.currentUser$);
+      return of(this.currentUser$.value);
     }
 
     return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {}).pipe(
@@ -115,14 +119,8 @@ export class AuthService {
   }
 
   isAuthorized(): Observable<boolean> {
-    if (!this.token) {
-      return of(false);
-    }
-
-    return this.getUserWithToken().pipe(
-      map(currentUser => {
-        return !!currentUser;
-      })
+    return !this.token ? of(false) : this.getUserWithToken().pipe(
+      map(Boolean)
     );
   }
 
@@ -130,6 +128,6 @@ export class AuthService {
     localStorage.removeItem('token');
     this.authorized = false;
     this.currentUser$.next(null);
-    this.router.navigate(['/']);
+    this.router.navigate([ '/' ]);
   }
 }
