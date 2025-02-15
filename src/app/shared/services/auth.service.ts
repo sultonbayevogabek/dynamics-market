@@ -5,6 +5,7 @@ import { BehaviorSubject, firstValueFrom, Observable, of, switchMap } from 'rxjs
 import { IUser } from '../interfaces/user.interface';
 import { ToasterService } from './toaster.service';
 import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
 
   constructor(
     private toaster: ToasterService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     (window as any).receiveData = this.receiveData.bind(this);
   }
@@ -74,12 +76,9 @@ export class AuthService {
   }
 
   private buildOAuthUrl(): string {
-    const params = new URLSearchParams({
-      client_id: environment.clientId,
-      redirect_uri: environment.redirectUri,
-    });
+    const params = new URLSearchParams(environment.googleAuthParams);
 
-    return `https://accounts.google.com/o/oauth2/v2/auth?${params}&${environment.authUrlParams}`;
+    return `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
   }
 
   authWithGoogle(idToken: string): Observable<{ token: string }> {
@@ -93,7 +92,7 @@ export class AuthService {
     }
 
     this.token = data.token;
-    await firstValueFrom(this.getUserWithToken());
+    this.getUserWithToken().subscribe();
   }
 
   getUserWithToken(): Observable<IUser | unknown> {
@@ -131,5 +130,6 @@ export class AuthService {
     localStorage.removeItem('token');
     this.authorized = false;
     this.currentUser$.next(null);
+    this.router.navigate(['/']);
   }
 }
