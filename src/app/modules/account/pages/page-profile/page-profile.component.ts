@@ -15,7 +15,7 @@ export class PageProfileComponent implements OnInit {
   profileForm: FormGroup = new FormGroup({
     firstName: new FormControl(null, [ Validators.required ]),
     lastName: new FormControl(null, [ Validators.required ]),
-    email: new FormControl({ value: '', disabled: true }),
+    email: new FormControl(null, [ Validators.required ]),
     phone: new FormControl('+998 ', [ Validators.required ]),
     telegram: new FormControl(null),
     gender: new FormControl('male'),
