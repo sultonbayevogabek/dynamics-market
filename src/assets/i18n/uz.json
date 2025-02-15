@@ -33,5 +33,17 @@
   "logout": "Chiqish",
   "edit.profile": "Profilni tahrirlash",
   "orders.history": "Buyurtmalar tarixi",
-  "menu": "Menyu"
+  "menu": "Menyu",
+  "my.profile": "Mening profilim",
+  "navigation": "Navigatsiya",
+  "order.details": "Buyurtma tafsilotlari",
+  "firstname": "Ism",
+  "lastname": "Familiya",
+  "email": "Elektron pochta",
+  "phone.number": "Telefon raqam",
+  "save": "Saqlash",
+  "telegram": "Telegram",
+  "gender": "Jins",
+  "female": "Ayol",
+  "male": "Erkak"
 }

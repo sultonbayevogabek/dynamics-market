@@ -5,16 +5,16 @@
         <ol class="breadcrumb">
           <ng-container *ngFor="let breadcrumb of breadcrumbs; last as last">
             <li *ngIf="!last" class="breadcrumb-item">
-              <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+              <a [routerLink]="breadcrumb.url">{{ breadcrumb.label| translate }}</a>
               <app-icon class="breadcrumb-arrow" name="arrow-rounded-right-6x9" size="6x9"></app-icon>
             </li>
-            <li *ngIf="last" class="breadcrumb-item active" aria-current="page">{{ breadcrumb.label }}</li>
+            <li *ngIf="last" class="breadcrumb-item active" aria-current="page">{{ breadcrumb.label| translate }}</li>
           </ng-container>
         </ol>
       </nav>
     </div>
     <div *ngIf="header" class="page-header__title">
-      <h1>{{ header }}</h1>
+      <h1>{{ header| translate }}</h1>
     </div>
   </div>
 </div>

@@ -33,5 +33,17 @@
   "logout": "Выйти",
   "edit.profile": "Редактировать профиль",
   "orders.history": "Истории заказов",
-  "menu": "Меню"
+  "menu": "Меню",
+  "my.profile": "Мой профиль",
+  "navigation": "Навигация",
+  "order.details": "Детали заказа",
+  "firstname": "Имя",
+  "lastname": "Фамилия",
+  "email": "Электрон почта",
+  "phone.number": "Номер телефона",
+  "save": "Сохранить",
+  "telegram": "Телеграм",
+  "gender": "Пол",
+  "female": "Женщина",
+  "male": "Мужской"
 }

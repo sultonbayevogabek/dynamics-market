@@ -33,5 +33,17 @@
   "logout": "Logout",
   "edit.profile": "Edit profile",
   "orders.history": "Orders history",
-  "menu": "Menu"
+  "menu": "Menu",
+  "my.profile": "My profile",
+  "navigation": "Navigation",
+  "order.details": "Order details",
+  "firstname": "Firstname",
+  "lastname": "Lastname",
+  "email": "Email",
+  "phone.number": "Phone number",
+  "save": "Save",
+  "telegram": "Telegram",
+  "gender": "Gender",
+  "female": "Female",
+  "male": "Male"
 }

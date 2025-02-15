@@ -1,22 +1,27 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: [ './layout.component.sass' ]
+  templateUrl: './layout.component.html'
 })
+
 export class LayoutComponent {
+  constructor(
+    private _authService: AuthService,
+  ) {
+  }
+
   links: { label: string; url: string }[] = [
-    { label: 'Dashboard', url: './dashboard' },
-    { label: 'Edit Profile', url: './profile' },
-    { label: 'Order History', url: './orders' },
-    { label: 'Order Details', url: './orders/5' },
-    { label: 'Addresses', url: './addresses' },
-    { label: 'Edit Address', url: './addresses/5' },
-    { label: 'Password', url: './password' },
-    { label: 'Logout', url: './login' }
+    { label: 'edit.profile', url: './profile' },
+    { label: 'orders.history', url: './orders' },
+    { label: 'order.details', url: './orders/5' },
+    { label: 'logout', url: '' }
   ];
 
-  constructor() {
+  clickNavigation(link: { label: string; url: string }) {
+    if (!link.url) {
+      this._authService.logout();
+    }
   }
 }

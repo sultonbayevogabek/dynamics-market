@@ -43,6 +43,7 @@ import { ColorTypePipe } from './pipes/color-type.pipe';
 import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -80,18 +81,19 @@ import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinn
     ProductGalleryComponent,
     LoaderSpinnerComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    RouterModule,
-    // modules (third-party)
-    CarouselModule,
-    ModalModule.forRoot(),
-    RedZoomModule
-  ],
+   imports: [
+      // modules (angular)
+      CommonModule,
+      FormsModule,
+      HttpClientModule,
+      ReactiveFormsModule,
+      RouterModule,
+      // modules (third-party)
+      CarouselModule,
+      ModalModule.forRoot(),
+      RedZoomModule,
+      TranslateModule
+   ],
   exports: [
     // directives
     ClickDirective,
