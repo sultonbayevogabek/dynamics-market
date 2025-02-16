@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '@shared/services/auth.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -27,8 +27,10 @@ export class OAuthCallbackComponent implements OnInit {
     }
 
     const response = await firstValueFrom(this.authService.authWithGoogle(this.idToken));
+
     if (!response || !response.token) {
       this.onAuthFailed();
+      return;
     }
 
     this.onAuthSucceed(response.token);
