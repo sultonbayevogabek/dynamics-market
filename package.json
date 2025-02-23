@@ -7,7 +7,12 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "sprite": "svg-sprite --config src/sprite-config.json src/svg/*.svg",
-    "build": "ng build"
+    "build": "ng build",
+    "start:ssr": "npm run build:ssr && npm run serve:ssr",
+    "dev:ssr": "ng run dynamics-market:serve-ssr",
+    "serve:ssr": "node dist/server/main.js",
+    "build:ssr": "ng build && ng run dynamics-market:server",
+    "prerender": "ng run dynamics-market:prerender"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +29,7 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@nguniversal/express-engine": "^13.0.1",
     "bootstrap": "^4.6.1",
     "express": "^4.15.2",
     "ngx-bootstrap": "^8.0.0",
@@ -62,6 +68,7 @@
     "postcss": "^8.5.2",
     "svg-sprite": "^1.5.3",
     "tailwindcss": "^3.4.17",
-    "typescript": "~4.5.2"
+    "typescript": "~4.5.2",
+    "@nguniversal/builders": "^13.0.1"
   }
 }
