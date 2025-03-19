@@ -126,7 +126,7 @@ export class AuthService {
       return of(null);
     }
 
-    return this.http.post<IUser>(environment.host + 'user/get-user-by-token', {}).pipe(
+    return this.http.post<IUser>(environment.host + 'user/get-user', {}).pipe(
       switchMap(user => {
         this.authorized = true;
         this.currentUser$.next(user);

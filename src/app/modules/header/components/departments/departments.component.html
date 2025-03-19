@@ -28,9 +28,9 @@
           *ngFor="let item of items"
           class="departments__item"
           [ngClass]="{
-                        'departments__item--menu': item.menu && item.menu.type === 'menu',
-                        'departments__item--hover': item === hoveredItem
-                    }"
+            'departments__item--menu': item.menu && item.menu.type === 'menu',
+            'departments__item--hover': item === hoveredItem
+          }"
           (mouseenter)="onItemMouseEnter(item)"
           #itemElement
         >

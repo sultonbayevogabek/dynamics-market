@@ -15,18 +15,18 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { departments } from '../../../../../data/header-departments';
-import { NavigationLink } from '../../../../shared/interfaces/navigation-link';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
 import { isPlatformBrowser } from '@angular/common';
-import { HeaderService } from '../../../../shared/services/header.service';
-import { fromMatchMedia } from '../../../../shared/functions/rxjs/fromMatchMedia';
-import { fromOutsideTouchClick } from '../../../../shared/functions/rxjs/fromOutsideTouchClick';
+import { HeaderService } from '@shared/services/header.service';
+import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
+import { fromOutsideTouchClick } from '@shared/functions/rxjs/fromOutsideTouchClick';
 
 @Component({
   selector: 'app-header-departments',
   templateUrl: './departments.component.html',
   styleUrls: [ './departments.component.scss' ]
 })
+
 export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   private destroy$: Subject<void> = new Subject();
 
@@ -35,7 +35,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
   @ViewChildren('submenuElement') submenuElements!: QueryList<ElementRef>;
   @ViewChildren('itemElement') itemElements!: QueryList<ElementRef>;
 
-  items: NavigationLink[] = departments;
+  items: NavigationLink[] = this.header.departments;
   hoveredItem: NavigationLink | null = null;
 
   isOpen = false;
@@ -57,7 +57,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     const root = this.element.querySelector('.departments') as HTMLElement;
     const content = this.element.querySelector('.departments__links-wrapper') as HTMLElement;
 
@@ -149,6 +149,8 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
         this.fix();
       });
     }
+
+    await this.header.getCategoriesList();
   }
 
   getAreaBottom(): number {
@@ -174,11 +176,6 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
     content.style.maxHeight = `${ this.fixedHeight }px`;
     content.style.height = `${ this.fixedHeight }px`;
     content.getBoundingClientRect(); // force reflow
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   ngAfterViewInit(): void {
@@ -389,5 +386,10 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
     }
 
     return elements[index].nativeElement as HTMLDivElement;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

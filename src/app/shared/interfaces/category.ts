@@ -12,3 +12,20 @@ export interface Category {
   parents?: Category[] | null;
   children?: Category[] | null;
 }
+
+export interface ICategory {
+  _id: string
+  nameUz: string
+  nameRu: string
+  nameEn: string
+  slugUz: string
+  slugRu: string
+  slugEn: string
+  parentId: any
+  isDeleted: boolean
+  images: any
+  hierarchyPath: string[]
+  status: number
+  createdAt: string
+  updatedAt: string
+}
