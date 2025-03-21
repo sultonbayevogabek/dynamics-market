@@ -35,6 +35,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxMaskModule } from 'ngx-mask';
+import { LanguageInterceptor } from './core/interceptors/language.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,7 +80,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     // { provide: LOCALE_ID, useValue: 'it' }
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true },
   ],
   bootstrap: [ AppComponent ]
 })

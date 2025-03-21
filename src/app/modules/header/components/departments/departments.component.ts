@@ -35,7 +35,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
   @ViewChildren('submenuElement') submenuElements!: QueryList<ElementRef>;
   @ViewChildren('itemElement') itemElements!: QueryList<ElementRef>;
 
-  items: NavigationLink[] = this.header.departments;
+  items: NavigationLink[] = []
   hoveredItem: NavigationLink | null = null;
 
   isOpen = false;
@@ -150,7 +150,13 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
       });
     }
 
-    await this.header.getCategoriesList();
+    await this.header.setCategories();
+
+    this.header.departments$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((departments) => {
+        this.items = departments;
+      })
   }
 
   getAreaBottom(): number {

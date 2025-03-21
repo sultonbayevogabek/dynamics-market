@@ -64,6 +64,7 @@
 
   & > .megamenu__item > a {
     font-weight: $font-weight-medium;
+    @apply line-clamp-1;
   }
 
   & > .megamenu__item > a + .megamenu__links {

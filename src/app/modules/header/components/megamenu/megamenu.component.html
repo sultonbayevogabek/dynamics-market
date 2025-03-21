@@ -1,11 +1,13 @@
 <!-- .megamenu -->
 <div class="megamenu">
-  <div class="megamenu__body" [style.background-image]="menu.image ? 'url('+menu.image+')' : ''">
+  <div class="megamenu__body">
     <div class="row">
       <div *ngFor="let column of menu.columns" class="col-{{ column.size }}">
         <ul class="megamenu__links megamenu__links--level--0">
           <li *ngFor="let item of column.items" class="megamenu__item"
-              [ngClass]="{'megamenu__item--with-submenu': item.items}">
+              [ngClass]="{'megamenu__item--with-submenu': item.items}"
+              [title]="item?.label"
+          >
 
             <a *ngIf="!item.external" [routerLink]="item.url" [target]="item.target || '_self'"
                (click)="itemClick.emit(item)">{{ item.label }}</a>
