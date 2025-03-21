@@ -41,11 +41,9 @@
                       size="6x9"></app-icon>
           </ng-template>
 
-          <a *ngIf="!item.external" class="departments__item-link" [routerLink]="item.url"
-             [target]="item.target || '_self'" (click)="onItemClick()" (appTouchClick)="onTouchClick($event, item)">
-            <ng-container [ngTemplateOutlet]="link"></ng-container>
-          </a>
-          <a *ngIf="item.external" class="departments__item-link" [href]="item.url" [target]="item.target"
+          <a class="departments__item-link"
+             [routerLink]="['/', 'products']"
+             [queryParams]="{ category: item.url }"
              (click)="onItemClick()" (appTouchClick)="onTouchClick($event, item)">
             <ng-container [ngTemplateOutlet]="link"></ng-container>
           </a>

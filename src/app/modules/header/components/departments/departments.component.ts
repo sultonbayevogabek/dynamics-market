@@ -20,6 +20,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HeaderService } from '@shared/services/header.service';
 import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { fromOutsideTouchClick } from '@shared/functions/rxjs/fromOutsideTouchClick';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-departments',
@@ -35,7 +36,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
   @ViewChildren('submenuElement') submenuElements!: QueryList<ElementRef>;
   @ViewChildren('itemElement') itemElements!: QueryList<ElementRef>;
 
-  items: NavigationLink[] = []
+  items: NavigationLink[] = [];
   hoveredItem: NavigationLink | null = null;
 
   isOpen = false;
@@ -156,7 +157,8 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
       .pipe(takeUntil(this.destroy$))
       .subscribe((departments) => {
         this.items = departments;
-      })
+        console.log(this.items);
+      });
   }
 
   getAreaBottom(): number {
@@ -296,7 +298,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
     this.hoveredItem = null;
   }
 
-  onTouchClick(event: Event, item: NavigationLink): void {
+  async onTouchClick(event: Event, item: NavigationLink) {
     if (event.cancelable) {
       if (this.hoveredItem && this.hoveredItem === item) {
         return;
@@ -311,7 +313,9 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
     }
   }
 
-  onItemClick(): void {
+  async onItemClick()
+  {
+    console.log('item cliked');
     this.close();
   }
 

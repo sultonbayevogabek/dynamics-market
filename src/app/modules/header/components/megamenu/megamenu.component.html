@@ -9,19 +9,21 @@
               [title]="item?.label"
           >
 
-            <a *ngIf="!item.external" [routerLink]="item.url" [target]="item.target || '_self'"
-               (click)="itemClick.emit(item)">{{ item.label }}</a>
-            <a *ngIf="item.external" [href]="item.url" [target]="item.target"
+            <a [routerLink]="['/', 'products']"
+               [queryParams]="{
+                  category: item.url
+               }"
                (click)="itemClick.emit(item)">{{ item.label }}</a>
 
             <ul *ngIf="item.items" class="megamenu__links megamenu__links--level--1">
               <li *ngFor="let subItem of item.items" class="megamenu__item">
 
-                <a *ngIf="!subItem.external" [routerLink]="subItem.url" [target]="subItem.target || '_self'"
-                   (click)="itemClick.emit(subItem)">{{ subItem.label }}</a>
-                <a *ngIf="subItem.external" [href]="subItem.url" [target]="subItem.target"
-                   (click)="itemClick.emit(subItem)">{{ subItem.label }}</a>
-
+                <a
+                  [routerLink]="['/', 'products']"
+                  [queryParams]="{
+                    category: subItem.url
+                  }"
+                  (click)="itemClick.emit(subItem)">{{ subItem.label }}</a>
               </li>
             </ul>
           </li>

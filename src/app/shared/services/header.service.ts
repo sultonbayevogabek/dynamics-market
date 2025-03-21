@@ -16,7 +16,7 @@ export interface ILocalCategory {
   data: ICategory[];
   time: number;
   language: string
-};
+}
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +83,7 @@ export class HeaderService extends RequestService {
 
   async getCategoriesFromServer(): Promise<ICategory[]> {
     const response = await firstValueFrom(
-      this.request<{ data: ICategory[] }>('category/front/get-list')
+      this.request<{ data: ICategory[] }>('category/list')
     );
 
     localStorage.setItem('categories', JSON.stringify({
@@ -114,7 +114,7 @@ export class HeaderService extends RequestService {
     categories.forEach(category => {
       const department: NavigationLink = {
         label: category.name,
-        url: `/products?category=${ category.slug }`
+        url: category.slug
       };
 
       let size: 'sm' | 'xl' | 'lg' | 'nl' = 'sm';
@@ -156,7 +156,6 @@ export class HeaderService extends RequestService {
         size: size,
         columns: columns
       };
-
 
       departments.push(department);
       this.departments$.next(departments);
