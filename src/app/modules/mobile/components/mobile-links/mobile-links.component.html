@@ -7,13 +7,13 @@
            class="mobile-links__item-link"
            (click)="onItemClick(link)"
            [routerLink]="link.url">
-          {{ link.label| translate }}
+          {{ link.label ? (link.label| translate) : '' }}
         </a>
         <a
           *ngIf="link.type !== 'link'"
           class="mobile-links__item-link"
           (click)="onItemClick(link)">
-          {{ link.label| translate }}
+          {{ link.label ? (link.label| translate) : '' }}
         </a>
 
         <button *ngIf="link.children?.length" class="mobile-links__item-toggle" type="button" (click)="item.toggle()">
@@ -29,6 +29,5 @@
         ></app-mobile-links>
       </div>
     </div>
-    <div *ngIf="link.type === 'divider'" class="mobile-links__divider"></div>
   </li>
 </ul>

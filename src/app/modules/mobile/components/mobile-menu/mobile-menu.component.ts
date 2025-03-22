@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MobileMenuService } from '@shared/services/mobile-menu.service';
-import { mobileMenu } from '../../../../../data/mobile-menu';
-import { MobileMenuItem } from '@shared/interfaces/mobile-menu-item';
+import { MobileMenuItemLink } from '@shared/interfaces/mobile-menu-item';
 import { LanguageService } from '@shared/services/language.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
   private destroy$: Subject<void> = new Subject();
 
   isOpen = false;
-  links: MobileMenuItem[] = mobileMenu;
+  links: MobileMenuItemLink[] = this.mobileMenuService.mobileMenu;
 
   constructor(
     public mobileMenuService: MobileMenuService,
@@ -35,7 +34,7 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
     this.destroy$.complete();
   }
 
-  onItemClick(event: MobileMenuItem): void {
+  onItemClick(event: MobileMenuItemLink): void {
     if (event.type === 'link') {
       this.mobileMenuService.close();
     }

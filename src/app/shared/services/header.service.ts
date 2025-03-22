@@ -23,6 +23,7 @@ export interface ILocalCategory {
 })
 export class HeaderService extends RequestService {
   departments$ = new BehaviorSubject<NavigationLink[]>([]);
+  categories$ = new BehaviorSubject<ICategory[]>([]);
 
   private departmentsAreaValue: HTMLElement | null = null;
   private departmentsAreaSubject: BehaviorSubject<HTMLElement | null> = new BehaviorSubject<HTMLElement | null>(null);
@@ -109,6 +110,8 @@ export class HeaderService extends RequestService {
     } else {
       categories = await this.getCategoriesFromServer();
     }
+
+    this.categories$.next(categories);
 
     const departments: NavigationLink[] = [];
     categories.forEach(category => {

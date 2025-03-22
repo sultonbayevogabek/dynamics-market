@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { MobileMenuItem } from '@shared/interfaces/mobile-menu-item';
+import { MobileMenuItemLink } from '@shared/interfaces/mobile-menu-item';
 
 @Component({
   selector: 'app-mobile-links',
@@ -9,17 +9,17 @@ import { MobileMenuItem } from '@shared/interfaces/mobile-menu-item';
 })
 
 export class MobileLinksComponent {
-  @Input() links: MobileMenuItem[] = [];
+  @Input() links: MobileMenuItemLink[] = [];
   @Input() level = 0;
 
-  @Output() itemClick: EventEmitter<MobileMenuItem> = new EventEmitter();
+  @Output() itemClick: EventEmitter<MobileMenuItemLink> = new EventEmitter();
 
   constructor(
 
   ) {
   }
 
-  onItemClick(item: MobileMenuItem): void {
+  onItemClick(item: MobileMenuItemLink): void {
     this.itemClick.emit(item);
   }
 }
