@@ -6,7 +6,11 @@
         <a *ngIf="link.type === 'link'"
            class="mobile-links__item-link"
            (click)="onItemClick(link)"
-           [routerLink]="link.url">
+           [routerLink]="['/products']"
+           [queryParams]="{
+            category: link.url
+           }"
+        >
           {{ link.label ? (link.label| translate) : '' }}
         </a>
         <a
