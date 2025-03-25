@@ -2,12 +2,8 @@ import { IFile } from '@shared/interfaces/file';
 
 export interface IBanner {
   _id: string
-  titleUz: string
-  titleRu: string
-  titleEn: string
-  textUz: string
-  textRu: string
-  textEn: string
+  title: string;
+  text: string;
   images: IFile[]
   hierarchy: Hierarchy[]
   product: Product
@@ -23,10 +19,7 @@ export interface IBanner {
 
 interface Hierarchy {
   categoryId: string
-  categoryNameUz: string
-  categoryNameRu: string
-  categoryNameEn: string
-  _id: string
+  categorySlug: string
 }
 
 interface Product {

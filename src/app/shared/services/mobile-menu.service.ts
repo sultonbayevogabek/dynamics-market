@@ -110,8 +110,6 @@ export class MobileMenuService {
     categoryItem.children = categories.map(category => {
       return this.transformCategory(category);
     })
-
-    console.log(categoryItem, 'category');
   }
 
   transformCategory(category: ICategory): MobileMenuItemLink {

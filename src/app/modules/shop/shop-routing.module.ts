@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Data, ResolveData, RouterModule, Routes } from '@angular/router';
 import { PageCategoryComponent } from './pages/page-category/page-category.component';
 import { PageCartComponent } from './pages/page-cart/page-cart.component';
-import { PageWishlistComponent } from './pages/page-wishlist/page-wishlist.component';
 import { PageCheckoutComponent } from './pages/page-checkout/page-checkout.component';
 import { PageCompareComponent } from './pages/page-compare/page-compare.component';
 import { PageTrackOrderComponent } from './pages/page-track-order/page-track-order.component';
@@ -70,10 +69,6 @@ const routes: Routes = [
   {
     path: 'cart/checkout/success',
     component: PageOrderSuccessComponent
-  },
-  {
-    path: 'wishlist',
-    component: PageWishlistComponent
   },
   {
     path: 'compare',

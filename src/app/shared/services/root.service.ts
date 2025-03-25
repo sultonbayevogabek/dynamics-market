@@ -64,10 +64,6 @@ export class RootService {
     return '/shop/cart/checkout';
   }
 
-  wishlist(): string {
-    return '/shop/wishlist';
-  }
-
   blog(): string {
     return '/blog';
   }

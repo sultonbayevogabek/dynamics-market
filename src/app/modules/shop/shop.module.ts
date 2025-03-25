@@ -25,7 +25,6 @@ import { PageCheckoutComponent } from './pages/page-checkout/page-checkout.compo
 import { PageCompareComponent } from './pages/page-compare/page-compare.component';
 import { PageProductComponent } from './pages/page-product/page-product.component';
 import { PageTrackOrderComponent } from './pages/page-track-order/page-track-order.component';
-import { PageWishlistComponent } from './pages/page-wishlist/page-wishlist.component';
 import { ProductSidebarComponent } from './components/product-sidebar/product-sidebar.component';
 import { PageOrderSuccessComponent } from './pages/page-order-success/page-order-success.component';
 
@@ -42,7 +41,6 @@ import { PageOrderSuccessComponent } from './pages/page-order-success/page-order
     PageCompareComponent,
     PageProductComponent,
     PageTrackOrderComponent,
-    PageWishlistComponent,
     ProductSidebarComponent,
     PageOrderSuccessComponent
   ],

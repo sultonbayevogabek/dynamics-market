@@ -8,21 +8,21 @@
         <div class="block-slideshow__body">
           <owl-carousel-o *ngIf="banners?.length" [options]="options" appOwlPreventClick>
             <ng-template *ngFor="let banner of banners" carouselSlide>
-              <a class="block-slideshow__slide" href="" appClick>
+              <div class="block-slideshow__slide" appClick>
                 <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop"
                      [ngStyle]="{'background-image': 'url('+host + banner.images[0].path +')'}"></div>
                 <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile"
                      [ngStyle]="{'background-image': 'url('+host + banner.images[1].path +')'}"></div>
                 <div class="block-slideshow__slide-content">
                   <div class="block-slideshow__slide-title"
-                       [innerHTML]="sanitizer.bypassSecurityTrustHtml(banner.titleUz)"></div>
+                       [innerHTML]="sanitizer.bypassSecurityTrustHtml(banner.title)"></div>
                   <div class="block-slideshow__slide-text"
-                       [innerHTML]="sanitizer.bypassSecurityTrustHtml(banner.textUz)"></div>
-                  <div class="block-slideshow__slide-button">
-                    <span class="btn btn-primary btn-lg">Shop Now</span>
+                       [innerHTML]="sanitizer.bypassSecurityTrustHtml(banner.text)"></div>
+                  <div class="block-slideshow__slide-button" (click)="openBanner(banner)">
+                    <span class="btn btn-primary btn-lg">{{ 'shop.now'| translate }}</span>
                   </div>
                 </div>
-              </a>
+              </div>
             </ng-template>
           </owl-carousel-o>
 

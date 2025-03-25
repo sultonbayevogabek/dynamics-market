@@ -5,6 +5,7 @@ import { BannerService } from '@shared/services/banner.service';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '@env/environment';
 import { IBanner } from '@shared/interfaces/banner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-block-slideshow',
@@ -30,6 +31,7 @@ export class BlockSlideshowComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private direction: DirectionService,
     private bannerService: BannerService,
+    private router: Router,
   ) {
   }
 
@@ -41,5 +43,28 @@ export class BlockSlideshowComponent implements OnInit {
     this.banners = await firstValueFrom(
       this.bannerService.getBanners()
     )
+  }
+
+  async openBanner(banner: IBanner) {
+    if (banner.type === 'filter') {
+      const queryParams: {
+        category?: string;
+        brands?: string;
+      } = {}
+
+      if (banner.hierarchy && banner.hierarchy.length) {
+        queryParams.category = banner.hierarchy[banner.hierarchy.length - 1].categorySlug
+      }
+
+      if (banner.brandSlugs && banner.brandSlugs.length) {
+        queryParams.brands = banner.brandSlugs.join(',');
+      }
+
+      await this.router.navigate(['/products'], { queryParams });
+    }
+
+    if (banner.type === 'product') {
+      await this.router.navigate(['/product', banner.product.slug]);
+    }
   }
 }
