@@ -19,7 +19,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
 import { asyncScheduler, firstValueFrom, fromEvent, of, Subject } from 'rxjs';
 import { ShopService } from '../../api/shop.service';
-import { Category } from '../../interfaces/category';
+import { Category, ICategory } from '../../interfaces/category';
 import { DOCUMENT } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { HeaderService } from '@shared/services/header.service';
@@ -40,7 +40,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
 
   hasSuggestions = false;
 
-  categories: CategoryWithDepth[] = [];
+  categories: ICategory[] = [];
 
   suggestedProducts: Product[] = [];
 
@@ -95,11 +95,6 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['location'] && this.location === 'header') {
-      this.shop.getCategories(null, 1).pipe(
-        takeUntil(this.destroy$)
-      ).subscribe(categories => this.categories = this.getCategoriesWithDepth(categories));
-    }
   }
 
   async ngOnInit() {
@@ -162,7 +157,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     });
 
     this.headerService.categories$.subscribe(categories => {
-      console.log(categories);
+      this.categories = categories;
     })
   }
 
@@ -172,10 +167,6 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
 
   closeSuggestion(): void {
     this.classSearchSuggestionsOpen = false;
-  }
-
-  getCategoryName(category: CategoryWithDepth): string {
-    return '&nbsp;'.repeat(category.depth * 4) + category.name;
   }
 
   addToCart(product: Product): void {
@@ -189,14 +180,6 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
         this.addedToCartProducts = this.addedToCartProducts.filter(eachProduct => eachProduct !== product);
       }
     });
-  }
-
-  private getCategoriesWithDepth(categories: Category[], depth = 0): CategoryWithDepth[] {
-    return categories.reduce<CategoryWithDepth[]>((acc, category) => [
-      ...acc,
-      { ...category, depth },
-      ...this.getCategoriesWithDepth(category.children || [], depth + 1)
-    ], []);
   }
 
   ngOnDestroy(): void {

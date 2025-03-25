@@ -11,8 +11,7 @@
       <option
         *ngFor="let category of categories"
         [value]="category.slug"
-        [innerHTML]="getCategoryName(category)"
-      ></option>
+      >{{ category.name }}</option>
     </select>
     <input
       class="search__input"
