@@ -48,5 +48,7 @@
   "male": "Erkak",
   "required.field": "Majburiy maydon",
   "changes.successfully.saved": "O'zgarishlar muvaffaqiyatli saqlandi",
-  "address": "Manzil"
+  "address": "Manzil",
+  "all.categories": "Barcha kategoriyalar",
+  "product.search": "Tovarlarni qidirish"
 }

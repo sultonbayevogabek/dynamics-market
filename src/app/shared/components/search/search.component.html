@@ -7,7 +7,7 @@
       formControlName="category"
       (focus)="closeSuggestion()"
     >
-      <option value="all">All Categories</option>
+      <option value="all">{{ 'all.categories'| translate }}</option>
       <option
         *ngFor="let category of categories"
         [value]="category.slug"
@@ -17,7 +17,7 @@
     <input
       class="search__input"
       name="search"
-      placeholder="Search over 10,000 products"
+      [placeholder]="'product.search'| translate"
       aria-label="Site search"
       type="text"
       autocomplete="off"

@@ -48,5 +48,7 @@
   "male": "Мужской",
   "required.field": "Обязательное поле",
   "changes.successfully.saved": "Изменения успешно сохранились",
-  "address": "Адрес"
+  "address": "Адрес",
+  "all.categories": "Все категории",
+  "product.search": "Поиск товаров"
 }

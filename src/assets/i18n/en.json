@@ -48,5 +48,7 @@
   "male": "Male",
   "required.field": "Mandatory field",
   "changes.successfully.saved": "Changes successfully saved",
-  "address": "Address"
+  "address": "Address",
+  "all.categories": "All categories",
+  "product.search": "Product search"
 }

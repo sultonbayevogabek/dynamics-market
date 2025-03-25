@@ -157,7 +157,6 @@ export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, A
       .pipe(takeUntil(this.destroy$))
       .subscribe((departments) => {
         this.items = departments;
-        console.log(this.items);
       });
   }
 
