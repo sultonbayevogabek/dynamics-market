@@ -1,4 +1,4 @@
-import { PostCommentsList } from '../app/shared/interfaces/post-comments-list';
+import { PostCommentsList } from '@shared/interfaces/post-comments-list';
 
 export const postComments: PostCommentsList = {
   count: 4,

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Link } from '../../../../shared/interfaces/link';
+import { Link } from '@shared/interfaces/link';
 
 @Component({
   selector: 'app-footer-links',

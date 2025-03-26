@@ -1,5 +1,5 @@
 import { CategoryDef } from '../interfaces/category-def';
-import { Category } from '../../app/shared/interfaces/category';
+import { Category } from '@shared/interfaces/category';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 

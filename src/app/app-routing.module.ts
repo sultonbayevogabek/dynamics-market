@@ -26,8 +26,8 @@ const routes: Routes = [
         component: PageHomeOneComponent
       },
       {
-        path: 'shop',
-        loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule)
+        path: 'products',
+        loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule)
       },
       {
         path: '',

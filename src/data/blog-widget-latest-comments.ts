@@ -1,4 +1,4 @@
-import { PostComment } from '../app/shared/interfaces/post-comment';
+import { PostComment } from '@shared/interfaces/post-comment';
 
 export const latestComments: PostComment[] = [
   {

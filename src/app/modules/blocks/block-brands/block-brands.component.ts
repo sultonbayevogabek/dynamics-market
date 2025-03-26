@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
-import { DirectionService } from '../../../shared/services/direction.service';
-import { RootService } from '../../../shared/services/root.service';
-import { Brand } from '../../../shared/interfaces/brand';
+import { DirectionService } from '@shared/services/direction.service';
+import { RootService } from '@shared/services/root.service';
+import { Brand } from '@shared/interfaces/brand';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({

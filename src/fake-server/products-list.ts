@@ -1,20 +1,19 @@
 import { Observable, throwError, timer } from 'rxjs';
-import { ProductsList } from '../app/shared/interfaces/list';
-import { Product } from '../app/shared/interfaces/product';
+import { ProductsList } from '@shared/interfaces/list';
+import { Product } from '@shared/interfaces/product';
 import {
   CategoryFilterItem,
-  CheckFilter, ColorFilter,
-  ColorFilterItem,
+  CheckFilter,
   Filter,
   FilterItem,
   RadioFilter
-} from '../app/shared/interfaces/filter';
+} from '@shared/interfaces/filter';
 import { HttpErrorResponse } from '@angular/common/http';
 import { attributesDef, products as productsTable } from './database/products';
-import { Category } from '../app/shared/interfaces/category';
+import { Category } from '@shared/interfaces/category';
 import { map } from 'rxjs/operators';
 import { shopCategoriesList, shopCategoriesTree } from './database/categories';
-import { ListOptions } from '../app/shared/api/shop.service';
+import { ListOptions } from '@shared/api/shop.service';
 
 interface FilterDef {
   type: Filter['type'];
@@ -29,12 +28,6 @@ interface FilterListValueDef {
 
 type FilterValueDef = number | FilterListValueDef[];
 
-/**
- * Returns products list.
- *
- * @param categorySlug Unique human-readable category identifier.
- * @param options Options list.
- */
 export function getProductsList(categorySlug: string | null, options: ListOptions): Observable<ProductsList> {
   const page = options.page || 1;
   const limit = options.limit || 12;
@@ -44,8 +37,7 @@ export function getProductsList(categorySlug: string | null, options: ListOption
   const filtersDef: FilterDef[] = [
     { type: 'range', slug: 'price', name: 'Price' },
     { type: 'check', slug: 'brand', name: 'Brand' },
-    { type: 'radio', slug: 'discount', name: 'With Discount' },
-    { type: 'color', slug: 'color', name: 'Color' }
+    { type: 'radio', slug: 'discount', name: 'With Discount' }
   ];
   let items = productsTable.slice();
 
@@ -91,7 +83,7 @@ export function getProductsList(categorySlug: string | null, options: ListOption
 
   // Calculate items count for filter values.
   filters.forEach(filter => {
-    if (filter.type !== 'check' && filter.type !== 'color' && filter.type !== 'radio') {
+    if (filter.type !== 'check' && filter.type !== 'radio') {
       return;
     }
 
@@ -203,59 +195,11 @@ function getListValues(slug: string, product: Product, defaultValue: FilterListV
   return getFilterValue('check', slug, product, defaultValue);
 }
 
-function getColorCode(slug: string): string {
-  switch (slug) {
-    case 'white':
-      return '#fff';
-    case 'silver':
-      return '#d9d9d9';
-    case 'light-gray':
-      return '#b3b3b3';
-    case 'gray':
-      return '#808080';
-    case 'dark-gray':
-      return '#666';
-    case 'coal':
-      return '#4d4d4d';
-    case 'black':
-      return '#262626';
-    case 'red':
-      return '#ff4040';
-    case 'orange':
-      return '#ff8126';
-    case 'yellow':
-      return '#ffd333';
-    case 'pear-green':
-      return '#becc1f';
-    case 'green':
-      return '#8fcc14';
-    case 'emerald':
-      return '#47cc5e';
-    case 'shamrock':
-      return '#47cca0';
-    case 'shakespeare':
-      return '#47cccc';
-    case 'blue':
-      return '#40bfff';
-    case 'dark-blue':
-      return '#3d6dcc';
-    case 'violet':
-      return '#7766cc';
-    case 'purple':
-      return '#b852cc';
-    case 'cerise':
-      return '#e53981';
-  }
-
-  return '#000';
-}
-
 function parseFilterValue(filter: Filter, value: string): any {
   switch (filter.type) {
     case 'range':
       return value.split('-').map(x => parseFloat(x));
     case 'check':
-    case 'color':
       return value.trim() === '' ? [] : value.split(',').map(x => x.trim());
   }
 
@@ -269,7 +213,7 @@ function testProduct(filter: Filter, product: Product): boolean {
     if (value === null || value < filter.value[0] || value > filter.value[1]) {
       return false;
     }
-  } else if (filter.type === 'check' || filter.type === 'color') {
+  } else if (filter.type === 'check') {
     const values = getListValues(filter.slug, product);
 
     return filter.value.length < 1 || filter.value.reduce<boolean>(
@@ -306,7 +250,6 @@ function calcProductsForFilterValues(filter: Filter, allFilters: Filter[], produ
   products.forEach(product => {
     switch (filter.type) {
       case 'check':
-      case 'color':
       case 'radio':
         getListValues(filter.slug, product).forEach(value => {
           if (!(value.slug in result)) {
@@ -347,7 +290,7 @@ function makeFilters(filtersDef: FilterDef[], products: Product[]): Filter[] {
         min,
         max
       });
-    } else if (filterType === 'check' || filterType === 'radio' || filterType === 'color') {
+    } else if (filterType === 'check' || filterType === 'radio') {
       const itemsBySlug: { [slug: string]: FilterItem } = {};
       let items: FilterItem[] = [];
 
@@ -376,14 +319,14 @@ function makeFilters(filtersDef: FilterDef[], products: Product[]): Filter[] {
         name: filterDef.name,
         value: filterType === 'radio' ? items[0].slug : [],
         items
-      } as CheckFilter | RadioFilter | ColorFilter);
+      } as CheckFilter | RadioFilter);
     }
   });
 
   return result;
 }
 
-function makeFilterItem(filterType: 'check' | 'color' | 'radio', value: FilterListValueDef): FilterItem | ColorFilterItem {
+function makeFilterItem(filterType: 'check' | 'radio', value: FilterListValueDef): FilterItem {
   switch (filterType) {
     case 'check':
     case 'radio':
@@ -391,13 +334,6 @@ function makeFilterItem(filterType: 'check' | 'color' | 'radio', value: FilterLi
         slug: value.slug,
         name: value.name,
         count: 0
-      };
-    case 'color':
-      return {
-        slug: value.slug,
-        name: value.name,
-        count: 0,
-        color: getColorCode(value.slug)
       };
   }
 }
@@ -413,17 +349,5 @@ function makeCategoryFilterItem(type: 'parent' | 'current' | 'child', category: 
 }
 
 function sortFilterItems(filterType: string, filterSlug: string, items: FilterItem[]): FilterItem[] {
-  if (filterType === 'color' && filterSlug === 'color') {
-    const attributeDef = attributesDef.find(x => x.slug === filterSlug);
-
-    if (attributeDef) {
-      const values = attributeDef.values.map(x => x.slug);
-
-      return items.sort((a, b) => {
-        return values.indexOf(a.slug) - values.indexOf(b.slug);
-      });
-    }
-  }
-
   return items;
 }

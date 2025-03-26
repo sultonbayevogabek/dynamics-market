@@ -1,4 +1,4 @@
-import { NavigationLink } from '../app/shared/interfaces/navigation-link';
+import { NavigationLink } from '@shared/interfaces/navigation-link';
 
 export const navigation: NavigationLink[] = [
   /*{
@@ -12,28 +12,28 @@ export const navigation: NavigationLink[] = [
     }
   },
   {
-    label: 'Megamenu', url: '/shop/catalog', menu: {
+    label: 'Megamenu', url: '/products/catalog', menu: {
       type: 'megamenu',
       size: 'nl',
       columns: [
         {
           size: 6, items: [
             {
-              label: 'Power Tools', url: '/shop/catalog', items: [
-                { label: 'Engravers', url: '/shop/catalog' },
-                { label: 'Wrenches', url: '/shop/catalog' },
-                { label: 'Wall Chaser', url: '/shop/catalog' },
-                { label: 'Pneumatic Tools', url: '/shop/catalog' }
+              label: 'Power Tools', url: '/products/catalog', items: [
+                { label: 'Engravers', url: '/products/catalog' },
+                { label: 'Wrenches', url: '/products/catalog' },
+                { label: 'Wall Chaser', url: '/products/catalog' },
+                { label: 'Pneumatic Tools', url: '/products/catalog' }
               ]
             },
             {
-              label: 'Machine Tools', url: '/shop/catalog', items: [
-                { label: 'Thread Cutting', url: '/shop/catalog' },
-                { label: 'Chip Blowers', url: '/shop/catalog' },
-                { label: 'Sharpening Machines', url: '/shop/catalog' },
-                { label: 'Pipe Cutters', url: '/shop/catalog' },
-                { label: 'Slotting machines', url: '/shop/catalog' },
-                { label: 'Lathes', url: '/shop/catalog' }
+              label: 'Machine Tools', url: '/products/catalog', items: [
+                { label: 'Thread Cutting', url: '/products/catalog' },
+                { label: 'Chip Blowers', url: '/products/catalog' },
+                { label: 'Sharpening Machines', url: '/products/catalog' },
+                { label: 'Pipe Cutters', url: '/products/catalog' },
+                { label: 'Slotting machines', url: '/products/catalog' },
+                { label: 'Lathes', url: '/products/catalog' }
               ]
             }
           ]
@@ -41,21 +41,21 @@ export const navigation: NavigationLink[] = [
         {
           size: 6, items: [
             {
-              label: 'Hand Tools', url: '/shop/catalog', items: [
-                { label: 'Screwdrivers', url: '/shop/catalog' },
-                { label: 'Handsaws', url: '/shop/catalog' },
-                { label: 'Knives', url: '/shop/catalog' },
-                { label: 'Axes', url: '/shop/catalog' },
-                { label: 'Multitools', url: '/shop/catalog' },
-                { label: 'Paint Tools', url: '/shop/catalog' }
+              label: 'Hand Tools', url: '/products/catalog', items: [
+                { label: 'Screwdrivers', url: '/products/catalog' },
+                { label: 'Handsaws', url: '/products/catalog' },
+                { label: 'Knives', url: '/products/catalog' },
+                { label: 'Axes', url: '/products/catalog' },
+                { label: 'Multitools', url: '/products/catalog' },
+                { label: 'Paint Tools', url: '/products/catalog' }
               ]
             },
             {
-              label: 'Garden Equipment', url: '/shop/catalog', items: [
-                { label: 'Motor Pumps', url: '/shop/catalog' },
-                { label: 'Chainsaws', url: '/shop/catalog' },
-                { label: 'Electric Saws', url: '/shop/catalog' },
-                { label: 'Brush Cutters', url: '/shop/catalog' }
+              label: 'Garden Equipment', url: '/products/catalog', items: [
+                { label: 'Motor Pumps', url: '/products/catalog' },
+                { label: 'Chainsaws', url: '/products/catalog' },
+                { label: 'Electric Saws', url: '/products/catalog' },
+                { label: 'Brush Cutters', url: '/products/catalog' }
               ]
             }
           ]
@@ -64,31 +64,31 @@ export const navigation: NavigationLink[] = [
     }
   },
   {
-    label: 'Shop', url: '/shop/catalog/power-tools', menu: {
+    label: 'Shop', url: '/products/catalog/power-tools', menu: {
       type: 'menu',
       items: [
         {
-          label: 'Shop Grid', url: '/shop/catalog/power-tools', items: [
-            { label: '3 Columns Sidebar', url: '/shop/catalog/power-tools' },
-            { label: '4 Columns Full', url: '/shop/category-grid-4-columns-full' },
-            { label: '5 Columns Full', url: '/shop/category-grid-5-columns-full' }
+          label: 'Shop Grid', url: '/products/catalog/power-tools', items: [
+            { label: '3 Columns Sidebar', url: '/products/catalog/power-tools' },
+            { label: '4 Columns Full', url: '/products/category-grid-4-columns-full' },
+            { label: '5 Columns Full', url: '/products/category-grid-5-columns-full' }
           ]
         },
-        { label: 'Shop List', url: '/shop/category-list' },
-        { label: 'Shop Right Sidebar', url: '/shop/category-right-sidebar' },
+        { label: 'Shop List', url: '/products/category-list' },
+        { label: 'Shop Right Sidebar', url: '/products/category-right-sidebar' },
         {
-          label: 'Product', url: '/shop/product-standard', items: [
-            { label: 'Product', url: '/shop/product-standard' },
-            { label: 'Product Alt', url: '/shop/product-columnar' },
-            { label: 'Product Sidebar', url: '/shop/product-sidebar' }
+          label: 'Product', url: '/products/product-standard', items: [
+            { label: 'Product', url: '/products/product-standard' },
+            { label: 'Product Alt', url: '/products/product-columnar' },
+            { label: 'Product Sidebar', url: '/products/product-sidebar' }
           ]
         },
-        { label: 'Cart', url: '/shop/cart' },
-        { label: 'Checkout', url: '/shop/cart/checkout' },
-        { label: 'Order Success', url: '/shop/cart/checkout/success' },
-        { label: 'Wishlist', url: '/shop/wishlist' },
-        { label: 'Compare', url: '/shop/compare' },
-        { label: 'Track Order', url: '/shop/track-order' }
+        { label: 'Cart', url: '/products/cart' },
+        { label: 'Checkout', url: '/products/cart/checkout' },
+        { label: 'Order Success', url: '/products/cart/checkout/success' },
+        { label: 'Wishlist', url: '/products/wishlist' },
+        { label: 'Compare', url: '/products/compare' },
+        { label: 'Track Order', url: '/products/track-order' }
       ]
     }
   },

@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+
+@Injectable()
+export class ProductsSidebarService {
+  private isOpenSubject$: Subject<boolean> = new Subject();
+
+  isOpen$: Observable<boolean> = this.isOpenSubject$.asObservable();
+
+  constructor() {
+  }
+
+  open(): void {
+    this.isOpenSubject$.next(true);
+  }
+
+  close(): void {
+    this.isOpenSubject$.next(false);
+  }
+}

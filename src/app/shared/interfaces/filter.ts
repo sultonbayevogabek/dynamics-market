@@ -51,16 +51,10 @@ export interface CheckFilter extends ValuableFilterBase {
   items: FilterItem[];
 }
 
-export interface ColorFilter extends ValuableFilterBase {
-  type: 'color';
-  value: ListFilterValue;
-  items: ColorFilterItem[];
-}
-
 export interface RadioFilter extends ValuableFilterBase {
   type: 'radio';
   value: string;
   items: FilterItem[];
 }
 
-export type Filter = CategoryFilter | RangeFilter | CheckFilter | ColorFilter | RadioFilter;
+export type Filter = CategoryFilter | RangeFilter | CheckFilter | RadioFilter;

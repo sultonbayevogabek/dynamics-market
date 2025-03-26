@@ -4,8 +4,8 @@
 }" appCollapse>
   <h4 class="widget-filters__title widget__title">Filters</h4>
 
-  <div class="widget-filters__list" [formGroup]="filtersForm" *ngIf="filtersForm">
-    <div *ngFor="let filter of filters; trackBy: trackBySlug" class="widget-filters__item">
+  <div class="widget-filters__list">
+    <div class="widget-filters__item">
       <div class="filter filter--opened" appCollapseItem="filter--opened" #collapse="appCollapseItem">
         <button type="button" class="filter__title" (click)="collapse.toggle()">
           {{ filter.name }}
@@ -25,7 +25,6 @@
                   <app-icon *ngIf="item.type === 'parent'" class="filter-categories__arrow"
                             name="arrow-rounded-left-6x9" size="6x9"></app-icon>
                   <a [routerLink]="this.root.category(item.category)">{{ item.name }}</a>
-                  <div class="filter-categories__counter" *ngIf="item.type === 'child'">{{ item.count }}</div>
                 </li>
               </ul>
             </div>
@@ -77,7 +76,6 @@
                                     </span>
 
                   <span class="filter-list__title">{{ item.name }}</span>
-                  <span class="filter-list__counter">{{ item.count }}</span>
                 </label>
               </div>
             </div>
@@ -103,33 +101,6 @@
                                     </span>
 
                   <span class="filter-list__title">{{ item.name }}</span>
-                  <span class="filter-list__counter">{{ item.count }}</span>
-                </label>
-              </div>
-            </div>
-
-            <div *ngIf="filter.type === 'color'" class="filter-color" [formGroupName]="filter.slug">
-              <div class="filter-color__list">
-                <label *ngFor="let item of filter.items; trackBy: trackBySlug" class="filter-color__item">
-                                    <span
-                                      class="filter-color__check input-check-color"
-                                      [ngClass]="['input-check-color--' + (item.color|colorType)]"
-                                      [style.color]="item.color"
-                                    >
-                                        <label class="input-check-color__body">
-                                            <input
-                                              class="input-check-color__input"
-                                              type="checkbox"
-                                              [value]="item.slug"
-                                              [name]="'filter_' + filter.slug"
-                                              [formControlName]="item.slug"
-                                            >
-                                            <span class="input-check-color__box"></span>
-                                            <app-icon class="input-check-color__icon" name="check-12x9"
-                                                      size="12x9"></app-icon>
-                                            <span class="input-check-color__stick"></span>
-                                        </label>
-                                    </span>
                 </label>
               </div>
             </div>

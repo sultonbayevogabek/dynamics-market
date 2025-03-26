@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Megamenu } from '../../../../shared/interfaces/megamenu';
-import { NestedLink } from '../../../../shared/interfaces/nested-link';
+import { Megamenu } from '@shared/interfaces/megamenu';
+import { NestedLink } from '@shared/interfaces/nested-link';
 
 @Component({
   selector: 'app-header-megamenu',

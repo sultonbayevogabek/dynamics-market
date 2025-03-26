@@ -1,4 +1,4 @@
-import { Review } from '../app/shared/interfaces/review';
+import { Review } from '@shared/interfaces/review';
 
 export const reviews: Review[] = [
   {

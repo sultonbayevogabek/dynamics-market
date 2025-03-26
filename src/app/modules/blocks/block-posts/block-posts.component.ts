@@ -9,7 +9,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { DirectionService } from '../../../shared/services/direction.service';
+import { DirectionService } from '@shared/services/direction.service';
 import { isPlatformBrowser } from '@angular/common';
 import { OwlOptions } from 'ngx-owl-carousel-o/lib/models/owl-options.model';
 

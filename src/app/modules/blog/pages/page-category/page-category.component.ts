@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Post } from '../../../../shared/interfaces/post';
+import { Post } from '@shared/interfaces/post';
 import { posts } from '../../../../../data/blog-posts';
 
 @Component({

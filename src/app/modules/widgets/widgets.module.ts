@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 // modules
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
 // widgets
 import { WidgetAboutusComponent } from './widget-aboutus/widget-aboutus.component';
@@ -44,6 +44,7 @@ import { WidgetTagsComponent } from './widget-tags/widget-tags.component';
     // modules (third-party)
     NgxSliderModule,
     // modules
+    SharedModule,
     SharedModule
   ],
   exports: [

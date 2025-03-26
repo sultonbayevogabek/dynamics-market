@@ -15,7 +15,7 @@ export class RootService {
   }
 
   shop(): string {
-    return `/shop/catalog`;
+    return `/products`;
   }
 
   category(category: Partial<Category>): string {
@@ -39,7 +39,7 @@ export class RootService {
   }
 
   product(product: Partial<Product>): string {
-    const basePath = '/shop/products';
+    const basePath = '/products/products';
 
     if ('slug' in product) {
       return `${ basePath }/${ product.slug }`;
@@ -57,11 +57,11 @@ export class RootService {
   }
 
   cart(): string {
-    return '/shop/cart';
+    return '/products/cart';
   }
 
   checkout(): string {
-    return '/shop/cart/checkout';
+    return '/products/cart/checkout';
   }
 
   blog(): string {

@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // modules
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
 // components
 import { ContactsComponent } from './components/contacts/contacts.component';
@@ -23,14 +23,15 @@ import { TranslateModule } from '@ngx-translate/core';
     NewsletterComponent,
     TotopComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    RouterModule,
-    // modules
-    SharedModule,
-    TranslateModule
-  ],
+   imports: [
+      // modules (angular)
+      CommonModule,
+      RouterModule,
+      // modules
+      SharedModule,
+      TranslateModule,
+      SharedModule
+   ],
   exports: [
     FooterComponent
   ]

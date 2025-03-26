@@ -1,7 +1,7 @@
 import { AttributeDef, ProductDef } from '../interfaces/product-def';
-import { Product, ProductAttribute, ProductAttributeValue } from '../../app/shared/interfaces/product';
+import { Product, ProductAttribute, ProductAttributeValue } from '@shared/interfaces/product';
 import { brands } from './brands';
-import { Category } from '../../app/shared/interfaces/category';
+import { Category } from '@shared/interfaces/category';
 import { shopCategoriesList } from './categories';
 import { Observable, of, throwError, timer } from 'rxjs';
 import { map } from 'rxjs/operators';

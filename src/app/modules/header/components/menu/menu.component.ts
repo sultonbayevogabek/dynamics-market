@@ -9,8 +9,8 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { NestedLink } from '../../../../shared/interfaces/nested-link';
-import { DirectionService } from '../../../../shared/services/direction.service';
+import { NestedLink } from '@shared/interfaces/nested-link';
+import { DirectionService } from '@shared/services/direction.service';
 
 @Component({
   selector: 'app-header-menu',

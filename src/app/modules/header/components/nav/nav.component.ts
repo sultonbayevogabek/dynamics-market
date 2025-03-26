@@ -10,17 +10,17 @@ import {
   PLATFORM_ID,
   ViewChild
 } from '@angular/core';
-import { CartService } from '../../../../shared/services/cart.service';
-import { WishlistService } from '../../../../shared/services/wishlist.service';
-import { RootService } from '../../../../shared/services/root.service';
-import { HeaderService } from '../../../../shared/services/header.service';
+import { CartService } from '@shared/services/cart.service';
+import { WishlistService } from '@shared/services/wishlist.service';
+import { RootService } from '@shared/services/root.service';
+import { HeaderService } from '@shared/services/header.service';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { filter, first, shareReplay, takeUntil } from 'rxjs/operators';
-import { fromMatchMedia } from '../../../../shared/functions/rxjs/fromMatchMedia';
+import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DropcartType } from '../dropcart/dropcart.component';
-import { OffcanvasCartService } from '../../../../shared/services/offcanvas-cart.service';
+import { OffcanvasCartService } from '@shared/services/offcanvas-cart.service';
 
 export type NavStickyMode = 'alwaysOnTop' | 'pullToShow';
 

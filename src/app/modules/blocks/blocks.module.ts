@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 // modules
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
 // blocks
 import { BlockBannerComponent } from './block-banner/block-banner.component';
@@ -54,7 +54,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CarouselModule,
     // modules
     SharedModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule
   ],
   exports: [
     // blocks

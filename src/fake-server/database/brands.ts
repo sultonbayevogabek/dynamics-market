@@ -1,5 +1,5 @@
 import { BrandDef } from '../interfaces/brand-def';
-import { Brand } from '../../app/shared/interfaces/brand';
+import { Brand } from '@shared/interfaces/brand';
 import { Observable, of } from 'rxjs';
 
 let lastBrandId = 0;

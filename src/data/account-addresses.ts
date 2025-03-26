@@ -1,4 +1,4 @@
-import { Address } from '../app/shared/interfaces/address';
+import { Address } from '@shared/interfaces/address';
 
 export const addresses: Address[] = [
   {

@@ -11,17 +11,17 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { Product } from '../../../shared/interfaces/product';
-import { BlockHeaderGroup } from '../../../shared/interfaces/block-header-group';
-import { DirectionService } from '../../../shared/services/direction.service';
+import { Product } from '@shared/interfaces/product';
+import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
+import { DirectionService } from '@shared/services/direction.service';
 import { isPlatformBrowser } from '@angular/common';
 import { OwlOptions } from 'ngx-owl-carousel-o/lib/models/owl-options.model';
 
 @Component({
   selector: 'app-block-products-carousel',
-  templateUrl: './block-products-carousel.component.html',
-  styleUrls: [ './block-products-carousel.component.scss' ]
+  templateUrl: './block-products-carousel.component.html'
 })
+
 export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit {
   @Input() header = '';
   @Input() layout: 'grid-4' | 'grid-4-sm' | 'grid-5' | 'horizontal' = 'grid-4';

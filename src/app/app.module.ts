@@ -18,7 +18,6 @@ import { BlocksModule } from './modules/blocks/blocks.module';
 import { FooterModule } from './modules/footer/footer.module';
 import { HeaderModule } from './modules/header/header.module';
 import { MobileModule } from './modules/mobile/mobile.module';
-import { SharedModule } from './shared/shared.module';
 import { WidgetsModule } from './modules/widgets/widgets.module';
 
 // components
@@ -36,6 +35,7 @@ import { LoggerInterceptor } from './core/interceptors/logger.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxMaskModule } from 'ngx-mask';
 import { LanguageInterceptor } from './core/interceptors/language.interceptor';
+import { SharedModule } from '@shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

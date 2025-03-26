@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Post } from '../../../../shared/interfaces/post';
-import { PostCommentsList } from '../../../../shared/interfaces/post-comments-list';
+import { Post } from '@shared/interfaces/post';
+import { PostCommentsList } from '@shared/interfaces/post-comments-list';
 import { posts } from '../../../../../data/blog-posts';
 import { postComments } from '../../../../../data/blog-post-comments';
 

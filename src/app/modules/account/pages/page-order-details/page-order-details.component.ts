@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Order } from '../../../../shared/interfaces/order';
+import { Order } from '@shared/interfaces/order';
 import { order } from '../../../../../data/account-order-details';
 
 @Component({

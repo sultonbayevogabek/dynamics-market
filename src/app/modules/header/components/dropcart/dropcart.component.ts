@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CartService } from '../../../../shared/services/cart.service';
-import { CartItem } from '../../../../shared/interfaces/cart-item';
-import { RootService } from '../../../../shared/services/root.service';
-import { OffcanvasCartService } from '../../../../shared/services/offcanvas-cart.service';
+import { CartService } from '@shared/services/cart.service';
+import { CartItem } from '@shared/interfaces/cart-item';
+import { RootService } from '@shared/services/root.service';
+import { OffcanvasCartService } from '@shared/services/offcanvas-cart.service';
 
 export type DropcartType = 'dropdown' | 'offcanvas';
 

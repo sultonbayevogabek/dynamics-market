@@ -17,8 +17,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { HeaderService } from '../../../../shared/services/header.service';
-import { fromOutsideTouchClick } from '../../../../shared/functions/rxjs/fromOutsideTouchClick';
+import { HeaderService } from '@shared/services/header.service';
+import { fromOutsideTouchClick } from '@shared/functions/rxjs/fromOutsideTouchClick';
 
 export type IndicatorTrigger = 'hover' | 'click' | false;
 

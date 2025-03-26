@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Category } from '../../../shared/interfaces/category';
-import { RootService } from '../../../shared/services/root.service';
+import { Category } from '@shared/interfaces/category';
+import { RootService } from '@shared/services/root.service';
 
 @Component({
   selector: 'app-block-categories',

@@ -9,14 +9,14 @@ import {
   PLATFORM_ID,
   ViewChild
 } from '@angular/core';
-import { MobileMenuService } from '../../../../shared/services/mobile-menu.service';
-import { WishlistService } from '../../../../shared/services/wishlist.service';
-import { CartService } from '../../../../shared/services/cart.service';
+import { MobileMenuService } from '@shared/services/mobile-menu.service';
+import { WishlistService } from '@shared/services/wishlist.service';
+import { CartService } from '@shared/services/cart.service';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { fromMatchMedia } from '../../../../shared/functions/rxjs/fromMatchMedia';
+import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { filter, first, shareReplay, takeUntil } from 'rxjs/operators';
-import { RootService } from '../../../../shared/services/root.service';
+import { RootService } from '@shared/services/root.service';
 
 export type MobileHeaderMode = 'alwaysOnTop' | 'pullToShow';
 

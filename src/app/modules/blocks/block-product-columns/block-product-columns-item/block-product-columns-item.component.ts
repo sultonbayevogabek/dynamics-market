@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { Product } from '../../../../shared/interfaces/product';
+import { Product } from '@shared/interfaces/product';
 
 @Component({
   selector: 'app-block-product-columns-item',

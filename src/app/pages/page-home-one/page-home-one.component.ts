@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { posts } from '../../../data/blog-posts';
-import { Brand } from '../../shared/interfaces/brand';
+import { Brand } from '@shared/interfaces/brand';
 import { merge, Observable, Subject } from 'rxjs';
-import { ShopService } from '../../shared/api/shop.service';
-import { Product } from '../../shared/interfaces/product';
-import { Category } from '../../shared/interfaces/category';
-import { BlockHeaderGroup } from '../../shared/interfaces/block-header-group';
+import { ShopService } from '@shared/api/shop.service';
+import { Product } from '@shared/interfaces/product';
+import { Category } from '@shared/interfaces/category';
+import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
 import { takeUntil, tap } from 'rxjs/operators';
 
 interface ProductsCarouselGroup extends BlockHeaderGroup {
@@ -22,7 +22,6 @@ interface ProductsCarouselData {
 @Component({
   selector: 'app-home',
   templateUrl: './page-home-one.component.html',
-  styleUrls: [ './page-home-one.component.scss' ]
 })
 export class PageHomeOneComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();

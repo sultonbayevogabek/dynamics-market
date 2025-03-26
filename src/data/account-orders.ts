@@ -1,4 +1,4 @@
-import { Order } from '../app/shared/interfaces/order';
+import { Order } from '@shared/interfaces/order';
 
 export const orders: Partial<Order>[] = [
   {

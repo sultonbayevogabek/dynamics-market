@@ -1,19 +1,18 @@
 import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { DirectionService } from '../../../shared/services/direction.service';
+import { DirectionService } from '@shared/services/direction.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   CheckFilter,
-  ColorFilter,
   ColorFilterItem,
   Filter,
   FilterItem,
   RadioFilter,
   SerializedFilterValues
-} from '../../../shared/interfaces/filter';
-import { RootService } from '../../../shared/services/root.service';
+} from '@shared/interfaces/filter';
+import { RootService } from '@shared/services/root.service';
 import { EMPTY, merge, of, Subject } from 'rxjs';
-import { PageCategoryService } from '../../shop/services/page-category.service';
+import { PageCategoryService } from '../../products/services/page-category.service';
 import { distinctUntilChanged, map, skip, takeUntil } from 'rxjs/operators';
 
 interface FormFilterValues {
@@ -51,6 +50,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(filters => {
       this.filters = filters;
+      console.log('Filter ====>', this.filters);
+
       this.filtersForm = this.makeFiltersForm(filters);
 
       filters.forEach(filter => {
@@ -76,7 +77,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
             break;
           case 'radio':
           case 'check':
-          case 'color':
             this.filtersForm.get(filter.slug)?.valueChanges.subscribe(filterValue => {
               this.pageCategory.updateOptions({
                 filterValues: this.convertFormToFilterValues(filters, {
@@ -89,11 +89,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         }
       });
     });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   trackBySlug(index: number, item: { slug: string }): any {
@@ -115,7 +110,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
           filtersFromGroup[filter.slug] = this.fb.control(filter.value);
           break;
         case 'check':
-        case 'color':
           filtersFromGroup[filter.slug] = this.makeListFilterForm(filter);
           break;
       }
@@ -124,7 +118,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     return this.fb.group(filtersFromGroup);
   }
 
-  makeListFilterForm(filter: CheckFilter | ColorFilter): FormGroup {
+  makeListFilterForm(filter: CheckFilter): FormGroup {
     const group: { [key: string]: AbstractControl } = {};
 
     filter.items.forEach(item => {
@@ -145,7 +139,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     return this.fb.group(group);
   }
 
-  isItemDisabled(filter: CheckFilter | RadioFilter | ColorFilter, item: FilterItem | ColorFilterItem): boolean {
+  isItemDisabled(filter: CheckFilter | RadioFilter, item: FilterItem | ColorFilterItem): boolean {
     return item.count === 0 && (filter.type === 'radio' || !filter.value.includes(item.slug));
   }
 
@@ -162,7 +156,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
           }
           break;
         case 'check':
-        case 'color':
           const filterFormValues: { [key: string]: any } = formValue as object || {};
 
           // Reactive forms do not add a values of disabled checkboxes.
@@ -200,7 +193,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
           formValues[filter.slug] = [ filter.min, filter.max ];
           break;
         case 'check':
-        case 'color':
           formValues[filter.slug] = {};
 
           filter.items.forEach(item => {
@@ -218,5 +210,10 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
 
   getRangeControl(filter: Filter): FormControl {
     return this.filtersForm.get(filter.slug) as FormControl;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

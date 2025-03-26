@@ -1,4 +1,4 @@
-import { ProductFeaturesSection } from '../app/shared/interfaces/product';
+import { ProductFeaturesSection } from '@shared/interfaces/product';
 
 export const specification: ProductFeaturesSection[] = [
   {

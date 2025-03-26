@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PostComment } from '../../../../shared/interfaces/post-comment';
+import { PostComment } from '@shared/interfaces/post-comment';
 
 @Component({
   selector: 'app-comments-list',

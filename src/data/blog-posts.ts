@@ -1,4 +1,4 @@
-import { Post } from '../app/shared/interfaces/post';
+import { Post } from '@shared/interfaces/post';
 
 export const posts: Post[] = [
   {

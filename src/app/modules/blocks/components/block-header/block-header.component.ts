@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BlockHeaderGroup } from '../../../../shared/interfaces/block-header-group';
+import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
 
 @Component({
   selector: 'app-block-header',
