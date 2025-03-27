@@ -14,6 +14,8 @@ import { RootService } from '@shared/services/root.service';
 import { EMPTY, merge, of, Subject } from 'rxjs';
 import { PageCategoryService } from '../../products/services/page-category.service';
 import { distinctUntilChanged, map, skip, takeUntil } from 'rxjs/operators';
+import { HeaderService } from '@shared/services/header.service';
+import { ICategory } from '@shared/interfaces/category';
 
 interface FormFilterValues {
   [filterSlug: string]: [ number, number ] | { [itemSlug: string]: boolean } | string;
@@ -26,6 +28,8 @@ interface FormFilterValues {
 })
 export class WidgetFiltersComponent implements OnInit, OnDestroy {
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
+  categories: ICategory[] = [];
+  hierarchy: any[] = [];
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -39,7 +43,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     private direction: DirectionService,
     private fb: FormBuilder,
     public root: RootService,
-    public pageCategory: PageCategoryService
+    public pageCategory: PageCategoryService,
+    private headerService: HeaderService
   ) {
     this.rightToLeft = this.direction.isRTL();
   }
@@ -89,6 +94,13 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         }
       });
     });
+
+    this.headerService.categories$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(categories => {
+        this.categories = categories;
+        console.log('Categories ===>', this.categories);
+      })
   }
 
   trackBySlug(index: number, item: { slug: string }): any {
@@ -215,5 +227,19 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  selectCategory(category: ICategory, categories: ICategory[]): any {
+    if (category.hidden) {
+      categories.forEach(c => {
+        c.hidden = false;
+      })
+      return;
+    }
+
+    categories.forEach(c => {
+      c.hidden = true;
+    })
+    category.hidden = false;
   }
 }

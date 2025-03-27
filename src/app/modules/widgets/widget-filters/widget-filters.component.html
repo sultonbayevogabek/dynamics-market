@@ -8,30 +8,21 @@
     <div class="widget-filters__item">
       <div class="filter filter--opened" appCollapseItem="filter--opened" #collapse="appCollapseItem">
         <button type="button" class="filter__title" (click)="collapse.toggle()">
-          {{ 'category'| translate }}
+          {{ 'categories'| translate }}
           <app-icon class="filter__arrow" name="arrow-rounded-down-12x7" size="12x7"></app-icon>
         </button>
         <div class="filter__body" appCollapseContent>
           <div class="filter__container">
             <div class="filter-categories filter-categories--root">
               <ul class="filter-categories__list">
-                <li class="filter-categories__item filter-categories__item--parent">
-                  <app-icon class="filter-categories__arrow" name="arrow-rounded-left-6x9" size="6x9"></app-icon>
-                  <a [routerLink]="this.root.shop()">{{ 'all.categories'| translate }}</a>
-                </li>
-                <li
-                    class="filter-categories__item">
-                  <app-icon
-                    class="filter-categories__arrow"
-                    name="arrow-rounded-left-6x9"
-                    size="6x9"
-                  ></app-icon>
-                  <a>Kategoriya</a>
-                </li>
+                <ng-container *ngFor="let category of categories">
+                  <ng-container
+                    *ngTemplateOutlet="categoryItem; context: { $implicit: { category, categories } }"
+                  >
+                  </ng-container>
+                </ng-container>
               </ul>
             </div>
-
-
           </div>
         </div>
       </div>
@@ -41,6 +32,32 @@
     <button class="btn btn-secondary btn-sm" (click)="reset()">{{ 'reset.filter'| translate }}</button>
   </div>
 </div>
+
+<ng-template #categoryItem let-data>
+  <li
+    class="filter-categories__item"
+    [ngClass]="{
+      'filter-categories__item--parent': data?.category?.parent,
+      'filter-categories__item--child': !data?.category?.parent
+    }"
+    *ngIf="!data?.category?.hidden"
+  >
+    <app-icon
+      *ngIf="data?.category?.parent"
+      class="filter-categories__arrow"
+      name="arrow-rounded-left-6x9"
+      size="6x9"
+    ></app-icon>
+    <a class="cursor-pointer" (click)="selectCategory(data?.category, data?.categories)">{{ data?.category?.name }}</a>
+  </li>
+
+  <ng-container *ngFor="let category of data?.category?.children">
+    <ng-container
+      *ngTemplateOutlet="categoryItem; context: { $implicit: { category, categories: data?.category?.children } }"
+    >
+    </ng-container>
+  </ng-container>
+</ng-template>
 
 
 <!--<div *ngIf="filter.type === 'range' && isPlatformBrowser" class="filter-price">
