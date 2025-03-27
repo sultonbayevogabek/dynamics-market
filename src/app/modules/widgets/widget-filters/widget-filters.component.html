@@ -13,7 +13,7 @@
         </button>
         <div class="filter__body" appCollapseContent>
           <div class="filter__container">
-            <div class="filter-categories filter-categories--root">
+            <div class="filter-categories filter-categories--root ">
               <ul class="filter-categories__list">
                 <li
                   class="filter-categories__item filter-categories__item--parent"
@@ -54,7 +54,7 @@
     }"
     *ngIf="data?.category?.visible === undefined || data?.category?.visible"
   >
-    <a class="cursor-pointer line-clamp-2" (click)="selectCategory(data?.category, data?.categories)">
+    <a class="cursor-pointer" (click)="selectCategory(data?.category, data?.categories)">
       {{ data?.category?.name }}
     </a>
 
