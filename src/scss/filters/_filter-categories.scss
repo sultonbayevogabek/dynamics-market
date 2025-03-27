@@ -45,12 +45,12 @@ $local-item-padding-left: 14px;
   position: relative;
 
   @include direction {
-    #{$padding-inline-start}: $local-item-padding-left;
+    #{$padding-inline-end}: $local-item-padding-left;
   }
 }
 
 .filter-categories__item--current {
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-medium;
 }
 
 .filter-categories__item--child {
@@ -58,7 +58,7 @@ $local-item-padding-left: 14px;
   font-size: 15px;
 
   @include direction {
-    #{$padding-inline-start}: $local-item-padding-left;
+    #{$padding-inline-end}: $local-item-padding-left;
   }
 }
 
@@ -66,9 +66,9 @@ $local-item-padding-left: 14px;
   fill: $filter-title-default-arrow-color;
   position: absolute;
   top: 10px;
+  right: 0;
 
   @include direction {
-    #{$inset-inline-start}: 0;
     transform: scaleX(1 * $transform-direction);
   }
 }

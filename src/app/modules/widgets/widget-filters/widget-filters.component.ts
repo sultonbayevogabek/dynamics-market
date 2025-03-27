@@ -29,7 +29,7 @@ interface FormFilterValues {
 export class WidgetFiltersComponent implements OnInit, OnDestroy {
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
   categories: ICategory[] = [];
-  hierarchy: any[] = [];
+  selectedCategory: ICategory | null = null;
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -100,7 +100,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       .subscribe(categories => {
         this.categories = categories;
         console.log('Categories ===>', this.categories);
-      })
+      });
   }
 
   trackBySlug(index: number, item: { slug: string }): any {
@@ -229,17 +229,56 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  selectCategory(category: ICategory, categories: ICategory[]): any {
-    if (category.hidden) {
-      categories.forEach(c => {
-        c.hidden = false;
-      })
-      return;
+  selectCategory(category: ICategory, categories: ICategory[]) {
+    this.selectedCategory = category;
+
+    if (category?.children?.length) {
+      if (category?.showChildren) {
+        categories.forEach(c => {
+          c.showChildren = false;
+          c.visible = true;
+          c.parent = false;
+        });
+
+        return;
+      }
+
+      if (!category?.showChildren) {
+        categories.forEach(c => {
+          c.showChildren = false;
+          c.visible = false;
+          category.parent = false;
+        });
+
+        category.showChildren = true;
+        category.visible = true;
+        category.parent = true;
+      }
     }
 
+    if (!category?.children?.length) {
+      categories.forEach(c => {
+        c.visible = false;
+      });
+
+      category.visible = true;
+    }
+  }
+
+  selectAllCategories() {
+    this.resetCategories(this.categories);
+    this.selectedCategory = null;
+  }
+
+  resetCategories(categories: ICategory[]) {
     categories.forEach(c => {
-      c.hidden = true;
-    })
-    category.hidden = false;
+      c.showChildren = false;
+      c.visible = true;
+      c.parent = false;
+
+      if (c?.children?.length) {
+        this.resetCategories(c.children);
+      }
+    });
   }
 }
