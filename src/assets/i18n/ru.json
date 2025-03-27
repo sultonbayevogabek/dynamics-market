@@ -51,5 +51,7 @@
   "address": "Адрес",
   "all.categories": "Все категории",
   "product.search": "Поиск товаров",
-  "shop.now": "Купить сейчас"
+  "shop.now": "Купить сейчас",
+  "filter": "Фильтр",
+  "reset.filter": "Очистить фильтр"
 }

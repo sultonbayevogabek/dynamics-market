@@ -21,6 +21,7 @@ import { WidgetPostsComponent } from './widget-posts/widget-posts.component';
 import { WidgetProductsComponent } from './widget-products/widget-products.component';
 import { WidgetSearchComponent } from './widget-search/widget-search.component';
 import { WidgetTagsComponent } from './widget-tags/widget-tags.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { WidgetTagsComponent } from './widget-tags/widget-tags.component';
     NgxSliderModule,
     // modules
     SharedModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ],
   exports: [
     // widgets

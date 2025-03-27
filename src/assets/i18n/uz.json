@@ -51,5 +51,7 @@
   "address": "Manzil",
   "all.categories": "Barcha kategoriyalar",
   "product.search": "Tovarlarni qidirish",
-  "shop.now": "Xarid qiling"
+  "shop.now": "Xarid qiling",
+  "filter": "Filtr",
+  "reset.filter": "Filtrni tozalash"
 }
