@@ -14,25 +14,17 @@
         <div class="filter__body" appCollapseContent>
           <div class="filter__container">
             <div class="filter-categories filter-categories--root ">
-              <ul class="filter-categories__list">
-                <li
-                  class="filter-categories__item filter-categories__item--parent"
-                  *ngIf="filter.category"
-                >
-                  <app-icon
-                    class="filter-categories__arrow"
-                    name="arrow-rounded-right-6x9"
-                    size="6x9"
-                  ></app-icon>
-                  <a class="cursor-pointer" (click)="selectAllCategories()">{{ 'all.categories'| translate }}</a>
-                </li>
-                <ng-container *ngFor="let category of categories">
-                  <ng-container
-                    *ngTemplateOutlet="categoryItem; context: { $implicit: { category, categories } }"
-                  >
-                  </ng-container>
-                </ng-container>
-              </ul>
+              <ng-container
+                *ngTemplateOutlet="categoriesList; context: { $implicit: { categories: categories.main, level: 'main'} }"
+              ></ng-container>
+
+              <ng-container
+                *ngTemplateOutlet="categoriesList; context: { $implicit: { categories: categories.middle, level: 'middle'} }"
+              ></ng-container>
+
+              <ng-container
+                *ngTemplateOutlet="categoriesList; context: { $implicit: { categories: categories.sub, level: 'sub'} }"
+              ></ng-container>
             </div>
           </div>
         </div>
@@ -43,6 +35,39 @@
     <button class="btn btn-secondary btn-sm" (click)="reset()">{{ 'reset.filter'| translate }}</button>
   </div>
 </div>
+
+<ng-template #categoriesList let-data>
+  <ul
+    *ngIf="data.categories.length"
+    class="filter-categories__list"
+    [ngClass]="{
+      'pl-2': data.level === 'middle',
+      'pl-4': data.level === 'sub'
+    }"
+  >
+    <ng-container *ngFor="let category of data.categories">
+      <li
+        class="filter-categories__item"
+        *ngIf="!category.hidden"
+        [ngClass]="{
+          'filter-categories__item--parent': ['main', 'middle'].includes(data.level),
+          'filter-categories__item--current': category.slug === filter.category
+        }"
+      >
+        <app-icon
+          *ngIf="['main', 'middle'].includes(data.level)"
+          class="filter-categories__arrow"
+          [name]="category.showChildren ? 'arrow-rounded-down-9x6' : 'arrow-rounded-right-6x9'"
+          [size]="category.showChildren ? '9x6' : '6x9'"
+        ></app-icon>
+        <a
+          class="cursor-pointer"
+          (click)="selectCategory(category, data.level)"
+        >{{ category.name }}</a>
+      </li>
+    </ng-container>
+  </ul>
+</ng-template>
 
 <ng-template #categoryItem let-data>
   <li

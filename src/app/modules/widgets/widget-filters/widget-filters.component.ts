@@ -1,26 +1,14 @@
 import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DirectionService } from '@shared/services/direction.service';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {
-  CheckFilter,
-  ColorFilterItem,
-  Filter,
-  FilterItem, IProductsFilter,
-  RadioFilter,
-  SerializedFilterValues
-} from '@shared/interfaces/filter';
+import { IProductsFilter } from '@shared/interfaces/filter';
 import { RootService } from '@shared/services/root.service';
-import { EMPTY, merge, of, Subject } from 'rxjs';
-import { PageCategoryService } from '../../products/services/page-category.service';
-import { distinctUntilChanged, map, skip, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { HeaderService } from '@shared/services/header.service';
 import { ICategory } from '@shared/interfaces/category';
 import { ProductsService } from '@shared/services/products.service';
-
-interface FormFilterValues {
-  [filterSlug: string]: [ number, number ] | { [itemSlug: string]: boolean } | string;
-}
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-widget-filters',
@@ -29,250 +17,125 @@ interface FormFilterValues {
 })
 export class WidgetFiltersComponent implements OnInit, OnDestroy {
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
-  categories: ICategory[] = [];
+
+  categories: {
+    main: ICategory[];
+    middle: ICategory[];
+    sub: ICategory[];
+  } = {
+    main: [],
+    middle: [],
+    sub: []
+  };
+  flattenedCategories: { [key: string]: ICategory } = {};
+  categoryId!: string;
 
   destroy$: Subject<void> = new Subject<void>();
 
-  filters: Filter[] = [];
-  filtersForm!: FormGroup;
   isPlatformBrowser = isPlatformBrowser(this.platformId);
   rightToLeft = false;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private direction: DirectionService,
-    private fb: FormBuilder,
     public root: RootService,
-    public pageCategory: PageCategoryService,
     private headerService: HeaderService,
     private productsService: ProductsService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.rightToLeft = this.direction.isRTL();
   }
 
   ngOnInit(): void {
-    this.pageCategory.list$.pipe(
-      map(x => x?.filters || []),
-      takeUntil(this.destroy$)
-    ).subscribe(filters => {
-      this.filters = filters;
-
-      this.filtersForm = this.makeFiltersForm(filters);
-
-      filters.forEach(filter => {
-        switch (filter.type) {
-          case 'range':
-            merge(
-              of([
-                Math.max(filter.value[0], filter.min),
-                Math.min(filter.value[1], filter.max)
-              ]),
-              this.filtersForm.get(filter.slug)?.valueChanges || EMPTY
-            ).pipe(
-              distinctUntilChanged((a, b) => a.join('-') === b.join('-')),
-              skip(1)
-            ).subscribe(filterValue => {
-              this.pageCategory.updateOptions({
-                filterValues: this.convertFormToFilterValues(filters, {
-                  ...this.filtersForm.value,
-                  [filter.slug]: filterValue
-                })
-              });
-            });
-            break;
-          case 'radio':
-          case 'check':
-            this.filtersForm.get(filter.slug)?.valueChanges.subscribe(filterValue => {
-              this.pageCategory.updateOptions({
-                filterValues: this.convertFormToFilterValues(filters, {
-                  ...this.filtersForm.value,
-                  [filter.slug]: filterValue
-                })
-              });
-            });
-            break;
-        }
-      });
-    });
-
     this.headerService.categories$
       .pipe(takeUntil(this.destroy$))
       .subscribe(categories => {
-        this.categories = categories;
+        this.categories.main = categories;
       });
   }
 
   get filter(): IProductsFilter {
-    return this.productsService.filter
-  }
-
-  trackBySlug(index: number, item: { slug: string }): any {
-    return item.slug;
-  }
-
-  makeFiltersForm(filters: Filter[]): FormGroup {
-    const filtersFromGroup: { [key: string]: AbstractControl } = {};
-
-    filters.forEach(filter => {
-      switch (filter.type) {
-        case 'range':
-          filtersFromGroup[filter.slug] = this.fb.control([
-            Math.max(filter.value[0], filter.min),
-            Math.min(filter.value[1], filter.max)
-          ]);
-          break;
-        case 'radio':
-          filtersFromGroup[filter.slug] = this.fb.control(filter.value);
-          break;
-        case 'check':
-          filtersFromGroup[filter.slug] = this.makeListFilterForm(filter);
-          break;
-      }
-    });
-
-    return this.fb.group(filtersFromGroup);
-  }
-
-  makeListFilterForm(filter: CheckFilter): FormGroup {
-    const group: { [key: string]: AbstractControl } = {};
-
-    filter.items.forEach(item => {
-      const control = this.fb.control(filter.value.includes(item.slug));
-
-      // A timeout is needed because sometimes a state change is ignored if performed immediately.
-      setTimeout(() => {
-        if (this.isItemDisabled(filter, item)) {
-          control.disable({ emitEvent: false });
-        } else {
-          control.enable({ emitEvent: false });
-        }
-      }, 0);
-
-      group[item.slug] = control;
-    });
-
-    return this.fb.group(group);
-  }
-
-  isItemDisabled(filter: CheckFilter | RadioFilter, item: FilterItem | ColorFilterItem): boolean {
-    return item.count === 0 && (filter.type === 'radio' || !filter.value.includes(item.slug));
-  }
-
-  convertFormToFilterValues(filters: Filter[], formValues: FormFilterValues): SerializedFilterValues {
-    const filterValues: SerializedFilterValues = {};
-
-    filters.forEach(filter => {
-      const formValue = formValues[filter.slug];
-
-      switch (filter.type) {
-        case 'range':
-          if (formValue && (formValue[0] !== filter.min || formValue[1] !== filter.max)) {
-            filterValues[filter.slug] = `${ formValue[0] }-${ formValue[1] }`;
-          }
-          break;
-        case 'check':
-          const filterFormValues: { [key: string]: any } = formValue as object || {};
-
-          // Reactive forms do not add a values of disabled checkboxes.
-          // This code will add them manually.
-          filter.value.forEach(filterValue => {
-            if (!(filterValue in filterFormValues)) {
-              filterFormValues[filterValue] = true;
-            }
-          });
-
-          const values = Object.keys(filterFormValues).filter(x => filterFormValues[x]);
-
-          if (values.length > 0) {
-            filterValues[filter.slug] = values.join(',');
-          }
-          break;
-        case 'radio':
-          if (formValue !== filter.items[0].slug) {
-            filterValues[filter.slug] = formValue as string;
-          }
-
-          break;
-      }
-    });
-
-    return filterValues;
+    return this.productsService.filter;
   }
 
   reset(): void {
-    const formValues: { [key: string]: any } = {};
 
-    this.filters.forEach(filter => {
-      switch (filter.type) {
-        case 'range':
-          formValues[filter.slug] = [ filter.min, filter.max ];
-          break;
-        case 'check':
-          formValues[filter.slug] = {};
+  }
 
-          filter.items.forEach(item => {
-            formValues[filter.slug][item.slug] = false;
-          });
-          break;
-        case 'radio':
-          formValues[filter.slug] = filter.items[0].slug;
-          break;
+  setCategoryFromQuery() {
+    const params = this.activatedRoute.snapshot.queryParams;
+    const categorySlug = params['category'];
+    this.filter.category = categorySlug;
+
+    if (categorySlug) {
+      this.transform(this.categoryId);
+    }
+  }
+
+  flattenCategories(categories: ICategory[]) {
+    categories.forEach(category => {
+      this.flattenedCategories[category._id] = category;
+
+      if (category?.children?.length > 0) {
+        this.flattenCategories(category.children);
       }
     });
-
-    this.filtersForm.setValue(formValues);
   }
 
-  getRangeControl(filter: Filter): FormControl {
-    return this.filtersForm.get(filter.slug) as FormControl;
+  transform(categoryId: string) {
+    const category = this.flattenedCategories[categoryId];
+    if (category?.children?.length > 0) {
+      category.showChildren = true;
+    }
+    if (category.parentId) {
+      this.transform(category.parentId);
+    }
   }
 
-  selectCategory(category: ICategory, categories: ICategory[]) {
+  async selectCategory(category: ICategory, level: 'main' | 'middle' | 'sub') {
     this.filter.category = category.slug;
 
-    if (category?.children?.length) {
-      if (category?.showChildren) {
-        categories.forEach(c => {
-          c.showChildren = false;
-          c.visible = true;
-          c.parent = false;
-        });
+    category.showChildren = !category?.showChildren;
 
-        return;
-      }
-
-      if (!category?.showChildren) {
-        categories.forEach(c => {
-          c.showChildren = false;
-          c.visible = false;
-          category.parent = false;
-        });
-
-        category.showChildren = true;
-        category.visible = true;
-        category.parent = true;
-      }
-    }
-
-    if (!category?.children?.length) {
-      categories.forEach(c => {
-        c.visible = false;
+    if (level === 'main') {
+      this.categories.main.forEach(c => {
+        if (c._id !== category._id) {
+          c.hidden = category.showChildren;
+        }
       });
 
-      category.visible = true;
+      if (category.showChildren) {
+        this.categories.middle = category.children;
+      } else {
+        this.categories.middle = [];
+      }
+
+      this.categories.sub = [];
+    }
+
+    if (level === 'middle') {
+      this.categories.middle.forEach(c => {
+        if (c._id !== category._id) {
+          c.hidden = category.showChildren;
+        }
+      });
+
+      if (category.showChildren) {
+        this.categories.sub = category.children;
+      } else {
+        this.categories.sub = [];
+      }
     }
   }
 
-  selectAllCategories() {
-    this.resetCategories(this.categories);
+  async selectAllCategories() {
     this.filter.category = null;
+    await this.productsService.setQueryToParams();
   }
 
   resetCategories(categories: ICategory[]) {
     categories.forEach(c => {
       c.showChildren = false;
-      c.visible = true;
-      c.parent = false;
 
       if (c?.children?.length) {
         this.resetCategories(c.children);

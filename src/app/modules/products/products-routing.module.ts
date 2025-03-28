@@ -30,7 +30,7 @@ const categoryPageResolvers: ResolveData = {
 
 const routes: Routes = [
   {
-    path: 'catalog',
+    path: '',
     component: PageCategoryComponent,
     data: categoryPageData,
     resolve: categoryPageResolvers
@@ -42,7 +42,7 @@ const routes: Routes = [
     resolve: categoryPageResolvers
   },
   {
-    path: 'products/:productSlug',
+    path: 'products',
     component: PageProductComponent,
     data: {
       // Product page layout. Possible values: 'standard', 'columnar', 'sidebar'.

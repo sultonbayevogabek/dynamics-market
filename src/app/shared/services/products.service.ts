@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProductsFilter } from '@shared/interfaces/filter';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,13 @@ export class ProductsService {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
   async setQueryToParams() {
-    await this.router.navigate(['/products'], {
+    await this.router.navigate([], {
+      relativeTo: this.activatedRoute,
       queryParams: this.filter,
       queryParamsHandling: 'merge'
     });

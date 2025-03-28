@@ -15,10 +15,10 @@ export interface Category {
 
 export interface ICategory {
   _id: string;
+  parentId?: string;
   name: string;
   slug: string;
   children: ICategory[];
   showChildren?: boolean;
-  visible?: boolean;
-  parent?: boolean;
+  hidden?: boolean;
 }
