@@ -17,7 +17,7 @@
               <ul class="filter-categories__list">
                 <li
                   class="filter-categories__item filter-categories__item--parent"
-                  *ngIf="selectedCategory"
+                  *ngIf="filter.category"
                 >
                   <app-icon
                     class="filter-categories__arrow"
@@ -50,7 +50,7 @@
     [ngClass]="{
       'filter-categories__item--parent': data?.category?.parent,
       'filter-categories__item--child': !data?.category?.parent,
-      'filter-categories__item--current': data?.category?.slug === selectedCategory?.slug
+      'filter-categories__item--current': data?.category?.slug === filter?.category
     }"
     *ngIf="data?.category?.visible === undefined || data?.category?.visible"
   >

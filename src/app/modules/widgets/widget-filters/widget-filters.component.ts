@@ -6,7 +6,7 @@ import {
   CheckFilter,
   ColorFilterItem,
   Filter,
-  FilterItem,
+  FilterItem, IProductsFilter,
   RadioFilter,
   SerializedFilterValues
 } from '@shared/interfaces/filter';
@@ -16,6 +16,7 @@ import { PageCategoryService } from '../../products/services/page-category.servi
 import { distinctUntilChanged, map, skip, takeUntil } from 'rxjs/operators';
 import { HeaderService } from '@shared/services/header.service';
 import { ICategory } from '@shared/interfaces/category';
+import { ProductsService } from '@shared/services/products.service';
 
 interface FormFilterValues {
   [filterSlug: string]: [ number, number ] | { [itemSlug: string]: boolean } | string;
@@ -29,7 +30,6 @@ interface FormFilterValues {
 export class WidgetFiltersComponent implements OnInit, OnDestroy {
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
   categories: ICategory[] = [];
-  selectedCategory: ICategory | null = null;
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -44,7 +44,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public root: RootService,
     public pageCategory: PageCategoryService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private productsService: ProductsService,
   ) {
     this.rightToLeft = this.direction.isRTL();
   }
@@ -55,7 +56,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(filters => {
       this.filters = filters;
-      console.log('Filter ====>', this.filters);
 
       this.filtersForm = this.makeFiltersForm(filters);
 
@@ -99,8 +99,11 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(categories => {
         this.categories = categories;
-        console.log('Categories ===>', this.categories);
       });
+  }
+
+  get filter(): IProductsFilter {
+    return this.productsService.filter
   }
 
   trackBySlug(index: number, item: { slug: string }): any {
@@ -224,13 +227,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     return this.filtersForm.get(filter.slug) as FormControl;
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   selectCategory(category: ICategory, categories: ICategory[]) {
-    this.selectedCategory = category;
+    this.filter.category = category.slug;
 
     if (category?.children?.length) {
       if (category?.showChildren) {
@@ -267,7 +265,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
 
   selectAllCategories() {
     this.resetCategories(this.categories);
-    this.selectedCategory = null;
+    this.filter.category = null;
   }
 
   resetCategories(categories: ICategory[]) {
@@ -280,5 +278,10 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         this.resetCategories(c.children);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
