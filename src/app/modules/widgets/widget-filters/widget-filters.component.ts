@@ -105,7 +105,13 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       });
 
       if (category.showChildren) {
-        this.categories.middle = category.children;
+        this.categories.middle = category.children.map(c => {
+          return {
+            ...c,
+            hidden: false,
+            showChildren: false
+          };
+        });
       } else {
         this.categories.middle = [];
       }
@@ -121,7 +127,13 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       });
 
       if (category.showChildren) {
-        this.categories.sub = category.children;
+        this.categories.sub = category.children.map(c => {
+          return {
+            ...c,
+            hidden: false,
+            showChildren: false
+          };
+        });
       } else {
         this.categories.sub = [];
       }
