@@ -19,6 +19,7 @@ import { PageContactUsComponent } from './pages/page-contact-us/page-contact-us.
 import { PageFaqComponent } from './pages/page-faq/page-faq.component';
 import { PageTermsComponent } from './pages/page-terms/page-terms.component';
 import { PageTypographyComponent } from './pages/page-typography/page-typography.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -31,16 +32,17 @@ import { PageTypographyComponent } from './pages/page-typography/page-typography
     PageTermsComponent,
     PageTypographyComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    // modules (third-party)
-    CarouselModule,
-    // modules
-    BlocksModule,
-    SharedModule,
-    SiteRoutingModule
-  ]
+   imports: [
+      // modules (angular)
+      CommonModule,
+      // modules (third-party)
+      CarouselModule,
+      // modules
+      BlocksModule,
+      SharedModule,
+      SiteRoutingModule,
+      TranslateModule
+   ]
 })
 export class SiteModule {
 }

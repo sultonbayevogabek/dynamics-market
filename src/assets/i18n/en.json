@@ -59,5 +59,12 @@
   "information": "Information",
   "follow.us.on.social.networks": "Follow us on social networks",
   "subscribe.to.stay.aware.of.the.latest.news.in.us": "Subscribe to stay aware of the latest news in us",
-  "subscribe": "Subscribe"
+  "subscribe": "Subscribe",
+  "work.time.label": "Work time",
+  "comment": "Comment",
+  "contact.us.comment": "The 24/7 you can contact with the contact information below.",
+  "leave.us.your.message": "Leave us your message",
+  "your.name": "Your name",
+  "message": "Message",
+  "send.message": "Send message"
 }

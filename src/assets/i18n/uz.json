@@ -59,5 +59,12 @@
   "information": "Ma'lumot",
   "follow.us.on.social.networks": "Ijtimoiy tarmoqlarda bizni kuzatib boring",
   "subscribe.to.stay.aware.of.the.latest.news.in.us": "Bizdagi eng oxirgi yangiliklardan xabardor bo'lib turish uchun obuna bo'ling",
-  "subscribe": "Obuna bo'lish"
+  "subscribe": "Obuna",
+  "work.time.label": "Ish vaqti",
+  "comment": "Izoh",
+  "contact.us.comment": "Quyida keltirilgan kontakt ma'lumotlari orqali 24/7 biz bilan bog'lanishingiz mumkin.",
+  "leave.us.your.message": "Bizga xabaringizni qoldiring",
+  "your.name": "Ismingiz",
+  "message": "Xabar",
+  "send.message": "Xabarni yuborish"
 }
