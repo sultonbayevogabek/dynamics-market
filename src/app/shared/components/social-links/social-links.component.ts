@@ -18,11 +18,10 @@ export class SocialLinksComponent {
   theme = theme;
 
   items: SocialLinksItem[] = [
+    { type: 'instagram', url: this.theme.author.profile_url, icon: 'fab fa-instagram' },
+    { type: 'youtube', url: this.theme.author.profile_url, icon: 'fab fa-youtube' },
     { type: 'facebook', url: this.theme.author.profile_url, icon: 'fab fa-facebook-f' },
     { type: 'twitter', url: this.theme.author.profile_url, icon: 'fab fa-twitter' },
-    { type: 'youtube', url: this.theme.author.profile_url, icon: 'fab fa-youtube' },
-    { type: 'instagram', url: this.theme.author.profile_url, icon: 'fab fa-instagram' },
-    { type: 'rss', url: this.theme.author.profile_url, icon: 'fas fa-rss' }
   ];
 
   @Input() shape: SocialLinksShape = 'circle';

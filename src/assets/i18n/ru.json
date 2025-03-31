@@ -54,5 +54,10 @@
   "shop.now": "Купить сейчас",
   "filter": "Фильтр",
   "reset.filter": "Очистить фильтр",
-  "brands": "Бренды"
+  "brands": "Бренды",
+  "powered.by": "Разработано",
+  "information": "Информация",
+  "follow.us.on.social.networks": "Следуйте за нами в социальных сетях",
+  "subscribe.to.stay.aware.of.the.latest.news.in.us": "Подписаться, чтобы быть в курсе последних новостей в нас",
+  "subscribe": "Подписаться"
 }

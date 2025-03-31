@@ -1,7 +1,10 @@
 <div class="site-footer__widget footer-links">
-  <h5 class="footer-links__title">{{ header }}</h5>
+  <h5 class="footer-links__title">{{ header| translate }}</h5>
   <ul class="footer-links__list">
-    <li *ngFor="let link of links" class="footer-links__item"><a [routerLink]="link.url"
-                                                                 class="footer-links__link">{{ link.label }}</a></li>
+    <li *ngFor="let link of links" class="footer-links__item">
+      <a
+        [routerLink]="link.url"
+        class="footer-links__link"
+      >{{ link.label| translate }}</a></li>
   </ul>
 </div>
