@@ -53,5 +53,6 @@
   "product.search": "Поиск товаров",
   "shop.now": "Купить сейчас",
   "filter": "Фильтр",
-  "reset.filter": "Очистить фильтр"
+  "reset.filter": "Очистить фильтр",
+  "brands": "Бренды"
 }

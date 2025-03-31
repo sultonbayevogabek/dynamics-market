@@ -14,6 +14,21 @@
         <div class="filter__body" appCollapseContent>
           <div class="filter__container">
             <div class="filter-categories filter-categories--root ">
+              <div
+                class="filter-categories__item filter-categories__item&#45;&#45;parent"
+                *ngIf="filter.category"
+                (click)="selectCategory(null)"
+              >
+                <app-icon
+                  class="filter-categories__arrow"
+                  [name]="'arrow-rounded-right-6x9'"
+                  [size]="'6x9'"
+                ></app-icon>
+                <a
+                  class="cursor-pointer"
+                >{{ 'all.categories'| translate }}</a>
+              </div>
+
               <ng-container
                 *ngTemplateOutlet="categoriesList; context: { $implicit: { categories: categories.main, level: 'main'} }"
               ></ng-container>
@@ -25,6 +40,41 @@
               <ng-container
                 *ngTemplateOutlet="categoriesList; context: { $implicit: { categories: categories.sub, level: 'sub'} }"
               ></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter filter--opened" appCollapseItem="filter--opened" #collapseBrands="appCollapseItem">
+        <button type="button" class="filter__title" (click)="collapseBrands.toggle()">
+          {{ 'brands'| translate }}
+          <app-icon class="filter__arrow" name="arrow-rounded-down-12x7" size="12x7"></app-icon>
+        </button>
+        <div class="filter__body" appCollapseContent>
+          <div class="filter__container">
+            <div class="filter-list">
+              <div class="filter-list__list">
+                <label
+                  *ngFor="let item of brands"
+                  class="filter-list__item"
+                >
+                  <span class="filter-list__input input-check">
+                      <span class="input-check__body">
+                          <input
+                            class="input-check__input"
+                            type="checkbox"
+                            [value]="item?.slugUz"
+                            [checked]="filter.brands?.includes(item.slugUz!)"
+                            (change)="selectBrand($event)"
+                          >
+                          <span class="input-check__box"></span>
+                          <app-icon class="input-check__icon" name="check-9x7" size="9x7"></app-icon>
+                      </span>
+                  </span>
+
+                  <span class="filter-list__title">{{ item.nameUz }}</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -53,6 +103,7 @@
           'filter-categories__item--parent': ['main', 'middle'].includes(data.level),
           'filter-categories__item--current': category.slug === filter.category
         }"
+        (click)="selectCategory(category.slug)"
       >
         <app-icon
           *ngIf="['main', 'middle'].includes(data.level)"
@@ -62,7 +113,6 @@
         ></app-icon>
         <a
           class="cursor-pointer"
-          (click)="selectCategory(category, data.level)"
         >{{ category.name }}</a>
       </li>
     </ng-container>
@@ -92,32 +142,6 @@
     –
     <span
       class="filter-price__max-value">{{ (rightToLeft ? slider.value : slider.highValue)|currencyFormat }}</span>
-  </div>
-</div>
-
-<div *ngIf="filter.type === 'check'" class="filter-list" [formGroupName]="filter.slug">
-  <div class="filter-list__list">
-    <label
-      *ngFor="let item of filter.items; trackBy: trackBySlug"
-      class="filter-list__item"
-      [ngClass]="{'filter-list__item&#45;&#45;disabled': isItemDisabled(filter, item)}"
-    >
-                                    <span class="filter-list__input input-check">
-                                        <span class="input-check__body">
-                                            <input
-                                              class="input-check__input"
-                                              type="checkbox"
-                                              [value]="item.slug"
-                                              [name]="'filter_' + filter.slug"
-                                              [formControlName]="item.slug"
-                                            >
-                                            <span class="input-check__box"></span>
-                                            <app-icon class="input-check__icon" name="check-9x7" size="9x7"></app-icon>
-                                        </span>
-                                    </span>
-
-      <span class="filter-list__title">{{ item.name }}</span>
-    </label>
   </div>
 </div>
 

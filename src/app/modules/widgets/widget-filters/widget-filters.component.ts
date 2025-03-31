@@ -3,12 +3,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { DirectionService } from '@shared/services/direction.service';
 import { IProductsFilter } from '@shared/interfaces/filter';
 import { RootService } from '@shared/services/root.service';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { HeaderService } from '@shared/services/header.service';
 import { ICategory } from '@shared/interfaces/category';
 import { ProductsService } from '@shared/services/products.service';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from '@shared/interfaces/brand';
+import { BrandsService } from '@shared/services/brands.service';
 
 @Component({
   selector: 'app-widget-filters',
@@ -27,6 +29,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     sub: []
   };
   flattenedCategories: { [key: string]: ICategory } = {};
+  brands: Brand[] = [];
   categoryId!: string;
 
   destroy$: Subject<void> = new Subject<void>();
@@ -40,56 +43,23 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     public root: RootService,
     private headerService: HeaderService,
     private productsService: ProductsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private brandsService: BrandsService
   ) {
     this.rightToLeft = this.direction.isRTL();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.headerService.categories$
       .pipe(takeUntil(this.destroy$))
       .subscribe(categories => {
         this.categories.main = categories;
         this.flattenCategories(categories);
-        this.setCategoryFromQuery(categories);
+        this.setFilterFromQuery();
       });
-  }
-
-  get filter(): IProductsFilter {
-    return this.productsService.filter;
-  }
-
-  reset(): void {
-
-  }
-
-  setCategoryFromQuery(categories: ICategory[]) {
-    this.activatedRoute.queryParams.subscribe(params => {
-      const categorySlug = params['category'];
-
-      if (!categorySlug) {
-        return;
-      }
-
-      this.filter.category = categorySlug;
-
-      for (const categoryId in this.flattenedCategories) {
-        const category = this.flattenedCategories[categoryId];
-
-        if (category.children?.length) {
-          category.showChildren = false;
-          category.hidden = false;
-        }
-
-        if (category.slug === categorySlug) {
-          this.categoryId = categoryId;
-        }
-      }
-
-      if (this.categoryId) {
-        this.showCategoriesByQuery(this.categoryId);
-      }
-    });
+    this.brands = await firstValueFrom(
+      this.brandsService.getBrandsList()
+    );
   }
 
   flattenCategories(categories: ICategory[]) {
@@ -102,35 +72,83 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
+  get filter(): IProductsFilter {
+    return this.productsService.filter;
+  }
+
+  reset(): void {
+
+  }
+
+  setFilterFromQuery() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const categorySlug = params['category'];
+
+      if (!categorySlug) {
+        this.categories.main.forEach(category => {
+          category.hidden = false;
+          category.showChildren = false;
+        });
+        this.categories.middle = [];
+        this.categories.sub = [];
+        return;
+      }
+
+      this.filter.category = categorySlug;
+
+      for (const categoryId in this.flattenedCategories) {
+        const category = this.flattenedCategories[categoryId];
+
+        category.showChildren = false;
+        category.hidden = false;
+
+        if (category.slug === categorySlug) {
+          this.categoryId = categoryId;
+        }
+      }
+
+      if (this.categoryId) {
+        this.showCategoriesByQuery(this.categoryId);
+      }
+
+      const brands = params['brands'];
+      if (brands && brands.length) {
+        this.filter.brands = brands;
+      } else {
+        this.filter.brands = [];
+      }
+    });
+  }
+
   showCategoriesByQuery(categoryId: string) {
     const selectedCategory = this.flattenedCategories[categoryId];
-
-    let mainCategory: ICategory;
-    let middleCategory: ICategory;
-    let subCategory: ICategory;
-    let level: 'main' | 'middle' | 'sub' = 'sub';
+    let level!: 'main' | 'middle' | 'sub';
 
     if (!selectedCategory.parentId) {
       level = 'main';
     }
 
-    if (selectedCategory.parentId && selectedCategory.children?.length) {
+    if (selectedCategory.parentId && selectedCategory.children.length) {
       level = 'middle';
     }
 
-    if (selectedCategory.parentId && !selectedCategory?.children?.length) {
+    if (selectedCategory.parentId && !selectedCategory.children.length) {
       level = 'sub';
     }
 
+    let mainCategory: ICategory | null;
+    let middleCategory: ICategory | null;
+    let subCategory: ICategory | null;
+
     if (level === 'sub') {
       subCategory = selectedCategory;
-      middleCategory = this.flattenedCategories[subCategory.parentId!];
-      mainCategory = this.flattenedCategories[middleCategory.parentId!];
+      middleCategory = this.flattenedCategories[subCategory?.parentId!];
+      mainCategory = this.flattenedCategories[middleCategory?.parentId!];
     }
 
     if (level === 'middle') {
       middleCategory = selectedCategory;
-      mainCategory = this.flattenedCategories[middleCategory.parentId!];
+      mainCategory = this.flattenedCategories[middleCategory?.parentId!];
     }
 
     if (level === 'main') {
@@ -150,50 +168,39 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  async selectCategory(category: ICategory, level: 'main' | 'middle' | 'sub') {
-    this.filter.category = category.slug;
-    this.drawCategoriesHierarchy(category, level);
+  async selectCategory(slug: string | null) {
+    this.filter.category = slug;
     await this.productsService.setQueryToParams();
   }
 
   drawCategoriesHierarchy(category: ICategory, level: 'main' | 'middle' | 'sub') {
-    category.showChildren = !category?.showChildren;
+    category.hidden = false;
 
     if (level === 'main') {
+      category.showChildren = true;
+
       this.categories.main.forEach(c => {
-        if (c._id !== category._id) {
-          c.hidden = category.showChildren;
+        if (category._id !== c._id) {
+          c.hidden = true;
+          c.showChildren = false;
         }
       });
 
-      if (category.showChildren) {
-        this.categories.middle = category.children;
-        this.categories.middle.forEach(c => {
-          c.hidden = false;
-          c.showChildren = false;
-        });
-      } else {
-        this.categories.middle = [];
-      }
-
+      this.categories.middle = category.children;
       this.categories.sub = [];
     }
 
     if (level === 'middle') {
+      category.showChildren = true;
+
       this.categories.middle.forEach(c => {
-        if (c._id !== category._id) {
-          c.hidden = category.showChildren;
+        if (category._id !== c._id) {
+          c.hidden = true;
+          c.showChildren = false;
         }
       });
 
-      if (category.showChildren) {
-        this.categories.sub = category.children;
-        this.categories.sub.forEach(c => {
-          c.hidden = false;
-        });
-      } else {
-        this.categories.sub = [];
-      }
+      this.categories.sub = category.children;
     }
   }
 
@@ -210,6 +217,21 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         this.resetCategories(c.children);
       }
     });
+  }
+
+  async selectBrand($event: Event) {
+    const target = $event.target as HTMLInputElement;
+    const value = target.value;
+    const checked = target.checked;
+
+    if (checked) {
+      this.filter.brands = this.filter.brands || [];
+      this.filter.brands?.push(value);
+    } else {
+      this.filter.brands = this.filter.brands?.filter(b => b !== value);
+    }
+
+    await this.productsService.setQueryToParams();
   }
 
   ngOnDestroy(): void {
