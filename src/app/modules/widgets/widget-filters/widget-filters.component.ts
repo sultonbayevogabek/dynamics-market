@@ -117,6 +117,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       } else {
         this.filter.brands = [];
       }
+
+      console.log(this.filter);
     });
   }
 
