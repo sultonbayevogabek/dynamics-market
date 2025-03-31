@@ -31,6 +31,11 @@ $local-item-padding-left: 14px;
 .filter-categories__item {
   padding: 6px 0;
   display: flex;
+  cursor: pointer;
+
+  &:hover {
+    color: $link-hover-color;
+  }
 
   & > a {
     flex-grow: 1;

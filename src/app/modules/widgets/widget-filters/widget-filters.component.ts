@@ -12,8 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-widget-filters',
-  templateUrl: './widget-filters.component.html',
-  styleUrls: [ './widget-filters.component.scss' ]
+  templateUrl: './widget-filters.component.html'
 })
 export class WidgetFiltersComponent implements OnInit, OnDestroy {
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
@@ -51,6 +50,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(categories => {
         this.categories.main = categories;
+        this.flattenCategories(categories);
+        this.setCategoryFromQuery(categories);
       });
   }
 
@@ -62,39 +63,100 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
 
   }
 
-  setCategoryFromQuery() {
-    const params = this.activatedRoute.snapshot.queryParams;
-    const categorySlug = params['category'];
-    this.filter.category = categorySlug;
+  setCategoryFromQuery(categories: ICategory[]) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const categorySlug = params['category'];
 
-    if (categorySlug) {
-      this.transform(this.categoryId);
-    }
+      if (!categorySlug) {
+        return;
+      }
+
+      this.filter.category = categorySlug;
+
+      for (const categoryId in this.flattenedCategories) {
+        const category = this.flattenedCategories[categoryId];
+
+        if (category.children?.length) {
+          category.showChildren = false;
+          category.hidden = false;
+        }
+
+        if (category.slug === categorySlug) {
+          this.categoryId = categoryId;
+        }
+      }
+
+      if (this.categoryId) {
+        this.showCategoriesByQuery(this.categoryId);
+      }
+    });
   }
 
   flattenCategories(categories: ICategory[]) {
     categories.forEach(category => {
       this.flattenedCategories[category._id] = category;
 
-      if (category?.children?.length > 0) {
+      if (category?.children?.length) {
         this.flattenCategories(category.children);
       }
     });
   }
 
-  transform(categoryId: string) {
-    const category = this.flattenedCategories[categoryId];
-    if (category?.children?.length > 0) {
-      category.showChildren = true;
+  showCategoriesByQuery(categoryId: string) {
+    const selectedCategory = this.flattenedCategories[categoryId];
+
+    let mainCategory: ICategory;
+    let middleCategory: ICategory;
+    let subCategory: ICategory;
+    let level: 'main' | 'middle' | 'sub' = 'sub';
+
+    if (!selectedCategory.parentId) {
+      level = 'main';
     }
-    if (category.parentId) {
-      this.transform(category.parentId);
+
+    if (selectedCategory.parentId && selectedCategory.children?.length) {
+      level = 'middle';
+    }
+
+    if (selectedCategory.parentId && !selectedCategory?.children?.length) {
+      level = 'sub';
+    }
+
+    if (level === 'sub') {
+      subCategory = selectedCategory;
+      middleCategory = this.flattenedCategories[subCategory.parentId!];
+      mainCategory = this.flattenedCategories[middleCategory.parentId!];
+    }
+
+    if (level === 'middle') {
+      middleCategory = selectedCategory;
+      mainCategory = this.flattenedCategories[middleCategory.parentId!];
+    }
+
+    if (level === 'main') {
+      mainCategory = selectedCategory;
+    }
+
+    if (mainCategory!) {
+      this.drawCategoriesHierarchy(mainCategory, 'main');
+    }
+
+    if (middleCategory!) {
+      this.drawCategoriesHierarchy(middleCategory, 'middle');
+    }
+
+    if (subCategory!) {
+      this.drawCategoriesHierarchy(subCategory, 'sub');
     }
   }
 
   async selectCategory(category: ICategory, level: 'main' | 'middle' | 'sub') {
     this.filter.category = category.slug;
+    this.drawCategoriesHierarchy(category, level);
+    await this.productsService.setQueryToParams();
+  }
 
+  drawCategoriesHierarchy(category: ICategory, level: 'main' | 'middle' | 'sub') {
     category.showChildren = !category?.showChildren;
 
     if (level === 'main') {
@@ -105,12 +167,10 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       });
 
       if (category.showChildren) {
-        this.categories.middle = category.children.map(c => {
-          return {
-            ...c,
-            hidden: false,
-            showChildren: false
-          };
+        this.categories.middle = category.children;
+        this.categories.middle.forEach(c => {
+          c.hidden = false;
+          c.showChildren = false;
         });
       } else {
         this.categories.middle = [];
@@ -127,12 +187,9 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       });
 
       if (category.showChildren) {
-        this.categories.sub = category.children.map(c => {
-          return {
-            ...c,
-            hidden: false,
-            showChildren: false
-          };
+        this.categories.sub = category.children;
+        this.categories.sub.forEach(c => {
+          c.hidden = false;
         });
       } else {
         this.categories.sub = [];

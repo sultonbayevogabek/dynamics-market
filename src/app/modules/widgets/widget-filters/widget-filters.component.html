@@ -69,43 +69,6 @@
   </ul>
 </ng-template>
 
-<ng-template #categoryItem let-data>
-  <li
-    class="filter-categories__item"
-    [ngClass]="{
-      'filter-categories__item--parent': data?.category?.parent,
-      'filter-categories__item--child': !data?.category?.parent,
-      'filter-categories__item--current': data?.category?.slug === filter?.category
-    }"
-    *ngIf="data?.category?.visible === undefined || data?.category?.visible"
-  >
-    <a class="cursor-pointer" (click)="selectCategory(data?.category, data?.categories)">
-      {{ data?.category?.name }}
-    </a>
-
-    <app-icon
-      *ngIf="data?.category?.children?.length"
-      class="filter-categories__arrow"
-      [ngStyle]="{
-        'transform': data?.category?.parent ? 'rotate(90deg)' : 'none'
-      }"
-      name="arrow-rounded-right-6x9"
-      size="6x9"
-    ></app-icon>
-  </li>
-
-  <ng-container *ngIf="data?.category?.showChildren">
-    <ng-container *ngFor="let c of data?.category?.children">
-      <ul class="filter-categories__list pl-3">
-        <ng-container
-          *ngTemplateOutlet="categoryItem; context: { $implicit: { category: c, categories: data?.category?.children } }"
-        >
-        </ng-container>
-      </ul>
-    </ng-container>
-  </ng-container>
-</ng-template>
-
 
 <!--<div *ngIf="filter.type === 'range' && isPlatformBrowser" class="filter-price">
   <div class="filter-price__slider">
