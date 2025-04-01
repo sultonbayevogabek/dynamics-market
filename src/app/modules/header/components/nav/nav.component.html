@@ -50,11 +50,10 @@
         </app-indicator>
 
         <app-indicator
-          link="./products/cart"
+          link="/products/cart"
           icon="cart-20"
           trigger="click"
           [counter]="(cart.quantity$|async) || 0"
-          #cartIndicator="appIndicator"
         >
         </app-indicator>
 

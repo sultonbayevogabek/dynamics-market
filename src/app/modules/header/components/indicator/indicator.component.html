@@ -11,7 +11,7 @@
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
 
-<a *ngIf="link !== null && trigger === 'click'" [href]="link" class="indicator__button" (click)="onClick($event)"
+<a *ngIf="link !== null && trigger === 'click'" [routerLink]="link" class="indicator__button" (click)="onClick($event)"
    (appTouchClick)="onTouchClick($event)">
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </a>

@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Data, ResolveData, RouterModule, Routes } from '@angular/router';
 import { PageCategoryComponent } from './pages/page-category/page-category.component';
-import { PageCartComponent } from './pages/page-cart/page-cart.component';
-import { PageCheckoutComponent } from './pages/page-checkout/page-checkout.component';
 import { PageCompareComponent } from './pages/page-compare/page-compare.component';
 import { PageTrackOrderComponent } from './pages/page-track-order/page-track-order.component';
-import { CheckoutGuard } from './guards/checkout.guard';
 import { PageProductComponent } from './pages/page-product/page-product.component';
 import { ProductsListResolverService } from './resolvers/products-list-resolver.service';
 import { CategoryResolverService } from './resolvers/category-resolver.service';
 import { ProductResolverService } from './resolvers/product-resolver.service';
-import { PageOrderSuccessComponent } from './pages/page-order-success/page-order-success.component';
 
 const categoryPageData: Data = {
   // Number of products per row. Possible values: 3, 4, 5.
@@ -55,20 +51,6 @@ const routes: Routes = [
     resolve: {
       product: ProductResolverService
     }
-  },
-  {
-    path: 'cart',
-    pathMatch: 'full',
-    component: PageCartComponent
-  },
-  {
-    path: 'cart/checkout',
-    component: PageCheckoutComponent,
-    canActivate: [ CheckoutGuard ]
-  },
-  {
-    path: 'cart/checkout/success',
-    component: PageOrderSuccessComponent
   },
   {
     path: 'compare',
