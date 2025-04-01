@@ -19,7 +19,6 @@ import { filter, first, shareReplay, takeUntil } from 'rxjs/operators';
 import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { DropcartType } from '../dropcart/dropcart.component';
 import { OffcanvasCartService } from '@shared/services/offcanvas-cart.service';
 
 export type NavStickyMode = 'alwaysOnTop' | 'pullToShow';
@@ -46,8 +45,6 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   media!: Observable<MediaQueryList>;
 
-  dropcartType: DropcartType = 'dropdown';
-
   get element(): HTMLDivElement {
     return this.elementRef?.nativeElement;
   }
@@ -65,9 +62,6 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.dropcartType = data['dropcartType'] || 'dropdown';
-    });
   }
 
   ngOnDestroy(): void {
@@ -79,12 +73,6 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.stickyMode && isPlatformBrowser(this.platformId)) {
       this.media = fromMatchMedia('(min-width: 992px)', false).pipe(shareReplay({ bufferSize: 1, refCount: true }));
       this.media.pipe(takeUntil(this.destroy$)).subscribe(media => this.onMediaChange(media));
-    }
-  }
-
-  onCartClick(): void {
-    if (this.dropcartType === 'offcanvas') {
-      this.offcanvasCart.open();
     }
   }
 

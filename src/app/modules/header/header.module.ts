@@ -10,7 +10,6 @@ import { SharedModule } from '@shared/shared.module';
 // components
 import { AccountMenuComponent } from './components/account-menu/account-menu.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
-import { DropcartComponent } from './components/dropcart/dropcart.component';
 import { HeaderComponent } from './header.component';
 import { IndicatorComponent } from './components/indicator/indicator.component';
 import { LinksComponent } from './components/links/links.component';
@@ -25,7 +24,6 @@ import { TranslateModule } from '@ngx-translate/core';
     // components
     AccountMenuComponent,
     DepartmentsComponent,
-    DropcartComponent,
     HeaderComponent,
     IndicatorComponent,
     LinksComponent,
@@ -44,8 +42,7 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   exports: [
     // components
-    HeaderComponent,
-    DropcartComponent
+    HeaderComponent
   ]
 })
 export class HeaderModule {

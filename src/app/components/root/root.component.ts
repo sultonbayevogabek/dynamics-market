@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DropcartType } from '../../modules/header/components/dropcart/dropcart.component';
 
 interface RouterData {
   headerLayout?: 'classic' | 'compact';
-  dropcartType?: DropcartType;
 }
 
 @Component({
@@ -15,14 +13,12 @@ interface RouterData {
 
 export class RootComponent {
   headerLayout: 'classic' | 'compact' = 'classic';
-  dropcartType: DropcartType = 'dropdown';
 
   constructor(
     public route: ActivatedRoute
   ) {
     this.route.data.subscribe((data: RouterData) => {
       this.headerLayout = data.headerLayout || 'classic';
-      this.dropcartType = data.dropcartType || 'dropdown';
     });
   }
 }
