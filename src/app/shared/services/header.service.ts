@@ -102,7 +102,7 @@ export class HeaderService extends RequestService {
 
     if (localStorage.getItem('categories')) {
       const localCategories: ILocalCategory = JSON.parse(localStorage.getItem('categories')!);
-      if ((new Date().getTime() - localCategories.time) / 60000 < 60 && localCategories.language === currentLang) {
+      if ((new Date().getTime() - localCategories.time) / 60000 < 60 && localCategories.language === currentLang && localCategories?.data?.length) {
         categories = localCategories.data;
       } else {
         categories = await this.getCategoriesFromServer();

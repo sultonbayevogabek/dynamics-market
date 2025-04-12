@@ -8,6 +8,7 @@ import { PageCheckoutComponent } from './components/page-checkout/page-checkout.
 import { PageOrderSuccessComponent } from './components/page-order-success/page-order-success.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CartRoutingModule } from './cart-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CartRoutingModule
   ]
 })
 export class CartModule {

@@ -23,21 +23,20 @@ import { TranslateModule } from '@ngx-translate/core';
     // pages
     PageAboutUsComponent,
     PageContactUsComponent,
-    PageContactUsComponent,
     PageFaqComponent,
-    PageTermsComponent,
+    PageTermsComponent
   ],
-   imports: [
-      // modules (angular)
-      CommonModule,
-      // modules (third-party)
-      CarouselModule,
-      // modules
-      BlocksModule,
-      SharedModule,
-      SiteRoutingModule,
-      TranslateModule
-   ]
+  imports: [
+    // modules (angular)
+    CommonModule,
+    // modules (third-party)
+    CarouselModule,
+    // modules
+    BlocksModule,
+    SharedModule,
+    SiteRoutingModule,
+    TranslateModule
+  ]
 })
 export class SiteModule {
 }
