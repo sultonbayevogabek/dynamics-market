@@ -24,6 +24,7 @@ import { PageProductComponent } from './pages/page-product/page-product.componen
 import { PageTrackOrderComponent } from './pages/page-track-order/page-track-order.component';
 import { ProductSidebarComponent } from './components/product-sidebar/product-sidebar.component';
 import { SharedModule } from '@shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SharedModule } from '@shared/shared.module';
     BlocksModule,
     ProductsRoutingModule,
     WidgetsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ]
 })
 export class ProductsModule {

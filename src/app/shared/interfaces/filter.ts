@@ -60,8 +60,9 @@ export interface RadioFilter extends ValuableFilterBase {
 export type Filter = CategoryFilter | RangeFilter | CheckFilter | RadioFilter;
 
 export interface IProductsFilter {
-  brands?: string[];
+  brand?: string[];
   category?: string | null;
   page?: number;
   limit?: number;
+  sort?: 'cheaper' | 'more-expensive'
 }

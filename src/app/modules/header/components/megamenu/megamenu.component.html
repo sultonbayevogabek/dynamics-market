@@ -13,6 +13,7 @@
                [queryParams]="{
                   category: item.url
                }"
+               [queryParamsHandling]="'merge'"
                (click)="itemClick.emit(item)">{{ item.label }}</a>
 
             <ul *ngIf="item.items" class="megamenu__links megamenu__links--level--1">
@@ -23,6 +24,7 @@
                   [queryParams]="{
                     category: subItem.url
                   }"
+                  [queryParamsHandling]="'merge'"
                   (click)="itemClick.emit(subItem)">{{ subItem.label }}</a>
               </li>
             </ul>

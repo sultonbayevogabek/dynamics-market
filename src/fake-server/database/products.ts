@@ -79,8 +79,8 @@ const productsDef: ProductDef[] = [
     name: 'Electric Planer Brandix KL370090G 300 Watts',
     price: 749,
     images: [
-      'assets/images/products/product-1.jpg',
-      'assets/images/products/product-1-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-1.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-1-1.jpg'
     ],
     badges: 'new',
     rating: 4,
@@ -102,8 +102,8 @@ const productsDef: ProductDef[] = [
     name: 'Undefined Tool IRadix DPS3000SY 2700 Watts',
     price: 1019,
     images: [
-      'assets/images/products/product-2.jpg',
-      'assets/images/products/product-2-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-2.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-2-1.jpg'
     ],
     badges: 'hot',
     rating: 5,
@@ -125,8 +125,8 @@ const productsDef: ProductDef[] = [
     name: 'Drill Screwdriver Brandix ALX7054 200 Watts',
     price: 850,
     images: [
-      'assets/images/products/product-3.jpg',
-      'assets/images/products/product-3-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-3.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-3-1.jpg'
     ],
     rating: 4,
     reviews: 8,
@@ -148,8 +148,8 @@ const productsDef: ProductDef[] = [
     price: 949,
     compareAtPrice: 1189,
     images: [
-      'assets/images/products/product-4.jpg',
-      'assets/images/products/product-4-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-4.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-4-1.jpg'
     ],
     badges: 'sale',
     rating: 3,
@@ -171,8 +171,8 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Router Power Tool 2017ERXPK',
     price: 1700,
     images: [
-      'assets/images/products/product-5.jpg',
-      'assets/images/products/product-5-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-5.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-5-1.jpg'
     ],
     rating: 4,
     reviews: 2,
@@ -193,8 +193,8 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Drilling Machine DM2019KW4 4kW',
     price: 3199,
     images: [
-      'assets/images/products/product-6.jpg',
-      'assets/images/products/product-6-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-6.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-6-1.jpg'
     ],
     rating: 3,
     reviews: 21,
@@ -215,8 +215,8 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Pliers',
     price: 24,
     images: [
-      'assets/images/products/product-7.jpg',
-      'assets/images/products/product-7-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-7.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-7-1.jpg'
     ],
     rating: 2,
     reviews: 1,
@@ -237,8 +237,8 @@ const productsDef: ProductDef[] = [
     name: 'Water Hose 40cm',
     price: 15,
     images: [
-      'assets/images/products/product-8.jpg',
-      'assets/images/products/product-8-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-8.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-8-1.jpg'
     ],
     rating: 2,
     reviews: 5,
@@ -259,8 +259,8 @@ const productsDef: ProductDef[] = [
     name: 'Spanner Wrench',
     price: 19,
     images: [
-      'assets/images/products/product-9.jpg',
-      'assets/images/products/product-9-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-9.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-9-1.jpg'
     ],
     rating: 4,
     reviews: 34,
@@ -281,8 +281,8 @@ const productsDef: ProductDef[] = [
     name: 'Water Tap',
     price: 15,
     images: [
-      'assets/images/products/product-10.jpg',
-      'assets/images/products/product-10-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-10.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-10-1.jpg'
     ],
     rating: 5,
     reviews: 3,
@@ -303,8 +303,8 @@ const productsDef: ProductDef[] = [
     name: 'Hand Tool Kit',
     price: 149,
     images: [
-      'assets/images/products/product-11.jpg',
-      'assets/images/products/product-11-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-11.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-11-1.jpg'
     ],
     rating: 4,
     reviews: 7,
@@ -325,8 +325,8 @@ const productsDef: ProductDef[] = [
     name: 'Ash\'s Chainsaw 3.5kW',
     price: 666.99,
     images: [
-      'assets/images/products/product-12.jpg',
-      'assets/images/products/product-12-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-12.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-12-1.jpg'
     ],
     rating: 5,
     reviews: 17,
@@ -347,8 +347,8 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Angle Grinder KZX3890PQW',
     price: 649,
     images: [
-      'assets/images/products/product-13.jpg',
-      'assets/images/products/product-13-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-13.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-13-1.jpg'
     ],
     rating: 2,
     reviews: 8,
@@ -369,8 +369,8 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Air Compressor DELTAKX500',
     price: 1800,
     images: [
-      'assets/images/products/product-14.jpg',
-      'assets/images/products/product-14-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-14.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-14-1.jpg'
     ],
     rating: 3,
     reviews: 14,
@@ -391,8 +391,8 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Electric Jigsaw JIG7000BQ',
     price: 290,
     images: [
-      'assets/images/products/product-15.jpg',
-      'assets/images/products/product-15-1.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-15.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-15-1.jpg'
     ],
     rating: 2,
     reviews: 1,
@@ -413,11 +413,11 @@ const productsDef: ProductDef[] = [
     name: 'Brandix Screwdriver SCREW1500ACC',
     price: 1499,
     images: [
-      'assets/images/products/product-16.jpg',
-      'assets/images/products/product-16-1.jpg',
-      'assets/images/products/product-16-2.jpg',
-      'assets/images/products/product-16-3.jpg',
-      'assets/images/products/product-16-4.jpg'
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-16.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-16-1.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-16-2.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-16-3.jpg',
+      'https://stroyka.angular.themeforest.scompiler.ru/themes/blue-ltr/assets/images/products/product-16-4.jpg'
     ],
     rating: 5,
     reviews: 3,

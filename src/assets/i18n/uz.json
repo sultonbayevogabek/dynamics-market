@@ -68,5 +68,11 @@
   "message": "Xabar",
   "send.message": "Xabarni yuborish",
   "sultonbayev.o.b": "Sultonbayev O. B",
-  "frequently.asked.questions": "Ko'p so'raladigan savollar"
+  "frequently.asked.questions": "Ko'p so'raladigan savollar",
+  "sort.by": "Saralash turi",
+  "show": "Ko'rsatish",
+  "products": "Tovarlar",
+  "pagination.result.text": "Jami {{ total }}, {{ interval }} ko'rsatilmoqda",
+  "cheaper": "Arzonroq",
+  "more.expensive": "Qimmatroq"
 }

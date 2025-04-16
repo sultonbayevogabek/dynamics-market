@@ -1,4 +1,4 @@
-<div class="products-view" [ngClass]="{'products-view--loading': this.pageService.isLoading$|async}"
+<div class="products-view" [ngClass]="{'products-view--loading': this.pageService.isLoading$| async}"
      [formGroup]="listOptionsForm">
   <div class="products-view__loader"></div>
 
@@ -11,7 +11,7 @@
         <div class="view-options__filters-button">
           <button type="button" class="filters-button" (click)="sidebar.open()">
             <app-icon class="filters-button__icon" name="filters-16" size="16"></app-icon>
-            <span class="filters-button__title">Filters</span>
+            <span class="filters-button__title">{{ 'filter'| translate }}</span>
             <span class="filters-button__counter" *ngIf="filtersCount > 0">{{ filtersCount }}</span>
           </button>
         </div>
@@ -38,27 +38,31 @@
           </div>
         </div>
         <div class="view-options__legend">
-          Showing {{ this.pageService.from }}–{{ this.pageService.to }}
-          of {{ this.pageService.total }}
-          results
+          {{
+            'pagination.result.text'| translate: {
+              interval: this.pageService.from + '-' + this.pageService.to,
+              total: this.pageService.total
+            }
+          }}
         </div>
         <div class="view-options__divider"></div>
         <div class="view-options__control">
-          <label for="view-options-sort">Sort By</label>
+          <label for="view-options-sort">{{ 'sort.by'| translate }}</label>
           <div>
             <select class="form-control form-control-sm" id="view-options-sort" formControlName="sort">
-              <option value="default">Default</option>
-              <option value="name_asc">Name (A-Z)</option>
-              <option value="name_desc">Name (Z-A)</option>
+              <option value="cheaper">{{ 'cheaper'| translate }}</option>
+              <option value="more-expensive">{{ 'more.expensive'| translate }}</option>
             </select>
           </div>
         </div>
         <div class="view-options__control">
-          <label for="view-options-limit">Show</label>
+          <label for="view-options-limit">{{ 'show'| translate }}</label>
           <div>
             <select class="form-control form-control-sm" id="view-options-limit" formControlName="limit">
               <option value="12">12</option>
               <option value="24">24</option>
+              <option value="36">36</option>
+              <option value="48">48</option>
             </select>
           </div>
         </div>

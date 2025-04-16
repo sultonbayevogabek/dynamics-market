@@ -63,8 +63,8 @@
                           <input
                             class="input-check__input"
                             type="checkbox"
-                            [value]="item?.slugUz"
-                            [checked]="filter.brands?.includes(item.slugUz!)"
+                            [value]="item?.slug"
+                            [checked]="filter.brand?.includes(item.slug)"
                             (change)="selectBrand($event)"
                           >
                           <span class="input-check__box"></span>
@@ -72,7 +72,7 @@
                       </span>
                   </span>
 
-                  <span class="filter-list__title">{{ item.nameUz }}</span>
+                  <span class="filter-list__title">{{ item.name }}</span>
                 </label>
               </div>
             </div>

@@ -44,6 +44,7 @@
           <a class="departments__item-link"
              [routerLink]="['/', 'products']"
              [queryParams]="{ category: item.url }"
+             [queryParamsHandling]="'merge'"
              (click)="onItemClick()" (appTouchClick)="onTouchClick($event, item)">
             <ng-container [ngTemplateOutlet]="link"></ng-container>
           </a>

@@ -55,11 +55,12 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       .subscribe(categories => {
         this.categories.main = categories;
         this.flattenCategories(categories);
-        this.setFilterFromQuery();
+        this.setCategoryFromQuery();
       });
     this.brands = await firstValueFrom(
       this.brandsService.getBrandsList()
     );
+    this.setBrandFromQuery();
   }
 
   flattenCategories(categories: ICategory[]) {
@@ -76,11 +77,13 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     return this.productsService.filter;
   }
 
-  reset(): void {
-
+  async reset() {
+    this.filter.category = null;
+    this.filter.brand = [];
+    await this.productsService.setQueryToParams();
   }
 
-  setFilterFromQuery() {
+  setCategoryFromQuery() {
     this.activatedRoute.queryParams.subscribe(params => {
       const categorySlug = params['category'];
 
@@ -95,7 +98,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       }
 
       this.filter.category = categorySlug;
-
       for (const categoryId in this.flattenedCategories) {
         const category = this.flattenedCategories[categoryId];
 
@@ -106,19 +108,9 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
           this.categoryId = categoryId;
         }
       }
-
       if (this.categoryId) {
         this.showCategoriesByQuery(this.categoryId);
       }
-
-      const brands = params['brands'];
-      if (brands && brands.length) {
-        this.filter.brands = brands;
-      } else {
-        this.filter.brands = [];
-      }
-
-      console.log(this.filter);
     });
   }
 
@@ -206,11 +198,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  async selectAllCategories() {
-    this.filter.category = null;
-    await this.productsService.setQueryToParams();
-  }
-
   resetCategories(categories: ICategory[]) {
     categories.forEach(c => {
       c.showChildren = false;
@@ -221,18 +208,31 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
+  setBrandFromQuery() {
+    let brand = this.activatedRoute.snapshot.queryParams['brand'];
+
+    if (!brand) {
+      brand = [];
+    }
+
+    if (typeof brand === 'string') {
+      brand = [ brand ];
+    }
+
+    this.filter.brand = brand;
+  }
+
   async selectBrand($event: Event) {
     const target = $event.target as HTMLInputElement;
     const value = target.value;
     const checked = target.checked;
-
     if (checked) {
-      this.filter.brands = this.filter.brands || [];
-      this.filter.brands?.push(value);
+      const brand = this.filter?.brand || [];
+      brand.push(value);
+      this.filter.brand = brand;
     } else {
-      this.filter.brands = this.filter.brands?.filter(b => b !== value);
+      this.filter.brand = this.filter.brand?.filter(b => b !== value);
     }
-
     await this.productsService.setQueryToParams();
   }
 

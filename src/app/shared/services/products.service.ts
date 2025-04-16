@@ -18,10 +18,7 @@ export class ProductsService {
   async setQueryToParams() {
     await this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: {
-        ...this.filter,
-        brands: this.filter.brands?.join(',')
-      },
+      queryParams: this.filter,
       queryParamsHandling: 'merge'
     });
   }

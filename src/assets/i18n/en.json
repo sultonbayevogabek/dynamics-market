@@ -68,5 +68,11 @@
   "message": "Message",
   "send.message": "Send message",
   "sultonbayev.o.b": "Sultonbayev O. B",
-  "frequently.asked.questions": "Frequently asked questions"
+  "frequently.asked.questions": "Frequently asked questions",
+  "sort.by": "Sort by",
+  "show": "Show",
+  "products": "Products",
+  "pagination.result.text": "Showing {{ interval }} of {{ total }} results\n",
+  "cheaper": "Cheaper",
+  "more.expensive": "More expensive"
 }
