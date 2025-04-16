@@ -5,14 +5,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ProductsList } from '@shared/interfaces/list';
+import { ProductsService } from '@shared/services/products.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export type Layout = 'grid' | 'grid-with-features' | 'list';
 
 @Component({
   selector: 'app-products-view',
-  templateUrl: './products-view.component.html',
-  styleUrls: [ './products-view.component.scss' ]
+  templateUrl: './products-view.component.html'
 })
+
 export class ProductsViewComponent implements OnInit, OnDestroy {
   @Input() layout: Layout = 'grid';
   @Input() grid: 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full' = 'grid-3-sidebar';
@@ -26,20 +28,30 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public sidebar: ProductsSidebarService,
-    public pageService: PageCategoryService
+    public pageService: PageCategoryService,
+    private productsService: ProductsService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.listOptionsForm = this.fb.group({
-      page: this.fb.control(this.pageService.page),
-      limit: this.fb.control(this.pageService.limit),
-      sort: this.fb.control(this.pageService.sort)
+      page: this.fb.control(1),
+      limit: this.fb.control(12),
+      sort: this.fb.control('cheaper')
     });
-    this.listOptionsForm.valueChanges.subscribe(value => {
-      value.limit = parseFloat(value.limit);
 
-      this.pageService.updateOptions(value);
+    this.listOptionsForm.valueChanges.subscribe(async value => {
+      value.limit = parseFloat(value.limit);
+      await this.router.navigate(
+        [],
+        {
+          queryParams: this.listOptionsForm.value,
+          queryParamsHandling: 'merge',
+          relativeTo: this.activatedRoute
+        }
+      );
     });
 
     this.pageService.list$.pipe(
@@ -51,11 +63,10 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
         this.listOptionsForm.setValue({ page, limit, sort }, { emitEvent: false });
       }
     );
-  }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.activatedRoute.queryParams.subscribe(params => {
+      console.log('params', params);
+    });
   }
 
   setLayout(value: Layout): void {
@@ -64,5 +75,10 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
 
   resetFilters(): void {
     this.pageService.updateOptions({ filterValues: {} });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

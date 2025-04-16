@@ -16,7 +16,6 @@ export class ProductsService {
   }
 
   async setQueryToParams() {
-    console.log('Filter ====>', this.filter);
     await this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: this.filter,

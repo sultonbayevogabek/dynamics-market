@@ -77,8 +77,10 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     return this.productsService.filter;
   }
 
-  reset(): void {
-
+  async reset() {
+    this.filter.category = null;
+    this.filter.brand = [];
+    await this.productsService.setQueryToParams();
   }
 
   setCategoryFromQuery() {
@@ -110,20 +112,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         this.showCategoriesByQuery(this.categoryId);
       }
     });
-  }
-
-  setBrandFromQuery() {
-    let brand = this.activatedRoute.snapshot.queryParams['brand'];
-
-    if (!brand) {
-      brand = [];
-    }
-
-    if (typeof brand === 'string') {
-      brand = [ brand ];
-    }
-
-    this.filter.brand = brand;
   }
 
   showCategoriesByQuery(categoryId: string) {
@@ -210,11 +198,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  async selectAllCategories() {
-    this.filter.category = null;
-    await this.productsService.setQueryToParams();
-  }
-
   resetCategories(categories: ICategory[]) {
     categories.forEach(c => {
       c.showChildren = false;
@@ -225,9 +208,21 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  async selectBrand($event: Event) {
-    console.log(this.filter);
+  setBrandFromQuery() {
+    let brand = this.activatedRoute.snapshot.queryParams['brand'];
 
+    if (!brand) {
+      brand = [];
+    }
+
+    if (typeof brand === 'string') {
+      brand = [ brand ];
+    }
+
+    this.filter.brand = brand;
+  }
+
+  async selectBrand($event: Event) {
     const target = $event.target as HTMLInputElement;
     const value = target.value;
     const checked = target.checked;
@@ -238,7 +233,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     } else {
       this.filter.brand = this.filter.brand?.filter(b => b !== value);
     }
-
     await this.productsService.setQueryToParams();
   }
 

@@ -46,7 +46,7 @@ export class PageCategoryComponent implements OnDestroy {
 
       // If categorySlug is undefined then this is a root catalog page.
       if (!this.getCategorySlug()) {
-        this.pageHeader = 'Shop';
+        this.pageHeader = 'products';
       } else {
         this.pageHeader = data['category'].name;
 

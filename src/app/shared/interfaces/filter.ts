@@ -64,4 +64,5 @@ export interface IProductsFilter {
   category?: string | null;
   page?: number;
   limit?: number;
+  sort?: 'cheaper' | 'more-expensive'
 }
