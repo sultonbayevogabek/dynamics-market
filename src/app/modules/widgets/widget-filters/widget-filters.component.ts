@@ -74,9 +74,15 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         this.flattenCategories(categories);
         this.setCategoryFromQuery();
       });
-    this.data.brands = await firstValueFrom(
-      this.brandsService.getBrandsList()
-    );
+
+    if (this.brandsService.brands.length) {
+      this.data.brands = this.brandsService.brands;
+    } else {
+      this.data.brands = await firstValueFrom(
+        this.brandsService.getBrandsList()
+      );
+    }
+
     this.setBrandFromQuery();
   }
 

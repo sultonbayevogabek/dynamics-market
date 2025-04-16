@@ -1,16 +1,19 @@
-import { AfterViewInit, Component, ElementRef, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { DirectionService } from '@shared/services/direction.service';
 import { RootService } from '@shared/services/root.service';
 import { Brand } from '@shared/interfaces/brand';
 import { isPlatformBrowser } from '@angular/common';
+import { BrandsService } from '@shared/services/brands.service';
+import { firstValueFrom } from 'rxjs';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-block-brands',
-  templateUrl: './block-brands.component.html',
-  styleUrls: [ './block-brands.component.scss' ]
+  templateUrl: './block-brands.component.html'
 })
-export class BlockBrandsComponent implements AfterViewInit {
-  @Input() brands: Brand[] = [];
+export class BlockBrandsComponent implements AfterViewInit, OnInit {
+  host = environment.host;
+  brands: Brand[] = [];
 
   @ViewChild('container', { read: ElementRef }) container!: ElementRef;
 
@@ -34,8 +37,19 @@ export class BlockBrandsComponent implements AfterViewInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     public root: RootService,
-    private direction: DirectionService
+    private direction: DirectionService,
+    private brandsService: BrandsService
   ) {
+  }
+
+  async ngOnInit() {
+    if (this.brandsService.brands.length) {
+      this.brands = this.brandsService.brands;
+    } else {
+      this.brands = await firstValueFrom(
+        this.brandsService.getBrandsList()
+      );
+    }
   }
 
   ngAfterViewInit(): void {

@@ -9,8 +9,13 @@ import { map } from 'rxjs/operators';
 })
 
 export class BrandsService extends RequestService {
+  brands: Brand[] = [];
+
   getBrandsList(): Observable<Brand[]> {
     return this.request<{ data: Brand[] }>('brand/list')
-      .pipe(map(res => res.data));
+      .pipe(map(res => {
+        this.brands = res.data;
+        return res.data
+      }));
   }
 }

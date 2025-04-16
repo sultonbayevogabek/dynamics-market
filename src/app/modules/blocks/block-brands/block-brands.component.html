@@ -5,7 +5,14 @@
       <owl-carousel-o [options]="carouselOptions" appOwlPreventClick>
         <ng-template *ngFor="let brand of brands" carouselSlide>
           <div class="block-brands__item">
-            <a [routerLink]="root.brand(brand)"><img [src]="brand.image" [alt]="brand.name"></a>
+            <a
+              [routerLink]="['/products']"
+              [queryParams]="{
+                brand: [brand.slug]
+              }"
+            >
+              <img [src]="host + brand.logo?.path" [alt]="brand?.name">
+            </a>
           </div>
         </ng-template>
       </owl-carousel-o>
