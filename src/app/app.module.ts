@@ -36,6 +36,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxMaskModule } from 'ngx-mask';
 import { LanguageInterceptor } from './core/interceptors/language.interceptor';
 import { SharedModule } from '@shared/shared.module';
+import { ConfigInterceptor } from './core/interceptors/config.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -82,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ConfigInterceptor, multi: true },
   ],
   bootstrap: [ AppComponent ]
 })
