@@ -23,6 +23,7 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
 
   filterForm!: FormGroup;
+  isQueryUpdatingFromCode = false;
   filtersCount = 0;
 
   constructor(
@@ -42,8 +43,7 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
       sort: this.fb.control('high-rating')
     });
 
-    this.setInitialValueToForm();
-    this.watchFormValueChanges();
+    this.setValueFromQueryToForm();
 
     this.pageService.list$.pipe(
       filter((x): x is ProductsList => x !== null),
@@ -55,40 +55,45 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
     );
   }
 
-  watchFormValueChanges() {
-    this.filterForm.valueChanges.subscribe(async value => {
-      value.limit = parseFloat(value.limit);
-      await this.router.navigate(
-        [],
-        {
-          queryParams: this.filterForm.value,
-          queryParamsHandling: 'merge',
-          relativeTo: this.activatedRoute
-        }
-      );
-    });
+  async filter(pagination = false) {
+    if (!pagination) {
+      this.filterForm.get('page')?.setValue(1);
+    }
+    this.isQueryUpdatingFromCode = true;
+    await this.router.navigate(
+      [],
+      {
+        queryParams: this.filterForm.value,
+        queryParamsHandling: 'merge',
+        relativeTo: this.activatedRoute
+      }
+    );
+    this.isQueryUpdatingFromCode = false;
   }
 
-  setInitialValueToForm() {
-    const params = {
-      sort: 'high-rating',
-      limit: 12,
-      page: 1
-    }
-    const querySnapshot = this.activatedRoute.snapshot.queryParams;
-    if (querySnapshot['sort'] && [ 'high-rating', 'cheaper', 'more-expensive' ].includes(querySnapshot['sort'])) {
-      params.sort = querySnapshot['sort'];
-    }
+  setValueFromQueryToForm() {
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      if (this.isQueryUpdatingFromCode) return;
 
-    if (querySnapshot['limit'] && [ 12, 24, 36, 48 ].includes(+querySnapshot['limit'])) {
-      params.limit = +querySnapshot['limit'];
-    }
+      const params = {
+        sort: 'high-rating',
+        limit: 12,
+        page: 1
+      }
+      if (queryParams['sort'] && [ 'high-rating', 'cheaper', 'more-expensive' ].includes(queryParams['sort'])) {
+        params.sort = queryParams['sort'];
+      }
 
-    if (querySnapshot['page']) {
-      params.page = +querySnapshot['page'];
-    }
+      if (queryParams['limit'] && [ 12, 24, 36, 48 ].includes(+queryParams['limit'])) {
+        params.limit = +queryParams['limit'];
+      }
 
-    this.filterForm.setValue(params);
+      if (queryParams['page']) {
+        params.page = +queryParams['page'];
+      }
+
+      this.filterForm.setValue(params);
+    })
   }
 
   setLayout(value: Layout): void {
