@@ -8,9 +8,10 @@ import { takeUntil } from 'rxjs/operators';
 import { HeaderService } from '@shared/services/header.service';
 import { ICategory } from '@shared/interfaces/category';
 import { ProductsService } from '@shared/services/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from '@shared/interfaces/brand';
 import { BrandsService } from '@shared/services/brands.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-widget-filters',
@@ -28,9 +29,18 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     middle: [],
     sub: []
   };
-  flattenedCategories: { [key: string]: ICategory } = {};
-  brands: Brand[] = [];
-  categoryId!: string;
+
+  data: {
+    flattenedCategories: { [key: string]: ICategory };
+    brands: Brand[];
+    categoryId: string | null;
+  } = {
+    flattenedCategories: {},
+    brands: [],
+    categoryId: null
+  };
+
+  filterForm!: FormGroup;
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -44,12 +54,19 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private productsService: ProductsService,
     private activatedRoute: ActivatedRoute,
-    private brandsService: BrandsService
+    private brandsService: BrandsService,
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.rightToLeft = this.direction.isRTL();
   }
 
   async ngOnInit() {
+    this.filterForm = this.fb.group({
+      category: null,
+      brand: []
+    });
+
     this.headerService.categories$
       .pipe(takeUntil(this.destroy$))
       .subscribe(categories => {
@@ -57,7 +74,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         this.flattenCategories(categories);
         this.setCategoryFromQuery();
       });
-    this.brands = await firstValueFrom(
+    this.data.brands = await firstValueFrom(
       this.brandsService.getBrandsList()
     );
     this.setBrandFromQuery();
@@ -65,7 +82,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
 
   flattenCategories(categories: ICategory[]) {
     categories.forEach(category => {
-      this.flattenedCategories[category._id] = category;
+      this.data.flattenedCategories[category._id] = category;
 
       if (category?.children?.length) {
         this.flattenCategories(category.children);
@@ -73,14 +90,18 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  get filter(): IProductsFilter {
-    return this.productsService.filter;
+  async reset() {
+    this.filterForm.reset()
+    await this.setFilterParamsToQuery();
   }
 
-  async reset() {
-    this.filter.category = null;
-    this.filter.brand = [];
-    await this.productsService.setQueryToParams();
+
+  async setFilterParamsToQuery() {
+    await this.router.navigate([], {
+      queryParams: this.filterForm.value,
+      queryParamsHandling: 'merge',
+      relativeTo: this.activatedRoute
+    })
   }
 
   setCategoryFromQuery() {
@@ -97,25 +118,25 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.filter.category = categorySlug;
-      for (const categoryId in this.flattenedCategories) {
-        const category = this.flattenedCategories[categoryId];
+      this.filterForm.get('category')?.setValue(categorySlug);
+      for (const categoryId in this.data.flattenedCategories) {
+        const category = this.data.flattenedCategories[categoryId];
 
         category.showChildren = false;
         category.hidden = false;
 
         if (category.slug === categorySlug) {
-          this.categoryId = categoryId;
+          this.data.categoryId = categoryId;
         }
       }
-      if (this.categoryId) {
-        this.showCategoriesByQuery(this.categoryId);
+      if (this.data.categoryId) {
+        this.showCategoriesByQuery(this.data.categoryId);
       }
     });
   }
 
   showCategoriesByQuery(categoryId: string) {
-    const selectedCategory = this.flattenedCategories[categoryId];
+    const selectedCategory = this.data.flattenedCategories[categoryId];
     let level!: 'main' | 'middle' | 'sub';
 
     if (!selectedCategory.parentId) {
@@ -136,13 +157,13 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
 
     if (level === 'sub') {
       subCategory = selectedCategory;
-      middleCategory = this.flattenedCategories[subCategory?.parentId!];
-      mainCategory = this.flattenedCategories[middleCategory?.parentId!];
+      middleCategory = this.data.flattenedCategories[subCategory?.parentId!];
+      mainCategory = this.data.flattenedCategories[middleCategory?.parentId!];
     }
 
     if (level === 'middle') {
       middleCategory = selectedCategory;
-      mainCategory = this.flattenedCategories[middleCategory?.parentId!];
+      mainCategory = this.data.flattenedCategories[middleCategory?.parentId!];
     }
 
     if (level === 'main') {
@@ -163,8 +184,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
   }
 
   async selectCategory(slug: string | null) {
-    this.filter.category = slug;
-    await this.productsService.setQueryToParams();
+    this.filterForm.get('category')?.setValue(slug);
+    await this.setFilterParamsToQuery();
   }
 
   drawCategoriesHierarchy(category: ICategory, level: 'main' | 'middle' | 'sub') {
@@ -219,7 +240,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       brand = [ brand ];
     }
 
-    this.filter.brand = brand;
+    this.filterForm.get('brand')?.setValue(brand);
   }
 
   async selectBrand($event: Event) {
@@ -227,13 +248,15 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     const value = target.value;
     const checked = target.checked;
     if (checked) {
-      const brand = this.filter?.brand || [];
+      const brand = this.filterForm.get('brand')?.value || [];
       brand.push(value);
-      this.filter.brand = brand;
+      this.filterForm.get('brand')?.setValue(brand);
     } else {
-      this.filter.brand = this.filter.brand?.filter(b => b !== value);
+      let brand: string[] = this.filterForm.get('brand')?.value;
+      brand = brand?.filter(b => b !== value);
+      this.filterForm.get('brand')?.setValue(brand);
     }
-    await this.productsService.setQueryToParams();
+    await this.setFilterParamsToQuery();
   }
 
   ngOnDestroy(): void {

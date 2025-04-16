@@ -74,5 +74,9 @@
   "products": "Tovarlar",
   "pagination.result.text": "Jami {{ total }}, {{ interval }} ko'rsatilmoqda",
   "cheaper": "Arzonroq",
-  "more.expensive": "Qimmatroq"
+  "more.expensive": "Qimmatroq",
+  "high.rating": "Yuqori reyting",
+  "page.not.found.title": "Voy! 404 xatolik",
+  "page.not.found": "Sahifa topilmadi",
+  "go.to.homepage": "Bosh sahifaga o'tish"
 }

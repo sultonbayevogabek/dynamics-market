@@ -1,5 +1,5 @@
 <div class="products-view" [ngClass]="{'products-view--loading': this.pageService.isLoading$| async}"
-     [formGroup]="listOptionsForm">
+     [formGroup]="filterForm">
   <div class="products-view__loader"></div>
 
   <div *ngIf="pageService.items?.length" class="products-view__content">
@@ -50,6 +50,7 @@
           <label for="view-options-sort">{{ 'sort.by'| translate }}</label>
           <div>
             <select class="form-control form-control-sm" id="view-options-sort" formControlName="sort">
+              <option value="high-rating">{{ 'high.rating'| translate }}</option>
               <option value="cheaper">{{ 'cheaper'| translate }}</option>
               <option value="more-expensive">{{ 'more.expensive'| translate }}</option>
             </select>
@@ -79,7 +80,11 @@
     </div>
 
     <div class="products-view__pagination">
-      <app-pagination formControlName="page" [siblings]="2" [total]="pageService.pages"></app-pagination>
+      <app-pagination
+        formControlName="page"
+        [siblings]="2"
+        [total]="pageService.pages"
+      ></app-pagination>
     </div>
   </div>
 

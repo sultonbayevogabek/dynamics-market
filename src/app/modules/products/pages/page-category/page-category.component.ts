@@ -11,11 +11,11 @@ import { parseProductsListParams } from '../../resolvers/products-list-resolver.
 import { ShopService } from '@shared/api/shop.service';
 import { parseFilterValue } from '@shared/helpers/filter';
 import { Category } from '@shared/interfaces/category';
+import { ProductsService } from '@shared/services/products.service';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './page-category.component.html',
-  styleUrls: [ './page-category.component.scss' ],
   providers: [
     { provide: PageCategoryService, useClass: PageCategoryService },
     { provide: ProductsSidebarService, useClass: ProductsSidebarService }
@@ -36,7 +36,8 @@ export class PageCategoryComponent implements OnDestroy {
     private route: ActivatedRoute,
     private pageService: PageCategoryService,
     private shop: ShopService,
-    private location: Location
+    private location: Location,
+    private productsService: ProductsService
   ) {
     this.route.data.subscribe(data => {
       this.breadcrumbs = [
@@ -88,11 +89,8 @@ export class PageCategoryComponent implements OnDestroy {
       this.pageService.setList(list);
       this.pageService.setIsLoading(false);
     });
-  }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.productsService.watchQueryParams();
   }
 
   updateUrl(): void {
@@ -152,5 +150,10 @@ export class PageCategoryComponent implements OnDestroy {
 
   getProductsViewLayout(): 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full' {
     return 'grid-' + this.columns + '-full' as 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full';
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

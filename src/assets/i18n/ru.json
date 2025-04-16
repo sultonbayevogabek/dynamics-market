@@ -74,5 +74,9 @@
   "products": "Товары",
   "pagination.result.text": "{{ interval }} из {{ total }} результатов",
   "cheaper": "Подешевле",
-  "more.expensive": "Подороже"
+  "more.expensive": "Подороже",
+  "high.rating": "Высокий рейтинг",
+  "page.not.found.title": "Упс! Ошибка 404",
+  "page.not.found": "Страница не найдена",
+  "go.to.homepage": "Перейти на главную страницу"
 }

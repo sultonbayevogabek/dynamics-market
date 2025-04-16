@@ -3,7 +3,9 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RequestService {
   private readonly API_URL = environment.host;
 

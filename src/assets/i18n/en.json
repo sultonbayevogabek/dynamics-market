@@ -74,5 +74,9 @@
   "products": "Products",
   "pagination.result.text": "Showing {{ interval }} of {{ total }} results\n",
   "cheaper": "Cheaper",
-  "more.expensive": "More expensive"
+  "more.expensive": "More expensive",
+  "high.rating": "High rating",
+  "page.not.found.title": "Oops! Error 404",
+  "page.not.found": "Page Not Found",
+  "go.to.homepage": "Go to homepage"
 }

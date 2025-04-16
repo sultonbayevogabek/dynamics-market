@@ -16,7 +16,7 @@
             <div class="filter-categories filter-categories--root ">
               <div
                 class="filter-categories__item filter-categories__item&#45;&#45;parent"
-                *ngIf="filter.category"
+                *ngIf="filterForm.get('category')?.value"
                 (click)="selectCategory(null)"
               >
                 <app-icon
@@ -55,7 +55,7 @@
             <div class="filter-list">
               <div class="filter-list__list">
                 <label
-                  *ngFor="let item of brands"
+                  *ngFor="let item of data.brands"
                   class="filter-list__item"
                 >
                   <span class="filter-list__input input-check">
@@ -64,7 +64,7 @@
                             class="input-check__input"
                             type="checkbox"
                             [value]="item?.slug"
-                            [checked]="filter.brand?.includes(item.slug)"
+                            [checked]="filterForm.get('brand')?.value.includes(item.slug)"
                             (change)="selectBrand($event)"
                           >
                           <span class="input-check__box"></span>
@@ -101,7 +101,7 @@
         *ngIf="!category.hidden"
         [ngClass]="{
           'filter-categories__item--parent': ['main', 'middle'].includes(data.level),
-          'filter-categories__item--current': category.slug === filter.category
+          'filter-categories__item--current': category.slug === filterForm.get('category')?.value
         }"
         (click)="selectCategory(category.slug)"
       >

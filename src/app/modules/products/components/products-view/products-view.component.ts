@@ -22,7 +22,7 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<void> = new Subject<void>();
 
-  listOptionsForm!: FormGroup;
+  filterForm!: FormGroup;
   filtersCount = 0;
 
   constructor(
@@ -36,23 +36,14 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.listOptionsForm = this.fb.group({
+    this.filterForm = this.fb.group({
       page: this.fb.control(1),
       limit: this.fb.control(12),
-      sort: this.fb.control('cheaper')
+      sort: this.fb.control('high-rating')
     });
 
-    this.listOptionsForm.valueChanges.subscribe(async value => {
-      value.limit = parseFloat(value.limit);
-      await this.router.navigate(
-        [],
-        {
-          queryParams: this.listOptionsForm.value,
-          queryParamsHandling: 'merge',
-          relativeTo: this.activatedRoute
-        }
-      );
-    });
+    this.setInitialValueToForm();
+    this.watchFormValueChanges();
 
     this.pageService.list$.pipe(
       filter((x): x is ProductsList => x !== null),
@@ -60,13 +51,44 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
     ).subscribe(
       ({ page, limit, sort, filterValues }) => {
         this.filtersCount = Object.keys(filterValues).length;
-        this.listOptionsForm.setValue({ page, limit, sort }, { emitEvent: false });
       }
     );
+  }
 
-    this.activatedRoute.queryParams.subscribe(params => {
-      console.log('params', params);
+  watchFormValueChanges() {
+    this.filterForm.valueChanges.subscribe(async value => {
+      value.limit = parseFloat(value.limit);
+      await this.router.navigate(
+        [],
+        {
+          queryParams: this.filterForm.value,
+          queryParamsHandling: 'merge',
+          relativeTo: this.activatedRoute
+        }
+      );
     });
+  }
+
+  setInitialValueToForm() {
+    const params = {
+      sort: 'high-rating',
+      limit: 12,
+      page: 1
+    }
+    const querySnapshot = this.activatedRoute.snapshot.queryParams;
+    if (querySnapshot['sort'] && [ 'high-rating', 'cheaper', 'more-expensive' ].includes(querySnapshot['sort'])) {
+      params.sort = querySnapshot['sort'];
+    }
+
+    if (querySnapshot['limit'] && [ 12, 24, 36, 48 ].includes(+querySnapshot['limit'])) {
+      params.limit = +querySnapshot['limit'];
+    }
+
+    if (querySnapshot['page']) {
+      params.page = +querySnapshot['page'];
+    }
+
+    this.filterForm.setValue(params);
   }
 
   setLayout(value: Layout): void {
