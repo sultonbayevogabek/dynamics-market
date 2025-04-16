@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 
 export class BannerService extends RequestService {
   getBanners(): Observable<IBanner[]> {
-    return this.request<{ data: IBanner[]; total: number }>('banner/get-list')
+    return this.request<{ data: IBanner[]; total: number }>('banner/list')
       .pipe(map(response => response.data));
   }
 }

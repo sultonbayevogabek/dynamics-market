@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 
 export class BrandsService extends RequestService {
   getBrandsList(): Observable<Brand[]> {
-    return this.request<{ data: Brand[] }>('brand/get-list')
+    return this.request<{ data: Brand[] }>('brand/list')
       .pipe(map(res => res.data));
   }
 }

@@ -80,6 +80,7 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
         limit: 12,
         page: 1
       }
+
       if (queryParams['sort'] && [ 'high-rating', 'cheaper', 'more-expensive' ].includes(queryParams['sort'])) {
         params.sort = queryParams['sort'];
       }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IProductsFilter } from '@shared/interfaces/filter';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, Observable, tap } from 'rxjs';
 import { Product } from '@shared/interfaces/product';
 import { RequestService } from '@shared/services/request.service';
 
@@ -21,7 +21,7 @@ export class ProductsService {
   }
 
   watchQueryParams() {
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.pipe(distinctUntilChanged()).subscribe(params => {
       if (params && params['category']) {
         this.filter.category = params['category'];
       } else {
@@ -63,7 +63,7 @@ export class ProductsService {
   }
 
   getProducts() {
-    this.requestService.request('product/get-list', this.filter)
+    this.requestService.request('product/list', this.filter)
       .pipe(
         tap(res => {
           this.products$.next([]);
