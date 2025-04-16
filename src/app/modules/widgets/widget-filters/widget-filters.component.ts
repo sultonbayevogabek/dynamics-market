@@ -90,7 +90,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  async reset() {s
+  async reset() {
     this.filterForm.reset()
     await this.setFilterParamsToQuery({
       ...this.filterForm.value,
