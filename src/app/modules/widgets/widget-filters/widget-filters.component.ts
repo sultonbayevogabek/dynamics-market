@@ -90,15 +90,19 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  async reset() {
+  async reset() {s
     this.filterForm.reset()
-    await this.setFilterParamsToQuery();
+    await this.setFilterParamsToQuery({
+      ...this.filterForm.value,
+      page: null,
+      limit: null,
+      sort: null
+    });
   }
 
-
-  async setFilterParamsToQuery() {
+  async setFilterParamsToQuery(queryParams?: IProductsFilter) {
     await this.router.navigate([], {
-      queryParams: {
+      queryParams: queryParams || {
         ...this.filterForm.value,
         page: 1
       },
