@@ -64,7 +64,7 @@
                             class="input-check__input"
                             type="checkbox"
                             [value]="item?.slug"
-                            [checked]="filterForm.get('brand')?.value.includes(item.slug)"
+                            [checked]="filterForm.get('brand')?.value?.includes(item.slug)"
                             (change)="selectBrand($event)"
                           >
                           <span class="input-check__box"></span>

@@ -1,4 +1,4 @@
-<div class="products-view" [ngClass]="{'products-view--loading': this.pageService.isLoading$| async}"
+<div class="products-view" [ngClass]="{'products-view--loading': this.productsService.loading$| async}"
      [formGroup]="filterForm">
   <div class="products-view__loader"></div>
 

@@ -12,6 +12,7 @@ import { RequestService } from '@shared/services/request.service';
 export class ProductsService {
   filter: IProductsFilter = {};
   products$ = new BehaviorSubject<Product[]>([]);
+  loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private router: Router,
@@ -63,9 +64,11 @@ export class ProductsService {
   }
 
   getProducts() {
+    this.loading$.next(true);
     this.requestService.request('product/list', this.filter)
       .pipe(
         tap(res => {
+          this.loading$.next(false);
           this.products$.next([]);
         })
       )

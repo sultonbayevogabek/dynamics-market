@@ -30,7 +30,7 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public sidebar: ProductsSidebarService,
     public pageService: PageCategoryService,
-    private productsService: ProductsService,
+    public productsService: ProductsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
