@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '@shared/interfaces/product';
+import { IProduct, Product } from '@shared/interfaces/product';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from '@shared/api/shop.service';
 import { Observable } from 'rxjs';
@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
   styleUrls: [ './page-product.component.scss' ]
 })
 export class PageProductComponent implements OnInit {
-  relatedProducts$!: Observable<Product[]>;
+  relatedProducts$!: Observable<IProduct[]>;
 
-  product!: Product;
+  product!: IProduct;
   layout: 'standard' | 'columnar' | 'sidebar' = 'standard';
   sidebarPosition: 'start' | 'end' = 'start'; // For LTR scripts "start" is "left" and "end" is "right"
 

@@ -1,5 +1,5 @@
 import { AttributeDef, ProductDef } from '../interfaces/product-def';
-import { Product, ProductAttribute, ProductAttributeValue } from '@shared/interfaces/product';
+import { IProduct, Product, ProductAttribute, ProductAttributeValue } from '@shared/interfaces/product';
 import { brands } from './brands';
 import { Category } from '@shared/interfaces/category';
 import { shopCategoriesList } from './categories';
@@ -435,7 +435,7 @@ const productsDef: ProductDef[] = [
   }
 ];
 
-export const products: Product[] = productsDef.map(productDef => {
+export const products: any[] = productsDef.map(productDef => {
   let badges: string[] = [];
 
   if (productDef.badges) {
@@ -508,28 +508,28 @@ export const products: Product[] = productsDef.map(productDef => {
   };
 });
 
-export function getBestsellers(limit: number | null = null): Observable<Product[]> {
+export function getBestsellers(limit: number | null = null): Observable<IProduct[]> {
   const start = 0;
   const end = limit ? start + limit : undefined;
 
   return of(products.slice(start, end));
 }
 
-export function getTopRated(limit: number | null = null): Observable<Product[]> {
+export function getTopRated(limit: number | null = null): Observable<IProduct[]> {
   const start = 3;
   const end = limit ? start + limit : undefined;
 
   return of(products.slice(start, end));
 }
 
-export function getSpecialOffers(limit: number | null = null): Observable<Product[]> {
+export function getSpecialOffers(limit: number | null = null): Observable<IProduct[]> {
   const start = 6;
   const end = limit ? start + limit : undefined;
 
   return of(products.slice(start, end));
 }
 
-export function getFeatured(categorySlug: string | null = null, limit: number | null = null): Observable<Product[]> {
+export function getFeatured(categorySlug: string | null = null, limit: number | null = null): Observable<IProduct[]> {
   let fakeProducts = products.slice();
 
   if (categorySlug === 'power-tools') {
@@ -543,20 +543,20 @@ export function getFeatured(categorySlug: string | null = null, limit: number | 
   return timer(1000).pipe(map(() => fakeProducts.slice(0, limit || undefined)));
 }
 
-export function getLatestProducts(categorySlug: string | null = null, limit: number | null = null): Observable<Product[]> {
+export function getLatestProducts(categorySlug: string | null = null, limit: number | null = null): Observable<IProduct[]> {
   return getFeatured(categorySlug, limit);
 }
 
 // noinspection JSUnusedLocalSymbols
-export function getRelatedProducts(product: Partial<Product>): Observable<Product[]> {
+export function getRelatedProducts(product: Partial<IProduct>): Observable<IProduct[]> {
   return of(products.slice(0, 7));
 }
 
-export function getSuggestions(query: string, limit: number, categorySlug: string | null = null): Observable<Product[]> {
+export function getSuggestions(query: string, limit: number, categorySlug: string | null = null): Observable<IProduct[]> {
   return of(products.filter(x => x.name.toLowerCase().includes(query.toLowerCase())).slice(0, limit));
 }
 
-export function getProduct(productSlug: string): Observable<Product> {
+export function getProduct(productSlug: string): Observable<IProduct> {
   const product = products.find(x => x.slug === productSlug);
 
   if (!product) {

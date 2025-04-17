@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../interfaces/product';
+import { IProduct, Product } from '../interfaces/product';
 import { Category } from '../interfaces/category';
 import { Brand } from '../interfaces/brand';
 
@@ -38,7 +38,7 @@ export class RootService {
     throw Error('Provided category with unknown type.');
   }
 
-  product(product: Partial<Product>): string {
+  product(product: Partial<IProduct>): string {
     const basePath = '/products/products';
 
     if ('slug' in product) {

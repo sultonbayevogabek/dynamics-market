@@ -1,11 +1,11 @@
 import { Inject, Injectable, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
-import { Product } from '../interfaces/product';
+import { IProduct, Product } from '../interfaces/product';
 import { map, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
 interface WishlistData {
-  items: Product[];
+  items: IProduct[];
 }
 
 @Injectable({
@@ -17,12 +17,12 @@ export class WishlistService implements OnDestroy {
   };
 
   private destroy$: Subject<void> = new Subject();
-  private itemsSubject$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
-  private onAddingSubject$: Subject<Product> = new Subject();
+  private itemsSubject$: BehaviorSubject<IProduct[]> = new BehaviorSubject<IProduct[]>([]);
+  private onAddingSubject$: Subject<IProduct> = new Subject();
 
-  readonly items$: Observable<Product[]> = this.itemsSubject$.pipe(takeUntil(this.destroy$));
+  readonly items$: Observable<IProduct[]> = this.itemsSubject$.pipe(takeUntil(this.destroy$));
   readonly count$: Observable<number> = this.itemsSubject$.pipe(map(items => items.length));
-  readonly onAdding$: Observable<Product> = this.onAddingSubject$.asObservable();
+  readonly onAdding$: Observable<IProduct> = this.onAddingSubject$.asObservable();
 
   constructor(
     @Inject(PLATFORM_ID)
@@ -33,7 +33,7 @@ export class WishlistService implements OnDestroy {
     }
   }
 
-  add(product: Product): Observable<void> {
+  add(product: IProduct): Observable<void> {
     // timer only for demo
     return timer(1000).pipe(map(() => {
       this.onAddingSubject$.next(product);
@@ -47,7 +47,7 @@ export class WishlistService implements OnDestroy {
     }));
   }
 
-  remove(product: Product): Observable<void> {
+  remove(product: IProduct): Observable<void> {
     // timer only for demo
     return timer(1000).pipe(map(() => {
       const index = this.data.items.findIndex(item => item.id === product.id);

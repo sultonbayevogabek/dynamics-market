@@ -2,7 +2,7 @@
      [formGroup]="filterForm">
   <div class="products-view__loader"></div>
 
-  <div *ngIf="pageService.items?.length" class="products-view__content">
+  <div *ngIf="products.data?.length" class="products-view__content">
     <div class="products-view__options">
       <div class="view-options" [ngClass]="{
                 'view-options--offcanvas--always': offcanvas === 'always',
@@ -40,8 +40,8 @@
         <div class="view-options__legend">
           {{
             'pagination.result.text'| translate: {
-              interval: this.pageService.from + '-' + this.pageService.to,
-              total: this.pageService.total
+              interval: 1 + '-' + 12,
+              total: 7
             }
           }}
         </div>
@@ -77,7 +77,7 @@
     <div class="products-view__list products-list" [attr.data-layout]="layout !== 'list' ? grid : layout"
          [attr.data-with-features]="layout === 'grid-with-features' ? 'true' : 'false'">
       <div class="products-list__body">
-        <div *ngFor="let product of pageService.items" class="products-list__item">
+        <div *ngFor="let product of products.data" class="products-list__item">
           <app-product-card [product]="product"></app-product-card>
         </div>
       </div>
@@ -88,14 +88,14 @@
         formControlName="page"
         (pageChange)="filter(true)"
         [siblings]="2"
-        [total]="pageService.pages"
+        [total]="products.pages"
       ></app-pagination>
     </div>
   </div>
 
-  <div *ngIf="!pageService.items?.length" class="products-view__empty">
+  <div *ngIf="!products.data?.length" class="products-view__empty">
     <div class="products-view__empty-title">No matching items</div>
     <div class="products-view__empty-subtitle">Try resetting the filters</div>
-    <button type="button" class="btn btn-primary btn-sm" (click)="resetFilters()">Reset filters</button>
+    <button type="button" class="btn btn-primary btn-sm">Reset filters</button>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { QuickviewService } from '../../services/quickview.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Product } from '../../interfaces/product';
+import { IProduct, Product } from '../../interfaces/product';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class QuickviewComponent implements AfterViewInit, OnDestroy {
   @ViewChild('modal', { read: TemplateRef }) template!: TemplateRef<any>;
 
   modalRef?: BsModalRef;
-  product?: Product;
+  product?: IProduct;
 
   constructor(
     private quickview: QuickviewService,

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompareService } from '@shared/services/compare.service';
 import { CartService } from '@shared/services/cart.service';
-import { Product } from '@shared/interfaces/product';
+import { IProduct, Product } from '@shared/interfaces/product';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RootService } from '@shared/services/root.service';
@@ -19,10 +19,10 @@ interface Feature {
 export class PageCompareComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject();
 
-  products: Product[] = [];
+  products: IProduct[] = [];
   features: Feature[] = [];
-  addedToCartProducts: Product[] = [];
-  removedProducts: Product[] = [];
+  addedToCartProducts: IProduct[] = [];
+  removedProducts: IProduct[] = [];
 
   constructor(
     public root: RootService,
@@ -46,7 +46,7 @@ export class PageCompareComponent implements OnInit, OnDestroy {
           features.push(feature);
         }
 
-        feature.values[product.id] = productAttribute.values.map(x => x.name).join(', ');
+        // feature.values[product._id] = productAttribute.value?.map(x => x.name).join(', ');
       }));
 
       this.products = products;
@@ -59,20 +59,20 @@ export class PageCompareComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: IProduct): void {
     if (this.addedToCartProducts.includes(product)) {
       return;
     }
 
     this.addedToCartProducts.push(product);
-    this.cart.add(product, 1).subscribe({
-      complete: () => {
-        this.addedToCartProducts = this.addedToCartProducts.filter(eachProduct => eachProduct !== product);
-      }
-    });
+    // this.cart.add(product, 1).subscribe({
+    //   complete: () => {
+    //     this.addedToCartProducts = this.addedToCartProducts.filter(eachProduct => eachProduct !== product);
+    //   }
+    // });
   }
 
-  remove(product: Product): void {
+  remove(product: IProduct): void {
     if (this.removedProducts.includes(product)) {
       return;
     }

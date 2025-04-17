@@ -1,12 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProductsSidebarService } from '../../services/products-sidebar.service';
-import { PageCategoryService } from '../../services/page-category.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ProductsList } from '@shared/interfaces/list';
 import { ProductsService } from '@shared/services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct } from '@shared/interfaces/product';
 
 export type Layout = 'grid' | 'grid-with-features' | 'list';
 
@@ -19,6 +18,15 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   @Input() layout: Layout = 'grid';
   @Input() grid: 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full' = 'grid-3-sidebar';
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
+  products: {
+    data: IProduct[];
+    pages: number;
+    total: number;
+  } = {
+    data: [],
+    pages: 0,
+    total: 0
+  }
 
   destroy$: Subject<void> = new Subject<void>();
 
@@ -29,7 +37,6 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public sidebar: ProductsSidebarService,
-    public pageService: PageCategoryService,
     public productsService: ProductsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -45,14 +52,13 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
 
     this.setValueFromQueryToForm();
 
-    this.pageService.list$.pipe(
-      filter((x): x is ProductsList => x !== null),
-      takeUntil(this.destroy$)
-    ).subscribe(
-      ({ page, limit, sort, filterValues }) => {
-        this.filtersCount = Object.keys(filterValues).length;
-      }
-    );
+    this.productsService.products$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(products => {
+        if (products) {
+          this.products = products;
+        }
+      })
   }
 
   async filter(pagination = false) {
@@ -99,10 +105,6 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
 
   setLayout(value: Layout): void {
     this.layout = value;
-  }
-
-  resetFilters(): void {
-    this.pageService.updateOptions({ filterValues: {} });
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,5 @@
 import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import { IProduct, Product } from '../../interfaces/product';
 import { FormControl } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { WishlistService } from '../../services/wishlist.service';
@@ -16,7 +16,7 @@ export type ProductLayout = 'standard' | 'sidebar' | 'columnar' | 'quickview';
 export class ProductComponent {
   @Input() layout: ProductLayout = 'standard';
 
-  @Input() product!: Product;
+  @Input() product!: IProduct;
 
   quantity: FormControl = new FormControl(1);
 
@@ -36,24 +36,18 @@ export class ProductComponent {
   addToCart(): void {
     if (!this.addingToCart && this.product && this.quantity.value > 0) {
       this.addingToCart = true;
-
-      this.cart.add(this.product, this.quantity.value).subscribe({ complete: () => this.addingToCart = false });
     }
   }
 
   addToWishlist(): void {
     if (!this.addingToWishlist && this.product) {
       this.addingToWishlist = true;
-
-      this.wishlist.add(this.product).subscribe({ complete: () => this.addingToWishlist = false });
     }
   }
 
   addToCompare(): void {
     if (!this.addingToCompare && this.product) {
       this.addingToCompare = true;
-
-      this.compare.add(this.product).subscribe({ complete: () => this.addingToCompare = false });
     }
   }
 }

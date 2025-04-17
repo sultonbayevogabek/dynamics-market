@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import { Product } from '@shared/interfaces/product';
+import { IProduct, Product } from '@shared/interfaces/product';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { ShopService } from '@shared/api/shop.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductResolverService implements Resolve<Product> {
+export class ProductResolverService implements Resolve<IProduct> {
   constructor(
     private root: RootService,
     private router: Router,
@@ -18,7 +18,7 @@ export class ProductResolverService implements Resolve<Product> {
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Product> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IProduct> {
     const productSlug = route.params['productSlug'] || route.data['productSlug'];
 
     return this.shop.getProduct(productSlug).pipe(

@@ -13,7 +13,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import { IProduct, Product } from '../../interfaces/product';
 import { RootService } from '../../services/root.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
@@ -42,9 +42,9 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
 
   categories: ICategory[] = [];
 
-  suggestedProducts: Product[] = [];
+  suggestedProducts: IProduct[] = [];
 
-  addedToCartProducts: Product[] = [];
+  addedToCartProducts: IProduct[] = [];
 
   @Input() location: SearchLocation = 'header';
 
@@ -169,17 +169,17 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     this.classSearchSuggestionsOpen = false;
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: IProduct): void {
     if (this.addedToCartProducts.includes(product)) {
       return;
     }
 
     this.addedToCartProducts.push(product);
-    this.cart.add(product, 1).subscribe({
-      complete: () => {
-        this.addedToCartProducts = this.addedToCartProducts.filter(eachProduct => eachProduct !== product);
-      }
-    });
+    // this.cart.add(product, 1).subscribe({
+    //   complete: () => {
+    //     this.addedToCartProducts = this.addedToCartProducts.filter(eachProduct => eachProduct !== product);
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {

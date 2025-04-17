@@ -1,5 +1,5 @@
 import { Filter, SerializedFilterValues } from './filter';
-import { Product } from './product';
+import { IProduct, Product } from './product';
 
 export interface List<T> {
   /** Array of list items. */
@@ -34,4 +34,4 @@ export interface FilterableList<T> extends List<T> {
   filterValues: SerializedFilterValues;
 }
 
-export type ProductsList = PaginatedList<Product> & FilterableList<Product>;
+export type ProductsList = PaginatedList<IProduct> & FilterableList<IProduct>;

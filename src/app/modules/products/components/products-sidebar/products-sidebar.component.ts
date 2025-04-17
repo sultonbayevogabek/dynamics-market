@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { Product } from '@shared/interfaces/product';
+import { IProduct, Product } from '@shared/interfaces/product';
 import { ProductsSidebarService } from '../../services/products-sidebar.service';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class ProductsSidebarComponent implements OnInit, OnDestroy {
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
 
   destroy$: Subject<void> = new Subject<void>();
-  bestsellers$!: Observable<Product[]>;
+  bestsellers$!: Observable<IProduct[]>;
   isOpen = false;
 
   constructor(

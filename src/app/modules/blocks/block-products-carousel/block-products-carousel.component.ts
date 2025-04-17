@@ -11,7 +11,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { Product } from '@shared/interfaces/product';
+import { IProduct, Product } from '@shared/interfaces/product';
 import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
 import { DirectionService } from '@shared/services/direction.service';
 import { isPlatformBrowser } from '@angular/common';
@@ -26,7 +26,7 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit 
   @Input() header = '';
   @Input() layout: 'grid-4' | 'grid-4-sm' | 'grid-5' | 'horizontal' = 'grid-4';
   @Input() rows = 1;
-  @Input() products: Product[] = [];
+  @Input() products: IProduct[] = [];
   @Input() groups: BlockHeaderGroup[] = [];
   @Input() withSidebar = false;
   @Input() loading = false;
@@ -35,7 +35,7 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit 
 
   @ViewChild('container', { read: ElementRef }) container!: ElementRef;
 
-  columns: Product[][] = [];
+  columns: IProduct[][] = [];
 
   showCarousel = true;
 

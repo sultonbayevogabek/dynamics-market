@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../interfaces/category';
 import { HttpClient } from '@angular/common/http';
 import { Brand } from '../interfaces/brand';
-import { Product } from '../interfaces/product';
+import { IProduct, Product } from '../interfaces/product';
 import { ProductsList } from '../interfaces/list';
 import { SerializedFilterValues } from '../interfaces/filter';
 import {
@@ -155,13 +155,13 @@ export class ShopService {
     //     Object.keys(options.filterValues).forEach(slug => params[`filter_${slug}`] = options.filterValues[slug]);
     // }
     //
-    // return this.http.get<ProductsList>('https://example.com/api/products.json', {params});
+    // return this.http.get<IProductsList>('https://example.com/api/products.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getProductsList(categorySlug, options);
   }
 
-  getProduct(productSlug: string): Observable<Product> {
+  getProduct(productSlug: string): Observable<IProduct> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -170,7 +170,7 @@ export class ShopService {
      * where:
      * - electric-planer-brandix-kl370090g-300-watts = productSlug
      */
-    // return this.http.get<Product>(`https://example.com/api/products/${productSlug}.json`);
+    // return this.http.get<IProduct>(`https://example.com/api/products/${productSlug}.json`);
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getProduct(productSlug);
@@ -191,7 +191,7 @@ export class ShopService {
     return getBrands();
   }
 
-  getBestsellers(limit: number | null = null): Observable<Product[]> {
+  getBestsellers(limit: number | null = null): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -206,13 +206,13 @@ export class ShopService {
     //     params.limit = limit.toString();
     // }
     //
-    // return this.http.get<Product[]>('https://example.com/api/shop/products/bestsellers.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/shop/products/bestsellers.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getBestsellers(limit);
   }
 
-  getTopRated(limit: number | null = null): Observable<Product[]> {
+  getTopRated(limit: number | null = null): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -227,13 +227,13 @@ export class ShopService {
     //     params.limit = limit.toString();
     // }
     //
-    // return this.http.get<Product[]>('https://example.com/api/shop/products/top-rated.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/shop/products/top-rated.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getTopRated(limit);
   }
 
-  getSpecialOffers(limit: number | null = null): Observable<Product[]> {
+  getSpecialOffers(limit: number | null = null): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -248,13 +248,13 @@ export class ShopService {
     //     params.limit = limit.toString();
     // }
     //
-    // return this.http.get<Product[]>('https://example.com/api/shop/products/special-offers.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/shop/products/special-offers.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getSpecialOffers(limit);
   }
 
-  getFeaturedProducts(categorySlug: string | null = null, limit: number | null = null): Observable<Product[]> {
+  getFeaturedProducts(categorySlug: string | null = null, limit: number | null = null): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -273,13 +273,13 @@ export class ShopService {
     //     params.limit = limit.toString();
     // }
     //
-    // return this.http.get<Product[]>('https://example.com/api/shop/products/featured.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/shop/products/featured.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getFeatured(categorySlug, limit);
   }
 
-  getLatestProducts(categorySlug: string | null = null, limit: number | null = null): Observable<Product[]> {
+  getLatestProducts(categorySlug: string | null = null, limit: number | null = null): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -298,13 +298,13 @@ export class ShopService {
     //     params.limit = limit.toString();
     // }
     //
-    // return this.http.get<Product[]>('https://example.com/api/shop/products/latest.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/shop/products/latest.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getLatestProducts(categorySlug, limit);
   }
 
-  getRelatedProducts(product: Partial<Product>): Observable<Product[]> {
+  getRelatedProducts(product: Partial<IProduct>): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -317,13 +317,13 @@ export class ShopService {
     //     for: product.slug,
     // };
     //
-    // return this.http.get<Product[]>('https://example.com/api/shop/products/related.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/shop/products/related.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getRelatedProducts(product);
   }
 
-  getSuggestions(query: string, limit: number, categorySlug: string | null = null): Observable<Product[]> {
+  getSuggestions(query: string, limit: number, categorySlug: string | null = null): Observable<IProduct[]> {
     /**
      * This is what your API endpoint might look like:
      *
@@ -340,7 +340,7 @@ export class ShopService {
     //     params.category = categorySlug;
     // }
     //
-    // return this.http.get<Product[]>('https://example.com/api/search/suggestions.json', {params});
+    // return this.http.get<IProduct[]>('https://example.com/api/search/suggestions.json', {params});
 
     // This is for demonstration purposes only. Remove it and use the code above.
     return getSuggestions(query, limit, categorySlug);

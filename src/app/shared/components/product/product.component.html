@@ -2,7 +2,7 @@
   <div class="product__content">
     <!-- .product__gallery -->
     <div class="product__gallery">
-      <app-product-gallery [productLayout]="layout" [images]="product.images"></app-product-gallery>
+<!--      <app-product-gallery [productLayout]="layout" [images]="product.images"></app-product-gallery>-->
     </div>
     <!-- .product__gallery / end -->
     <!-- .product__info -->
@@ -151,13 +151,13 @@
         </div>
       </div>
 
-      <app-share-buttons
+      <!--<app-share-buttons
         class="product__share-buttons"
         [buttons]="['facebook', {type: 'twitter', label: 'Tweet'}, 'pinterest']"
         [pageUrl]="root.product(product)|absoluteUrl:'angular'"
         [pageTitle]="product.name"
         [pageImage]="product.images[0]|absoluteUrl:'html'"
-      ></app-share-buttons>
+      ></app-share-buttons>-->
     </div>
   </div>
 </div>

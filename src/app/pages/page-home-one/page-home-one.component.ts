@@ -1,21 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { posts } from '../../../data/blog-posts';
-import { Brand } from '@shared/interfaces/brand';
 import { merge, Observable, Subject } from 'rxjs';
 import { ShopService } from '@shared/api/shop.service';
-import { Product } from '@shared/interfaces/product';
+import { IProduct } from '@shared/interfaces/product';
 import { Category } from '@shared/interfaces/category';
 import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
 import { takeUntil, tap } from 'rxjs/operators';
 
 interface ProductsCarouselGroup extends BlockHeaderGroup {
-  products$: Observable<Product[]>;
+  products$: Observable<IProduct[]>;
 }
 
 interface ProductsCarouselData {
   abort$: Subject<void>;
   loading: boolean;
-  products: Product[];
+  products: IProduct[];
   groups: ProductsCarouselGroup[];
 }
 
@@ -25,12 +24,12 @@ interface ProductsCarouselData {
 })
 export class PageHomeOneComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
-  bestsellers$!: Observable<Product[]>;
+  bestsellers$!: Observable<IProduct[]>;
   popularCategories$!: Observable<Category[]>;
 
-  columnTopRated$!: Observable<Product[]>;
-  columnSpecialOffers$!: Observable<Product[]>;
-  columnBestsellers$!: Observable<Product[]>;
+  columnTopRated$!: Observable<IProduct[]>;
+  columnSpecialOffers$!: Observable<IProduct[]>;
+  columnBestsellers$!: Observable<IProduct[]>;
 
   posts = posts;
 
@@ -127,6 +126,8 @@ export class PageHomeOneComponent implements OnInit, OnDestroy {
     (group as ProductsCarouselGroup).products$.pipe(
       tap(() => carousel.loading = false),
       takeUntil(merge(this.destroy$, carousel.abort$))
-    ).subscribe(x => carousel.products = x);
+    ).subscribe(
+      // x => carousel?.products = x
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '@shared/interfaces/product';
+import { IProduct, Product } from '@shared/interfaces/product';
 import { ShopService } from '@shared/api/shop.service';
 import { Category } from '@shared/interfaces/category';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProductSidebarComponent implements OnInit {
   categories$!: Observable<Category[]>;
-  bestsellers$!: Observable<Product[]>;
+  bestsellers$!: Observable<IProduct[]>;
 
   constructor(
     private shop: ShopService

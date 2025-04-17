@@ -44,3 +44,58 @@ export interface Product {
   attributes: ProductAttribute[];
   customFields: CustomFields;
 }
+
+export interface IProduct {
+  _id: string
+  sku: string
+  oldPrice: number
+  currentPrice: number
+  quantity: number
+  categoryId: string
+  brandId: string
+  images: Image[]
+  status: number
+  hierarchyPath: string[]
+  views: number
+  inStock: boolean
+  name: string
+  description: string
+  slug: string
+  attributesx: Attribute[]
+  hierarchy: Hierarchy[]
+
+  id: number;
+  price: number;
+  compareAtPrice: number | null;
+  badges: string[];
+  rating: number;
+  reviews: number;
+  availability: string;
+  brand: Brand | null;
+  categories: Category[];
+  attributes: ProductAttribute[];
+  customFields: CustomFields;
+}
+
+export interface Image {
+  fieldname: string
+  originalname: string
+  encoding: string
+  mimetype: string
+  destination: string
+  filename: string
+  path: string
+  size: number
+  extension: string
+}
+
+export interface Attribute {
+  name: string
+  value: string
+}
+
+export interface Hierarchy {
+  categoryId: string
+  categorySlug: string
+  categoryName: string
+}
