@@ -93,9 +93,15 @@
     </div>
   </div>
 
-  <div *ngIf="!products.data?.length" class="products-view__empty">
-    <div class="products-view__empty-title">No matching items</div>
-    <div class="products-view__empty-subtitle">Try resetting the filters</div>
-    <button type="button" class="btn btn-primary btn-sm">Reset filters</button>
+<!--  *ngIf="!products.data?.length && !(this.productsService.loading$| async)"-->
+
+  <div class="products-view__empty">
+    <div class="products-view__empty-title">{{ 'no.products.found.for.your.search'| translate }}</div>
+    <div class="products-view__empty-subtitle">{{ 'clear.the.search.filter.and.try.again'| translate }}</div>
+    <button
+      (click)="resetFilter()"
+      type="button"
+      class="btn btn-primary btn-sm"
+    >{{ 'reset.filter'| translate }}</button>
   </div>
 </div>

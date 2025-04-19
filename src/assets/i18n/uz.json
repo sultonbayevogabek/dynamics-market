@@ -79,5 +79,7 @@
   "page.not.found.title": "Voy! 404 xatolik",
   "page.not.found": "Sahifa topilmadi",
   "go.to.homepage": "Bosh sahifaga o'tish",
-  "add.to.cart": "Savatga qo'shish"
+  "add.to.cart": "Savatga qo'shish",
+  "no.products.found.for.your.search": "Qidiruvingiz bo'yicha tovarlar topilmadi",
+  "clear.the.search.filter.and.try.again": "Qidiruv filterini tozalab, qaytadan urinib ko'ring"
 }

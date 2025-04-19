@@ -77,6 +77,10 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
     this.isQueryUpdatingFromCode = false;
   }
 
+  async resetFilter() {
+    await this.router.navigate(['/products']);
+  }
+
   setValueFromQueryToForm() {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       if (this.isQueryUpdatingFromCode) return;

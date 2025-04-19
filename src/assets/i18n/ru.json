@@ -79,5 +79,7 @@
   "page.not.found.title": "Упс! Ошибка 404",
   "page.not.found": "Страница не найдена",
   "go.to.homepage": "Перейти на главную страницу",
-  "add.to.cart": "Добавить в корзину"
+  "add.to.cart": "Добавить в корзину",
+  "no.products.found.for.your.search": "По вашему запросу товары не найдены",
+  "clear.the.search.filter.and.try.again": "Очистите фильтр поиска и попробуйте снова"
 }

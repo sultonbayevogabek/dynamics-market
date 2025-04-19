@@ -39,7 +39,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     brands: [],
     categoryId: null
   };
-
+  isQueryUpdatingFromCode = false;
   filterForm!: FormGroup;
 
   destroy$: Subject<void> = new Subject<void>();
@@ -107,6 +107,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
   }
 
   async setFilterParamsToQuery(queryParams?: IProductsFilter) {
+    this.isQueryUpdatingFromCode = true;
     await this.router.navigate([], {
       queryParams: queryParams || {
         ...this.filterForm.value,
@@ -115,6 +116,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
       queryParamsHandling: 'merge',
       relativeTo: this.activatedRoute
     })
+    this.isQueryUpdatingFromCode = false;
   }
 
   setCategoryFromQuery() {
@@ -243,17 +245,21 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
   }
 
   setBrandFromQuery() {
-    let brand = this.activatedRoute.snapshot.queryParams['brand'];
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (this.isQueryUpdatingFromCode) return;
 
-    if (!brand) {
-      brand = [];
-    }
+      let brand = params['brand'];
 
-    if (typeof brand === 'string') {
-      brand = [ brand ];
-    }
+      if (!brand) {
+        brand = [];
+      }
 
-    this.filterForm.get('brand')?.setValue(brand);
+      if (typeof brand === 'string') {
+        brand = [ brand ];
+      }
+
+      this.filterForm.get('brand')?.setValue(brand);
+    })
   }
 
   async selectBrand($event: Event) {
