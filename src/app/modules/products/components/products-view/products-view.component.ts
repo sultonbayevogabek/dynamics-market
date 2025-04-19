@@ -25,11 +25,12 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   } = {
     data: [],
     pages: 0,
-    total: 0
+    total: 0,
   }
 
   destroy$: Subject<void> = new Subject<void>();
 
+  loaded = false;
   filterForm!: FormGroup;
   isQueryUpdatingFromCode = false;
   filtersCount = 0;
@@ -56,6 +57,7 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(products => {
         if (products) {
+          this.loaded = true;
           this.products = products;
         }
       })

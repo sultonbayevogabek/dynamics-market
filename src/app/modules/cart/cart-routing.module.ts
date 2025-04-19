@@ -6,16 +6,16 @@ import { PageOrderSuccessComponent } from './components/page-order-success/page-
 
 const routes: Routes = [
   {
-    path: 'cart',
+    path: '',
     pathMatch: 'full',
     component: PageCartComponent
   },
   {
-    path: 'cart/checkout',
+    path: 'checkout',
     component: PageCheckoutComponent
   },
   {
-    path: 'cart/checkout/success',
+    path: 'checkout/success',
     component: PageOrderSuccessComponent
   }
 ];

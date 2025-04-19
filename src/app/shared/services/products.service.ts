@@ -26,7 +26,7 @@ export class ProductsService {
     this.activatedRoute.queryParams
       .pipe(
         distinctUntilChanged(),
-        debounceTime(500)
+        debounceTime(300)
       )
       .subscribe(params => {
         if (params && params['category']) {
@@ -71,7 +71,10 @@ export class ProductsService {
 
   getProducts() {
     this.loading$.next(true);
-    this.requestService.request<{ data: IProduct[]; pages: number; total: number }>('product/list', this.filter)
+    this.requestService.request<{ data: IProduct[]; pages: number; total: number }>('product/list', {
+      ...this.filter,
+      brands: this.filter.brand
+    })
       .pipe(
         tap(res => {
           this.loading$.next(false);

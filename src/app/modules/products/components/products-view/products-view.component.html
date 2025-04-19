@@ -93,9 +93,7 @@
     </div>
   </div>
 
-<!--  *ngIf="!products.data?.length && !(this.productsService.loading$| async)"-->
-
-  <div class="products-view__empty">
+  <div class="products-view__empty" *ngIf="!products.data?.length && loaded">
     <div class="products-view__empty-title">{{ 'no.products.found.for.your.search'| translate }}</div>
     <div class="products-view__empty-subtitle">{{ 'clear.the.search.filter.and.try.again'| translate }}</div>
     <button

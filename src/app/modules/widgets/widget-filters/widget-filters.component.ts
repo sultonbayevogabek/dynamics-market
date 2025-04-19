@@ -111,7 +111,7 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
     await this.router.navigate([], {
       queryParams: queryParams || {
         ...this.filterForm.value,
-        page: 1
+        page: null
       },
       queryParamsHandling: 'merge',
       relativeTo: this.activatedRoute

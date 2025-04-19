@@ -9,7 +9,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { IProduct, Product, ProductAttribute } from '../../interfaces/product';
+import { IProduct, ProductAttribute } from '../../interfaces/product';
 import { WishlistService } from '../../services/wishlist.service';
 import { CompareService } from '../../services/compare.service';
 import { QuickviewService } from '../../services/quickview.service';
