@@ -81,5 +81,6 @@
   "go.to.homepage": "Go to homepage",
   "add.to.cart": "Add to cart",
   "no.products.found.for.your.search": "No products found for your search",
-  "clear.the.search.filter.and.try.again": "Clear the search filter and try again"
+  "clear.the.search.filter.and.try.again": "Clear the search filter and try again",
+  "manufacturer": "Manufacturer"
 }
