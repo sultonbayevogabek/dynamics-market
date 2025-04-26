@@ -44,6 +44,7 @@ import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { TranslateModule } from '@ngx-translate/core';
       CarouselModule,
       ModalModule.forRoot(),
       RedZoomModule,
-      TranslateModule
+      TranslateModule,
+      TooltipModule
    ],
   exports: [
     // directives

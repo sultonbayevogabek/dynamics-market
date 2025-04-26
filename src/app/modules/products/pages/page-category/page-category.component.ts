@@ -17,7 +17,7 @@ export class PageCategoryComponent implements OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
 
   columns: 3 | 4 | 5 = 3;
-  viewMode: 'grid' | 'grid-with-features' | 'list' = 'grid';
+  viewMode: 'grid' | 'grid-with-features' | 'list' = 'grid-with-features';
   sidebarPosition: 'start' | 'end' = 'start'; // For LTR scripts "start" is "left" and "end" is "right"
   breadcrumbs: Link[] = [];
   pageHeader = '';
@@ -34,7 +34,6 @@ export class PageCategoryComponent implements OnDestroy {
       ];
 
       this.columns = 'columns' in data ? data['columns'] : this.columns;
-      this.viewMode = 'viewMode' in data ? data['viewMode'] : this.viewMode;
       this.sidebarPosition = 'sidebarPosition' in data ? data['sidebarPosition'] : this.sidebarPosition;
     });
 

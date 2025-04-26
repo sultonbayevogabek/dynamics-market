@@ -18,11 +18,6 @@
         <div class="view-options__layout">
           <div class="layout-switcher">
             <div class="layout-switcher__list">
-              <button title="Grid" type="button" class="layout-switcher__button"
-                      [ngClass]="{'layout-switcher__button--active': layout === 'grid'}" (click)="setLayout('grid')">
-
-                <app-icon name="layout-grid-16x16" size="16"></app-icon>
-              </button>
               <button title="Grid With Features" type="button" class="layout-switcher__button"
                       [ngClass]="{'layout-switcher__button--active': layout === 'grid-with-features'}"
                       (click)="setLayout('grid-with-features')">

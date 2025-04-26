@@ -94,6 +94,8 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
         this.flattenCategories(category.children);
       }
     });
+
+    localStorage.setItem('flattenedCategories', JSON.stringify(this.data.flattenedCategories));
   }
 
   async reset() {

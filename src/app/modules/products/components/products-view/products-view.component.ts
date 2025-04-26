@@ -15,7 +15,7 @@ export type Layout = 'grid' | 'grid-with-features' | 'list';
 })
 
 export class ProductsViewComponent implements OnInit, OnDestroy {
-  @Input() layout: Layout = 'grid';
+  @Input() layout: Layout = 'grid-with-features';
   @Input() grid: 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full' = 'grid-3-sidebar';
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
   products: {

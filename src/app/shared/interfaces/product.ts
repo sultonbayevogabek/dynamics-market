@@ -21,6 +21,7 @@ export interface ProductAttributeValue {
 
 export interface ProductAttribute {
   name: string;
+  value: string;
   slug: string;
   featured: boolean;
   values: ProductAttributeValue[];

@@ -23,7 +23,7 @@
     </a>
   </div>
   <div class="product-card__info">
-    <div class="product-card__name">
+    <div class="product-card__name line-clamp-2" [title]="product.name">
       <a appClick>{{ product.name }}</a>
     </div>
 
@@ -38,13 +38,9 @@
       <span class="text-[#3366CCFF]">{{ product?.brand?.name }}</span>
     </div>
 
-    <ul *ngIf="featuredAttributes.length" class="product-card__features-list">
-      <li *ngFor="let attribute of featuredAttributes">
-        {{ attribute.name }}:
-        <ng-container *ngFor="let value of attribute.values; let last = last">
-          {{ value.name }}
-          <ng-container *ngIf="!last">,</ng-container>
-        </ng-container>
+    <ul *ngIf="product.attributes.length" class="product-card__features-list">
+      <li *ngFor="let attribute of product?.attributes?.slice(0, 5)">
+        {{ attribute.name }}: {{ attribute.value }}
       </li>
     </ul>
   </div>

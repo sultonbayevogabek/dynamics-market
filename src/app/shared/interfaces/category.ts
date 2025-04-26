@@ -18,6 +18,9 @@ export interface ICategory {
   parentId?: string;
   name: string;
   slug: string;
+  slugUz: string;
+  slugRu: string;
+  slugEn: string;
   children: ICategory[];
   showChildren?: boolean;
   hidden?: boolean;
