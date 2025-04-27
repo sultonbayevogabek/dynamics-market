@@ -27,18 +27,24 @@
       <a appClick>{{ product.name }}</a>
     </div>
 
-<!--    <div class="product-card__rating">-->
-<!--      <app-rating [value]="5"></app-rating>-->
-<!--      <div class="product-card__rating-legend">{{ 5 }} Reviews</div>-->
-<!--    </div>-->
-
-    <div class="text-[13px]">
-      <span class="text-[#6C757DFF]">{{ 'manufacturer'| translate }}: </span>
-
-      <span class="text-[#3366CCFF]">{{ product?.brand?.name }}</span>
+    <div class="product-card__rating">
+      <app-rating [value]="5"></app-rating>
+      <div class="product-card__rating-legend">{{ 5 }} {{ 'n.reviews'| translate }}</div>
     </div>
 
     <ul *ngIf="product.attributes.length" class="product-card__features-list">
+      <li>
+        <span>{{ 'manufacturer'| translate }}: </span>
+
+        <span class="text-[#3366CCFF]">{{ product?.brand?.name }}</span>
+      </li>
+      <li>
+        <span>{{ 'availability'| translate }}: </span>
+
+        <span *ngIf="product.availability === 'in_stock'" class="text-success">{{ 'in.stock'| translate }}</span>
+        <span *ngIf="product.availability === 'on_demand'" class="text-primary">{{ 'on.order'| translate }}</span>
+        <span *ngIf="product.availability === 'out_of_stock'" class="text-danger">{{ 'out.of.stock'| translate }}</span>
+      </li>
       <li *ngFor="let attribute of product?.attributes?.slice(0, 5)">
         {{ attribute.name }}: {{ attribute.value }}
       </li>
@@ -46,17 +52,24 @@
   </div>
   <div class="product-card__actions">
     <div class="product-card__availability">
-      Availability:
-      <span class="text-success">In Stock</span>
+      {{ 'availability'| translate }}:
+      <span *ngIf="product.availability === 'in_stock'" class="text-success">{{ 'in.stock'| translate }}</span>
+      <span *ngIf="product.availability === 'on_demand'" class="text-primary">{{ 'on.order'| translate }}</span>
+      <span *ngIf="product.availability === 'out_of_stock'" class="text-danger">{{ 'out.of.stock'| translate }}</span>
     </div>
     <div class="product-card__prices">
-      <ng-container *ngIf="product.oldPrice">
-        <span class="product-card__new-price">{{ product.currentPrice| currencyFormat }}</span>{{ ' ' }}
-        <span class="product-card__old-price">{{ product.oldPrice| currencyFormat }}</span>
+      <ng-container *ngIf="product.currentPrice && product.oldPrice">
+        <span class="product-card__new-price">{{ product.currentPrice| currencyFormat }}</span>
+        <span class="product-card__old-price"> {{ product.oldPrice| currencyFormat }}</span>
       </ng-container>
-      <ng-container *ngIf="!product.oldPrice">
-        {{ product.currentPrice|currencyFormat }}
+
+      <ng-container *ngIf="product.currentPrice && !product.oldPrice">
+        <span>{{ product.currentPrice| currencyFormat }}</span>
       </ng-container>
+
+      <span *ngIf="!product.currentPrice && !product.oldPrice">
+        {{ 'price.on.request'| translate }}
+      </span>
     </div>
     <div class="product-card__buttons">
       <button class="btn btn-primary product-card__addtocart w-full flex items-center justify-center gap-3" type="button" appClick (click)="addToCart()"
@@ -64,8 +77,9 @@
         <app-icon name="cart-20" size="16"></app-icon>
         <span>{{ 'add.to.cart'| translate }}</span>
       </button>
-      <button class="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button" appClick
-              (click)="addToCart()" [ngClass]="{'btn-loading': addingToCart}">Add To Cart
+      <button [title]="'add.to.cart'| translate" class="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button" appClick
+              (click)="addToCart()" [ngClass]="{'btn-loading': addingToCart}">
+        <span class="line-clamp-1">{{ 'add.to.cart'| translate }}</span>
       </button>
     </div>
   </div>

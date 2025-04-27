@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Data, ResolveData, RouterModule, Routes } from '@angular/router';
 import { PageCategoryComponent } from './pages/page-category/page-category.component';
-import { PageCompareComponent } from './pages/page-compare/page-compare.component';
 import { PageTrackOrderComponent } from './pages/page-track-order/page-track-order.component';
 import { PageProductComponent } from './pages/page-product/page-product.component';
 import { ProductsListResolverService } from './resolvers/products-list-resolver.service';
@@ -51,10 +50,6 @@ const routes: Routes = [
     resolve: {
       product: ProductResolverService
     }
-  },
-  {
-    path: 'compare',
-    component: PageCompareComponent
   },
   {
     path: 'track-order',

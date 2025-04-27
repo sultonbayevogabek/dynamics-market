@@ -25,6 +25,8 @@ import { ProductLayout } from '../product/product.component';
 import { NavigationStart, Router } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Image } from '@shared/interfaces/product';
+import { environment } from '@env/environment';
 
 export interface ProductGalleryItem {
   id: string;
@@ -39,6 +41,7 @@ export interface ProductGalleryItem {
 export class ProductGalleryComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
+  host = environment.host;
   items: ProductGalleryItem[] = [];
 
   currentItem: ProductGalleryItem | null = null;
@@ -71,8 +74,14 @@ export class ProductGalleryComponent implements OnInit, OnDestroy {
 
   @Input() productLayout: ProductLayout = 'standard';
 
-  @Input() set images(images: string[]) {
-    this.items = images.map((image, index) => ({ id: `image-${ index }`, image }));
+  @Input() set images(images: Image[]) {
+    this.items = images.map((img, index) => {
+      return {
+        id: `image-${ index }`,
+        image: this.host + img.path
+      };
+    });
+    console.log(this.items);
     this.currentItem = this.items[0] || null;
   }
 

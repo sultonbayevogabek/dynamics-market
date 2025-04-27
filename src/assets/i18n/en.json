@@ -82,5 +82,12 @@
   "add.to.cart": "Add to cart",
   "no.products.found.for.your.search": "No products found for your search",
   "clear.the.search.filter.and.try.again": "Clear the search filter and try again",
-  "manufacturer": "Manufacturer"
+  "manufacturer": "Manufacturer",
+  "price.on.request": "Price: on request",
+  "availability": "Availability",
+  "on.order": "On order",
+  "in.stock": "In stock",
+  "out.of.stock": "Out of stock",
+  "n.reviews": "reviews",
+  "write.review": "Write A Review"
 }

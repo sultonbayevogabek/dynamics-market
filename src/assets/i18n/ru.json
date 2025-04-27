@@ -82,5 +82,12 @@
   "add.to.cart": "Добавить в корзину",
   "no.products.found.for.your.search": "По вашему запросу товары не найдены",
   "clear.the.search.filter.and.try.again": "Очистите фильтр поиска и попробуйте снова",
-  "manufacturer": "Производитель"
+  "manufacturer": "Производитель",
+  "price.on.request": "Цена: по запросу",
+  "availability": "Наличие",
+  "on.order": "Под заказ",
+  "in.stock": "В наличии",
+  "out.of.stock": "Нет в наличии",
+  "n.reviews": "отзывов",
+  "write.review": "Написать отзыв"
 }

@@ -19,7 +19,6 @@ import { ProductsSidebarComponent } from './components/products-sidebar/products
 
 // pages
 import { PageCategoryComponent } from './pages/page-category/page-category.component';
-import { PageCompareComponent } from './pages/page-compare/page-compare.component';
 import { PageProductComponent } from './pages/page-product/page-product.component';
 import { PageTrackOrderComponent } from './pages/page-track-order/page-track-order.component';
 import { ProductSidebarComponent } from './components/product-sidebar/product-sidebar.component';
@@ -34,7 +33,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ProductsSidebarComponent,
     // pages
     PageCategoryComponent,
-    PageCompareComponent,
     PageProductComponent,
     PageTrackOrderComponent,
     ProductSidebarComponent,

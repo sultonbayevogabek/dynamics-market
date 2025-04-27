@@ -1,6 +1,8 @@
 @import '~ngx-toastr/toastr';
 @import 'node_modules/ngx-red-zoom/styles/base.scss';
-@import 'scss/style';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import 'scss/style';

@@ -38,16 +38,4 @@ export class ProductComponent {
       this.addingToCart = true;
     }
   }
-
-  addToWishlist(): void {
-    if (!this.addingToWishlist && this.product) {
-      this.addingToWishlist = true;
-    }
-  }
-
-  addToCompare(): void {
-    if (!this.addingToCompare && this.product) {
-      this.addingToCompare = true;
-    }
-  }
 }

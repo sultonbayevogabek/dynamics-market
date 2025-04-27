@@ -9,7 +9,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { IProduct, ProductAttribute } from '../../interfaces/product';
+import { IProduct } from '../../interfaces/product';
 import { WishlistService } from '../../services/wishlist.service';
 import { CompareService } from '../../services/compare.service';
 import { QuickviewService } from '../../services/quickview.service';
@@ -35,7 +35,6 @@ export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {
   addingToCart = false;
 
   showingQuickview = false;
-  featuredAttributes: ProductAttribute[] = [];
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -80,12 +79,12 @@ export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     this.showingQuickview = true;
-    // this.quickview.show(this.product).subscribe({
-    //   complete: () => {
-    //     this.showingQuickview = false;
-    //     this.cd.markForCheck();
-    //   }
-    // });
+    this.quickview.show(this.product).subscribe({
+      complete: () => {
+        this.showingQuickview = false;
+        this.cd.markForCheck();
+      }
+    });
   }
 
   ngOnDestroy(): void {

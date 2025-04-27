@@ -71,7 +71,7 @@ export interface IProduct {
   badges: string[];
   rating: number;
   reviews: number;
-  availability: string;
+  availability: 'out_of_stock' | 'in_stock' | 'on_demand';
   brand: Brand | null;
   categories: Category[];
   attributes: ProductAttribute[];

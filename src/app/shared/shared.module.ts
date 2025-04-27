@@ -34,7 +34,6 @@ import { ProductComponent } from './components/product/product.component';
 import { QuickviewComponent } from './components/quickview/quickview.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { SearchComponent } from './components/search/search.component';
-import { ShareButtonsComponent } from './components/share-buttons/share-buttons.component';
 import { SocialLinksComponent } from './components/social-links/social-links.component';
 
 // pipes
@@ -73,7 +72,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     QuickviewComponent,
     RatingComponent,
     SearchComponent,
-    ShareButtonsComponent,
     SocialLinksComponent,
     // pipes
     AbsoluteUrlPipe,
@@ -126,7 +124,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AbsoluteUrlPipe,
     ColorTypePipe,
     CurrencyFormatPipe,
-    ShareButtonsComponent,
     LoaderSpinnerComponent
   ],
   providers: []

@@ -82,5 +82,12 @@
   "add.to.cart": "Savatga qo'shish",
   "no.products.found.for.your.search": "Qidiruvingiz bo'yicha tovarlar topilmadi",
   "clear.the.search.filter.and.try.again": "Qidiruv filterini tozalab, qaytadan urinib ko'ring",
-  "manufacturer": "Ishlab chiqaruvchi"
+  "manufacturer": "Ishlab chiqaruvchi",
+  "price.on.request": "Narx: so'rov bo'yicha",
+  "availability": "Holati",
+  "on.order": " Buyurtma asosida ",
+  "in.stock": "Sotuvda bor",
+  "out.of.stock": "Sotuvda yo'q",
+  "n.reviews": "ta izoh",
+  "write.review": "Izoh qoldirish"
 }
