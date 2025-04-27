@@ -31,20 +31,10 @@ const routes: Routes = [
     resolve: categoryPageResolvers
   },
   {
-    path: 'catalog/:categorySlug',
-    component: PageCategoryComponent,
-    data: categoryPageData,
-    resolve: categoryPageResolvers
-  },
-  {
-    path: 'products',
+    path: '/:slug',
     component: PageProductComponent,
     data: {
-      // Product page layout. Possible values: 'standard', 'columnar', 'sidebar'.
       layout: 'standard',
-      // Sidebar position. Possible values: 'start', 'end'.
-      // It does not matter if the value of the 'layout' parameter is not 'sidebar'.
-      // For LTR scripts "start" is "left" and "end" is "right".
       sidebarPosition: 'start'
     },
     resolve: {
@@ -55,99 +45,6 @@ const routes: Routes = [
     path: 'track-order',
     component: PageTrackOrderComponent
   },
-
-  // --- START ---
-  // The following routes are only needed to demonstrate possible layouts of some pages. You can delete them.
-  {
-    path: 'category-grid-4-columns-full',
-    component: PageCategoryComponent,
-    data: {
-      columns: 4,
-      viewMode: 'grid',
-      categorySlug: 'power-tools'
-    },
-    resolve: {
-      category: CategoryResolverService,
-      products: ProductsListResolverService
-    }
-  },
-  {
-    path: 'category-grid-5-columns-full',
-    component: PageCategoryComponent,
-    data: {
-      columns: 5,
-      viewMode: 'grid',
-      categorySlug: 'power-tools'
-    },
-    resolve: {
-      category: CategoryResolverService,
-      products: ProductsListResolverService
-    }
-  },
-  {
-    path: 'category-list',
-    component: PageCategoryComponent,
-    data: {
-      columns: 3,
-      viewMode: 'list',
-      sidebarPosition: 'start',
-      categorySlug: 'power-tools'
-    },
-    resolve: {
-      category: CategoryResolverService,
-      products: ProductsListResolverService
-    }
-  },
-  {
-    path: 'category-right-sidebar',
-    component: PageCategoryComponent,
-    data: {
-      columns: 3,
-      viewMode: 'grid',
-      sidebarPosition: 'end',
-      categorySlug: 'power-tools'
-    },
-    resolve: {
-      category: CategoryResolverService,
-      products: ProductsListResolverService
-    }
-  },
-  {
-    path: 'product-standard',
-    component: PageProductComponent,
-    data: {
-      layout: 'standard',
-      sidebarPosition: 'start',
-      productSlug: 'brandix-screwdriver-screw1500acc'
-    },
-    resolve: {
-      product: ProductResolverService
-    }
-  },
-  {
-    path: 'product-columnar',
-    component: PageProductComponent,
-    data: {
-      layout: 'columnar',
-      productSlug: 'brandix-screwdriver-screw1500acc'
-    },
-    resolve: {
-      product: ProductResolverService
-    }
-  },
-  {
-    path: 'product-sidebar',
-    component: PageProductComponent,
-    data: {
-      layout: 'sidebar',
-      sidebarPosition: 'start',
-      productSlug: 'brandix-screwdriver-screw1500acc'
-    },
-    resolve: {
-      product: ProductResolverService
-    }
-  }
-  // --- END ---
 ];
 
 @NgModule({
