@@ -6,6 +6,6 @@ export const environment = {
     scope: 'email profile openid',
     nonce: '123456789'
   },
-  host: 'https://backend.dynamics-market.uz/'
-  // host: 'https://ffba-185-213-230-61.ngrok-free.app/'
+  // host: 'https://backend.dynamics-market.uz/'
+  host: 'https://833f-185-213-230-61.ngrok-free.app/'
 };
