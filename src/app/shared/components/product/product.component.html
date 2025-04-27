@@ -48,13 +48,18 @@
       </div>
 
       <div class="product__prices">
-        <ng-container *ngIf="product.compareAtPrice">
-          <span class="product__new-price">{{ product.price|currencyFormat }}</span>{{ ' ' }}
-          <span class="product__old-price">{{ product.compareAtPrice|currencyFormat }}</span>
+        <ng-container *ngIf="product.currentPrice && product.oldPrice">
+          <span class="product-card__new-price">{{ product.currentPrice| currencyFormat }}</span>
+          <span class="product-card__old-price"> {{ product.oldPrice| currencyFormat }}</span>
         </ng-container>
-        <ng-container *ngIf="!product.compareAtPrice">
-          {{ product.price|currencyFormat }}
+
+        <ng-container *ngIf="product.currentPrice && !product.oldPrice">
+          <span>{{ product.currentPrice| currencyFormat }}</span>
         </ng-container>
+
+        <span *ngIf="!product.currentPrice && !product.oldPrice">
+        {{ 'price.on.request'| translate }}
+      </span>
       </div>
       <!-- .product__options -->
       <form class="product__options">
@@ -75,16 +80,6 @@
         </div>
       </form>
       <!-- .product__options / end -->
-    </div>
-    <!-- .product__end -->
-    <div class="product__footer">
-      <div class="product__tags tags">
-        <div class="tags__list">
-          <a href="" appClick>Mounts</a>
-          <a href="" appClick>Electrodes</a>
-          <a href="" appClick>Chainsaws</a>
-        </div>
-      </div>
     </div>
   </div>
 </div>
