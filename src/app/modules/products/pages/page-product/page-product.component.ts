@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct, Product } from '@shared/interfaces/product';
+import { Hierarchy, IProduct } from '@shared/interfaces/product';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from '@shared/api/shop.service';
 import { Observable } from 'rxjs';
+import { Link } from '@shared/interfaces/link';
 
 @Component({
   selector: 'app-page-product',
@@ -13,8 +14,7 @@ export class PageProductComponent implements OnInit {
   relatedProducts$!: Observable<IProduct[]>;
 
   product!: IProduct;
-  layout: 'standard' | 'columnar' | 'sidebar' = 'standard';
-  sidebarPosition: 'start' | 'end' = 'start'; // For LTR scripts "start" is "left" and "end" is "right"
+  breadcrumbs: Link[] = [];
 
   constructor(
     private shop: ShopService,
@@ -24,11 +24,29 @@ export class PageProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.layout = data['layout'] || this.layout;
-      this.sidebarPosition = data['sidebarPosition'] || this.sidebarPosition;
       this.product = data['product'];
+      this.generateBreadCrumbs(this.product.hierarchy);
 
       this.relatedProducts$ = this.shop.getRelatedProducts(data['product']);
+    });
+  }
+
+  generateBreadCrumbs(hierarchy: Hierarchy[]) {
+    hierarchy.forEach((item, index) => {
+      const breadcrumb: Link = {
+        label: item?.categoryName,
+        url: '',
+        queryParams: null
+      };
+
+      if (index !== hierarchy.length - 1) {
+        breadcrumb.url = '/products';
+        breadcrumb.queryParams = {
+          category: item?.categorySlug
+        };
+      }
+
+      this.breadcrumbs.push(breadcrumb);
     });
   }
 }

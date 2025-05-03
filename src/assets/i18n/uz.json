@@ -89,5 +89,9 @@
   "in.stock": "Sotuvda bor",
   "out.of.stock": "Sotuvda yo'q",
   "n.reviews": "ta izoh",
-  "write.review": "Izoh qoldirish"
+  "write.review": "Izoh qoldirish",
+  "description": "Tavsif",
+  "specifications": "Xarakteristikalar",
+  "reviews": "Izohlar",
+  "full.information.about.the.product": "Tovar haqida to'liq ma'lumot"
 }

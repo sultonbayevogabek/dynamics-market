@@ -29,8 +29,8 @@ export class PageCategoryComponent implements OnDestroy {
   ) {
     this.route.data.subscribe(data => {
       this.breadcrumbs = [
-        { label: 'Home', url: this.root.home() },
-        { label: 'Shop', url: this.root.shop() }
+        { label: 'homepage', url: '/' },
+        { label: 'products', url: '' }
       ];
 
       this.columns = 'columns' in data ? data['columns'] : this.columns;

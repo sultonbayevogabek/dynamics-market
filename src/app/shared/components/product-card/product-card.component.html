@@ -18,13 +18,13 @@
 <!--  </div>-->
 
   <div class="product-card__image product-image relative">
-    <a appClick *ngIf="product.images?.length" class="product-image__body">
+    <a appClick [routerLink]="['/products', product?.slug]" *ngIf="product.images?.length" class="product-image__body">
       <img class="product-image__img" [src]="host + product.images[1].path" alt="">
     </a>
   </div>
   <div class="product-card__info">
     <div class="product-card__name line-clamp-2" [title]="product.name">
-      <a appClick>{{ product.name }}</a>
+      <a appClick [routerLink]="['/products', product?.slug]">{{ product.name }}</a>
     </div>
 
     <div class="product-card__rating">

@@ -89,5 +89,9 @@
   "in.stock": "In stock",
   "out.of.stock": "Out of stock",
   "n.reviews": "reviews",
-  "write.review": "Write A Review"
+  "write.review": "Write A Review",
+  "description": "Description",
+  "specifications": "Specifications",
+  "reviews": "Reviews",
+  "full.information.about.the.product": "Full information about the product"
 }

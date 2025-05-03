@@ -89,5 +89,9 @@
   "in.stock": "В наличии",
   "out.of.stock": "Нет в наличии",
   "n.reviews": "отзывов",
-  "write.review": "Написать отзыв"
+  "write.review": "Написать отзыв",
+  "description": "Описание",
+  "specifications": "Характеристики",
+  "reviews": "Отзывы",
+  "full.information.about.the.product": "Полная информация о товаре"
 }

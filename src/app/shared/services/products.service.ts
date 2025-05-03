@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IProductsFilter } from '@shared/interfaces/filter';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, distinctUntilChanged, tap } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, firstValueFrom, tap } from 'rxjs';
 import { IProduct } from '@shared/interfaces/product';
 import { RequestService } from '@shared/services/request.service';
 import { debounceTime } from 'rxjs/operators';
@@ -82,5 +82,11 @@ export class ProductsService {
         })
       )
       .subscribe();
+  }
+
+  async getProduct(slug: string): Promise<IProduct> {
+    return await firstValueFrom(
+      this.requestService.request<IProduct>('product/get-product', { slug })
+    );
   }
 }

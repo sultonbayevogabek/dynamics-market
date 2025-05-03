@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ProductFeaturesSection } from '@shared/interfaces/product';
-import { specification } from '../../../../../data/shop-product-spec';
+import { Component, Input, OnInit } from '@angular/core';
+import { IProduct } from '@shared/interfaces/product';
 import { reviews } from '../../../../../data/shop-product-reviews';
 import { Review } from '@shared/interfaces/review';
 
@@ -9,13 +8,17 @@ import { Review } from '@shared/interfaces/review';
   templateUrl: './product-tabs.component.html',
   styleUrls: [ './product-tabs.component.scss' ]
 })
-export class ProductTabsComponent {
+export class ProductTabsComponent implements OnInit {
   @Input() withSidebar = false;
   @Input() tab: 'description' | 'specification' | 'reviews' = 'description';
+  @Input() product!: IProduct;
 
-  specification: ProductFeaturesSection[] = specification;
   reviews: Review[] = reviews;
 
   constructor() {
+  }
+
+  ngOnInit() {
+    console.log(this.product);
   }
 }

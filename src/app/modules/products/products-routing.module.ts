@@ -27,16 +27,11 @@ const routes: Routes = [
   {
     path: '',
     component: PageCategoryComponent,
-    data: categoryPageData,
-    resolve: categoryPageResolvers
+    pathMatch: 'full'
   },
   {
-    path: '/:slug',
+    path: ':productSlug',
     component: PageProductComponent,
-    data: {
-      layout: 'standard',
-      sidebarPosition: 'start'
-    },
     resolve: {
       product: ProductResolverService
     }

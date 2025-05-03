@@ -44,6 +44,7 @@ import { ProductGalleryComponent } from './components/product-gallery/product-ga
 import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CutDescriptionPipe } from '@shared/pipes/cut-description.pipe';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AbsoluteUrlPipe,
     ColorTypePipe,
     CurrencyFormatPipe,
+    CutDescriptionPipe,
     ProductGalleryComponent,
     LoaderSpinnerComponent
   ],

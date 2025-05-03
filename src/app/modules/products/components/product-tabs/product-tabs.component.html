@@ -2,45 +2,24 @@
   <div class="product-tabs__list">
     <a href="#tab-description" class="product-tabs__item"
        [ngClass]="{'product-tabs__item--active': tab === 'description'}"
-       (click)="$event.preventDefault(); tab = 'description'">Description</a>
+       (click)="$event.preventDefault(); tab = 'description'">{{ 'description'| translate }}</a>
 
     <a href="#tab-specification" class="product-tabs__item"
        [ngClass]="{'product-tabs__item--active': tab === 'specification'}"
-       (click)="$event.preventDefault(); tab = 'specification'">Specification</a>
+       (click)="$event.preventDefault(); tab = 'specification'">{{ 'specifications'| translate }}</a>
 
     <a href="#tab-reviews" class="product-tabs__item"
        [ngClass]="{'product-tabs__item--active': tab === 'reviews'}"
-       (click)="$event.preventDefault(); tab = 'reviews'">Reviews</a>
+       (click)="$event.preventDefault(); tab = 'reviews'">{{ 'reviews'| translate }}</a>
   </div>
   <div class="product-tabs__content">
 
     <div class="product-tabs__pane" id="tab-description"
          [ngClass]="{'product-tabs__pane--active': tab === 'description'}">
       <div class="typography">
-        <h3>Product Full Description</h3>
+        <h3>{{ 'description'| translate }}</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum, diam non iaculis finibus,
-          ipsum arcu sollicitudin dolor, ut cursus sapien sem sed purus. Donec vitae fringilla tortor, sed
-          fermentum nunc. Suspendisse sodales turpis dolor, at rutrum dolor tristique id. Quisque pellentesque
-          ullamcorper felis, eget gravida mi elementum a. Maecenas consectetur volutpat ante, sit amet molestie
-          urna luctus in. Nulla eget dolor semper urna malesuada dictum. Duis eleifend pellentesque dui et
-          finibus. Pellentesque dapibus dignissim augue. Etiam odio est, sodales ac aliquam id, iaculis eget
-          lacus. Aenean porta, ante vitae suscipit pulvinar, purus dui interdum tellus, sed dapibus mi mauris
-          vitae tellus.
-        </p>
-        <h3>Etiam lacus lacus mollis in mattis</h3>
-        <p>
-          Praesent mattis eget augue ac elementum. Maecenas vel ante ut enim mollis accumsan. Vestibulum vel
-          eros at mi suscipit feugiat. Sed tortor purus, vulputate et eros a, rhoncus laoreet orci. Proin sapien
-          neque, commodo at porta in, vehicula eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et
-          ultrices posuere cubilia Curae; Curabitur porta vulputate augue, at sollicitudin nisl molestie eget.
-        </p>
-        <p>
-          Nunc sollicitudin, nunc id accumsan semper, libero nunc aliquet nulla, nec pretium ipsum risus ac
-          neque. Morbi eu facilisis purus. Quisque mi tortor, cursus in nulla ut, laoreet commodo quam.
-          Pellentesque et ornare sapien. In ac est tempus urna tincidunt finibus. Integer erat ipsum, tristique
-          ac lobortis sit amet, dapibus sit amet purus. Nam sed lorem nisi. Vestibulum ultrices tincidunt turpis,
-          sit amet fringilla odio scelerisque non.
+          {{ product?.description }}
         </p>
       </div>
     </div>
@@ -48,19 +27,18 @@
     <div class="product-tabs__pane" id="tab-specification"
          [ngClass]="{'product-tabs__pane--active': tab === 'specification'}">
       <div class="spec">
-        <h3 class="spec__header">Specification</h3>
-        <div *ngFor="let section of specification" class="spec__section">
-          <h4 class="spec__section-title">{{ section.name }}</h4>
-          <div *ngFor="let feature of section.features" class="spec__row">
+        <h3 class="spec__header">{{ 'specifications'| translate }}</h3>
+        <div class="spec__section">
+          <div *ngFor="let feature of product.attributes" class="spec__row">
             <div class="spec__name">{{ feature.name }}</div>
             <div class="spec__value">{{ feature.value }}</div>
           </div>
         </div>
-        <div class="spec__disclaimer">
-          Information on technical characteristics, the delivery set, the country of manufacture and the appearance
-          of the goods is for reference only and is based on the latest information available at the time of
-          publication.
-        </div>
+<!--        <div class="spec__disclaimer">-->
+<!--          Information on technical characteristics, the delivery set, the country of manufacture and the appearance-->
+<!--          of the goods is for reference only and is based on the latest information available at the time of-->
+<!--          publication.-->
+<!--        </div>-->
       </div>
     </div>
 

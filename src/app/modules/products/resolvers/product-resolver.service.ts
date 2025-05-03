@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import { IProduct, Product } from '@shared/interfaces/product';
-import { EMPTY, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+import { IProduct } from '@shared/interfaces/product';
 import { RootService } from '@shared/services/root.service';
-import { ShopService } from '@shared/api/shop.service';
+import { ProductsService } from '@shared/services/products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +11,12 @@ export class ProductResolverService implements Resolve<IProduct> {
   constructor(
     private root: RootService,
     private router: Router,
-    private shop: ShopService
+    private productsService: ProductsService
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IProduct> {
+  async resolve(route: ActivatedRouteSnapshot): Promise<IProduct> {
     const productSlug = route.params['productSlug'] || route.data['productSlug'];
-
-    return this.shop.getProduct(productSlug).pipe(
-      catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === 404) {
-          this.router.navigate([ this.root.notFound() ]).then();
-        }
-
-        return EMPTY;
-      })
-    );
+    return await this.productsService.getProduct(productSlug);
   }
 }
