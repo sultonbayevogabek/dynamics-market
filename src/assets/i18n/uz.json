@@ -93,5 +93,10 @@
   "description": "Tavsif",
   "specifications": "Xarakteristikalar",
   "reviews": "Izohlar",
-  "full.information.about.the.product": "Tovar haqida to'liq ma'lumot"
+  "full.information.about.the.product": "Tovar haqida to'liq ma'lumot",
+  "cart": "Savat",
+  "your.shopping.cart.is.empty": "Sizning savatingiz bo‘sh!",
+  "continue": "Davom etish",
+  "sign.in.to.add.products.to.your.cart": "Tovarni savatingizga qo'shish uchun avtorizatsiyadan o'ting",
+  "the.product.has.been.successfully.added.to.your.cart": "Tovar savatga muvaffaqiyatli qo‘shildi!"
 }

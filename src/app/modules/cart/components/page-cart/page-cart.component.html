@@ -1,14 +1,16 @@
-<app-page-header [header]="'Shopping Cart'" [breadcrumbs]="[
-    {label: 'Home',          url: root.home()},
-    {label: 'Shopping Cart', url: ''}
+<app-page-header [header]="'cart'" [breadcrumbs]="[
+    {label: 'homepage',          url: '/'},
+    {label: 'cart', url: ''}
 ]"></app-page-header>
 
 <div class="block block-empty" *ngIf="!items.length">
   <div class="container">
     <div class="block-empty__body">
-      <div class="block-empty__message">Your shopping cart is empty!</div>
+      <div class="block-empty__message">{{ 'your.shopping.cart.is.empty'| translate }}</div>
       <div class="block-empty__actions">
-        <a [routerLink]="root.shop()" class="btn btn-primary btn-sm">Continue</a>
+        <a [routerLink]="['/products']" class="btn btn-primary btn-sm">
+          {{ 'continue'| translate }}
+        </a>
       </div>
     </div>
   </div>

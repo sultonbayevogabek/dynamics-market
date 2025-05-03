@@ -9,6 +9,7 @@ import { PageOrderSuccessComponent } from './components/page-order-success/page-
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartRoutingModule } from './cart-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -16,14 +17,15 @@ import { CartRoutingModule } from './cart-routing.module';
     PageCheckoutComponent,
     PageOrderSuccessComponent
   ],
-  imports: [
-    // modules (angular)
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule,
-    CartRoutingModule
-  ]
+   imports: [
+      // modules (angular)
+      CommonModule,
+      SharedModule,
+      RouterModule,
+      ReactiveFormsModule,
+      CartRoutingModule,
+      TranslateModule
+   ]
 })
 export class CartModule {
 }

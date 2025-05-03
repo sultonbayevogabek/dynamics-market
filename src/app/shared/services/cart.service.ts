@@ -4,6 +4,7 @@ import { CartItem } from '../interfaces/cart-item';
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
+import { RequestService } from '@shared/services/request.service';
 
 interface CartTotal {
   title: string;
@@ -56,7 +57,8 @@ export class CartService {
 
   constructor(
     @Inject(PLATFORM_ID)
-    private platformId: any
+    private platformId: any,
+    private requestService: RequestService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.load();
@@ -64,40 +66,11 @@ export class CartService {
     }
   }
 
-  add(product: IProduct, quantity: number, options: { name: string; value: string }[] = []) {
-    // timer only for demo
-    /*return timer(1000).pipe(map(() => {
-      this.onAddingSubject$.next(product);
-
-      let item = this.items.find(eachItem => {
-        if (eachItem.product.id !== product.id || eachItem.options.length !== options.length) {
-          return false;
-        }
-
-        if (eachItem.options.length) {
-          for (const option of options) {
-            if (!eachItem.options.find(itemOption => itemOption.name === option.name && itemOption.value === option.value)) {
-              return false;
-            }
-          }
-        }
-
-        return true;
-      });
-
-      if (item) {
-        item.quantity += quantity;
-      } else {
-        item = { product, quantity, options };
-
-        this.data.items.push(item);
-      }
-
-      this.save();
-      this.calc();
-
-      return item;
-    }));*/
+  add(productId: string, quantity?: number) {
+    return this.requestService.request<{ statusCode: number }>('cart/add', {
+      productId,
+      quantity
+    })
   }
 
   update(updates: { item: CartItem, quantity: number }[]): Observable<void> {

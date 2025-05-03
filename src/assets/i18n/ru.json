@@ -93,5 +93,10 @@
   "description": "Описание",
   "specifications": "Характеристики",
   "reviews": "Отзывы",
-  "full.information.about.the.product": "Полная информация о товаре"
+  "full.information.about.the.product": "Полная информация о товаре",
+  "cart": "Корзина",
+  "your.shopping.cart.is.empty": "Ваша корзина пуста!",
+  "continue": "Продолжить",
+  "sign.in.to.add.products.to.your.cart": "Войдите, чтобы добавить товары в корзину",
+  "the.product.has.been.successfully.added.to.your.cart": "Товар успешно добавлен в корзину!"
 }
