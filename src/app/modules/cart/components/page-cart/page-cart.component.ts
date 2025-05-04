@@ -1,87 +1,70 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
-import { FormControl, Validators } from '@angular/forms';
-import { CartItem } from '@shared/interfaces/cart-item';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { ICartItem } from '@shared/interfaces/cart';
+import { firstValueFrom, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { RootService } from '@shared/services/root.service';
-
-interface Item {
-  cartItem: CartItem;
-  quantity: number;
-  quantityControl: FormControl;
-}
+import { AuthService } from '@shared/services/auth.service';
+import { IUser } from '@shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './page-cart.component.html',
-  styleUrls: [ './page-cart.component.scss' ]
+  templateUrl: './page-cart.component.html'
 })
 export class PageCartComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject();
 
-  removedItems: CartItem[] = [];
-  items: Item[] = [];
+  removedItems: any[] = [];
+  items: ICartItem[] = [];
   updating = false;
+  loading = true;
 
   constructor(
     public root: RootService,
-    public cart: CartService
+    public cart: CartService,
+    private authService: AuthService
   ) {
   }
 
-  ngOnInit(): void {
-    this.cart.items$.pipe(
-      takeUntil(this.destroy$),
-      map(cartItems => cartItems.map(cartItem => {
-        return {
-          cartItem,
-          quantity: cartItem.quantity,
-          quantityControl: new FormControl(cartItem.quantity, Validators.required)
-        };
-      }))
-    ).subscribe(items => this.items = items);
+  ngOnInit() {
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(async user => {
+        await this.getCartList(user);
+      })
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  remove(item: CartItem): void {
-    if (this.removedItems.includes(item)) {
+  async getCartList(user: IUser | null) {
+    if (!user) {
+      this.loading = false;
       return;
     }
 
-    this.removedItems.push(item);
-    this.cart.remove(item).subscribe({ complete: () => this.removedItems = this.removedItems.filter(eachItem => eachItem !== item) });
+    this.items = await firstValueFrom(
+      this.cart.getList()
+    )
+
+    this.loading = false;
+  }
+
+  remove(item: any): void {
+    if (this.removedItems.includes(item)) {
+      return;
+    }
   }
 
   update(): void {
     this.updating = true;
-    this.cart.update(
-      this.items
-        .filter(item => item.quantityControl.value !== item.quantity)
-        .map(item => ({
-          item: item.cartItem,
-          quantity: item.quantityControl.value
-        }))
-    ).subscribe({ complete: () => this.updating = false });
   }
 
   needUpdate(): boolean {
     let needUpdate = false;
 
-    for (const item of this.items) {
-      if (!item.quantityControl.valid) {
-        return false;
-      }
-
-      if (item.quantityControl.value !== item.quantity) {
-        needUpdate = true;
-      }
-    }
-
     return needUpdate;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

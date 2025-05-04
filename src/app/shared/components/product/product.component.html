@@ -66,13 +66,19 @@
         <div class="form-group product__option">
           <div class="product__actions">
             <div class="product__actions-item">
-              <app-input-number class="product__quantity" size="lg" [min]="1"
-                                [formControl]="quantity"></app-input-number>
+              <app-input-number
+                class="product__quantity"
+                size="lg"
+                [min]="1"
+                [max]="999"
+                [formControl]="quantity"
+              ></app-input-number>
             </div>
             <div class="product__actions-item product__actions-item--addtocart">
-              <button type="button" class="btn btn-primary btn-lg"
+              <button type="button" class="btn btn-primary btn-lg inline-flex items-center gap-4"
                       [ngClass]="{'btn-loading': addingToCart}"
                       appClick (click)="addToCart()">
+                <app-icon name="cart-20" size="24"></app-icon>
                 {{ 'add.to.cart'| translate }}
               </button>
             </div>

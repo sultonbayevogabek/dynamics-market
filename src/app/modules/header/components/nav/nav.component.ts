@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,
@@ -11,15 +11,14 @@ import {
   ViewChild
 } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
-import { WishlistService } from '@shared/services/wishlist.service';
 import { RootService } from '@shared/services/root.service';
 import { HeaderService } from '@shared/services/header.service';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { filter, first, shareReplay, takeUntil } from 'rxjs/operators';
 import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { OffcanvasCartService } from '@shared/services/offcanvas-cart.service';
+import { AuthService } from '@shared/services/auth.service';
+import { IUser } from '@shared/interfaces/user.interface';
 
 export type NavStickyMode = 'alwaysOnTop' | 'pullToShow';
 
@@ -28,6 +27,7 @@ export type NavStickyMode = 'alwaysOnTop' | 'pullToShow';
   templateUrl: './nav.component.html',
   styleUrls: [ './nav.component.scss' ]
 })
+
 export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() departments = true;
   @Input() logo = false;
@@ -44,6 +44,7 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
   scrollDistance = 0;
 
   media!: Observable<MediaQueryList>;
+  currentUser!: IUser | null;
 
   get element(): HTMLDivElement {
     return this.elementRef?.nativeElement;
@@ -51,22 +52,22 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private route: ActivatedRoute,
-    private offcanvasCart: OffcanvasCartService,
     public root: RootService,
     public cart: CartService,
-    public wishlist: WishlistService,
     public zone: NgZone,
-    public header: HeaderService
+    public header: HeaderService,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.currentUser = user;
+        this.cdr.detectChanges();
+      })
   }
 
   ngAfterViewInit(): void {
@@ -181,5 +182,10 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
     this.element.classList.remove('nav-panel--shown');
 
     this.zone.run(() => this.header.navPanelVisibility = 'hidden');
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

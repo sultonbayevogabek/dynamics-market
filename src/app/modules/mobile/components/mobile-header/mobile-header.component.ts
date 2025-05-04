@@ -1,22 +1,22 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,
   Input,
   NgZone,
-  OnDestroy,
+  OnDestroy, OnInit,
   PLATFORM_ID,
   ViewChild
 } from '@angular/core';
 import { MobileMenuService } from '@shared/services/mobile-menu.service';
-import { WishlistService } from '@shared/services/wishlist.service';
 import { CartService } from '@shared/services/cart.service';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { filter, first, shareReplay, takeUntil } from 'rxjs/operators';
-import { RootService } from '@shared/services/root.service';
+import { IUser } from '@shared/interfaces/user.interface';
+import { AuthService } from '@shared/services/auth.service';
 
 export type MobileHeaderMode = 'alwaysOnTop' | 'pullToShow';
 
@@ -26,10 +26,9 @@ export type MobileHeaderVisibility = 'hidden' | 'shown';
 
 @Component({
   selector: 'app-mobile-header',
-  templateUrl: './mobile-header.component.html',
-  styleUrls: [ './mobile-header.component.scss' ]
+  templateUrl: './mobile-header.component.html'
 })
-export class MobileHeaderComponent implements OnDestroy, AfterViewInit {
+export class MobileHeaderComponent implements OnDestroy, AfterViewInit, OnInit {
   @Input() stickyMode: MobileHeaderMode | false = false;
 
   @ViewChild('element') elementRef!: ElementRef;
@@ -45,6 +44,7 @@ export class MobileHeaderComponent implements OnDestroy, AfterViewInit {
   scrollPosition = 0;
   scrollDistance = 0;
 
+  currentUser!: IUser | null;
   media!: Observable<MediaQueryList>;
 
   get element(): HTMLDivElement {
@@ -58,16 +58,20 @@ export class MobileHeaderComponent implements OnDestroy, AfterViewInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     public menu: MobileMenuService,
-    public wishlist: WishlistService,
     public cart: CartService,
     public zone: NgZone,
-    public root: RootService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  ngOnInit() {
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.currentUser = user;
+        this.cdr.detectChanges();
+      })
   }
 
   ngAfterViewInit(): void {
@@ -180,5 +184,10 @@ export class MobileHeaderComponent implements OnDestroy, AfterViewInit {
     this.element.classList.remove('mobile-header--shown');
 
     this.zone.run(() => this.visibility = 'hidden');
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

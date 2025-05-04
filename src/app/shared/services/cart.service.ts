@@ -1,68 +1,18 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { IProduct, Product } from '../interfaces/product';
-import { CartItem } from '../interfaces/cart-item';
-import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ICartItem } from '../interfaces/cart';
 import { isPlatformBrowser } from '@angular/common';
 import { RequestService } from '@shared/services/request.service';
-
-interface CartTotal {
-  title: string;
-  price: number;
-  type: 'shipping' | 'fee' | 'tax' | 'other';
-}
-
-interface CartData {
-  items: CartItem[];
-  quantity: number;
-  subtotal: number;
-  totals: CartTotal[];
-  total: number;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private data: CartData = {
-    items: [],
-    quantity: 0,
-    subtotal: 0,
-    totals: [],
-    total: 0
-  };
-
-  private itemsSubject$: BehaviorSubject<CartItem[]> = new BehaviorSubject(this.data.items);
-  private quantitySubject$: BehaviorSubject<number> = new BehaviorSubject(this.data.quantity);
-  private subtotalSubject$: BehaviorSubject<number> = new BehaviorSubject(this.data.subtotal);
-  private totalsSubject$: BehaviorSubject<CartTotal[]> = new BehaviorSubject(this.data.totals);
-  private totalSubject$: BehaviorSubject<number> = new BehaviorSubject(this.data.total);
-  private onAddingSubject$: Subject<IProduct> = new Subject();
-
-  get items(): ReadonlyArray<CartItem> {
-    return this.data.items;
-  }
-
-  get quantity(): number {
-    return this.data.quantity;
-  }
-
-  readonly items$: Observable<CartItem[]> = this.itemsSubject$.asObservable();
-  readonly quantity$: Observable<number> = this.quantitySubject$.asObservable();
-  readonly subtotal$: Observable<number> = this.subtotalSubject$.asObservable();
-  readonly totals$: Observable<CartTotal[]> = this.totalsSubject$.asObservable();
-  readonly total$: Observable<number> = this.totalSubject$.asObservable();
-
-  readonly onAdding$: Observable<IProduct> = this.onAddingSubject$.asObservable();
-
   constructor(
     @Inject(PLATFORM_ID)
     private platformId: any,
     private requestService: RequestService
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      this.load();
-      this.calc();
     }
   }
 
@@ -70,80 +20,10 @@ export class CartService {
     return this.requestService.request<{ statusCode: number }>('cart/add', {
       productId,
       quantity
-    })
-  }
-
-  update(updates: { item: CartItem, quantity: number }[]): Observable<void> {
-    // timer only for demo
-    return timer(1000).pipe(map(() => {
-      updates.forEach(update => {
-        const item = this.items.find(eachItem => eachItem === update.item);
-
-        if (item) {
-          item.quantity = update.quantity;
-        }
-      });
-
-      this.save();
-      this.calc();
-    }));
-  }
-
-  remove(item: CartItem): Observable<void> {
-    // timer only for demo
-    return timer(1000).pipe(map(() => {
-      this.data.items = this.data.items.filter(eachItem => eachItem !== item);
-
-      this.save();
-      this.calc();
-    }));
-  }
-
-  private calc(): void {
-    let quantity = 0;
-    let subtotal = 0;
-
-    this.data.items.forEach(item => {
-      quantity += item.quantity;
-      subtotal += item.product.price * item.quantity;
     });
-
-    const totals: CartTotal[] = [];
-
-    totals.push({
-      title: 'Shipping',
-      price: 25,
-      type: 'shipping'
-    });
-    totals.push({
-      title: 'Tax',
-      price: subtotal * 0.20,
-      type: 'tax'
-    });
-
-    const total = subtotal + totals.reduce((acc, eachTotal) => acc + eachTotal.price, 0);
-
-    this.data.quantity = quantity;
-    this.data.subtotal = subtotal;
-    this.data.totals = totals;
-    this.data.total = total;
-
-    this.itemsSubject$.next(this.data.items);
-    this.quantitySubject$.next(this.data.quantity);
-    this.subtotalSubject$.next(this.data.subtotal);
-    this.totalsSubject$.next(this.data.totals);
-    this.totalSubject$.next(this.data.total);
   }
 
-  private save(): void {
-    localStorage.setItem('cartItems', JSON.stringify(this.data.items));
-  }
-
-  private load(): void {
-    const items = localStorage.getItem('cartItems');
-
-    if (items) {
-      this.data.items = JSON.parse(items);
-    }
+  getList() {
+    return this.requestService.request<ICartItem[]>('cart/list');
   }
 }

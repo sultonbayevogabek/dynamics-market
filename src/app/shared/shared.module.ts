@@ -45,6 +45,7 @@ import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinn
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CutDescriptionPipe } from '@shared/pipes/cut-description.pipe';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { CutDescriptionPipe } from '@shared/pipes/cut-description.pipe';
       ModalModule.forRoot(),
       RedZoomModule,
       TranslateModule,
-      TooltipModule
+      TooltipModule,
+      NgxMaskModule
    ],
   exports: [
     // directives

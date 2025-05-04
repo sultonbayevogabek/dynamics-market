@@ -50,10 +50,10 @@
         </app-indicator>
 
         <app-indicator
+          *ngIf="currentUser"
           link="/cart"
           icon="cart-20"
           trigger="click"
-          [counter]="(cart.quantity$| async) || 0"
         >
         </app-indicator>
 

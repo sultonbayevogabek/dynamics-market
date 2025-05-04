@@ -10,12 +10,10 @@ import {
 } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { IProduct } from '../../interfaces/product';
-import { WishlistService } from '../../services/wishlist.service';
-import { CompareService } from '../../services/compare.service';
 import { QuickviewService } from '../../services/quickview.service';
 import { RootService } from '../../services/root.service';
 import { CurrencyService } from '../../services/currency.service';
-import { first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { firstValueFrom, Subject } from 'rxjs';
 import { environment } from '@env/environment.prod';
 import { AuthService } from '@shared/services/auth.service';
@@ -44,8 +42,6 @@ export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {
     private cd: ChangeDetectorRef,
     public root: RootService,
     public cart: CartService,
-    public wishlist: WishlistService,
-    public compare: CompareService,
     public quickview: QuickviewService,
     public currency: CurrencyService,
     private authService: AuthService,

@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
 import { RootService } from '@shared/services/root.service';
 
 @Component({
@@ -15,18 +13,11 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     public root: RootService,
-    public cart: CartService,
-    private route: ActivatedRoute,
-    private router: Router
+    public cart: CartService
   ) {
   }
 
   ngOnInit(): void {
-    this.cart.quantity$.pipe(takeUntil(this.destroy$)).subscribe(quantity => {
-      if (!quantity) {
-        this.router.navigate([ '../cart' ], { relativeTo: this.route }).then();
-      }
-    });
   }
 
   ngOnDestroy(): void {
