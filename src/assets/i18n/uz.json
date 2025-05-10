@@ -113,5 +113,7 @@
   "company.name": "Kompaniya nomi",
   "additional.comment": "Qo‘shimcha izoh",
   "optional": "Ixtiyoriy",
-  "your.order": "Buyurtmangiz"
+  "your.order": "Buyurtmangiz",
+  "i.have.read.terms.of.website": "Men veb-saytning foydalanish shartlariga roziman va ularni o‘qidim",
+  "send.a.request": "So'rov yuborish"
 }

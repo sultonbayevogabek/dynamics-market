@@ -21,12 +21,17 @@
                   <label class="payment-methods__item-header">
                     <span class="payment-methods__item-radio input-radio">
                         <span class="input-radio__body">
-                            <input class="input-radio__input" name="checkout_payment_method"
-                                   type="radio">
+                            <input
+                              formControlName="userType"
+                              class="input-radio__input"
+                              name="checkout_payment_method"
+                              type="radio"
+                              value="legal"
+                            >
                             <span class="input-radio__circle"></span>
                         </span>
                     </span>
-                    <span class="payment-methods__item-title font-normal">{{ 'legal.entity'| translate}}</span>
+                    <span class="payment-methods__item-title font-normal">{{ 'legal.entity'| translate }}</span>
                   </label>
                 </div>
               </div>
@@ -36,8 +41,13 @@
                   <label class="payment-methods__item-header">
                     <span class="payment-methods__item-radio input-radio">
                         <span class="input-radio__body">
-                            <input class="input-radio__input" name="checkout_payment_method"
-                                   type="radio">
+                            <input
+                              formControlName="userType"
+                              class="input-radio__input"
+                              name="checkout_payment_method"
+                              type="radio"
+                              value="individual"
+                            >
                             <span class="input-radio__circle"></span>
                         </span>
                     </span>
@@ -50,27 +60,62 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="checkout-first-name">{{ 'firstname'| translate }} *</label>
-                <input type="text" class="form-control" id="checkout-first-name" [placeholder]="'firstname'| translate">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="checkout-first-name"
+                  [placeholder]="'firstname'| translate"
+                  formControlName="firstName"
+                  [class.is-invalid]="checkoutForm.get('firstName')?.errors && checkoutForm.get('firstName')?.touched"
+                >
               </div>
               <div class="form-group col-md-6">
                 <label for="checkout-last-name">{{ 'lastname'| translate }} *</label>
-                <input type="text" class="form-control" id="checkout-last-name" [placeholder]="'lastname'| translate">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="checkout-last-name"
+                  [placeholder]="'lastname'| translate"
+                  formControlName="lastName"
+                  [class.is-invalid]="checkoutForm.get('lastName')?.errors && checkoutForm.get('lastName')?.touched"
+                >
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="checkout-company-name">{{ 'company.name'| translate }}</label>
-              <input type="text" class="form-control" id="checkout-company-name" [placeholder]="'company.name'| translate">
+            <div class="form-group" [hidden]="checkoutForm.get('userType')?.value !== 'legal'">
+              <label for="checkout-company-name">{{ 'company.name'| translate }} *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="checkout-company-name"
+                [placeholder]="'company.name'| translate"
+                formControlName="companyName"
+                [class.is-invalid]="checkoutForm.get('companyName')?.errors && checkoutForm.get('companyName')?.touched"
+              >
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="checkout-email">{{ 'email'| translate }} *</label>
-                <input type="email" class="form-control" id="checkout-email" [placeholder]="'email'| translate">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="checkout-email"
+                  [placeholder]="'email'| translate"
+                  formControlName="email"
+                  [class.is-invalid]="checkoutForm.get('email')?.errors && checkoutForm.get('email')?.touched"
+                >
               </div>
               <div class="form-group col-md-6">
                 <label for="checkout-phone">{{ 'phone.number'| translate }} *</label>
-                <input type="text" class="form-control" id="checkout-phone" [placeholder]="'phone.number'| translate">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="checkout-phone"
+                  [placeholder]="'phone.number'| translate"
+                  formControlName="phoneNumber"
+                  [class.is-invalid]="checkoutForm.get('phoneNumber')?.errors && checkoutForm.get('phoneNumber')?.touched"
+                >
               </div>
             </div>
 
@@ -79,7 +124,12 @@
                 {{ 'additional.comment'| translate }}
                 <span class="text-muted text-lowercase">({{ 'optional'| translate }})</span>
               </label>
-              <textarea id="checkout-comment" class="form-control" rows="4"></textarea>
+              <textarea
+                id="checkout-comment"
+                class="form-control"
+                rows="4"
+                formControlName="comment"
+              ></textarea>
             </div>
           </div>
         </div>
@@ -99,30 +149,48 @@
               </thead>
               <tbody class="checkout__totals-products">
               <tr *ngFor="let item of items">
-                <td>{{ item.product.name }} × {{ item.quantity }}</td>
-                <td>{{ item.product.currentPrice * item.quantity|currencyFormat }}</td>
+                <td>{{ item.product?.name }} × {{ item?.quantity }}</td>
+                <td>
+                  <ng-container *ngIf="item?.product?.currentPrice">
+                    {{ (item.product.currentPrice * item.quantity)|currencyFormat }}
+                  </ng-container>
+
+                  <ng-container *ngIf="!item?.product?.currentPrice">
+                    -
+                  </ng-container>
+                </td>
               </tr>
               </tbody>
             </table>
 
             <div class="checkout__agree form-group">
               <div class="form-check">
-                                    <span class="form-check-input input-check">
-                                        <span class="input-check__body">
-                                            <input class="input-check__input" type="checkbox" id="checkout-terms">
-                                            <span class="input-check__box"></span>
-                                            <svg class="input-check__icon" width="9px" height="7px"><use
-                                              xlink:href="assets/images/sprite.svg#check-9x7"></use></svg>
-                                        </span>
-                                    </span>
+                <span class="form-check-input input-check">
+                  <span class="input-check__body">
+                    <input
+                      class="input-check__input"
+                      type="checkbox"
+                      id="checkout-terms"
+                      formControlName="terms"
+                    >
+                    <span class="input-check__box"></span>
+                    <svg class="input-check__icon" width="9px" height="7px"><use
+                      xlink:href="assets/images/sprite.svg#check-9x7"></use></svg>
+                  </span>
+                </span>
                 <label class="form-check-label" for="checkout-terms">
-                  I have read and agree to the website <a target="_blank" [routerLink]="['/terms']">terms and
-                  conditions</a>*
+                  {{ 'i.have.read.terms.of.website'| translate }}
                 </label>
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-xl btn-block">Place Order</button>
+            <button
+              type="submit"
+              class="btn btn-primary btn-xl btn-block"
+              [disabled]="checkoutForm.invalid || checkoutForm.disabled"
+            >
+              {{ 'send.a.request'| translate }}
+            </button>
           </div>
         </div>
       </div>

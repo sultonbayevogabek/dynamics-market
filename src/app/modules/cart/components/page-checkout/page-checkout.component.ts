@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
-import { firstValueFrom, Subject } from 'rxjs';
+import { firstValueFrom, lastValueFrom, Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@shared/services/auth.service';
 import { ICartItem } from '@shared/interfaces/cart';
+import { IUser } from '@shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -25,18 +26,35 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.initForm();
-    console.log(this.getCartItems());
+    await this.setUserData();
+    await this.getCartItems();
+  }
+
+  async setUserData() {
+    const user: IUser | null = await firstValueFrom(
+      this.authService.currentUser$
+    )
+    console.log(user);
+
+    this.checkoutForm.patchValue({
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.email,
+      phoneNumber: user?.phone
+    })
+    this.checkoutForm.updateValueAndValidity()
   }
 
   initForm(): void {
     this.checkoutForm = this.fb.group({
-      userType: ['', Validators.required],
+      userType: ['legal', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       companyName: [''],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
-      comment: ['']
+      comment: [''],
+      terms: [false, Validators.requiredTrue]
     });
 
     this.checkoutForm.get('userType')?.valueChanges.subscribe(userType => {
