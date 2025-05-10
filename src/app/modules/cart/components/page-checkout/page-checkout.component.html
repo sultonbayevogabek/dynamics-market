@@ -88,112 +88,22 @@
       <div class="col-12 col-lg-6 col-xl-5 mt-4 mt-lg-0">
         <div class="card mb-0">
           <div class="card-body">
-            <h3 class="card-title">Your Order</h3>
+            <h3 class="card-title">{{ 'your.order'| translate }}</h3>
 
             <table class="checkout__totals">
               <thead class="checkout__totals-header">
               <tr>
-                <th>Product</th>
-                <th>Total</th>
+                <th>{{ 'product'| translate }}</th>
+                <th>{{ 'total'| translate }}</th>
               </tr>
               </thead>
               <tbody class="checkout__totals-products">
-              <!--<tr *ngFor="let item of cart.items$|async">
+              <tr *ngFor="let item of items">
                 <td>{{ item.product.name }} × {{ item.quantity }}</td>
-                <td>{{ item.product.price * item.quantity|currencyFormat }}</td>
-              </tr>-->
-              </tbody>
-              <tbody *ngIf="[1, 2]?.length" class="checkout__totals-subtotals">
-              <tr>
-                <th>Subtotal</th>
-                <td>{{ 0 }}</td>
-              </tr>
-              <tr *ngFor="let total of [1, 2, 3]">
-                <th>{{ total }}</th>
-                <td>{{ total| currencyFormat }}</td>
+                <td>{{ item.product.currentPrice * item.quantity|currencyFormat }}</td>
               </tr>
               </tbody>
-              <tfoot class="checkout__totals-footer">
-              <tr>
-                <th>Total</th>
-                <td>{{ 0 }}</td>
-              </tr>
-              </tfoot>
             </table>
-
-            <div class="payment-methods">
-              <ul class="payment-methods__list">
-                <li class="payment-methods__item payment-methods__item--active">
-                  <label class="payment-methods__item-header">
-                                            <span class="payment-methods__item-radio input-radio">
-                                                <span class="input-radio__body">
-                                                    <input class="input-radio__input" name="checkout_payment_method"
-                                                           type="radio" checked>
-                                                    <span class="input-radio__circle"></span>
-                                                </span>
-                                            </span>
-                    <span class="payment-methods__item-title">Direct bank transfer</span>
-                  </label>
-                  <div class="payment-methods__item-container">
-                    <div class="payment-methods__item-description text-muted">
-                      Make your payment directly into our bank account. Please use your Order ID as the payment
-                      reference. Your order will not be shipped until the funds have cleared in our account.
-                    </div>
-                  </div>
-                </li>
-                <li class="payment-methods__item">
-                  <label class="payment-methods__item-header">
-                                            <span class="payment-methods__item-radio input-radio">
-                                                <span class="input-radio__body">
-                                                    <input class="input-radio__input" name="checkout_payment_method"
-                                                           type="radio">
-                                                    <span class="input-radio__circle"></span>
-                                                </span>
-                                            </span>
-                    <span class="payment-methods__item-title">Check payments</span>
-                  </label>
-                  <div class="payment-methods__item-container">
-                    <div class="payment-methods__item-description text-muted">
-                      Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
-                    </div>
-                  </div>
-                </li>
-                <li class="payment-methods__item">
-                  <label class="payment-methods__item-header">
-                                            <span class="payment-methods__item-radio input-radio">
-                                                <span class="input-radio__body">
-                                                    <input class="input-radio__input" name="checkout_payment_method"
-                                                           type="radio">
-                                                    <span class="input-radio__circle"></span>
-                                                </span>
-                                            </span>
-                    <span class="payment-methods__item-title">Cash on delivery</span>
-                  </label>
-                  <div class="payment-methods__item-container">
-                    <div class="payment-methods__item-description text-muted">
-                      Pay with cash upon delivery.
-                    </div>
-                  </div>
-                </li>
-                <li class="payment-methods__item">
-                  <label class="payment-methods__item-header">
-                                            <span class="payment-methods__item-radio input-radio">
-                                                <span class="input-radio__body">
-                                                    <input class="input-radio__input" name="checkout_payment_method"
-                                                           type="radio">
-                                                    <span class="input-radio__circle"></span>
-                                                </span>
-                                            </span>
-                    <span class="payment-methods__item-title">PayPal</span>
-                  </label>
-                  <div class="payment-methods__item-container">
-                    <div class="payment-methods__item-description text-muted">
-                      Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
 
             <div class="checkout__agree form-group">
               <div class="form-check">

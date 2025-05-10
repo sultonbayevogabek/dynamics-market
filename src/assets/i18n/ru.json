@@ -112,5 +112,6 @@
   "individual.person": "Физическое лицо",
   "company.name": "Название компании",
   "additional.comment": "Дополнительный комментарий",
-  "optional": "Необязательный"
+  "optional": "Необязательный",
+  "your.order": "Ваш заказ"
 }

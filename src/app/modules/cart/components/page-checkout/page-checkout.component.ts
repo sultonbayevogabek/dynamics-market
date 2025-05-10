@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@shared/services/auth.service';
+import { ICartItem } from '@shared/interfaces/cart';
 
 @Component({
   selector: 'app-checkout',
@@ -11,6 +12,7 @@ import { AuthService } from '@shared/services/auth.service';
 
 export class PageCheckoutComponent implements OnInit, OnDestroy {
   checkoutForm!: FormGroup;
+  items: ICartItem[] = [];
 
   private destroy$: Subject<void> = new Subject();
 
@@ -21,8 +23,9 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initForm();
+    console.log(this.getCartItems());
   }
 
   initForm(): void {
@@ -48,6 +51,17 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
 
       companyNameControl?.updateValueAndValidity();
     });
+  }
+
+  async getCartItems() {
+    const response = await firstValueFrom(
+      this.cart.getList({
+        page: 1,
+        limit: 1000
+      })
+    )
+
+    this.items = response?.data;
   }
 
   ngOnDestroy(): void {
