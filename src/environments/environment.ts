@@ -7,5 +7,5 @@ export const environment = {
     nonce: '123456789'
   },
   host: 'https://backend.dynamics-market.uz/'
-  // host: 'https://70a6-185-213-229-65.ngrok-free.app/'
+  // host: 'https://5856-185-213-230-33.ngrok-free.app/'
 };

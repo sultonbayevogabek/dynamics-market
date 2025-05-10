@@ -46,6 +46,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CutDescriptionPipe } from '@shared/pipes/cut-description.pipe';
 import { NgxMaskModule } from 'ngx-mask';
+import { ImgUrlPipe } from '@shared/pipes/img-url.pipe';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { NgxMaskModule } from 'ngx-mask';
     AbsoluteUrlPipe,
     ColorTypePipe,
     CurrencyFormatPipe,
+    ImgUrlPipe,
     CutDescriptionPipe,
     ProductGalleryComponent,
     LoaderSpinnerComponent
@@ -128,7 +130,8 @@ import { NgxMaskModule } from 'ngx-mask';
     AbsoluteUrlPipe,
     ColorTypePipe,
     CurrencyFormatPipe,
-    LoaderSpinnerComponent
+    LoaderSpinnerComponent,
+    ImgUrlPipe
   ],
   providers: []
 })

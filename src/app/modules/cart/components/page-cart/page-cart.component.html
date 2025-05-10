@@ -26,11 +26,11 @@
       <table class="cart__table cart-table">
         <thead class="cart-table__head">
         <tr class="cart-table__row">
-          <th class="cart-table__column cart-table__column--image">Image</th>
-          <th class="cart-table__column cart-table__column--product">Product</th>
-          <th class="cart-table__column cart-table__column--price">Price</th>
-          <th class="cart-table__column cart-table__column--quantity">Quantity</th>
-          <th class="cart-table__column cart-table__column--total">Total</th>
+          <th class="cart-table__column cart-table__column--image">{{ 'image'| translate }}</th>
+          <th class="cart-table__column cart-table__column--product">{{ 'product'| translate }}</th>
+          <th class="cart-table__column cart-table__column--price">{{ 'price'| translate }}</th>
+          <th class="cart-table__column cart-table__column--quantity">{{ 'quantity'| translate }}</th>
+          <th class="cart-table__column cart-table__column--total">{{ 'total'| translate }}</th>
           <th class="cart-table__column cart-table__column--remove"></th>
         </tr>
         </thead>
@@ -39,29 +39,54 @@
           <td class="cart-table__column cart-table__column--image">
             <div *ngIf="item.product.images?.length" class="product-image">
               <a class="product-image__body">
-                <img class="product-image__img" [src]="item.product.images[0]" alt="">
+                <img class="product-image__img" [src]="item.product.thumbs[0]?.path| imgUrl" alt="">
               </a>
             </div>
           </td>
           <td class="cart-table__column cart-table__column--product">
             <a
               class="cart-table__product-name">{{ item.product.name }}</a>
-            <ul *ngIf="item.product.attributes.length" class="cart-table__options">
-              <li *ngFor="let attribute of item.product.attributes">{{ attribute.name }}: {{ attribute.value }}</li>
-            </ul>
+            <div class="text-sm">
+              <span>{{ 'manufacturer'| translate }}: </span>
+              <span class="text-primary">{{ item?.product?.brand?.name }}</span>
+            </div>
           </td>
-          <td class="cart-table__column cart-table__column--price"
-              data-title="Price">{{ item.product.price| currencyFormat }}
+          <td class="cart-table__column cart-table__column--price" [attr.data-title]="'price'| translate">
+            <ng-container *ngIf="item?.product?.currentPrice && item?.product?.oldPrice">
+              <span>{{ item?.product?.currentPrice| currencyFormat }}</span>
+              <span> {{ item?.product?.oldPrice| currencyFormat }}</span>
+            </ng-container>
+
+            <ng-container *ngIf="item?.product?.currentPrice && !item?.product?.oldPrice">
+              <span>{{ item?.product?.currentPrice| currencyFormat }}</span>
+            </ng-container>
+
+            <span *ngIf="!item?.product?.currentPrice && !item?.product?.oldPrice">
+              {{ 'on.request'| translate }}
+            </span>
           </td>
-          <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
-<!--            <app-input-number [formControl]="item.quantity" [min]="1"></app-input-number>-->
+          <td class="cart-table__column cart-table__column--quantity" [attr.data-title]="'quantity'| translate">
+            <app-input-number
+              [(ngModel)]="item.quantity"
+              [min]="1"
+              [disabled]="!!item?.updating"
+              [readonly]="true"
+              (ngModelChange)="updateCount(item)"
+            ></app-input-number>
           </td>
           <td class="cart-table__column cart-table__column--total"
-              data-title="Total">{{ item.product.price * item.quantity|currencyFormat }}
+              [attr.data-title]="'total'| translate">
+            <ng-container *ngIf="item?.product?.currentPrice">
+              {{ (item.product.currentPrice * item.quantity)|currencyFormat }}
+            </ng-container>
+
+            <ng-container *ngIf="!item?.product?.currentPrice">
+              -
+            </ng-container>
           </td>
           <td class="cart-table__column cart-table__column--remove">
             <button type="button" class="btn btn-light btn-sm btn-svg-icon" (click)="remove(item)"
-                    [ngClass]="{'btn-loading': removedItems.includes(item)}">
+                    [ngClass]="{'btn-loading': item?.removing }">
               <app-icon name="cross-12" size="12"></app-icon>
             </button>
           </td>
@@ -69,52 +94,18 @@
         </tbody>
       </table>
 
-      <div class="cart__actions">
-        <div class="cart__buttons">
-          <a routerLink="/" class="btn btn-light">Continue Shopping</a>
-          <button type="button" class="btn btn-primary cart__update-button" (click)="update()"
-                  [ngClass]="{'btn-loading': updating}" [disabled]="!needUpdate()">Update Cart
-          </button>
-        </div>
+      <div class="flex justify-between pt-5">
+        <app-pagination
+          [(ngModel)]="params.page"
+          [siblings]="2"
+          [total]="params.pages"
+          (pageChange)="getCartList()"
+        ></app-pagination>
+
+        <a class="btn btn-primary" routerLink="./checkout">
+          {{ 'checkout'| translate }}
+        </a>
       </div>
-
-      <!--<div class="row justify-content-end pt-5">
-        <div class="col-12 col-md-7 col-lg-6 col-xl-5">
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">Cart Totals</h3>
-
-              <table class="cart__totals">
-                <thead *ngIf="(cart.totals$|async)?.length" class="cart__totals-header">
-                <tr>
-                  <th>Subtotal</th>
-                  <td>{{ cart.subtotal$|async|currencyFormat }}</td>
-                </tr>
-                </thead>
-                <tbody *ngIf="(cart.totals$|async)?.length" class="cart__totals-body">
-                <tr *ngFor="let total of cart.totals$|async">
-                  <th>{{ total.title }}</th>
-                  <td>
-                    {{ total.price|currencyFormat }}
-                    <div *ngIf="total.type === 'shipping'" class="cart__calc-shipping"><a href=""
-                                                                                          (click)="$event.preventDefault()">Calculate
-                      Shipping</a></div>
-                  </td>
-                </tr>
-                </tbody>
-                <tfoot class="cart__totals-footer">
-                <tr>
-                  <th>Total</th>
-                  <td>{{ 0 }}</td>
-                </tr>
-                </tfoot>
-              </table>
-              <a class="btn btn-primary btn-xl btn-block cart__checkout-button" routerLink="./checkout">Proceed to
-                checkout</a>
-            </div>
-          </div>
-        </div>
-      </div>-->
     </div>
   </div>
 </ng-container>

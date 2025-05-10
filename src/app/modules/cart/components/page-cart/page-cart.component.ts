@@ -2,10 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
 import { ICartItem } from '@shared/interfaces/cart';
 import { firstValueFrom, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { RootService } from '@shared/services/root.service';
-import { AuthService } from '@shared/services/auth.service';
-import { IUser } from '@shared/interfaces/user.interface';
+import { ToasterService } from '@shared/services/toaster.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,42 +12,54 @@ import { IUser } from '@shared/interfaces/user.interface';
 export class PageCartComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject();
 
-  removedItems: any[] = [];
   items: ICartItem[] = [];
   updating = false;
   loading = true;
+  params = {
+    page: 1,
+    limit: 3,
+    pages: 1
+  };
 
   constructor(
     public root: RootService,
     public cart: CartService,
-    private authService: AuthService
+    private toaster: ToasterService
   ) {
   }
 
-  ngOnInit() {
-    this.authService.currentUser$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(async user => {
-        await this.getCartList(user);
-      })
+  async ngOnInit() {
+    await this.getCartList();
   }
 
-  async getCartList(user: IUser | null) {
-    if (!user) {
-      this.loading = false;
-      return;
-    }
+  async getCartList() {
+    const response = await firstValueFrom(
+      this.cart.getList(this.params)
+    );
 
-    this.items = await firstValueFrom(
-      this.cart.getList()
-    )
+    this.items = response?.data;
+    this.params.pages = response?.pages;
 
     this.loading = false;
   }
 
-  remove(item: any): void {
-    if (this.removedItems.includes(item)) {
+  async remove(item: ICartItem) {
+    if (item.removing) {
       return;
+    }
+
+    item.removing = true;
+
+    const response = await firstValueFrom(
+      this.cart.remove(item?._id)
+    );
+
+    if (response.statusCode === 200) {
+      await this.toaster.success('the.product.has.been.successfully.removed.from.the.cart');
+      this.params.page = 1;
+      await this.getCartList();
+    } else {
+      item.removing = false;
     }
   }
 
@@ -57,14 +67,24 @@ export class PageCartComponent implements OnInit, OnDestroy {
     this.updating = true;
   }
 
-  needUpdate(): boolean {
-    let needUpdate = false;
-
-    return needUpdate;
-  }
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  async updateCount(item: ICartItem) {
+    if (item.updating) {
+      return;
+    }
+
+    item.updating = true;
+    const response = await firstValueFrom(
+      this.cart.updateCartItem({
+        _id: item._id,
+        quantity: item.quantity
+      })
+    )
+
+    item.updating = false;
   }
 }

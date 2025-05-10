@@ -79,11 +79,13 @@ export class InputNumberComponent implements ControlValueAccessor {
   }
 
   add(): void {
+    if (this.options.disabled) return;
     this.change(1);
     this.changeByTimer(1);
   }
 
   sub(): void {
+    if (this.options.disabled) return;
     this.change(-1);
     this.changeByTimer(-1);
   }
@@ -148,5 +150,9 @@ export class InputNumberComponent implements ControlValueAccessor {
     };
 
     document.addEventListener('mouseup', documentMouseUp, false);
+  }
+
+  some() {
+    console.log('some');
   }
 }

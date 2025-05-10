@@ -31,7 +31,6 @@ export class PaginationComponent implements OnChanges, OnInit, ControlValueAcces
   }
 
   ngOnInit(): void {
-    console.log(this.total);
     this.calc();
   }
 

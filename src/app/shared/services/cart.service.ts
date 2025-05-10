@@ -23,7 +23,15 @@ export class CartService {
     });
   }
 
-  getList() {
-    return this.requestService.request<ICartItem[]>('cart/list');
+  getList(params: { page?: number; limit?: number }) {
+    return this.requestService.request<{ data: ICartItem[]; total: number; pages: number }>('cart/list', params);
+  }
+
+  remove(_id: string) {
+    return this.requestService.request<{ statusCode: number }>('cart/delete', { _id });
+  }
+
+  updateCartItem(payload: { _id: string; quantity: number }) {
+    return this.requestService.request<{ statusCode: number }>('cart/update', payload);
   }
 }

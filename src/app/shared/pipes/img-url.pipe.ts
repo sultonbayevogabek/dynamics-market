@@ -7,7 +7,7 @@ import { environment } from '@env/environment';
 export class ImgUrlPipe implements PipeTransform {
   host = environment.host;
 
-  transform(path: string): string {
+  transform(path: string | undefined): string {
     return this.host + path;
   }
 }

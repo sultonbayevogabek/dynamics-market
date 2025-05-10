@@ -47,23 +47,24 @@ export interface Product {
 }
 
 export interface IProduct {
-  _id: string
-  sku: string
-  oldPrice: number
-  currentPrice: number
-  quantity: number
-  categoryId: string
-  brandId: string
-  images: Image[]
-  status: number
-  hierarchyPath: string[]
-  views: number
-  inStock: boolean
-  name: string
-  description: string
-  slug: string
-  attributesx: Attribute[]
-  hierarchy: Hierarchy[]
+  _id: string;
+  sku: string;
+  oldPrice: number;
+  currentPrice: number;
+  quantity: number;
+  categoryId: string;
+  brandId: string;
+  images: Image[];
+  thumbs: Image[];
+  status: number;
+  hierarchyPath: string[];
+  views: number;
+  inStock: boolean;
+  name: string;
+  description: string;
+  slug: string;
+  attributesx: Attribute[];
+  hierarchy: Hierarchy[];
 
   id: number;
   price: number;
@@ -79,24 +80,24 @@ export interface IProduct {
 }
 
 export interface Image {
-  fieldname: string
-  originalname: string
-  encoding: string
-  mimetype: string
-  destination: string
-  filename: string
-  path: string
-  size: number
-  extension: string
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  destination: string;
+  filename: string;
+  path: string;
+  size: number;
+  extension: string;
 }
 
 export interface Attribute {
-  name: string
-  value: string
+  name: string;
+  value: string;
 }
 
 export interface Hierarchy {
-  categoryId: string
-  categorySlug: string
-  categoryName: string
+  categoryId: string;
+  categorySlug: string;
+  categoryName: string;
 }

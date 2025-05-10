@@ -7,7 +7,7 @@ import { PageCartComponent } from './components/page-cart/page-cart.component';
 import { PageCheckoutComponent } from './components/page-checkout/page-checkout.component';
 import { PageOrderSuccessComponent } from './components/page-order-success/page-order-success.component';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartRoutingModule } from './cart-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -24,7 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
       RouterModule,
       ReactiveFormsModule,
       CartRoutingModule,
-      TranslateModule
+      TranslateModule,
+      FormsModule
    ]
 })
 export class CartModule {

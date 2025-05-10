@@ -98,5 +98,19 @@
   "your.shopping.cart.is.empty": "Sizning savatingiz bo‘sh!",
   "continue": "Davom etish",
   "sign.in.to.add.products.to.your.cart": "Tovarni savatingizga qo'shish uchun avtorizatsiyadan o'ting",
-  "the.product.has.been.successfully.added.to.your.cart": "Tovar savatga muvaffaqiyatli qo‘shildi!"
+  "the.product.has.been.successfully.added.to.your.cart": "Tovar savatga muvaffaqiyatli qo‘shildi!",
+  "image": "Rasm",
+  "product": "Tovar",
+  "the.product.has.been.successfully.removed.from.the.cart": "Tovar savatdan muvaffaqiyatli o‘chirildi",
+  "price": "Narxi",
+  "quantity": "Miqdor",
+  "total": "Jami",
+  "on.request": "So'rov bo'yicha",
+  "checkout": "Buyurtmani rasmiylashtirish",
+  "who.are.you": "Kim siz?",
+  "legal.entity": "Yuridik shaxs",
+  "individual.person": "Jismoniy shaxs",
+  "company.name": "Kompaniya nomi",
+  "additional.comment": "Qo‘shimcha izoh",
+  "optional": "Ixtiyoriy"
 }

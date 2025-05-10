@@ -15,7 +15,6 @@ import { RootService } from '../../services/root.service';
 import { CurrencyService } from '../../services/currency.service';
 import { takeUntil } from 'rxjs/operators';
 import { firstValueFrom, Subject } from 'rxjs';
-import { environment } from '@env/environment.prod';
 import { AuthService } from '@shared/services/auth.service';
 import { IUser } from '@shared/interfaces/user.interface';
 import { ToasterService } from '@shared/services/toaster.service';
@@ -27,7 +26,6 @@ import { ToasterService } from '@shared/services/toaster.service';
 })
 
 export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {
-  host = environment.host;
   currentUser!: IUser | null;
   private destroy$: Subject<void> = new Subject();
 

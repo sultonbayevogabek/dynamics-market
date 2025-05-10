@@ -98,5 +98,19 @@
   "your.shopping.cart.is.empty": "Ваша корзина пуста!",
   "continue": "Продолжить",
   "sign.in.to.add.products.to.your.cart": "Войдите, чтобы добавить товары в корзину",
-  "the.product.has.been.successfully.added.to.your.cart": "Товар успешно добавлен в корзину!"
+  "the.product.has.been.successfully.added.to.your.cart": "Товар успешно добавлен в корзину!",
+  "image": "Изображение",
+  "product": "Товар",
+  "the.product.has.been.successfully.removed.from.the.cart": "Товар успешно удалён из корзины",
+  "price": "Цена",
+  "quantity": "Количество",
+  "total": "Итого",
+  "on.request": "По запросу",
+  "checkout": "Оформить заказ",
+  "who.are.you": "Кто вы?",
+  "legal.entity": "Юридическое лицо",
+  "individual.person": "Физическое лицо",
+  "company.name": "Название компании",
+  "additional.comment": "Дополнительный комментарий",
+  "optional": "Необязательный"
 }

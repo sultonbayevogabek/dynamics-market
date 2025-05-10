@@ -98,5 +98,19 @@
   "your.shopping.cart.is.empty": "Your shopping cart is empty!",
   "continue": "Continue",
   "sign.in.to.add.products.to.your.cart": "Sign in to add products to your cart",
-  "the.product.has.been.successfully.added.to.your.cart": "The product has been successfully added to your cart!"
+  "the.product.has.been.successfully.added.to.your.cart": "The product has been successfully added to your cart!",
+  "image": "Image",
+  "product": "Product",
+  "the.product.has.been.successfully.removed.from.the.cart": "The product has been successfully removed from the cart",
+  "price": "Price",
+  "quantity": "Quantity",
+  "total": "Total",
+  "on.request": "On request",
+  "checkout": "Checkout",
+  "who.are.you": "Who are you?",
+  "legal.entity": "Legal entity",
+  "individual.person": "Individual person",
+  "company.name": "Company name",
+  "additional.comment": "Additional comment",
+  "optional": "Optional"
 }
