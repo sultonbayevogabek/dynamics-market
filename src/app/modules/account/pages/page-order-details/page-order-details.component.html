@@ -1,15 +1,18 @@
 <div class="card">
   <div class="order-header">
     <div class="order-header__actions">
-      <a routerLink="/account/orders" class="btn btn-xs btn-secondary">Back to list</a>
+      <a routerLink="/account/orders" class="btn btn-xs btn-secondary">
+        {{ 'back.to.list'| translate }}
+      </a>
     </div>
-    <h5 class="order-header__title">Order #{{ order.id }}</h5>
+    <h5 class="order-header__title">{{ 'order'| translate }} #{{ order.id }}</h5>
     <div class="order-header__subtitle">
-      Was placed on
-      <mark class="order-header__date">{{ order.date }}</mark>
-      and is currently
-      <mark class="order-header__status">{{ order.status }}</mark>
-      .
+      {{
+        'order.details.status.message'| translate: {
+          date: order.date,
+          status: 'New'
+        }
+      }}
     </div>
   </div>
   <div class="card-divider"></div>
@@ -18,8 +21,8 @@
       <table>
         <thead>
         <tr>
-          <th>Product</th>
-          <th>Total</th>
+          <th>{{ 'product'| translate }}</th>
+          <th>{{ 'total'| translate }}</th>
         </tr>
         </thead>
         <tbody class="card-table__body card-table__body--merge-rows">
@@ -28,22 +31,6 @@
           <td>{{ item.total|currencyFormat }}</td>
         </tr>
         </tbody>
-        <tbody *ngIf="order.additionalLines.length > 0" class="card-table__body card-table__body--merge-rows">
-        <tr>
-          <th>Subtotal</th>
-          <td>{{ order.subtotal|currencyFormat }}</td>
-        </tr>
-        <tr *ngFor="let line of order.additionalLines">
-          <th>{{ line.label }}</th>
-          <td>{{ line.total|currencyFormat }}</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <th>Total</th>
-          <td>{{ order.total|currencyFormat }}</td>
-        </tr>
-        </tfoot>
       </table>
     </div>
   </div>

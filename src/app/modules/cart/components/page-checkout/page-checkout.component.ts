@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@shared/services/auth.service';
 import { ICartItem } from '@shared/interfaces/cart';
 import { IUser } from '@shared/interfaces/user.interface';
+import { ToasterService } from '@shared/services/toaster.service';
 
 @Component({
   selector: 'app-checkout',
@@ -20,7 +21,8 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
   constructor(
     public cart: CartService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private toaster: ToasterService,
   ) {
   }
 
@@ -80,6 +82,20 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
     )
 
     this.items = response?.data;
+  }
+
+  async checkout() {
+    if (this.checkoutForm.invalid) {
+      await this.toaster.warning('please.fill.required.fields');
+      return;
+    }
+
+    if (this.checkoutForm.disabled) {
+      return;
+    }
+
+    this.checkoutForm.disable();
+    this.checkoutForm.updateValueAndValidity();
   }
 
   ngOnDestroy(): void {

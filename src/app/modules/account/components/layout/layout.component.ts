@@ -15,7 +15,6 @@ export class LayoutComponent {
   links: { label: string; url: string }[] = [
     { label: 'edit.profile', url: './profile' },
     { label: 'orders.history', url: './orders' },
-    { label: 'order.details', url: './orders/5' },
     { label: 'logout', url: '' }
   ];
 

@@ -4,7 +4,7 @@
     {label: 'checkout',      url: ''}
 ]"></app-page-header>
 
-<form class="checkout block" [formGroup]="checkoutForm">
+<form class="checkout block" [formGroup]="checkoutForm" (ngSubmit)="checkout()">
   <div class="container">
     <div class="row">
       <div class="col-12 col-lg-6 col-xl-7">
@@ -187,6 +187,9 @@
             <button
               type="submit"
               class="btn btn-primary btn-xl btn-block"
+              [ngClass]="{
+                'btn-loading': checkoutForm.disabled
+              }"
               [disabled]="checkoutForm.invalid || checkoutForm.disabled"
             >
               {{ 'send.a.request'| translate }}

@@ -115,5 +115,11 @@
   "optional": "Optional",
   "your.order": "Your order",
   "i.have.read.terms.of.website": "I have read and agree to the website terms and conditions",
-  "send.a.request": "Send a request"
+  "send.a.request": "Send a request",
+  "please.fill.required.fields": "Please fill required fields",
+  "order": "Order",
+  "date": "Date",
+  "status": "Status",
+  "back.to.list": "Back to list",
+  "order.details.status.message": "Was placed on {{ date }} and is currently {{ status }}"
 }
