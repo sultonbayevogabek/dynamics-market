@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
-import { firstValueFrom, lastValueFrom, Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@shared/services/auth.service';
 import { ICartItem } from '@shared/interfaces/cart';
 import { IUser } from '@shared/interfaces/user.interface';
 import { ToasterService } from '@shared/services/toaster.service';
+import { OrdersService } from '@shared/services/orders.service';
 
 @Component({
   selector: 'app-checkout',
@@ -20,9 +21,10 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     public cart: CartService,
+    public order: OrdersService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private toaster: ToasterService,
+    private toaster: ToasterService
   ) {
   }
 
@@ -35,34 +37,33 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
   async setUserData() {
     const user: IUser | null = await firstValueFrom(
       this.authService.currentUser$
-    )
-    console.log(user);
+    );
 
     this.checkoutForm.patchValue({
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.email,
-      phoneNumber: user?.phone
-    })
-    this.checkoutForm.updateValueAndValidity()
+      phone: user?.phone
+    });
+    this.checkoutForm.updateValueAndValidity();
   }
 
   initForm(): void {
     this.checkoutForm = this.fb.group({
-      userType: ['legal', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      companyName: [''],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
-      comment: [''],
-      terms: [false, Validators.requiredTrue]
+      customerType: [ 'legal', Validators.required ],
+      firstName: [ '', Validators.required ],
+      lastName: [ '', Validators.required ],
+      companyName: [ '', [ Validators.required ] ],
+      email: [ '', [ Validators.required, Validators.email ] ],
+      phone: [ '', Validators.required ],
+      comment: [ '' ],
+      terms: [ false, Validators.requiredTrue ]
     });
 
-    this.checkoutForm.get('userType')?.valueChanges.subscribe(userType => {
+    this.checkoutForm.get('customerType')?.valueChanges.subscribe(customerType => {
       const companyNameControl = this.checkoutForm.get('companyName');
 
-      if (userType === 'legal') { // Если выбрано "Юридическое лицо"
+      if (customerType === 'legal') { // Если выбрано "Юридическое лицо"
         companyNameControl?.setValidators(Validators.required);
       } else {
         companyNameControl?.clearValidators();
@@ -79,7 +80,7 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
         page: 1,
         limit: 1000
       })
-    )
+    );
 
     this.items = response?.data;
   }
@@ -95,6 +96,17 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
     }
 
     this.checkoutForm.disable();
+    this.checkoutForm.updateValueAndValidity();
+
+    const payload = this.checkoutForm.getRawValue();
+    const response = await firstValueFrom(
+      this.order.create(payload)
+    );
+    if (response?.statusCode === 201) {
+      await this.toaster.success('order.created.successfully.with.contact');
+      return;
+    }
+    this.checkoutForm.enable();
     this.checkoutForm.updateValueAndValidity();
   }
 

@@ -1,83 +1,83 @@
-<div class="card">
-  <div class="order-header">
-    <div class="order-header__actions">
-      <a routerLink="/account/orders" class="btn btn-xs btn-secondary">
-        {{ 'back.to.list'| translate }}
-      </a>
-    </div>
-    <h5 class="order-header__title">{{ 'order'| translate }} #{{ order.id }}</h5>
-    <div class="order-header__subtitle">
-      {{
-        'order.details.status.message'| translate: {
-          date: order.date,
-          status: 'New'
-        }
-      }}
-    </div>
-  </div>
-  <div class="card-divider"></div>
-  <div class="card-table">
-    <div class="table-responsive-sm">
-      <table>
-        <thead>
-        <tr>
-          <th>{{ 'product'| translate }}</th>
-          <th>{{ 'total'| translate }}</th>
-        </tr>
-        </thead>
-        <tbody class="card-table__body card-table__body--merge-rows">
-        <tr *ngFor="let item of order.items">
-          <td>{{ item.name }} × {{ item.quantity }}</td>
-          <td>{{ item.total|currencyFormat }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<!--<div class="card">-->
+<!--  <div class="order-header">-->
+<!--    <div class="order-header__actions">-->
+<!--      <a routerLink="/account/orders" class="btn btn-xs btn-secondary">-->
+<!--        {{ 'back.to.list'| translate }}-->
+<!--      </a>-->
+<!--    </div>-->
+<!--    <h5 class="order-header__title">{{ 'order'| translate }} #{{ order.id }}</h5>-->
+<!--    <div class="order-header__subtitle">-->
+<!--      {{-->
+<!--        'order.details.status.message'| translate: {-->
+<!--          date: order.date,-->
+<!--          status: 'New'-->
+<!--        }-->
+<!--      }}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="card-divider"></div>-->
+<!--  <div class="card-table">-->
+<!--    <div class="table-responsive-sm">-->
+<!--      <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>{{ 'product'| translate }}</th>-->
+<!--          <th>{{ 'total'| translate }}</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody class="card-table__body card-table__body&#45;&#45;merge-rows">-->
+<!--        <tr *ngFor="let item of order.items">-->
+<!--          <td>{{ item.name }} × {{ item.quantity }}</td>-->
+<!--          <td>{{ item.total|currencyFormat }}</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
-<div class="row mt-3 no-gutters mx-n2">
-  <div class="col-sm-6 col-12 px-2">
-    <div class="card address-card address-card--featured">
-      <div class="address-card__body">
-        <div class="address-card__badge address-card__badge--muted">Shipping Address</div>
-        <div class="address-card__name">{{ order.shippingAddress.firstName + ' ' + order.shippingAddress.lastName }}
-        </div>
-        <div class="address-card__row">
-          {{ order.shippingAddress.country }}<br>
-          {{ order.shippingAddress.postcode }}, {{ order.shippingAddress.city }}<br>
-          {{ order.shippingAddress.address }}
-        </div>
-        <div class="address-card__row">
-          <div class="address-card__row-title">Phone Number</div>
-          <div class="address-card__row-content">{{ order.shippingAddress.phone }}</div>
-        </div>
-        <div class="address-card__row">
-          <div class="address-card__row-title">Email Address</div>
-          <div class="address-card__row-content">{{ order.shippingAddress.email }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-12 px-2 mt-sm-0 mt-3">
-    <div class="card address-card address-card--featured">
-      <div class="address-card__body">
-        <div class="address-card__badge address-card__badge--muted">Billing Address</div>
-        <div class="address-card__name">{{ order.billingAddress.firstName + ' ' + order.billingAddress.lastName }}</div>
-        <div class="address-card__row">
-          {{ order.billingAddress.country }}<br>
-          {{ order.billingAddress.postcode }}, {{ order.billingAddress.city }}<br>
-          {{ order.billingAddress.address }}
-        </div>
-        <div class="address-card__row">
-          <div class="address-card__row-title">Phone Number</div>
-          <div class="address-card__row-content">{{ order.billingAddress.phone }}</div>
-        </div>
-        <div class="address-card__row">
-          <div class="address-card__row-title">Email Address</div>
-          <div class="address-card__row-content">{{ order.billingAddress.email }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="row mt-3 no-gutters mx-n2">-->
+<!--  <div class="col-sm-6 col-12 px-2">-->
+<!--    <div class="card address-card address-card&#45;&#45;featured">-->
+<!--      <div class="address-card__body">-->
+<!--        <div class="address-card__badge address-card__badge&#45;&#45;muted">Shipping Address</div>-->
+<!--        <div class="address-card__name">{{ order.shippingAddress.firstName + ' ' + order.shippingAddress.lastName }}-->
+<!--        </div>-->
+<!--        <div class="address-card__row">-->
+<!--          {{ order.shippingAddress.country }}<br>-->
+<!--          {{ order.shippingAddress.postcode }}, {{ order.shippingAddress.city }}<br>-->
+<!--          {{ order.shippingAddress.address }}-->
+<!--        </div>-->
+<!--        <div class="address-card__row">-->
+<!--          <div class="address-card__row-title">Phone Number</div>-->
+<!--          <div class="address-card__row-content">{{ order.shippingAddress.phone }}</div>-->
+<!--        </div>-->
+<!--        <div class="address-card__row">-->
+<!--          <div class="address-card__row-title">Email Address</div>-->
+<!--          <div class="address-card__row-content">{{ order.shippingAddress.email }}</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-sm-6 col-12 px-2 mt-sm-0 mt-3">-->
+<!--    <div class="card address-card address-card&#45;&#45;featured">-->
+<!--      <div class="address-card__body">-->
+<!--        <div class="address-card__badge address-card__badge&#45;&#45;muted">Billing Address</div>-->
+<!--        <div class="address-card__name">{{ order.billingAddress.firstName + ' ' + order.billingAddress.lastName }}</div>-->
+<!--        <div class="address-card__row">-->
+<!--          {{ order.billingAddress.country }}<br>-->
+<!--          {{ order.billingAddress.postcode }}, {{ order.billingAddress.city }}<br>-->
+<!--          {{ order.billingAddress.address }}-->
+<!--        </div>-->
+<!--        <div class="address-card__row">-->
+<!--          <div class="address-card__row-title">Phone Number</div>-->
+<!--          <div class="address-card__row-content">{{ order.billingAddress.phone }}</div>-->
+<!--        </div>-->
+<!--        <div class="address-card__row">-->
+<!--          <div class="address-card__row-title">Email Address</div>-->
+<!--          <div class="address-card__row-content">{{ order.billingAddress.email }}</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

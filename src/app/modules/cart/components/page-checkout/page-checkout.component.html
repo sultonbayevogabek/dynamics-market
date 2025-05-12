@@ -22,7 +22,7 @@
                     <span class="payment-methods__item-radio input-radio">
                         <span class="input-radio__body">
                             <input
-                              formControlName="userType"
+                              formControlName="customerType"
                               class="input-radio__input"
                               name="checkout_payment_method"
                               type="radio"
@@ -42,7 +42,7 @@
                     <span class="payment-methods__item-radio input-radio">
                         <span class="input-radio__body">
                             <input
-                              formControlName="userType"
+                              formControlName="customerType"
                               class="input-radio__input"
                               name="checkout_payment_method"
                               type="radio"
@@ -82,7 +82,7 @@
               </div>
             </div>
 
-            <div class="form-group" [hidden]="checkoutForm.get('userType')?.value !== 'legal'">
+            <div class="form-group" [hidden]="checkoutForm.get('customerType')?.value !== 'legal'">
               <label for="checkout-company-name">{{ 'company.name'| translate }} *</label>
               <input
                 type="text"
@@ -113,8 +113,8 @@
                   class="form-control"
                   id="checkout-phone"
                   [placeholder]="'phone.number'| translate"
-                  formControlName="phoneNumber"
-                  [class.is-invalid]="checkoutForm.get('phoneNumber')?.errors && checkoutForm.get('phoneNumber')?.touched"
+                  formControlName="phone"
+                  [class.is-invalid]="checkoutForm.get('phone')?.errors && checkoutForm.get('phone')?.touched"
                 >
               </div>
             </div>

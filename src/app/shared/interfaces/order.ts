@@ -1,30 +1,16 @@
-import { Address } from './address';
-
-export interface Order {
-  id: number;
-  date: string;
+export interface IOrder {
+  _id: string;
+  orderCode: string;
+  comment: string;
   status: string;
-  items: Array<{
-    id: number,
-    slug: string,
-    name: string,
-    image: string,
-    options?: Array<{
-      label: string;
-      value: string;
-    }>;
-    price: number,
-    quantity: number,
-    total: number,
-  }>;
-  additionalLines: Array<{
-    label: string,
-    total: number,
-  }>;
+  items: Item[];
+  itemsCount: number;
+  createdAt: string;
+}
+
+export interface Item {
+  productId: string;
+  name: string;
   quantity: number;
-  subtotal: number;
-  total: number;
-  paymentMethod: string;
-  shippingAddress: Address;
-  billingAddress: Address;
+  price: number;
 }

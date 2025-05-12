@@ -121,5 +121,6 @@
   "date": "Date",
   "status": "Status",
   "back.to.list": "Back to list",
-  "order.details.status.message": "Was placed on {{ date }} and is currently {{ status }}"
+  "order.details.status.message": "Was placed on {{ date }} and is currently {{ status }}",
+  "order.created.successfully.with.contact": "Order has been successfully created. We will contact you soon regarding your order"
 }

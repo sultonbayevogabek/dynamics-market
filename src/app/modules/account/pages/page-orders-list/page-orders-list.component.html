@@ -1,32 +1,49 @@
 <div class="card">
-  <div class="card-header">
-    <h5>{{ 'orders.history'| translate }}</h5>
+  <div class="flex justify-center py-20" *ngIf="loading">
+    <app-loader-spinner [size]="48"></app-loader-spinner>
   </div>
-  <div class="card-divider"></div>
-  <div class="card-table">
-    <div class="table-responsive-sm">
-      <table>
-        <thead>
-        <tr>
-          <th>{{ 'order'| translate }}</th>
-          <th>{{ 'date'| translate }}</th>
-          <th>{{ 'status'| translate }}</th>
-          <th>{{ 'total'| translate }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let order of orders">
-          <td><a [routerLink]="'/account/orders/' + order.id">#{{ order.id }}</a></td>
-          <td>{{ order.date }}</td>
-          <td>{{ order.status }}</td>
-          <td>{{ order.total|currencyFormat }} for {{ order.quantity }} item(s)</td>
-        </tr>
-        </tbody>
-      </table>
+
+  <div class="block block-empty" *ngIf="!orders?.length && !loading">
+    <div class="container">
+      <div class="block-empty__body">
+        <div class="block-empty__message">{{ 'your.shopping.cart.is.empty'| translate }}</div>
+        <div class="block-empty__actions">
+          <a [routerLink]="['/products']" class="btn btn-primary btn-sm">
+            {{ 'continue'| translate }}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="card-divider"></div>
-  <div class="card-footer">
-    <app-pagination [total]="3"></app-pagination>
-  </div>
+
+  <ng-container *ngIf="orders?.length && !loading">
+    <div class="card-header">
+      <h5>{{ 'orders.history'| translate }}</h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+      <div class="table-responsive-sm">
+        <table>
+          <thead>
+          <tr>
+            <th>{{ 'order'| translate }}</th>
+            <th>{{ 'date'| translate }}</th>
+            <th>{{ 'status'| translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let order of orders">
+            <td><a [routerLink]="'/account/orders/' + order._id">#{{ order.orderCode }}</a></td>
+            <td>{{ order.createdAt }}</td>
+            <td>{{ order.status }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-footer">
+      <app-pagination [total]="3"></app-pagination>
+    </div>
+  </ng-container>
 </div>

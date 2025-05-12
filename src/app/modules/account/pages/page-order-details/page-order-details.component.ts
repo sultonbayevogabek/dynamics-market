@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Order } from '@shared/interfaces/order';
-import { order } from '../../../../../data/account-order-details';
 
 @Component({
   selector: 'app-page-order-details',
@@ -8,8 +6,6 @@ import { order } from '../../../../../data/account-order-details';
 })
 
 export class PageOrderDetailsComponent {
-  order: Order = order;
-
   constructor() {
   }
 }

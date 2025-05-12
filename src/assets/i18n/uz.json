@@ -121,5 +121,6 @@
   "date": "Sana",
   "status": "Holati",
   "back.to.list": "Ro'yxatga qaytish",
-  "order.details.status.message": "{{ date }} kuni joylashtirilgan va hozirgi holati {{ status }}"
+  "order.details.status.message": "{{ date }} kuni joylashtirilgan va hozirgi holati {{ status }}",
+  "order.created.successfully.with.contact": "Buyurtma muvaffaqiyatli yaratildi. Buyurtma bo'yicha sizga tez orada aloqaga chiqamiz"
 }

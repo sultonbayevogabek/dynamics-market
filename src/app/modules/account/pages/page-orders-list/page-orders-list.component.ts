@@ -1,15 +1,37 @@
-import { Component } from '@angular/core';
-import { Order } from '@shared/interfaces/order';
-import { orders } from '../../../../../data/account-orders';
+import { Component, OnInit } from '@angular/core';
+import { IOrder } from '@shared/interfaces/order';
+import { OrdersService } from '@shared/services/orders.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-page-orders-list',
   templateUrl: './page-orders-list.component.html'
 })
 
-export class PageOrdersListComponent {
-  orders: Partial<Order>[] = orders;
+export class PageOrdersListComponent implements OnInit {
+  params = {
+    page: 1,
+    limit: 3,
+    pages: 1
+  };
+  orders: IOrder[] = [];
+  loading = true;
 
-  constructor() {
+  constructor(
+    private order: OrdersService
+  ) {
+  }
+
+  async ngOnInit() {
+    await this.getOrdersList();
+  }
+
+  async getOrdersList() {
+    const response = await firstValueFrom(
+      this.order.getList(this.params)
+    );
+    this.loading = false;
+
+    this.orders = response.data;
   }
 }

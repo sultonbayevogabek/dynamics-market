@@ -121,5 +121,6 @@
   "date": "Дата",
   "status": "Статус",
   "back.to.list": "Вернуться к списку",
-  "order.details.status.message": "Был размещен {{ date }} и в настоящее время имеет статус {{ status }}"
+  "order.details.status.message": "Был размещен {{ date }} и в настоящее время имеет статус {{ status }}",
+  "order.created.successfully.with.contact": "Заказ успешно создан. Мы свяжемся с вами в ближайшее время по поводу вашего заказа"
 }
