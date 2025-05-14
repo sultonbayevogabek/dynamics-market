@@ -26,12 +26,15 @@ export class PageOrdersListComponent implements OnInit {
     await this.getOrdersList();
   }
 
-  async getOrdersList() {
+  async getOrdersList(page?: number) {
+    if (page) {
+      this.params.page = page;
+    }
     const response = await firstValueFrom(
       this.order.getList(this.params)
     );
     this.loading = false;
-
-    this.orders = response.data;
+    this.params.pages = response?.pages;
+    this.orders = response?.data;
   }
 }

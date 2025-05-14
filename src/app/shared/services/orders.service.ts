@@ -1,7 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RequestService } from '@shared/services/request.service';
-import { IOrder } from '@shared/interfaces/order';
+import { IOrder, IOrderDetails } from '@shared/interfaces/order';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,9 @@ export class OrdersService {
 
   updateCartItem(payload: { _id: string; quantity: number }) {
     return this.requestService.request<{ statusCode: number }>('cart/update', payload);
+  }
+
+  getOrderDetails(orderCode: string) {
+    return this.requestService.request<IOrderDetails>('order/get-order', { orderCode });
   }
 }

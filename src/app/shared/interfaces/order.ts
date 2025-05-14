@@ -14,3 +14,21 @@ export interface Item {
   quantity: number;
   price: number;
 }
+
+export type CustomerType = 'legal' | 'individual';
+
+export type OrderStatus = 'new' | 'pendingReview' | 'cancelled' | 'contractSigned' | 'delivering' | 'completed';
+
+export interface IOrderDetails {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  orderCode: string;
+  customerType: CustomerType;
+  companyName: string;
+  phone: string;
+  status: OrderStatus;
+  createdAt: string; // ISO date string
+  items: Item[];
+}

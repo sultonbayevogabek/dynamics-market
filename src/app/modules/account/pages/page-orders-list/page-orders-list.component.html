@@ -33,9 +33,9 @@
           </thead>
           <tbody>
           <tr *ngFor="let order of orders">
-            <td><a [routerLink]="'/account/orders/' + order._id">#{{ order.orderCode }}</a></td>
-            <td>{{ order.createdAt }}</td>
-            <td>{{ order.status }}</td>
+            <td><a [routerLink]="'/account/orders/' + order.orderCode">#{{ order.orderCode }}</a></td>
+            <td>{{ order.createdAt| date: 'dd.MM.YYYY HH:mm' }}</td>
+            <td>{{ ('order.status.' + order.status)| translate }}</td>
           </tr>
           </tbody>
         </table>
@@ -43,7 +43,11 @@
     </div>
     <div class="card-divider"></div>
     <div class="card-footer">
-      <app-pagination [total]="3"></app-pagination>
+      <app-pagination
+        [total]="params.pages"
+        [current]="params.page"
+        (pageChange)="getOrdersList($event)"
+      ></app-pagination>
     </div>
   </ng-container>
 </div>

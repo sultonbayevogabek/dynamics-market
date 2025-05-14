@@ -25,7 +25,7 @@ const routes: Routes = [
         component: PageOrdersListComponent
       },
       {
-        path: 'orders/:orderId',
+        path: 'orders/:orderCode',
         component: PageOrderDetailsComponent
       }
     ]

@@ -122,5 +122,13 @@
   "status": "Holati",
   "back.to.list": "Ro'yxatga qaytish",
   "order.details.status.message": "{{ date }} kuni joylashtirilgan va hozirgi holati {{ status }}",
-  "order.created.successfully.with.contact": "Buyurtma muvaffaqiyatli yaratildi. Buyurtma bo'yicha sizga tez orada aloqaga chiqamiz"
+  "order.created.successfully.with.contact": "Buyurtma muvaffaqiyatli yaratildi. Buyurtma bo'yicha sizga tez orada aloqaga chiqamiz",
+  "thank.you": "Rahmat",
+  "order.status.new": "Yangi",
+  "order.status.pendingReview": "Ko'rib chiqilmoqda",
+  "order.status.cancelled": "Bekor qilingan",
+  "order.status.contractSigned": "Shartnoma imzolangan",
+  "order.status.delivering": "Yetkazilmoqda",
+  "order.status.completed": "Bajarilgan",
+  "order.created.at": "Buyurtma yaratilgan vaqt"
 }

@@ -122,5 +122,13 @@
   "status": "Status",
   "back.to.list": "Back to list",
   "order.details.status.message": "Was placed on {{ date }} and is currently {{ status }}",
-  "order.created.successfully.with.contact": "Order has been successfully created. We will contact you soon regarding your order"
+  "order.created.successfully.with.contact": "Order has been successfully created. We will contact you soon regarding your order",
+  "thank.you": "Thank you",
+  "order.status.new": "New",
+  "order.status.pendingReview": "Pending Review\n",
+  "order.status.cancelled": "Cancelled",
+  "order.status.contractSigned": "Contract Signed",
+  "order.status.delivering": "Delivering",
+  "order.status.completed": "Completed",
+  "order.created.at": "Order created at"
 }

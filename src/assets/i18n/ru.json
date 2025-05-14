@@ -122,5 +122,13 @@
   "status": "Статус",
   "back.to.list": "Вернуться к списку",
   "order.details.status.message": "Был размещен {{ date }} и в настоящее время имеет статус {{ status }}",
-  "order.created.successfully.with.contact": "Заказ успешно создан. Мы свяжемся с вами в ближайшее время по поводу вашего заказа"
+  "order.created.successfully.with.contact": "Заказ успешно создан. Мы свяжемся с вами в ближайшее время по поводу вашего заказа",
+  "thank.you": "Спасибо вам",
+  "order.status.new": "Новый",
+  "order.status.pendingReview": "Pending Review",
+  "order.status.cancelled": "Отменён",
+  "order.status.contractSigned": "Контракт подписан",
+  "order.status.delivering": "Доставляется",
+  "order.status.completed": "Завершён\n",
+  "order.created.at": "Дата создания заказа"
 }
