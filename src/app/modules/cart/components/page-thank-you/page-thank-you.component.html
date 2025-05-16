@@ -22,14 +22,6 @@
             <span class="order-success__meta-title">{{ 'order.created.at'| translate }}:</span>
             <span class="order-success__meta-value">{{ orderDetails?.createdAt| date: 'dd.MM.YYYY HH:mm' }}</span>
           </li>
-<!--          <li class="order-success__meta-item">-->
-<!--            <span class="order-success__meta-title">Total:</span>-->
-<!--            <span class="order-success__meta-value">{{ order.total|currencyFormat }}</span>-->
-<!--          </li>-->
-<!--          <li class="order-success__meta-item">-->
-<!--            <span class="order-success__meta-title">Payment method:</span>-->
-<!--            <span class="order-success__meta-value">{{ order.paymentMethod }}</span>-->
-<!--          </li>-->
         </ul>
       </div>
 
@@ -47,15 +39,15 @@
             <tr *ngFor="let item of orderDetails.items">
               <td class="order-list__column-image">
                 <div class="product-image">
-<!--                  <a [routerLink]="" class="product-image__body">-->
-<!--                    <img class="product-image__img" [src]="item.image" alt="">-->
-<!--                  </a>-->
+                  <a [routerLink]="" class="product-image__body">
+                    <img class="product-image__img" [src]="item.thumbs[0]?.path| imgUrl" alt="">
+                  </a>
                 </div>
               </td>
               <td class="order-list__column-product">
                 <a>{{ item?.name }}</a>
               </td>
-              <td class="order-list__column-quantity" [attr.data-title]="'quantity'| translate">{{ item.quantity }}</td>
+              <td class="order-list__column-quantity" [attr.data-title]="('quantity'| translate) + ':'">{{ item.quantity }}</td>
               <td class="order-list__column-total">
                 <ng-container *ngIf="item?.price">
                   {{ (item.price * item.quantity)|currencyFormat }}

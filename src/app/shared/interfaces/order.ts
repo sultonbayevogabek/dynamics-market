@@ -1,3 +1,5 @@
+import { IFile } from '@shared/interfaces/file';
+
 export interface IOrder {
   _id: string;
   orderCode: string;
@@ -13,6 +15,7 @@ export interface Item {
   name: string;
   quantity: number;
   price: number;
+  thumbs: IFile[];
 }
 
 export type CustomerType = 'legal' | 'individual';
