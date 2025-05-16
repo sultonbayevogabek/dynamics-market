@@ -7,6 +7,7 @@ import { ICartItem } from '@shared/interfaces/cart';
 import { IUser } from '@shared/interfaces/user.interface';
 import { ToasterService } from '@shared/services/toaster.service';
 import { OrdersService } from '@shared/services/orders.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -16,6 +17,7 @@ import { OrdersService } from '@shared/services/orders.service';
 export class PageCheckoutComponent implements OnInit, OnDestroy {
   checkoutForm!: FormGroup;
   items: ICartItem[] = [];
+  loading = true;
 
   private destroy$: Subject<void> = new Subject();
 
@@ -24,7 +26,8 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
     public order: OrdersService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private toaster: ToasterService
+    private toaster: ToasterService,
+    private router: Router,
   ) {
   }
 
@@ -83,9 +86,15 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
     );
 
     this.items = response?.data;
+    this.loading = false;
   }
 
   async checkout() {
+    if (!this.items.length) {
+      await this.toaster.warning('your.shopping.cart.is.empty');
+      return;
+    }
+
     if (this.checkoutForm.invalid) {
       await this.toaster.warning('please.fill.required.fields');
       return;
@@ -102,10 +111,13 @@ export class PageCheckoutComponent implements OnInit, OnDestroy {
     const response = await firstValueFrom(
       this.order.create(payload)
     );
+
     if (response?.statusCode === 201) {
       await this.toaster.success('order.created.successfully.with.contact');
+      await this.router.navigate(['cart', 'thank-you', response?.orderCode]);
       return;
     }
+
     this.checkoutForm.enable();
     this.checkoutForm.updateValueAndValidity();
   }

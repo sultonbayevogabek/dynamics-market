@@ -17,7 +17,7 @@ export class OrdersService {
   }
 
   create(payload: { [key: string]: string }) {
-    return this.requestService.request<{ statusCode: number }>('order/create', payload);
+    return this.requestService.request<{ statusCode: number, orderCode: number }>('order/create', payload);
   }
 
   getList(params: { page?: number; limit?: number }) {

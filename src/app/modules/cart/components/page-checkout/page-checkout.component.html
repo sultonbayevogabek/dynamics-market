@@ -160,6 +160,21 @@
                   </ng-container>
                 </td>
               </tr>
+
+              <tr *ngIf="loading">
+                <td class="text-center" colspan="2">
+                  <app-loader-spinner
+                    class="inline-block"
+                    [size]="24">
+                  </app-loader-spinner>
+                </td>
+              </tr>
+
+              <tr *ngIf="!loading && !items.length">
+                <td class="text-center" colspan="2">
+                  {{ 'your.shopping.cart.is.empty'| translate }}
+                </td>
+              </tr>
               </tbody>
             </table>
 
@@ -190,7 +205,7 @@
               [ngClass]="{
                 'btn-loading': checkoutForm.disabled
               }"
-              [disabled]="checkoutForm.invalid || checkoutForm.disabled"
+              [disabled]="checkoutForm.invalid || checkoutForm.disabled || !items.length"
             >
               {{ 'send.a.request'| translate }}
             </button>

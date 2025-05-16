@@ -130,5 +130,6 @@
   "order.status.contractSigned": "Contract Signed",
   "order.status.delivering": "Delivering",
   "order.status.completed": "Completed",
-  "order.created.at": "Order created at"
+  "order.created.at": "Order created at",
+  "order.number": "Order number"
 }

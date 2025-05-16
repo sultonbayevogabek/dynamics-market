@@ -130,5 +130,6 @@
   "order.status.contractSigned": "Контракт подписан",
   "order.status.delivering": "Доставляется",
   "order.status.completed": "Завершён\n",
-  "order.created.at": "Дата создания заказа"
+  "order.created.at": "Дата создания заказа",
+  "order.number": "Номер заказа"
 }
