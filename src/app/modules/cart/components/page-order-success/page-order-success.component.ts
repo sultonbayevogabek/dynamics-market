@@ -5,8 +5,8 @@ import { RootService } from '@shared/services/root.service';
   selector: 'app-page-order-success',
   templateUrl: './page-order-success.component.html',
 })
-export class PageOrderSuccessComponent {
 
+export class PageOrderSuccessComponent {
   constructor(
     public root: RootService
   ) {
