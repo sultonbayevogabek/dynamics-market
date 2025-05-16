@@ -11,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
 export class PageOrdersListComponent implements OnInit {
   params = {
     page: 1,
-    limit: 3,
+    limit: 5,
     pages: 1
   };
   orders: IOrder[] = [];
