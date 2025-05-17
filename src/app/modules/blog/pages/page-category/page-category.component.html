@@ -1,14 +1,10 @@
-<app-page-header [header]="'Latest News'" [breadcrumbs]="[
-    {label: 'Home',        url: '../../'},
-    {label: 'Blog',        url: '../'},
-    {label: 'Latest News', url: ''}
+<app-page-header [header]="'the.latest.news'" [breadcrumbs]="[
+    {label: 'homepage',        url: '../../'},
+    {label: 'news',        url: '../'}
 ]"></app-page-header>
 
 <div class="container">
   <div class="row">
-    <div *ngIf="sidebarPosition === 'start'" class="col-12 col-lg-4 order-1 order-lg-0">
-      <app-sidebar position="start"></app-sidebar>
-    </div>
     <div class="col-12 col-lg-8">
       <div class="block">
         <div class="posts-view">

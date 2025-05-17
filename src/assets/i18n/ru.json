@@ -131,5 +131,6 @@
   "order.status.delivering": "Доставляется",
   "order.status.completed": "Завершён\n",
   "order.created.at": "Дата создания заказа",
-  "order.number": "Номер заказа"
+  "order.number": "Номер заказа",
+  "the.latest.news": "Последние новости"
 }

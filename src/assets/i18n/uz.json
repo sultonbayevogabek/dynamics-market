@@ -131,5 +131,6 @@
   "order.status.delivering": "Yetkazilmoqda",
   "order.status.completed": "Bajarilgan",
   "order.created.at": "Buyurtma yaratilgan vaqt",
-  "order.number": "Buyurtma raqami"
+  "order.number": "Buyurtma raqami",
+  "the.latest.news": "Eng so'nggi yangiliklar"
 }
