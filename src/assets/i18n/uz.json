@@ -59,7 +59,7 @@
   "information": "Ma'lumot",
   "follow.us.on.social.networks": "Ijtimoiy tarmoqlarda bizni kuzatib boring",
   "subscribe.to.stay.aware.of.the.latest.news.in.us": "Bizdagi eng oxirgi yangiliklardan xabardor bo'lib turish uchun obuna bo'ling",
-  "subscribe": "Obuna",
+  "subscribe": "Obuna bo'lish",
   "work.time.label": "Ish vaqti",
   "comment": "Izoh",
   "contact.us.comment": "Quyida keltirilgan kontakt ma'lumotlari orqali 24/7 biz bilan bog'lanishingiz mumkin.",
@@ -133,5 +133,9 @@
   "order.created.at": "Buyurtma yaratilgan vaqt",
   "order.number": "Buyurtma raqami",
   "the.latest.news": "Eng so'nggi yangiliklar",
-  "our.newsletter": "Bizning yangiliklar"
+  "our.newsletter": "Bizning yangiliklar",
+  "subscribe.to.receive.helpful.news": "Foydali yangiliklar va maqolalarni muntazam olish uchun obuna bo‘ling. Biz sizga eng so‘nggi yangiliklar va takliflarni yuboramiz. Sizni qiziqtiradigan ma'lumotlar bilan doimiy bo‘ling.",
+  "follow.the.news.on.social.media": "Yangiliklarni ijtimoiy tarmoqlarda  kuzatib boring",
+  "subscribe.to.our.social.media.and.follow.us": "Ijtimoiy tarmoqdagi sahifalarimizga obuna bo'ling va bizdagi eng so'nggi xabar va yangiliklardan xabardor bo'ling.",
+  "search": "Qidirish"
 }

@@ -7,16 +7,16 @@
     'post-card--size--sm': layout === 'list-sm'
 }">
   <div class="post-card__image">
-    <a appClick [routerLink]="root.post()">
+    <a appClick [routerLink]="['/news', 'news-slug']">
       <img [src]="post.image" alt="">
     </a>
   </div>
   <div class="post-card__info">
     <div class="post-card__category">
-      <a appClick [routerLink]="root.post()" *ngFor="let category of post.categories">{{ category }}</a>
+      <a appClick [routerLink]="['/news', 'news-slug']" *ngFor="let category of post.categories">{{ category }}</a>
     </div>
     <div class="post-card__name">
-      <a appClick [routerLink]="root.post()">{{ post.title }}</a>
+      <a appClick [routerLink]="['/news', 'news-slug']">{{ post.title }}</a>
     </div>
     <div class="post-card__date">{{ post.date }}</div>
     <div class="post-card__content">
@@ -25,7 +25,7 @@
       In that sense, all cultures...
     </div>
     <div class="post-card__read-more">
-      <a appClick [routerLink]="root.post()" class="btn btn-secondary btn-sm">Read More</a>
+      <a appClick [routerLink]="['/news', 'news-slug']" class="btn btn-secondary btn-sm">Read More</a>
     </div>
   </div>
 </div>

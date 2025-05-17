@@ -10,47 +10,16 @@ const routes: Routes = [
     redirectTo: 'category-classic'
   },
   {
-    path: 'category-classic',
-    component: PageCategoryComponent,
-    data: {
-      sidebarPosition: 'end',    // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"
-      layout: 'classic' // one of [classic, grid, list]
-    }
-  },
-  {
     path: 'news',
     component: PageCategoryComponent,
     data: {
       sidebarPosition: 'end', // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"
       layout: 'grid' // one of [classic, grid, list]
-    }
+    },
+    pathMatch: 'full'
   },
   {
-    path: 'category-list',
-    component: PageCategoryComponent,
-    data: {
-      sidebarPosition: 'end', // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"
-      layout: 'list' // one of [classic, grid, list]
-    }
-  },
-  {
-    path: 'category-left-sidebar',
-    component: PageCategoryComponent,
-    data: {
-      sidebarPosition: 'start',  // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"
-      layout: 'classic' // one of [classic, grid, list]
-    }
-  },
-  {
-    path: 'post-classic',
-    component: PagePostComponent,
-    data: {
-      sidebarPosition: 'end',    // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"
-      layout: 'classic'
-    }
-  },
-  {
-    path: 'post-full',
+    path: 'news/:newsSlug',
     component: PagePostComponent,
     data: {
       layout: 'full'

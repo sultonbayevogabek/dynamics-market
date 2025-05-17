@@ -3,13 +3,12 @@
     {{ 'our.newsletter'| translate }}
   </h4>
   <div class="widget-newsletter__text">
-    Phasellus eleifend sapien felis, at sollicitudin arcu semper mattis. Mauris quis mi quis ipsum tristique lobortis.
-    Nulla vitae est blandit rutrum.
+    {{ 'subscribe.to.receive.helpful.news'| translate }}
   </div>
   <form class="widget-newsletter__form" action="">
     <label for="widget-newsletter-email" class="sr-only">{{ 'email'| translate }}</label>
     <input id="widget-newsletter-email" type="text" class="form-control" [placeholder]="'email'| translate">
 
-    <button type="submit" class="btn btn-primary mt-3">Subscribe</button>
+    <button type="submit" class="btn btn-primary mt-3">{{ 'subscribe'| translate }}</button>
   </form>
 </div>
