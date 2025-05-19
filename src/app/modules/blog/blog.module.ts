@@ -14,7 +14,7 @@ import { PostComponent } from './components/post/post.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 // pages
-import { PageCategoryComponent } from './pages/page-category/page-category.component';
+import { PageNewsComponent } from './pages/page-news/page-news.component';
 import { PagePostComponent } from './pages/page-post/page-post.component';
 
 @NgModule({
@@ -24,7 +24,7 @@ import { PagePostComponent } from './pages/page-post/page-post.component';
     PostComponent,
     SidebarComponent,
     // pages
-    PageCategoryComponent,
+    PageNewsComponent,
     PagePostComponent
   ],
   imports: [

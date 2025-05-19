@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Post } from '@shared/interfaces/post';
-import { posts } from '../../../../../data/blog-posts';
 import { latestComments } from '../../../../../data/blog-widget-latest-comments';
 import { BlogService } from '@shared/api/blog.service';
 import { Category } from '@shared/interfaces/category';
+import { INews } from '@shared/interfaces/news';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +12,7 @@ import { Category } from '@shared/interfaces/category';
 export class SidebarComponent implements OnInit {
   @Input() position: 'start' | 'end' = 'start';
 
-  posts: Post[] = posts;
+  posts: INews[] = [];
   categories: Category[] = [];
   latestComments = latestComments;
 

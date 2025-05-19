@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post } from '@shared/interfaces/post';
-import { PostCommentsList } from '@shared/interfaces/post-comments-list';
-import { posts } from '../../../../../data/blog-posts';
-import { postComments } from '../../../../../data/blog-post-comments';
+import { INews } from '@shared/interfaces/news';
 
 @Component({
   selector: 'app-post-details',
@@ -12,8 +9,7 @@ import { postComments } from '../../../../../data/blog-post-comments';
 export class PostComponent {
   @Input() layout: 'classic' | 'full' = 'classic';
 
-  posts: Post[] = posts;
-  comments: PostCommentsList = postComments;
+  posts: INews[] = [];
 
   constructor() {
   }

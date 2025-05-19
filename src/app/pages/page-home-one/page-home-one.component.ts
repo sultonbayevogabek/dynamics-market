@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { posts } from '../../../data/blog-posts';
 import { merge, Observable, Subject } from 'rxjs';
 import { ShopService } from '@shared/api/shop.service';
 import { IProduct } from '@shared/interfaces/product';
@@ -31,7 +30,7 @@ export class PageHomeOneComponent implements OnInit, OnDestroy {
   columnSpecialOffers$!: Observable<IProduct[]>;
   columnBestsellers$!: Observable<IProduct[]>;
 
-  posts = posts;
+  posts = [];
 
   featuredProducts!: ProductsCarouselData;
   latestProducts!: ProductsCarouselData;

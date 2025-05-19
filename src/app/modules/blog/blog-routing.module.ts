@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageCategoryComponent } from './pages/page-category/page-category.component';
+import { PageNewsComponent } from './pages/page-news/page-news.component';
 import { PagePostComponent } from './pages/page-post/page-post.component';
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'news',
-    component: PageCategoryComponent,
+    component: PageNewsComponent,
     data: {
       sidebarPosition: 'end', // one of [start, end]. For LTR scripts "start" is "left" and "end" is "right"
       layout: 'grid' // one of [classic, grid, list]
@@ -31,5 +31,6 @@ const routes: Routes = [
   imports: [ RouterModule.forChild(routes) ],
   exports: [ RouterModule ]
 })
+
 export class BlogRoutingModule {
 }

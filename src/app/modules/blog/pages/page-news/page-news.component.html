@@ -10,13 +10,20 @@
         <div class="posts-view">
           <div class="posts-view__list posts-list posts-list--layout--{{ layout }}">
             <div class="posts-list__body">
-              <div *ngFor="let post of posts" class="posts-list__item">
-                <app-post-card [post]="post" [layout]="getPostCardLayout()"></app-post-card>
+              <div *ngFor="let post of news" class="posts-list__item">
+                <app-post-card
+                  [post]="post"
+                  [layout]="getPostCardLayout()"
+                ></app-post-card>
               </div>
             </div>
           </div>
           <div class="posts-view__pagination">
-            <app-pagination [current]="1" [siblings]="2" [total]="10"></app-pagination>
+            <app-pagination
+              [total]="params.pages"
+              [current]="params.page"
+              (pageChange)="getNews($event)"
+            ></app-pagination>
           </div>
         </div>
       </div>

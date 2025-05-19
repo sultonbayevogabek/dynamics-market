@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post } from '../../interfaces/post';
+import { INews } from '@shared/interfaces/news';
 
 @Component({
   selector: 'app-post-card',
@@ -7,7 +7,7 @@ import { Post } from '../../interfaces/post';
 })
 
 export class PostCardComponent {
-  @Input() post!: Post;
+  @Input() post!: INews;
   @Input() layout: 'grid-nl' | 'grid-lg' | 'list-nl' | 'list-sm' | null = null;
 
   constructor() {

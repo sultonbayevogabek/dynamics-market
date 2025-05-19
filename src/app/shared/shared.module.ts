@@ -47,6 +47,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CutDescriptionPipe } from '@shared/pipes/cut-description.pipe';
 import { NgxMaskModule } from 'ngx-mask';
 import { ImgUrlPipe } from '@shared/pipes/img-url.pipe';
+import { CustomDatePipe } from '@shared/pipes/custom-date.pipe';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { ImgUrlPipe } from '@shared/pipes/img-url.pipe';
     ColorTypePipe,
     CurrencyFormatPipe,
     ImgUrlPipe,
+    CustomDatePipe,
     CutDescriptionPipe,
     ProductGalleryComponent,
     LoaderSpinnerComponent
@@ -131,7 +133,8 @@ import { ImgUrlPipe } from '@shared/pipes/img-url.pipe';
     ColorTypePipe,
     CurrencyFormatPipe,
     LoaderSpinnerComponent,
-    ImgUrlPipe
+    ImgUrlPipe,
+    CustomDatePipe
   ],
   providers: []
 })
