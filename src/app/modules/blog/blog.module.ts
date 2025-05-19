@@ -16,6 +16,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 // pages
 import { PageNewsComponent } from './pages/page-news/page-news.component';
 import { PagePostComponent } from './pages/page-post/page-post.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PagePostComponent } from './pages/page-post/page-post.component';
     // modules
     BlogRoutingModule,
     SharedModule,
-    WidgetsModule
+    WidgetsModule,
+    TranslateModule
   ]
 })
 export class BlogModule {

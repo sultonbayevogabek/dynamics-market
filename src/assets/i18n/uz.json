@@ -137,5 +137,6 @@
   "subscribe.to.receive.helpful.news": "Foydali yangiliklar va maqolalarni muntazam olish uchun obuna bo‘ling. Biz sizga eng so‘nggi yangiliklar va takliflarni yuboramiz. Sizni qiziqtiradigan ma'lumotlar bilan doimiy bo‘ling.",
   "follow.the.news.on.social.media": "Yangiliklarni ijtimoiy tarmoqlarda  kuzatib boring",
   "subscribe.to.our.social.media.and.follow.us": "Ijtimoiy tarmoqdagi sahifalarimizga obuna bo'ling va bizdagi eng so'nggi xabar va yangiliklardan xabardor bo'ling.",
-  "search": "Qidirish"
+  "search": "Qidirish",
+  "no.information.found.for.your.query": "Qidiruvingiz bo'yicha ma'lumot topilmadi"
 }

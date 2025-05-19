@@ -27,6 +27,19 @@
           </div>
         </div>
       </div>
+
+      <div class="block block-empty">
+        <div class="container">
+          <div class="block-empty__body">
+            <div class="block-empty__message">{{ 'no.information.found.for.your.query'| translate }}</div>
+            <div class="block-empty__actions">
+              <a [routerLink]="['/products']" class="btn btn-primary btn-sm">
+                {{ 'reset.filter'| translate }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div *ngIf="sidebarPosition === 'end'" class="col-12 col-lg-4">
       <app-sidebar position="end"></app-sidebar>
