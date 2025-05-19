@@ -1,13 +1,19 @@
 <app-page-header [header]="'the.latest.news'" [breadcrumbs]="[
-    {label: 'homepage',        url: '../../'},
-    {label: 'news',        url: '../'}
+    {label: 'homepage',        url: '/'},
+    {label: 'news',        url: ''}
 ]"></app-page-header>
 
 <div class="container">
   <div class="row">
     <div class="col-12 col-lg-8">
+      <div class="py-20" *ngIf="loading">
+        <app-loader-spinner
+          [size]="48"
+        ></app-loader-spinner>
+      </div>
+
       <div class="block">
-        <div class="posts-view">
+        <div class="posts-view" *ngIf="news?.length && !loading">
           <div class="posts-view__list posts-list posts-list--layout--{{ layout }}">
             <div class="posts-list__body">
               <div *ngFor="let post of news" class="posts-list__item">
@@ -28,12 +34,12 @@
         </div>
       </div>
 
-      <div class="block block-empty">
+      <div class="block block-empty" *ngIf="!news?.length && !loading">
         <div class="container">
           <div class="block-empty__body">
             <div class="block-empty__message">{{ 'no.information.found.for.your.query'| translate }}</div>
             <div class="block-empty__actions">
-              <a [routerLink]="['/products']" class="btn btn-primary btn-sm">
+              <a [routerLink]="['/news']" class="btn btn-primary btn-sm">
                 {{ 'reset.filter'| translate }}
               </a>
             </div>

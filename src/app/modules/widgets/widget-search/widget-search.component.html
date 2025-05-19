@@ -1,6 +1,12 @@
 <div class="widget-search">
-  <form class="widget-search__body">
-    <input class="widget-search__input" [placeholder]="('search'| translate) + '...'" type="text" autocomplete="off" spellcheck="false">
+  <form class="widget-search__body" (ngSubmit)="onSubmit()">
+    <input
+      class="widget-search__input"
+      [placeholder]="('search'| translate) + '...'"
+      type="text"
+      autocomplete="off"
+      spellcheck="false"
+      [formControl]="searchControl">
     <button class="widget-search__button" type="submit">
       <app-icon name="search-20" size="20"></app-icon>
     </button>

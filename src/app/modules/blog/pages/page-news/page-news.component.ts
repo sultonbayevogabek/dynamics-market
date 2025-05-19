@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { firstValueFrom, Subject } from 'rxjs';
+import { distinctUntilChanged, firstValueFrom, Subject } from 'rxjs';
 import { NewsService } from '@shared/services/news.service';
 import { INews } from '@shared/interfaces/news';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-news',
@@ -25,12 +27,26 @@ export class PageNewsComponent implements OnInit, OnDestroy {
   news: INews[] = [];
 
   constructor(
-    private newsService: NewsService
+    private newsService: NewsService,
+    private activatedRoute: ActivatedRoute,
   ) {
   }
 
-  async ngOnInit() {
-    await this.getNews();
+  ngOnInit() {
+    this.watchQuery();
+  }
+
+  watchQuery() {
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(async params => {
+        if (params && params['search']) {
+          this.params.search = params['search'];
+        } else {
+          this.params.search = '';
+        }
+        await this.getNews(1);
+      })
   }
 
   getPostCardLayout(): 'grid-nl' | 'grid-lg' | 'list-nl' | 'list-sm' {
@@ -52,6 +68,7 @@ export class PageNewsComponent implements OnInit, OnDestroy {
 
     this.news = response?.data;
     this.params.pages = response?.pages;
+    this.loading = false;
   }
 
   ngOnDestroy(): void {
