@@ -15,4 +15,8 @@ export class NewsService {
   getNews(params: { page?: number; limit?: number; search?: string }) {
     return this.requestService.request<{ total: number; pages: number; data: INews[] }>('news/list', params);
   }
+
+  getNewsDetails(slug: string) {
+    return this.requestService.request<INews>('news/get-news', { slug });
+  }
 }

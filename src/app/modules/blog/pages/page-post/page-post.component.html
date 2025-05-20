@@ -1,15 +1,41 @@
-<app-page-header [breadcrumbs]="[
-    {label: 'homepage',        url: '/'},
-    {label: 'news',        url: ''},
-    {label: 'Latest News', url: ''}
-]"></app-page-header>
+<div class="container py-20" *ngIf="loading">
+  <app-loader-spinner
+    [size]="48"
+  ></app-loader-spinner>
+</div>
 
-<div class="container">
-  <ng-container *ngIf="layout === 'full'">
-    <div class="row justify-content-center">
-      <div class="col-md-12 col-lg-9 col-xl-8">
-        <app-post-details layout="full"></app-post-details>
+<div class="block block-empty" *ngIf="!news && !loading">
+  <div class="container">
+    <div class="block-empty__body">
+      <div class="block-empty__message">{{ 'your.shopping.cart.is.empty'| translate }}</div>
+      <div class="block-empty__actions">
+        <a [routerLink]="['/news']" class="btn btn-primary btn-sm">
+          {{ 'news'| translate }}
+        </a>
       </div>
     </div>
-  </ng-container>
+  </div>
 </div>
+
+<ng-container *ngIf="news && !loading">
+  <app-page-header [breadcrumbs]="[
+    {label: 'homepage',        url: '/'},
+    {label: 'news',        url: ''},
+    {label: news?.title!, url: ''}
+  ]"></app-page-header>
+
+  <div class="container">
+    <ng-container *ngIf="layout === 'full'">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-9 col-xl-8">
+          <app-post-details
+            layout="full"
+            [news]="news"
+          ></app-post-details>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+

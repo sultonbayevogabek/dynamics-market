@@ -5,4 +5,5 @@ export interface INews {
   title: string;
   shortDesc: string;
   slug: string;
+  content: string;
 }

@@ -7,25 +7,17 @@
     'post-card--size--sm': layout === 'list-sm'
 }">
   <div class="post-card__image aspect-[350/235] bg-gray-50">
-    <a appClick [routerLink]="['/news', 'news-slug']">
+    <a appClick [routerLink]="['/news', post?.slug]">
       <img [src]="post.imageUrl" alt="">
     </a>
   </div>
   <div class="post-card__info">
-    <div class="post-card__category">
-<!--      <a appClick [routerLink]="['/news', 'news-slug']" *ngFor="let category of post.categories">{{ category }}</a>-->
-    </div>
     <div class="post-card__name">
-      <a appClick [routerLink]="['/news', 'news-slug']">{{ post.title }}</a>
+      <a appClick [routerLink]="['/news', post?.slug]">{{ post.title }}</a>
     </div>
     <div class="post-card__date">{{ post.createdAt| customDate }}</div>
     <div class="post-card__content">
-      {{
-        post?.shortDesc
-      }}
-    </div>
-    <div class="post-card__read-more">
-      <a appClick [routerLink]="['/news', 'news-slug']" class="btn btn-secondary btn-sm">Read More</a>
+      {{ post?.shortDesc }}
     </div>
   </div>
 </div>
