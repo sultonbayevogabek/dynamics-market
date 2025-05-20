@@ -15,7 +15,7 @@
   <div
     class="post__content typography"
     [ngClass]="{'typography--expanded': layout === 'full'}"
-    [innerHTML]="news?.content"
+    [innerHTML]="news?.content!| cleanContent"
   >
   </div>
 </div>

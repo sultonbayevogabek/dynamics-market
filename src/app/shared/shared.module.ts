@@ -48,6 +48,7 @@ import { CutDescriptionPipe } from '@shared/pipes/cut-description.pipe';
 import { NgxMaskModule } from 'ngx-mask';
 import { ImgUrlPipe } from '@shared/pipes/img-url.pipe';
 import { CustomDatePipe } from '@shared/pipes/custom-date.pipe';
+import { CleanContentPipe } from '@shared/pipes/clean-content.pipe';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { CustomDatePipe } from '@shared/pipes/custom-date.pipe';
     ImgUrlPipe,
     CustomDatePipe,
     CutDescriptionPipe,
+    CleanContentPipe,
     ProductGalleryComponent,
     LoaderSpinnerComponent
   ],
@@ -134,7 +136,8 @@ import { CustomDatePipe } from '@shared/pipes/custom-date.pipe';
     CurrencyFormatPipe,
     LoaderSpinnerComponent,
     ImgUrlPipe,
-    CustomDatePipe
+    CustomDatePipe,
+    CleanContentPipe
   ],
   providers: []
 })
