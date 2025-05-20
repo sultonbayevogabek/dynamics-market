@@ -12,8 +12,7 @@
     </div>
   </div>
 
-  <div class="post__featured">
-    <img class="w-full" [src]="news?.imageUrl" alt="">
+  <div class="post__featured" [innerHTML]="news?.content!| extractFirstImage">
   </div>
 
   <div

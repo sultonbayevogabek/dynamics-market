@@ -1,4 +1,3 @@
-// clean-content.pipe.ts
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -9,6 +8,12 @@ export class CleanContentPipe implements PipeTransform {
     if (!value) return '';
 
     // &nbsp; belgilarini oddiy bo'shliq bilan almashtirish
-    return value.replace(/&nbsp;/g, ' ');
+    let cleanedValue = value.replace(/&nbsp;/g, ' ');
+
+    // Birinchi img elementini topish va olib tashlash
+    const imgRegex = /<img[^>]*>|<img[^>]*\/>/i;
+    cleanedValue = cleanedValue.replace(imgRegex, '');
+
+    return cleanedValue;
   }
 }
