@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { ShopService } from '@shared/api/shop.service';
 import { IProduct } from '@shared/interfaces/product';
-import { Category } from '@shared/interfaces/category';
 import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -24,7 +22,6 @@ interface ProductsCarouselData {
 export class PageHomeOneComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
   bestsellers$!: Observable<IProduct[]>;
-  popularCategories$!: Observable<Category[]>;
 
   columnTopRated$!: Observable<IProduct[]>;
   columnSpecialOffers$!: Observable<IProduct[]>;
@@ -36,80 +33,12 @@ export class PageHomeOneComponent implements OnInit, OnDestroy {
   latestProducts!: ProductsCarouselData;
 
   constructor(
-    private shop: ShopService
   ) {
   }
 
   ngOnInit(): void {
-    this.bestsellers$ = this.shop.getBestsellers(7);
-    this.popularCategories$ = this.shop.getCategoriesBySlug([
-      'power-tools',
-      'hand-tools',
-      'machine-tools',
-      'power-machinery',
-      'measurement',
-      'clothes-and-ppe'
-    ], 1);
-    this.columnTopRated$ = this.shop.getTopRated(3);
-    this.columnSpecialOffers$ = this.shop.getSpecialOffers(3);
-    this.columnBestsellers$ = this.shop.getBestsellers(3);
-
-    this.featuredProducts = {
-      abort$: new Subject<void>(),
-      loading: false,
-      products: [],
-      groups: [
-        {
-          name: 'All',
-          current: true,
-          products$: this.shop.getFeaturedProducts(null, 8)
-        },
-        {
-          name: 'Power Tools',
-          current: false,
-          products$: this.shop.getFeaturedProducts('power-tools', 8)
-        },
-        {
-          name: 'Hand Tools',
-          current: false,
-          products$: this.shop.getFeaturedProducts('hand-tools', 8)
-        },
-        {
-          name: 'Plumbing',
-          current: false,
-          products$: this.shop.getFeaturedProducts('plumbing', 8)
-        }
-      ]
-    };
     this.groupChange(this.featuredProducts, this.featuredProducts.groups[0]);
 
-    this.latestProducts = {
-      abort$: new Subject<void>(),
-      loading: false,
-      products: [],
-      groups: [
-        {
-          name: 'All',
-          current: true,
-          products$: this.shop.getLatestProducts(null, 8)
-        },
-        {
-          name: 'Power Tools',
-          current: false,
-          products$: this.shop.getLatestProducts('power-tools', 8)
-        },
-        {
-          name: 'Hand Tools',
-          current: false,
-          products$: this.shop.getLatestProducts('hand-tools', 8)
-        },
-        {
-          name: 'Plumbing',
-          current: false,
-          products$: this.shop.getLatestProducts('plumbing', 8)
-        }
-      ]
-    };
     this.groupChange(this.latestProducts, this.latestProducts.groups[0]);
   }
 

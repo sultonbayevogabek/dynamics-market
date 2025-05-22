@@ -5,7 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { isPlatformBrowser } from '@angular/common';
-import { ShopService } from '@shared/api/shop.service';
 
 @Component({
   selector: 'app-products-sidebar',
@@ -24,7 +23,6 @@ export class ProductsSidebarComponent implements OnInit, OnDestroy {
   isOpen = false;
 
   constructor(
-    private shop: ShopService,
     public sidebar: ProductsSidebarService,
     @Inject(PLATFORM_ID)
     private platformId: any
@@ -32,7 +30,6 @@ export class ProductsSidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.bestsellers$ = this.shop.getBestsellers().pipe(map(x => x.slice(0, 5)));
 
     this.sidebar.isOpen$.pipe(
       takeUntil(this.destroy$)

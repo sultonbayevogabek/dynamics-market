@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BlogService } from '@shared/api/blog.service';
 import { Category } from '@shared/interfaces/category';
 import { INews } from '@shared/interfaces/news';
 
@@ -15,11 +14,9 @@ export class SidebarComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(
-    private blog: BlogService
   ) {
   }
 
   ngOnInit(): void {
-    this.blog.getCategories(null, 1).subscribe(x => this.categories = x);
   }
 }

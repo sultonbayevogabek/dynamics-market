@@ -13,12 +13,11 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { IProduct, Product } from '../../interfaces/product';
+import { IProduct } from '../../interfaces/product';
 import { RootService } from '../../services/root.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
-import { asyncScheduler, firstValueFrom, fromEvent, of, Subject } from 'rxjs';
-import { ShopService } from '../../api/shop.service';
+import { asyncScheduler, fromEvent, of, Subject } from 'rxjs';
 import { Category, ICategory } from '../../interfaces/category';
 import { DOCUMENT } from '@angular/common';
 import { CartService } from '../../services/cart.service';
@@ -87,7 +86,6 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     private fb: FormBuilder,
     private elementRef: ElementRef,
     private zone: NgZone,
-    private shop: ShopService,
     private cart: CartService,
     public root: RootService,
     private headerService: HeaderService,
@@ -110,18 +108,17 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
         if (query) {
           const categorySlug = this.form.value.category !== 'all' ? this.form.value.category : null;
 
-          return this.shop.getSuggestions(query, 5, categorySlug);
         }
 
         return of([]);
       }),
       takeUntil(this.destroy$)
     ).subscribe(products => {
-      this.hasSuggestions = products.length > 0;
-
-      if (products.length > 0) {
-        this.suggestedProducts = products;
-      }
+      // this.hasSuggestions = products.length > 0;
+      //
+      // if (products.length > 0) {
+      //   // this.suggestedProducts = products;
+      // }
     });
 
     this.zone.runOutsideAngular(() => {

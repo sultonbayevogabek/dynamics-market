@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct, Product } from '@shared/interfaces/product';
-import { ShopService } from '@shared/api/shop.service';
+import { IProduct } from '@shared/interfaces/product';
 import { Category } from '@shared/interfaces/category';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-sidebar',
@@ -15,12 +13,10 @@ export class ProductSidebarComponent implements OnInit {
   bestsellers$!: Observable<IProduct[]>;
 
   constructor(
-    private shop: ShopService
   ) {
   }
 
   ngOnInit(): void {
-    this.categories$ = this.shop.getCategories(null, 1);
-    this.bestsellers$ = this.shop.getBestsellers().pipe(map(x => x.slice(0, 5)));
+
   }
 }

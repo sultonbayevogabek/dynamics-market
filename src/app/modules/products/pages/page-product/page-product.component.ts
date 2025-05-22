@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hierarchy, IProduct } from '@shared/interfaces/product';
 import { ActivatedRoute } from '@angular/router';
-import { ShopService } from '@shared/api/shop.service';
 import { Observable } from 'rxjs';
 import { Link } from '@shared/interfaces/link';
 
@@ -17,7 +16,6 @@ export class PageProductComponent implements OnInit {
   breadcrumbs: Link[] = [];
 
   constructor(
-    private shop: ShopService,
     private route: ActivatedRoute
   ) {
   }
@@ -26,8 +24,6 @@ export class PageProductComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.product = data['product'];
       this.generateBreadCrumbs(this.product.hierarchy);
-
-      this.relatedProducts$ = this.shop.getRelatedProducts(data['product']);
     });
   }
 

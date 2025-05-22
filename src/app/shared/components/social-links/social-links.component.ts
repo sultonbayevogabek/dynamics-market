@@ -1,5 +1,4 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { theme } from '../../../../data/theme';
 
 export interface SocialLinksItem {
   type: string;
@@ -15,13 +14,12 @@ export type SocialLinksShape = 'circle' | 'rounded';
   styleUrls: [ './social-links.component.scss' ]
 })
 export class SocialLinksComponent {
-  theme = theme;
 
   items: SocialLinksItem[] = [
-    { type: 'instagram', url: this.theme.author.profile_url, icon: 'fab fa-instagram' },
-    { type: 'youtube', url: this.theme.author.profile_url, icon: 'fab fa-youtube' },
-    { type: 'facebook', url: this.theme.author.profile_url, icon: 'fab fa-facebook-f' },
-    { type: 'twitter', url: this.theme.author.profile_url, icon: 'fab fa-twitter' },
+    { type: 'instagram', url: '/', icon: 'fab fa-instagram' },
+    { type: 'youtube', url: '/', icon: 'fab fa-youtube' },
+    { type: 'facebook', url: '/', icon: 'fab fa-facebook-f' },
+    { type: 'twitter', url: '/', icon: 'fab fa-twitter' },
   ];
 
   @Input() shape: SocialLinksShape = 'circle';

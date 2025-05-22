@@ -20,12 +20,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { HeaderService } from '@shared/services/header.service';
 import { fromMatchMedia } from '@shared/functions/rxjs/fromMatchMedia';
 import { fromOutsideTouchClick } from '@shared/functions/rxjs/fromOutsideTouchClick';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-departments',
-  templateUrl: './departments.component.html',
-  styleUrls: [ './departments.component.scss' ]
+  templateUrl: './departments.component.html'
 })
 
 export class DepartmentsComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {

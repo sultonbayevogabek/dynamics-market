@@ -1,4 +1,5 @@
 import { CustomFields } from './custom-fields';
+import { IFile } from '@shared/interfaces/file';
 
 export interface Category {
   id: number;
@@ -6,7 +7,7 @@ export interface Category {
   name: string;
   slug: string;
   path: string;
-  image: string | null;
+  image: IFile;
   items: number;
   customFields: CustomFields;
   parents?: Category[] | null;
