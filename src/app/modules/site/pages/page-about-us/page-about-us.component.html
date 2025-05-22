@@ -1,14 +1,15 @@
-<div class="block about-us">
+<app-page-header [breadcrumbs]="[
+    {label: 'homepage',                 url: '/'},
+    {label: 'about.us', url: ''}
+]"></app-page-header>
+
+<div class="block">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-xl-10">
-        <div class="about-us__body">
-          <h1 class="about-us__title">
-            {{ 'about.us'| translate }}
-          </h1>
-          <div class="about-us__text typography" [innerHTML]="about[currentLang]">
-          </div>
-        </div>
+    <div class="document">
+      <div class="document__header">
+        <h1 class="document__title">{{ 'about.us'| translate }}</h1>
+      </div>
+      <div class="document__content typography" [innerHTML]="about[currentLang]">
       </div>
     </div>
   </div>
