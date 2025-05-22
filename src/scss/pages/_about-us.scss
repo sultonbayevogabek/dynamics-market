@@ -9,7 +9,7 @@
 }
 
 .about-us__image {
-  background-image: url('../../assets/images/aboutus.jpg');
+  background-image: url('https://www.shutterstock.com/image-vector/grey-white-abstract-technology-background-260nw-1369081088.jpg');
   background-size: cover;
   background-position: bottom center;
   height: 500px;
@@ -21,6 +21,7 @@
   margin-top: -380px;
   border-radius: 4px 4px 0 0;
   padding: 75px 92px;
+  box-shadow: $megamenu-shadow
 }
 
 .about-us__title {
