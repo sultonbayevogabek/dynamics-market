@@ -8,20 +8,11 @@
 .about-us {
 }
 
-.about-us__image {
-  background-image: url('https://www.shutterstock.com/image-vector/grey-white-abstract-technology-background-260nw-1369081088.jpg');
-  background-size: cover;
-  background-position: bottom center;
-  height: 500px;
-}
-
 .about-us__body {
   background: $body-bg;
   min-height: 380px;
-  margin-top: -380px;
   border-radius: 4px 4px 0 0;
-  padding: 75px 92px;
-  box-shadow: $megamenu-shadow
+  padding: 75px 0;
 }
 
 .about-us__title {
@@ -108,14 +99,11 @@
 
 
 @media (max-width: breakpoint(md-end)) and (min-width: breakpoint(md-start)) {
-  .about-us__image {
-    height: 460px;
-  }
   .about-us__title {
     margin-bottom: 36px;
   }
   .about-us__body {
-    padding: 50px;
+    padding: 50px 0;
   }
   .about-us__team {
     margin-top: 75px;
@@ -123,16 +111,12 @@
 }
 
 @media (max-width: breakpoint(sm-end)) and (min-width: breakpoint(sm-start)) {
-  .about-us__image {
-    height: 360px;
-  }
   .about-us__title {
     margin-bottom: 24px;
   }
   .about-us__body {
     min-height: 290px;
-    margin-top: -290px;
-    padding: 40px;
+    padding: 40px 0;
   }
   .about-us__team {
     margin-top: 50px;
@@ -140,13 +124,9 @@
 }
 
 @media (max-width: breakpoint(sm-end)) {
-  .about-us__image {
-    height: 330px;
-  }
   .about-us__body {
     min-height: 290px;
-    margin-top: -290px;
-    padding: 30px 24px;
+    padding: 30px 0;
   }
   .about-us__title {
     margin-bottom: 20px;
