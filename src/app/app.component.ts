@@ -1,35 +1,29 @@
-import { Component, Inject, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Router } from '@angular/router';
 import { isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { CurrencyService } from '@shared/services/currency.service';
-import { filter, first } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { LANGUAGES_SHORTS } from '@shared/constants/languages';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ]
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private router: Router,
-    private zone: NgZone,
     private scroller: ViewportScroller,
     private currency: CurrencyService,
     private translate: TranslateService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      this.zone.runOutsideAngular(() => {
-        // Language init
-        const lang = localStorage.getItem('lang') || 'uz';
-        if (LANGUAGES_SHORTS.includes(lang)) {
-          this.translate.setDefaultLang(lang);
-          this.translate.use(lang);
-        }
-      });
+      const lang = localStorage.getItem('lang') || 'uz';
+      if (LANGUAGES_SHORTS.includes(lang)) {
+        this.translate.setDefaultLang(lang);
+        this.translate.use(lang);
+      }
     }
   }
 
@@ -40,11 +34,5 @@ export class AppComponent implements OnInit {
       // digitsInfo: '1.2-2',
       // locale: 'en-US'
     };
-
-    this.router.events.subscribe((event) => {
-      if ((event instanceof NavigationEnd)) {
-        this.scroller.scrollToPosition([ 0, 0 ]);
-      }
-    });
   }
 }
