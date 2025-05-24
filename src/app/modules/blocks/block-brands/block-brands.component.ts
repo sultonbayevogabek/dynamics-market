@@ -54,11 +54,11 @@ export class BlockBrandsComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const container = this.container.nativeElement as HTMLElement;
-      const containerWidth = container.getBoundingClientRect().width;
+      const container = this.container?.nativeElement as HTMLElement;
+      const containerWidth = container?.getBoundingClientRect().width;
 
       window.addEventListener('load', () => {
-        const newContainerWidth = container.getBoundingClientRect().width;
+        const newContainerWidth = container?.getBoundingClientRect().width;
 
         if (containerWidth !== newContainerWidth) {
           this.showCarousel = false;

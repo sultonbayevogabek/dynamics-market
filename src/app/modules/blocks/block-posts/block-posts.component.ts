@@ -1,71 +1,59 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  Input,
-  OnChanges,
-  PLATFORM_ID,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { DirectionService } from '@shared/services/direction.service';
 import { isPlatformBrowser } from '@angular/common';
 import { OwlOptions } from 'ngx-owl-carousel-o/lib/models/owl-options.model';
+import { INews } from '@shared/interfaces/news';
+import { firstValueFrom } from 'rxjs';
+import { NewsService } from '@shared/services/news.service';
 
 @Component({
   selector: 'app-block-posts',
-  templateUrl: './block-posts.component.html',
-  styleUrls: [ './block-posts.component.scss' ]
+  templateUrl: './block-posts.component.html'
 })
-export class BlockPostsComponent implements OnChanges, AfterViewInit {
-  @Input() header = '';
-  @Input() layout: 'list-sm' | 'grid-nl' = 'list-sm';
-  @Input() posts: any[] = [];
+
+export class BlockPostsComponent implements AfterViewInit, OnInit {
+  layout: 'list-sm' | 'grid-nl' = 'list-sm';
+  news: INews[] = [];
 
   @ViewChild('container', { read: ElementRef }) container!: ElementRef;
 
   showCarousel = true;
 
-  carouselDefaultOptions = {
+  carouselOptions: OwlOptions = {
     margin: 30,
     nav: false,
     dots: false,
     loop: true,
-    rtl: this.direction.isRTL()
-  };
-
-  carouselOptionsByLayout: any = {
-    'grid-nl': {
-      responsive: {
-        930: { items: 3 },
-        690: { items: 2 },
-        0: { items: 1 }
-      }
-    },
-    'list-sm': {
-      responsive: {
-        930: { items: 2 },
-        0: { items: 1 }
-      }
+    rtl: false,
+    responsive: {
+      930: { items: 2 },
+      0: { items: 1 }
     }
   };
-
-  carouselOptions: OwlOptions = {};
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private direction: DirectionService
+    private direction: DirectionService,
+    private newsService: NewsService
   ) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('layout' in changes) {
-      this.carouselOptions = Object.assign({}, this.carouselDefaultOptions, this.carouselOptionsByLayout[changes['layout'].currentValue]);
-    }
+  async ngOnInit() {
+    await this.getNews();
   }
 
-  ngAfterViewInit(): void {
+  async getNews(page?: number) {
+    const response = await firstValueFrom(
+      this.newsService.getNews({
+        page: 1,
+        limit: 2
+      })
+    );
+
+    this.news = response?.data;
+  }
+
+  ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       const container = this.container.nativeElement as HTMLElement;
       const containerWidth = container.getBoundingClientRect().width;

@@ -2,24 +2,24 @@
 
 <app-block-features></app-block-features>
 
-<app-block-products-carousel
-  header="popular.products"
-  layout="grid-4"
-  [loading]="featuredProducts.loading"
-  [products]="featuredProducts.products"
-  [groups]="featuredProducts.groups"
-  (groupChange)="groupChange(featuredProducts, $event)"
-></app-block-products-carousel>
+<!--<app-block-products-carousel-->
+<!--  header="popular.products"-->
+<!--  layout="grid-4"-->
+<!--  [loading]="featuredProducts.loading"-->
+<!--  [products]="featuredProducts.products"-->
+<!--  [groups]="featuredProducts.groups"-->
+<!--  (groupChange)="groupChange(featuredProducts, $event)"-->
+<!--&gt;</app-block-products-carousel>-->
 
 <app-block-banner></app-block-banner>
 
 <app-block-brands></app-block-brands>
 
 <app-block-categories
-  header="popular.categories" layout="classic"
 ></app-block-categories>
 
-<!--<app-block-posts header="latest.news" layout="list-sm" [posts]="posts"></app-block-posts>-->
+<app-block-posts
+></app-block-posts>
 
 <app-block-product-columns>
   <app-block-product-columns-item header="top.products"

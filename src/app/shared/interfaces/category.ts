@@ -25,4 +25,5 @@ export interface ICategory {
   children: ICategory[];
   showChildren?: boolean;
   hidden?: boolean;
+  image?: IFile;
 }

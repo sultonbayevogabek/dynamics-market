@@ -21,13 +21,10 @@ interface ProductsCarouselData {
 })
 export class PageHomeOneComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject<void>();
-  bestsellers$!: Observable<IProduct[]>;
 
   columnTopRated$!: Observable<IProduct[]>;
   columnSpecialOffers$!: Observable<IProduct[]>;
   columnBestsellers$!: Observable<IProduct[]>;
-
-  posts = [];
 
   featuredProducts!: ProductsCarouselData;
   latestProducts!: ProductsCarouselData;
@@ -37,9 +34,9 @@ export class PageHomeOneComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.groupChange(this.featuredProducts, this.featuredProducts.groups[0]);
-
-    this.groupChange(this.latestProducts, this.latestProducts.groups[0]);
+    // this.groupChange(this.featuredProducts, this.featuredProducts.groups[0]);
+    //
+    // this.groupChange(this.latestProducts, this.latestProducts.groups[0]);
   }
 
   ngOnDestroy(): void {

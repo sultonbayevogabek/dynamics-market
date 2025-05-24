@@ -1,9 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { RootService } from '@shared/services/root.service';
 import { HeaderService } from '@shared/services/header.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NavigationLink } from '@shared/interfaces/navigation-link';
 import { ICategory } from '@shared/interfaces/category';
 
 @Component({
@@ -12,14 +10,12 @@ import { ICategory } from '@shared/interfaces/category';
 })
 
 export class BlockCategoriesComponent implements OnInit, OnDestroy {
-  @Input() header = '';
-  @Input() layout: 'classic' | 'compact' = 'classic';
   categories: ICategory[] = [];
+  loading = true;
 
   private destroy$ = new Subject<void>();
 
   constructor(
-    public root: RootService,
     private headerService: HeaderService
   ) {}
 
@@ -28,7 +24,7 @@ export class BlockCategoriesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(categories => {
         this.categories = categories?.slice(0, 6);
-        console.log('categories', categories);
+        this.loading = false;
       })
   }
 
