@@ -35,7 +35,7 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
   }
 
   onItemClick(event: MobileMenuItemLink): void {
-    if (event.type === 'link') {
+    if (['category-link', 'page-link'].includes(event.type!)) {
       this.mobileMenuService.close();
     }
 

@@ -1,9 +1,9 @@
 <ul class="mobile-links mobile-links--level--{{ level }}" appCollapse>
   <li *ngFor="let link of links">
-    <div *ngIf="link.type === 'button' || link.type === 'link'" class="mobile-links__item"
+    <div *ngIf="link.type === 'button' || ['category-link', 'page-link'].includes(link.type!)" class="mobile-links__item"
          appCollapseItem="mobile-links__item--open" #item="appCollapseItem">
       <div class="mobile-links__item-title">
-        <a *ngIf="link.type === 'link'"
+        <a *ngIf="link.type === 'category-link'"
            class="mobile-links__item-link"
            (click)="onItemClick(link)"
            [routerLink]="['/products']"
@@ -11,13 +11,20 @@
             category: link.url
            }"
         >
-          {{ link.label ? (link.label| translate) : '' }}
+          {{ link.label ? (link.label!| translate) : '' }}
+        </a>
+        <a *ngIf="link.type === 'page-link'"
+           class="mobile-links__item-link"
+           (click)="onItemClick(link)"
+           [routerLink]="link.url"
+        >
+          {{ link.label ? (link.label!| translate) : '' }}
         </a>
         <a
-          *ngIf="link.type !== 'link'"
+          *ngIf="link.type === 'button'"
           class="mobile-links__item-link"
           (click)="onItemClick(link)">
-          {{ link.label ? (link.label| translate) : '' }}
+          {{ link.label ? (link.label!| translate) : '' }}
         </a>
 
         <button *ngIf="link.children?.length" class="mobile-links__item-toggle" type="button" (click)="item.toggle()">

@@ -15,49 +15,29 @@ export class MobileMenuService {
   mobileMenu: MobileMenuItemLink[] = [
     {
       type: 'button', label: 'categories', children: [
-        {
-          type: 'link', label: 'Power Tools', url: '/shop/catalog', children: [
-            { type: 'link', label: 'Engravers', url: '/shop/catalog' },
-            { type: 'link', label: 'Wrenches', url: '/shop/catalog' },
-            { type: 'link', label: 'Wall Chaser', url: '/shop/catalog' },
-            { type: 'link', label: 'Pneumatic Tools', url: '/shop/catalog', children: [
-                { type: 'link', label: 'Engravers', url: '/shop/catalog' },
-              ] }
-          ]
-        },
-        {
-          type: 'link', label: 'Machine Tools', url: '/shop/catalog', children: [
-            { type: 'link', label: 'Thread Cutting', url: '/shop/catalog' },
-            { type: 'link', label: 'Chip Blowers', url: '/shop/catalog' },
-            { type: 'link', label: 'Sharpening Machines', url: '/shop/catalog' },
-            { type: 'link', label: 'Pipe Cutters', url: '/shop/catalog' },
-            { type: 'link', label: 'Slotting machines', url: '/shop/catalog' },
-            { type: 'link', label: 'Lathes', url: '/shop/catalog' }
-          ]
-        }
       ]
     },
 
     {
-      type: 'link', label: 'homepage', url: '/'
+      type: 'page-link', label: 'homepage', url: '/'
     },
 
     {
-      type: 'link', label: 'about.us', url: '/about-us'
+      type: 'page-link', label: 'about.us', url: '/about-us'
     },
     {
-      type: 'link', label: 'news', url: '/news'
-    },
-
-    {
-      type: 'link', label: 'contacts', url: '/contact-us'
-    },
-    {
-      type: 'link', label: 'privacy.policy', url: '/terms'
+      type: 'page-link', label: 'news', url: '/news'
     },
 
     {
-      type: 'link', label: 'faq', url: '/faq'
+      type: 'page-link', label: 'contacts', url: '/contact-us'
+    },
+    {
+      type: 'page-link', label: 'privacy.policy', url: '/terms'
+    },
+
+    {
+      type: 'page-link', label: 'faq', url: '/faq'
     },
 
     {
@@ -114,7 +94,7 @@ export class MobileMenuService {
 
   transformCategory(category: ICategory): MobileMenuItemLink {
     return {
-      type: 'link',
+      type: 'category-link',
       label: category.name,
       url: category.slug,
       children: category.children?.map(c => this.transformCategory(c)) || []

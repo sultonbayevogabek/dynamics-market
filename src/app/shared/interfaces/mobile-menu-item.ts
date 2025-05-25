@@ -1,5 +1,5 @@
 export interface MobileMenuItemLink {
-  type?: 'link' | 'button';
+  type?: 'page-link' | 'category-link' | 'button';
   url?: string;
   data?: {
     language?: string;
