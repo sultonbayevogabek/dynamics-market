@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -92,6 +93,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     private productsService: ProductsService,
     public root: RootService,
     private headerService: HeaderService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -168,6 +170,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
 
     const response = await this.productsService.searchProduct(searchParams);
     this.suggestedProducts = response?.data;
+    this.cdr.detectChanges();
   }
 
   openSuggestion(): void {
