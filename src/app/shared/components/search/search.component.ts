@@ -15,17 +15,16 @@ import {
 } from '@angular/core';
 import { IProduct } from '../../interfaces/product';
 import { RootService } from '../../services/root.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, map, switchMap, takeUntil, throttleTime } from 'rxjs/operators';
-import { asyncScheduler, fromEvent, of, Subject } from 'rxjs';
-import { Category, ICategory } from '../../interfaces/category';
+import { FormBuilder } from '@angular/forms';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, fromEvent, Subject } from 'rxjs';
+import { ICategory } from '../../interfaces/category';
 import { DOCUMENT } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { HeaderService } from '@shared/services/header.service';
+import { ProductsService } from '@shared/services/products.service';
 
 export type SearchLocation = 'header' | 'indicator' | 'mobile-header';
-
-export type CategoryWithDepth = Category & { depth: number };
 
 @Component({
   selector: 'app-search',
@@ -35,7 +34,10 @@ export type CategoryWithDepth = Category & { depth: number };
 export class SearchComponent implements OnChanges, OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
-  form!: FormGroup;
+  form = this.fb.group({
+    category: [ 'all' ],
+    search: [ '' ]
+  });
 
   hasSuggestions = false;
 
@@ -87,6 +89,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     private elementRef: ElementRef,
     private zone: NgZone,
     private cart: CartService,
+    private productsService: ProductsService,
     public root: RootService,
     private headerService: HeaderService,
   ) {
@@ -96,30 +99,15 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.form = this.fb.group({
-      category: [ 'all' ],
-      query: [ '' ]
-    });
-
-    this.form.get('query')?.valueChanges.pipe(
-      throttleTime(250, asyncScheduler, { leading: true, trailing: true }),
-      map(query => query.trim()),
-      switchMap(query => {
-        if (query) {
-          const categorySlug = this.form.value.category !== 'all' ? this.form.value.category : null;
-
-        }
-
-        return of([]);
-      }),
-      takeUntil(this.destroy$)
-    ).subscribe(products => {
-      // this.hasSuggestions = products.length > 0;
-      //
-      // if (products.length > 0) {
-      //   // this.suggestedProducts = products;
-      // }
-    });
+    this.form.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(async () => {
+        await this.search();
+      });
 
     this.zone.runOutsideAngular(() => {
       fromEvent(this.document, 'click').pipe(
@@ -156,6 +144,30 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     this.headerService.categories$.subscribe(categories => {
       this.categories = categories;
     })
+  }
+
+  async search() {
+    const searchParams: {
+      category?: string,
+      search: string
+    } = {
+      search: ''
+    };
+
+    const formValue = this.form.getRawValue();
+
+    if (formValue?.search?.trim()?.length < 2) {
+      return;
+    }
+
+    searchParams.search = formValue.search?.trim();
+
+    if (formValue.category !== 'all') {
+      searchParams.category = formValue.category;
+    }
+
+    const response = await this.productsService.searchProduct(searchParams);
+    this.suggestedProducts = response?.data;
   }
 
   openSuggestion(): void {

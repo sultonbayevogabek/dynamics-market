@@ -89,4 +89,10 @@ export class ProductsService {
       this.requestService.request<IProduct>('product/get-product', { slug })
     );
   }
+
+  async searchProduct(params: { search: string; category?: string }): Promise<{ data: IProduct[]; total: number }> {
+    return await firstValueFrom(
+      this.requestService.request<{ data: IProduct[]; total: number }>('product/search', params)
+    );
+  }
 }
