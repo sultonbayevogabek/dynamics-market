@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { IProduct } from '@shared/interfaces/product';
-import { RootService } from '@shared/services/root.service';
 import { ProductsService } from '@shared/services/products.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductResolverService implements Resolve<IProduct> {
   constructor(
-    private root: RootService,
-    private router: Router,
     private productsService: ProductsService
   ) {
   }

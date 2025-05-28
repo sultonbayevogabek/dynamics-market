@@ -11,7 +11,6 @@ import {
 import { CartService } from '../../services/cart.service';
 import { IProduct } from '../../interfaces/product';
 import { QuickviewService } from '../../services/quickview.service';
-import { RootService } from '../../services/root.service';
 import { CurrencyService } from '../../services/currency.service';
 import { takeUntil } from 'rxjs/operators';
 import { firstValueFrom, Subject } from 'rxjs';
@@ -38,7 +37,6 @@ export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private cd: ChangeDetectorRef,
-    public root: RootService,
     public cart: CartService,
     public quickview: QuickviewService,
     public currency: CurrencyService,

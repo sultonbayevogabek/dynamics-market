@@ -11,7 +11,6 @@ import { SharedModule } from '@shared/shared.module';
 import { LayoutComponent } from './components/layout/layout.component';
 
 // pages
-import { PageLoginComponent } from './pages/page-login/page-login.component';
 import { PageOrdersListComponent } from './pages/page-orders-list/page-orders-list.component';
 import { PageProfileComponent } from './pages/page-profile/page-profile.component';
 import { PageOrderDetailsComponent } from './pages/page-order-details/page-order-details.component';
@@ -23,8 +22,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     // components
     LayoutComponent,
-    // pages
-    PageLoginComponent,
     PageOrdersListComponent,
     PageProfileComponent,
     PageOrderDetailsComponent,

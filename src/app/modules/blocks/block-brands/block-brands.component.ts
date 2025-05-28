@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { DirectionService } from '@shared/services/direction.service';
-import { RootService } from '@shared/services/root.service';
 import { Brand } from '@shared/interfaces/brand';
 import { isPlatformBrowser } from '@angular/common';
 import { BrandsService } from '@shared/services/brands.service';
@@ -36,7 +35,6 @@ export class BlockBrandsComponent implements AfterViewInit, OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    public root: RootService,
     private direction: DirectionService,
     private brandsService: BrandsService
   ) {

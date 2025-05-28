@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
 import { ICartItem } from '@shared/interfaces/cart';
 import { firstValueFrom, Subject } from 'rxjs';
-import { RootService } from '@shared/services/root.service';
 import { ToasterService } from '@shared/services/toaster.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './page-cart.component.html'
 })
+
 export class PageCartComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject();
 
@@ -22,7 +22,6 @@ export class PageCartComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    public root: RootService,
     public cart: CartService,
     private toaster: ToasterService
   ) {
@@ -67,11 +66,6 @@ export class PageCartComponent implements OnInit, OnDestroy {
     this.updating = true;
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   async updateCount(item: ICartItem) {
     if (item.updating) {
       return;
@@ -86,5 +80,10 @@ export class PageCartComponent implements OnInit, OnDestroy {
     )
 
     item.updating = false;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -11,7 +11,6 @@ import {
   ViewChild
 } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
-import { RootService } from '@shared/services/root.service';
 import { HeaderService } from '@shared/services/header.service';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { filter, first, shareReplay, takeUntil } from 'rxjs/operators';
@@ -52,7 +51,6 @@ export class NavComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    public root: RootService,
     public cart: CartService,
     public zone: NgZone,
     public header: HeaderService,

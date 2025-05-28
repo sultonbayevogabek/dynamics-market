@@ -15,7 +15,6 @@ import {
   ViewChild
 } from '@angular/core';
 import { IProduct } from '../../interfaces/product';
-import { RootService } from '../../services/root.service';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { distinctUntilChanged, fromEvent, Subject } from 'rxjs';
@@ -91,7 +90,6 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     private zone: NgZone,
     private cart: CartService,
     private productsService: ProductsService,
-    public root: RootService,
     private headerService: HeaderService,
     private cdr: ChangeDetectorRef
   ) {

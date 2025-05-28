@@ -2,7 +2,6 @@ import { Component, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angul
 import { isPlatformBrowser } from '@angular/common';
 import { DirectionService } from '@shared/services/direction.service';
 import { IProductsFilter } from '@shared/interfaces/filter';
-import { RootService } from '@shared/services/root.service';
 import { firstValueFrom, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { HeaderService } from '@shared/services/header.service';
@@ -50,7 +49,6 @@ export class WidgetFiltersComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private direction: DirectionService,
-    public root: RootService,
     private headerService: HeaderService,
     private productsService: ProductsService,
     private activatedRoute: ActivatedRoute,

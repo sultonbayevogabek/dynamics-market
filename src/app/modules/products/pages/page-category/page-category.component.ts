@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsSidebarService } from '../../services/products-sidebar.service';
 import { Link } from '@shared/interfaces/link';
-import { RootService } from '@shared/services/root.service';
 import { Subject } from 'rxjs';
 import { ProductsService } from '@shared/services/products.service';
 
@@ -23,7 +22,6 @@ export class PageCategoryComponent implements OnDestroy {
   pageHeader = '';
 
   constructor(
-    private root: RootService,
     private route: ActivatedRoute,
     private productsService: ProductsService
   ) {
