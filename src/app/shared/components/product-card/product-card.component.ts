@@ -20,8 +20,7 @@ import { ToasterService } from '@shared/services/toaster.service';
 
 @Component({
   selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './product-card.component.html'
 })
 
 export class ProductCardComponent implements OnInit, OnDestroy, OnChanges {

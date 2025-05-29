@@ -7,8 +7,7 @@ import { MobileMenuService } from '@shared/services/mobile-menu.service';
 
 @Component({
   selector: 'app-mobile-auth',
-  templateUrl: './mobile-auth.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mobile-auth.component.html'
 })
 
 export class MobileAuthComponent implements OnInit, OnDestroy {

@@ -3,8 +3,7 @@ import { MobileMenuItemLink } from '@shared/interfaces/mobile-menu-item';
 
 @Component({
   selector: 'app-mobile-links',
-  templateUrl: './mobile-links.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mobile-links.component.html'
 })
 
 export class MobileLinksComponent {

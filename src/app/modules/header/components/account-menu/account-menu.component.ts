@@ -15,8 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-account-menu',
   templateUrl: './account-menu.component.html',
-  styleUrls: [ './account-menu.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: [ './account-menu.component.scss' ]
 })
 
 export class AccountMenuComponent implements OnInit, OnDestroy {
