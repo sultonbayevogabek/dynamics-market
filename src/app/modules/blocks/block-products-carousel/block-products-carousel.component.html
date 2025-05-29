@@ -8,8 +8,14 @@
   [attr.data-layout]="layout"
 >
   <div [ngClass]="{'container': !withSidebar}" *ngIf="showCarousel">
-    <app-block-header [header]="header" [groups]="groups" [arrows]="true" (next)="carousel.next()"
-                      (prev)="carousel.prev()" (groupChange)="groupChange.emit($event)"></app-block-header>
+    <app-block-header
+      [header]="'popular.products'"
+      [groups]="popularBrands"
+      [arrows]="true"
+      (next)="carousel.next()"
+      (prev)="carousel.prev()"
+      (groupChange)="getProducts($event.slug)"
+    ></app-block-header>
 
     <div class="block-products-carousel__slider" #container>
       <div class="block-products-carousel__preloader"></div>

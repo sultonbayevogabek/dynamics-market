@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProductsFilter } from '@shared/interfaces/filter';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, distinctUntilChanged, firstValueFrom, tap } from 'rxjs';
 import { IProduct } from '@shared/interfaces/product';
 import { RequestService } from '@shared/services/request.service';
@@ -16,7 +16,6 @@ export class ProductsService {
   loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private requestService: RequestService
   ) {
@@ -69,11 +68,12 @@ export class ProductsService {
       });
   }
 
-  getProducts() {
+  getProducts(params = {}) {
     this.loading$.next(true);
     this.requestService.request<{ data: IProduct[]; pages: number; total: number }>('product/list', {
       ...this.filter,
-      brands: this.filter.brand
+      brands: this.filter.brand,
+      ...params
     })
       .pipe(
         tap(res => {

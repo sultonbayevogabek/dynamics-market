@@ -2,36 +2,36 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   Inject,
-  Input,
   OnChanges,
-  Output,
+  OnDestroy,
+  OnInit,
   PLATFORM_ID,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { IProduct, Product } from '@shared/interfaces/product';
-import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
+import { IProduct } from '@shared/interfaces/product';
 import { DirectionService } from '@shared/services/direction.service';
 import { isPlatformBrowser } from '@angular/common';
 import { OwlOptions } from 'ngx-owl-carousel-o/lib/models/owl-options.model';
+import { BrandsService } from '@shared/services/brands.service';
+import { Brand } from '@shared/interfaces/brand';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ProductsService } from '@shared/services/products.service';
 
 @Component({
   selector: 'app-block-products-carousel',
   templateUrl: './block-products-carousel.component.html'
 })
 
-export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit {
-  @Input() header = '';
-  @Input() layout: 'grid-4' | 'grid-4-sm' | 'grid-5' | 'horizontal' = 'grid-4';
-  @Input() rows = 1;
-  @Input() products: IProduct[] = [];
-  @Input() groups: BlockHeaderGroup[] = [];
-  @Input() withSidebar = false;
-  @Input() loading = false;
-
-  @Output() groupChange: EventEmitter<BlockHeaderGroup> = new EventEmitter();
+export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit, OnInit, OnDestroy {
+  layout: 'grid-4' | 'grid-4-sm' | 'grid-5' | 'horizontal' = 'grid-4';
+  rows = 1;
+  popularBrands: Brand[] = [];
+  products: IProduct[] = [];
+  withSidebar = false;
+  loading = true;
 
   @ViewChild('container', { read: ElementRef }) container!: ElementRef;
 
@@ -89,10 +89,33 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit 
 
   carouselOptions: OwlOptions = {};
 
+  private destroy$: Subject<void> = new Subject();
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private direction: DirectionService
+    private direction: DirectionService,
+    private brandsService: BrandsService,
+    private productsService: ProductsService
   ) {
+  }
+
+  ngOnInit() {
+    this.brandsService.brands$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(brands => {
+        this.loading = false;
+        this.filterPopularBrands(brands);
+      });
+  }
+
+  filterPopularBrands(brands: Brand[]) {
+    this.popularBrands = brands?.filter(brand => brand?.isPopular) || [];
+  }
+
+  async getProducts(brand: string) {
+    await this.productsService.getProducts({
+      brands: [ brand ]
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -130,5 +153,10 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit 
         }
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

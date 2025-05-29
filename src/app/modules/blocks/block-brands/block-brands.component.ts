@@ -41,7 +41,7 @@ export class BlockBrandsComponent implements AfterViewInit, OnInit {
   }
 
   async ngOnInit() {
-    if (this.brandsService.brands.length) {
+    if (this.brandsService.brands?.length) {
       this.brands = this.brandsService.brands;
     } else {
       this.brands = await firstValueFrom(

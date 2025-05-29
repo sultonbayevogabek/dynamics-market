@@ -6,18 +6,20 @@ export interface Brand {
   slug: string;
   image: string;
 
-  _id?: string
-  nameUz?: string
-  nameRu?: string
-  nameEn?: string
-  slugUz?: string
-  slugRu?: string
-  slugEn?: string
-  website?: string
-  logo?: IFile
-  status?: number
-  isDeleted?: boolean
-  createdAt?: string
-  updatedAt?: string
-  __v?: number
+  _id?: string;
+  nameUz?: string;
+  nameRu?: string;
+  nameEn?: string;
+  slugUz?: string;
+  slugRu?: string;
+  slugEn?: string;
+  website?: string;
+  logo?: IFile;
+  status?: number;
+  isDeleted?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  isPopular?: boolean;
+  current?: boolean;
+  __v?: number;
 }

@@ -1,26 +1,28 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BlockHeaderGroup } from '@shared/interfaces/block-header-group';
+import { Brand } from '@shared/interfaces/brand';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-block-header',
-  templateUrl: './block-header.component.html',
-  styleUrls: [ './block-header.component.scss' ]
+  templateUrl: './block-header.component.html'
 })
 export class BlockHeaderComponent {
   @Input() header = '';
   @Input() arrows = false;
-  @Input() groups: BlockHeaderGroup[] = [];
+  @Input() groups: Brand[] = [];
 
   @Output() next: EventEmitter<any> = new EventEmitter();
   @Output() prev: EventEmitter<any> = new EventEmitter();
 
-  @Output() groupChange: EventEmitter<BlockHeaderGroup> = new EventEmitter();
+  @Output() groupChange: EventEmitter<Brand> = new EventEmitter();
 
   constructor() {
   }
 
-  setGroup(group: BlockHeaderGroup): void {
+  setGroup(group: Brand): void {
     this.groups.forEach(g => g.current = g === group);
     this.groupChange.emit(group);
   }
+
+  protected readonly group = group;
 }
