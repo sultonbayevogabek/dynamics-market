@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,
@@ -27,7 +28,6 @@ import { ProductsService } from '@shared/services/products.service';
 
 export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   layout: 'grid-4' | 'grid-4-sm' | 'grid-5' | 'horizontal' = 'grid-4';
-  rows = 1;
   popularBrands: Brand[] = [];
   products: IProduct[] = [];
   withSidebar = false;
@@ -35,59 +35,25 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
 
   @ViewChild('container', { read: ElementRef }) container!: ElementRef;
 
-  columns: IProduct[][] = [];
-
   showCarousel = true;
 
-  carouselDefaultOptions: any = {
+  carouselOptions: OwlOptions = {
     items: 4,
     margin: 14,
     nav: false,
     dots: false,
     loop: true,
     stagePadding: 1,
-    rtl: this.direction.isRTL()
-  };
-
-  carouselOptionsByLayout: any = {
-    'grid-4': {
-      responsive: {
-        1110: { items: 4, margin: 14 },
-        930: { items: 4, margin: 10 },
-        690: { items: 3, margin: 10 },
-        400: { items: 2, margin: 10 },
-        0: { items: 1 }
-      }
-    },
-    'grid-4-sm': {
-      responsive: {
-        820: { items: 4, margin: 14 },
-        640: { items: 3, margin: 10 },
-        400: { items: 2, margin: 10 },
-        0: { items: 1 }
-      }
-    },
-    'grid-5': {
-      responsive: {
-        1110: { items: 5, margin: 12 },
-        930: { items: 4, margin: 10 },
-        690: { items: 3, margin: 10 },
-        400: { items: 2, margin: 10 },
-        0: { items: 1 }
-      }
-    },
-    horizontal: {
-      items: 3,
-      responsive: {
-        1110: { items: 3, margin: 14 },
-        930: { items: 3, margin: 10 },
-        690: { items: 2, margin: 10 },
-        0: { items: 1 }
-      }
+    rtl: this.direction.isRTL(),
+    skip_validateItems: true,
+    responsive: {
+      1110: { items: 4, margin: 14 },
+      930: { items: 4, margin: 10 },
+      690: { items: 3, margin: 10 },
+      400: { items: 2, margin: 10 },
+      0: { items: 1 }
     }
   };
-
-  carouselOptions: OwlOptions = {};
 
   private destroy$: Subject<void> = new Subject();
 
@@ -95,7 +61,8 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
     @Inject(PLATFORM_ID) private platformId: any,
     private direction: DirectionService,
     private brandsService: BrandsService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -103,39 +70,34 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
     this.brandsService.brands$
       .pipe(takeUntil(this.destroy$))
       .subscribe(brands => {
-        this.loading = false;
         this.filterPopularBrands(brands);
+      });
+
+    this.productsService.products$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(products => {
+        this.products = products?.data || [];
+        this.loading = false;
+        this.cdr.detectChanges();
       });
   }
 
   filterPopularBrands(brands: Brand[]) {
     this.popularBrands = brands?.filter(brand => brand?.isPopular) || [];
+    this.popularBrands[0].current = true;
+    this.getProducts(this.popularBrands[0]?.slug);
   }
 
-  async getProducts(brand: string) {
-    await this.productsService.getProducts({
-      brands: [ brand ]
+  getProducts(brand: string) {
+    this.loading = true;
+    this.productsService.getProducts({
+      brands: [ brand ],
+      page: 1,
+      limit: 12
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const properties = Object.keys(changes);
-
-    if (properties.includes('products') || properties.includes('row')) {
-      this.columns = [];
-
-      if (this.products && this.rows > 0) {
-        const products = this.products.slice();
-
-        while (products.length > 0) {
-          this.columns.push(products.splice(0, this.rows));
-        }
-      }
-    }
-
-    if ('layout' in changes) {
-      this.carouselOptions = Object.assign({}, this.carouselDefaultOptions, this.carouselOptionsByLayout[changes['layout'].currentValue]);
-    }
   }
 
   ngAfterViewInit(): void {

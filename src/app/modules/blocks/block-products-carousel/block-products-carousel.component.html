@@ -3,7 +3,7 @@
   class="block block-products-carousel"
   [ngClass]="{
         'block-products-carousel--loading': loading,
-        'block-products-carousel--has-items': !!columns?.length
+        'block-products-carousel--has-items': !!products?.length
     }"
   [attr.data-layout]="layout"
 >
@@ -21,11 +21,9 @@
       <div class="block-products-carousel__preloader"></div>
 
       <owl-carousel-o [options]="carouselOptions" appOwlPreventClick #carousel>
-        <ng-template *ngFor="let column of columns" carouselSlide>
-          <div class="block-products-carousel__column">
-            <div *ngFor="let product of column" class="block-products-carousel__cell">
-              <app-product-card [product]="product"></app-product-card>
-            </div>
+        <ng-template *ngFor="let product of products" carouselSlide>
+          <div class="block-products-carousel__cell">
+            <app-product-card [product]="product"></app-product-card>
           </div>
         </ng-template>
       </owl-carousel-o>
