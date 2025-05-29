@@ -5,9 +5,9 @@ import { Review } from '@shared/interfaces/review';
 
 @Component({
   selector: 'app-product-tabs',
-  templateUrl: './product-tabs.component.html',
-  styleUrls: [ './product-tabs.component.scss' ]
+  templateUrl: './product-tabs.component.html'
 })
+
 export class ProductTabsComponent implements OnInit {
   @Input() withSidebar = false;
   @Input() tab: 'description' | 'specification' | 'reviews' = 'description';

@@ -8,9 +8,9 @@
        [ngClass]="{'product-tabs__item--active': tab === 'specification'}"
        (click)="$event.preventDefault(); tab = 'specification'">{{ 'specifications'| translate }}</a>
 
-    <a href="#tab-reviews" class="product-tabs__item"
-       [ngClass]="{'product-tabs__item--active': tab === 'reviews'}"
-       (click)="$event.preventDefault(); tab = 'reviews'">{{ 'reviews'| translate }}</a>
+<!--    <a href="#tab-reviews" class="product-tabs__item"-->
+<!--       [ngClass]="{'product-tabs__item&#45;&#45;active': tab === 'reviews'}"-->
+<!--       (click)="$event.preventDefault(); tab = 'reviews'">{{ 'reviews'| translate }}</a>-->
   </div>
   <div class="product-tabs__content">
 
@@ -34,11 +34,6 @@
             <div class="spec__value">{{ feature.value }}</div>
           </div>
         </div>
-<!--        <div class="spec__disclaimer">-->
-<!--          Information on technical characteristics, the delivery set, the country of manufacture and the appearance-->
-<!--          of the goods is for reference only and is based on the latest information available at the time of-->
-<!--          publication.-->
-<!--        </div>-->
       </div>
     </div>
 
