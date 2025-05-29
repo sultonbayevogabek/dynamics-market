@@ -16,13 +16,12 @@ export class ProductsService {
   loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private requestService: RequestService
   ) {
   }
 
-  watchQueryParams() {
-    this.activatedRoute.queryParams
+  watchQueryParams(activatedRoute: ActivatedRoute) {
+    activatedRoute.queryParams
       .pipe(
         distinctUntilChanged(),
         debounceTime(300)

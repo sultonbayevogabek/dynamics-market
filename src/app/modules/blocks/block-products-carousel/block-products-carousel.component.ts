@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,
@@ -61,8 +60,7 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
     @Inject(PLATFORM_ID) private platformId: any,
     private direction: DirectionService,
     private brandsService: BrandsService,
-    private productsService: ProductsService,
-    private cdr: ChangeDetectorRef
+    private productsService: ProductsService
   ) {
   }
 
@@ -70,6 +68,10 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
     this.brandsService.brands$
       .pipe(takeUntil(this.destroy$))
       .subscribe(brands => {
+        if (!brands || !brands?.length) {
+          return;
+        }
+
         this.filterPopularBrands(brands);
       });
 
@@ -78,7 +80,6 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
       .subscribe(products => {
         this.products = products?.data || [];
         this.loading = false;
-        this.cdr.detectChanges();
       });
   }
 

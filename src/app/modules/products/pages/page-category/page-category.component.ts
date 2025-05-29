@@ -22,10 +22,10 @@ export class PageCategoryComponent implements OnDestroy {
   pageHeader = '';
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private productsService: ProductsService
   ) {
-    this.route.data.subscribe(data => {
+    this.activatedRoute.data.subscribe(data => {
       this.breadcrumbs = [
         { label: 'homepage', url: '/' },
         { label: 'products', url: '' }
@@ -35,7 +35,7 @@ export class PageCategoryComponent implements OnDestroy {
       this.sidebarPosition = 'sidebarPosition' in data ? data['sidebarPosition'] : this.sidebarPosition;
     });
 
-    this.productsService.watchQueryParams();
+    this.productsService.watchQueryParams(activatedRoute);
   }
 
   getProductsViewLayout(): 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full' {
