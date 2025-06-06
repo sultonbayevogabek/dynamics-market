@@ -17,21 +17,27 @@ import {
 import { IProduct } from '../../interfaces/product';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { distinctUntilChanged, fromEvent, Subject } from 'rxjs';
+import { distinctUntilChanged, firstValueFrom, fromEvent, Subject } from 'rxjs';
 import { ICategory } from '../../interfaces/category';
 import { DOCUMENT } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { HeaderService } from '@shared/services/header.service';
 import { ProductsService } from '@shared/services/products.service';
+import { AuthService } from '@shared/services/auth.service';
+import { IUser } from '@shared/interfaces/user.interface';
+import { ToasterService } from '@shared/services/toaster.service';
 
 export type SearchLocation = 'header' | 'indicator' | 'mobile-header';
+export type SuggestedProduct = IProduct & { addingToCart?: boolean };
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   exportAs: 'search'
 })
+
 export class SearchComponent implements OnChanges, OnInit, OnDestroy {
+  currentUser!: IUser | null;
   private destroy$: Subject<void> = new Subject<void>();
 
   form = this.fb.group({
@@ -43,9 +49,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
 
   categories: ICategory[] = [];
 
-  suggestedProducts: IProduct[] = [];
-
-  addedToCartProducts: IProduct[] = [];
+  suggestedProducts: SuggestedProduct[] = [];
 
   @Input() location: SearchLocation = 'header';
 
@@ -91,7 +95,9 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     private cart: CartService,
     private productsService: ProductsService,
     private headerService: HeaderService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService,
+    private toaster: ToasterService
   ) {
   }
 
@@ -99,6 +105,13 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(currentUser => {
+        this.currentUser = currentUser;
+        this.cdr.detectChanges();
+      });
+
     this.form.valueChanges
       .pipe(
         debounceTime(500),
@@ -167,7 +180,8 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     const response = await this.productsService.searchProduct(searchParams);
-    this.suggestedProducts = response?.data;
+    this.suggestedProducts = response?.data || [];
+    this.hasSuggestions = !!this.suggestedProducts?.length;
     this.cdr.detectChanges();
   }
 
@@ -179,19 +193,26 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy {
     this.classSearchSuggestionsOpen = false;
   }
 
-  addToCart(product: IProduct): void {
-    if (this.addedToCartProducts.includes(product)) {
+  async addToCart(product: SuggestedProduct) {
+    if (!this.currentUser) {
+      await this.toaster.info('sign.in.to.add.products.to.your.cart');
+      this.authService.openOAuthWindow();
       return;
     }
 
-    this.addedToCartProducts.push(product);
-    // this.cart.add(product, 1).subscribe({
-    //   complete: () => {
-    //     this.addedToCartProducts = this.addedToCartProducts.filter(eachProduct => eachProduct !== product);
-    //   }
-    // });
-  }
+    product.addingToCart = true;
 
+    const response = await firstValueFrom(
+      this.cart.add(product._id)
+    )
+
+    product.addingToCart = false;
+    this.cdr.detectChanges();
+
+    if (response && response.statusCode === 201) {
+      await this.toaster.success('the.product.has.been.successfully.added.to.your.cart');
+    }
+  }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

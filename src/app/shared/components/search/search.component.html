@@ -61,9 +61,9 @@
         <div *ngIf="location === 'header'" class="suggestions__item-actions">
           <button
             type="button"
-            title="Add to cart"
+            [title]="'add.to.cart'| translate"
             class="btn btn-primary btn-sm btn-svg-icon"
-            [class.btn-loading]="addedToCartProducts.includes(product)"
+            [class.btn-loading]="product?.addingToCart"
             (click)="addToCart(product)"
           >
             <app-icon name="cart-16" size="16"></app-icon>
