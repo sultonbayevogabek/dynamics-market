@@ -10,7 +10,7 @@ import { Review } from '@shared/interfaces/review';
 
 export class ProductTabsComponent implements OnInit {
   @Input() withSidebar = false;
-  @Input() tab: 'description' | 'specification' | 'reviews' = 'description';
+  @Input() tab: 'description' | 'specification' | 'reviews' = 'specification';
   @Input() product!: IProduct;
 
   reviews: Review[] = reviews;
@@ -19,6 +19,5 @@ export class ProductTabsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.product);
   }
 }

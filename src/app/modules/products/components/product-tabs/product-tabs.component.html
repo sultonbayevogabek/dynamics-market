@@ -1,12 +1,12 @@
 <div class="product-tabs" [ngClass]="{'product-tabs--layout--sidebar': withSidebar}">
   <div class="product-tabs__list">
-    <a href="#tab-description" class="product-tabs__item"
-       [ngClass]="{'product-tabs__item--active': tab === 'description'}"
-       (click)="$event.preventDefault(); tab = 'description'">{{ 'description'| translate }}</a>
-
     <a href="#tab-specification" class="product-tabs__item"
        [ngClass]="{'product-tabs__item--active': tab === 'specification'}"
        (click)="$event.preventDefault(); tab = 'specification'">{{ 'specifications'| translate }}</a>
+
+    <a href="#tab-description" class="product-tabs__item"
+       [ngClass]="{'product-tabs__item--active': tab === 'description'}"
+       (click)="$event.preventDefault(); tab = 'description'">{{ 'description'| translate }}</a>
 
 <!--    <a href="#tab-reviews" class="product-tabs__item"-->
 <!--       [ngClass]="{'product-tabs__item&#45;&#45;active': tab === 'reviews'}"-->

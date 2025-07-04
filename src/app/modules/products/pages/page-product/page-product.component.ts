@@ -6,8 +6,7 @@ import { Link } from '@shared/interfaces/link';
 
 @Component({
   selector: 'app-page-product',
-  templateUrl: './page-product.component.html',
-  styleUrls: [ './page-product.component.scss' ]
+  templateUrl: './page-product.component.html'
 })
 export class PageProductComponent implements OnInit {
   relatedProducts$!: Observable<IProduct[]>;
@@ -28,21 +27,25 @@ export class PageProductComponent implements OnInit {
   }
 
   generateBreadCrumbs(hierarchy: Hierarchy[]) {
-    hierarchy.forEach((item, index) => {
-      const breadcrumb: Link = {
+    this.breadcrumbs = [];
+
+    hierarchy.forEach((item) => {
+      const categoryBreadcrumb: Link = {
         label: item?.categoryName,
-        url: '',
-        queryParams: null
-      };
-
-      if (index !== hierarchy.length - 1) {
-        breadcrumb.url = '/products';
-        breadcrumb.queryParams = {
+        url: '/products',
+        queryParams: {
           category: item?.categorySlug
-        };
-      }
-
-      this.breadcrumbs.push(breadcrumb);
+        }
+      };
+      this.breadcrumbs.push(categoryBreadcrumb);
     });
+
+    const productBreadcrumb = {
+      label: this.product?.name,
+      url: '',
+      queryParams: null
+    };
+
+    this.breadcrumbs.push(productBreadcrumb);
   }
 }
