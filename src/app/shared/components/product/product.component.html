@@ -3,9 +3,14 @@
 
     <div class="product__gallery">
       <app-product-gallery
+        *ngIf="product.images?.length; else placeholderImage"
         [productLayout]="layout"
         [images]="product.images"
       ></app-product-gallery>
+
+      <ng-template #placeholderImage>
+        <img class="" [src]="'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'" alt="">
+      </ng-template>
     </div>
 
     <div class="product__info">
