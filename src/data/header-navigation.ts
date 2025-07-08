@@ -156,7 +156,7 @@ export const navigation: NavigationLink[] = [
     external: false
   },
   {
-    label: 'privacy.policy',
+    label: 'terms.of.use',
     url: '/terms',
     external: false
   },

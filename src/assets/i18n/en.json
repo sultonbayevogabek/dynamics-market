@@ -10,7 +10,7 @@
   "homepage": "Home",
   "about.us": "Аbout us",
   "news": "News",
-  "privacy.policy": "Privacy policy",
+  "terms.of.use": "Terms of Use",
   "faq": "FAQ",
   "free.shipping": "Free shipping",
   "for.all.types.of.orders": "For all types of orders",
@@ -139,5 +139,6 @@
   "search": "Search",
   "no.information.found.for.your.query": "No information found for your query",
   "publication.date": "Publication date",
-  "show.all": "Show all"
+  "show.all": "Show all",
+  "terms.of.use.last.updated": "Terms of use were last updated on {{ date }}"
 }

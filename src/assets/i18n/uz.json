@@ -10,7 +10,7 @@
   "homepage": "Bosh sahifa",
   "about.us": "Biz haqimizda",
   "news": "Yangiliklar",
-  "privacy.policy": "Maxfiylik siyosati",
+  "terms.of.use": "Foydalanish shartlari",
   "faq": "KSS",
   "free.shipping": "Bepul yetkazish",
   "for.all.types.of.orders": "Barcha turdagi buyurtmalar uchun",
@@ -139,5 +139,6 @@
   "search": "Qidirish",
   "no.information.found.for.your.query": "Qidiruvingiz bo'yicha ma'lumot topilmadi",
   "publication.date": "Yangilik joylangan sana",
-  "show.all": "Hammasini ko'rish"
+  "show.all": "Hammasini ko'rish",
+  "terms.of.use.last.updated": "Foydalanish shartlari oxirgi marta {{ date }} da yangilangan"
 }

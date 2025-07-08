@@ -10,7 +10,7 @@
   "homepage": "Главная",
   "about.us": "О нас",
   "news": "Новости",
-  "privacy.policy": "Политика конфиденциальности",
+  "terms.of.use": "Пользовательское соглашение",
   "faq": "ЧЗВ",
   "free.shipping": "Беспл. доставка",
   "for.all.types.of.orders": "Для всех типов заказов",
@@ -139,5 +139,6 @@
   "search": "Поиск",
   "no.information.found.for.your.query": "Информация по вашему запросу не найдена",
   "publication.date": "Дата размещения новости",
-  "show.all": "Показать все"
+  "show.all": "Показать все",
+  "terms.of.use.last.updated": "Пользовательское соглашение было\n в последний раз обновлено\n {{ date }}"
 }

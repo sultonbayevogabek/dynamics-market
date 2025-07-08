@@ -33,7 +33,7 @@ export class MobileMenuService {
       type: 'page-link', label: 'contacts', url: '/contact-us'
     },
     {
-      type: 'page-link', label: 'privacy.policy', url: '/terms'
+      type: 'page-link', label: 'terms.of.use', url: '/terms'
     },
 
     {

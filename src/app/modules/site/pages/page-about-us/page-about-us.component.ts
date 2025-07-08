@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DirectionService } from '@shared/services/direction.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
