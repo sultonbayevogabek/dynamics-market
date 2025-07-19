@@ -16,7 +16,7 @@ export class PageProfileComponent implements OnInit {
     firstName: new FormControl(null, [ Validators.required ]),
     lastName: new FormControl(null, [ Validators.required ]),
     email: new FormControl(null, [ Validators.required ]),
-    phone: new FormControl('+998 ', [ Validators.required ]),
+    phone: new FormControl('', [ Validators.required ]),
     telegram: new FormControl(null),
     gender: new FormControl('male'),
     address: new FormControl(null)
@@ -38,16 +38,18 @@ export class PageProfileComponent implements OnInit {
   }
 
   async setInitialValue() {
-    this.currentUser = await firstValueFrom(this.authService.currentUser$);
+    this.currentUser = await firstValueFrom(
+      this.authService.currentUser$
+    );
 
     this.profileForm.patchValue({
       firstName: this.currentUser?.firstName,
       lastName: this.currentUser?.lastName,
       email: this.currentUser?.email,
-      phone: this.currentUser?.phone ?? '+998 ',
+      phone: this.currentUser?.phone,
       telegram: this.currentUser?.telegram,
       gender: this.currentUser?.gender ?? 'male',
-      address: this.currentUser?.address,
+      address: this.currentUser?.address
     });
   }
 
@@ -60,10 +62,7 @@ export class PageProfileComponent implements OnInit {
 
     form.disable();
 
-    const payload = {
-      ...form.value,
-      phone: `+998${ form.value.phone }`
-    };
+    const payload = form.getRawValue();
 
     try {
       const response = await firstValueFrom(
