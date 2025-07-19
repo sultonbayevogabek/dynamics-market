@@ -4,7 +4,9 @@ export interface IOrder {
   _id: string;
   orderCode: string;
   comment: string;
-  status: string;
+  status: {
+    name: string;
+  };
   items: Item[];
   itemsCount: number;
   createdAt: string;

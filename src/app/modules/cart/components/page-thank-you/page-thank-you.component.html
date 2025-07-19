@@ -35,7 +35,7 @@
               <th class="order-list__column-total">{{ 'total'| translate }}</th>
             </tr>
             </thead>
-            <tbody class="order-list__products">
+            <tbody class="order-list__products" *ngIf="orderDetails">
             <tr *ngFor="let item of orderDetails.items">
               <td class="order-list__column-image">
                 <div class="product-image">

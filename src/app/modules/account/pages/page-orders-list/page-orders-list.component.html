@@ -35,7 +35,7 @@
           <tr *ngFor="let order of orders">
             <td><a [routerLink]="'/account/orders/' + order.orderCode">#{{ order.orderCode }}</a></td>
             <td>{{ order.createdAt| date: 'dd.MM.YYYY HH:mm' }}</td>
-            <td>{{ ('order.status.' + order.status)| translate }}</td>
+            <td>{{ order.status?.name }}</td>
           </tr>
           </tbody>
         </table>
