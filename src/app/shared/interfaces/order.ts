@@ -22,7 +22,9 @@ export interface Item {
 
 export type CustomerType = 'legal' | 'individual';
 
-export type OrderStatus = 'new' | 'pendingReview' | 'cancelled' | 'contractSigned' | 'delivering' | 'completed';
+export type OrderStatus = {
+  name: string;
+};
 
 export interface IOrderDetails {
   _id: string;

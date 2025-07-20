@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Brand } from '@shared/interfaces/brand';
-import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-block-header',
@@ -23,6 +22,4 @@ export class BlockHeaderComponent {
     this.groups.forEach(g => g.current = g === group);
     this.groupChange.emit(group);
   }
-
-  protected readonly group = group;
 }

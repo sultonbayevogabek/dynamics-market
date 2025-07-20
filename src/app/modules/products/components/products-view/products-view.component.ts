@@ -52,15 +52,6 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
     });
 
     this.setValueFromQueryToForm();
-
-    this.productsService.products$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(products => {
-        if (products) {
-          this.loaded = true;
-          this.products = products;
-        }
-      })
   }
 
   async filter(pagination = false) {

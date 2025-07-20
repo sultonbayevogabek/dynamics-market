@@ -20,7 +20,10 @@
     <div class="block-products-carousel__slider" #container>
       <div class="block-products-carousel__preloader"></div>
 
-      <owl-carousel-o [options]="carouselOptions" appOwlPreventClick #carousel>
+      <owl-carousel-o
+        [options]="carouselOptions"
+        appOwlPreventClick #carousel
+      >
         <ng-template *ngFor="let product of products" carouselSlide>
           <div class="block-products-carousel__cell">
             <app-product-card [product]="product"></app-product-card>

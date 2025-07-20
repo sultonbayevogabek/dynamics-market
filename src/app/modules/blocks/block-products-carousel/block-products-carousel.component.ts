@@ -1,8 +1,9 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject,
+  Inject, NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -17,7 +18,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o/lib/models/owl-options.model';
 import { BrandsService } from '@shared/services/brands.service';
 import { Brand } from '@shared/interfaces/brand';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { ProductsService } from '@shared/services/products.service';
 
 @Component({
@@ -60,42 +61,41 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
     @Inject(PLATFORM_ID) private platformId: any,
     private direction: DirectionService,
     private brandsService: BrandsService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private ngZone: NgZone
   ) {
   }
 
   ngOnInit() {
     this.brandsService.brands$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(brands => {
+      .subscribe(async brands => {
         if (!brands || !brands?.length) {
           return;
         }
 
-        this.filterPopularBrands(brands);
-      });
-
-    this.productsService.products$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(products => {
-        this.products = products?.data || [];
-        this.loading = false;
+        await this.filterPopularBrands(brands);
       });
   }
 
-  filterPopularBrands(brands: Brand[]) {
+  async filterPopularBrands(brands: Brand[]) {
     this.popularBrands = brands?.filter(brand => brand?.isPopular) || [];
     this.popularBrands[0].current = true;
-    this.getProducts(this.popularBrands[0]?.slug);
+    await this.getProducts(this.popularBrands[0]?.slug);
   }
 
-  getProducts(brand: string) {
+  async getProducts(brand: string) {
     this.loading = true;
-    this.productsService.getProducts({
-      brands: [ brand ],
-      page: 1,
-      limit: 12
-    });
+    const response = await firstValueFrom(
+      this.productsService.getProducts({
+        brands: [ brand ],
+        page: 1,
+        limit: 12
+      })
+    );
+    this.loading = false;
+    this.products = response?.data;
+    console.log('Procuts', this.products);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

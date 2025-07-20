@@ -12,7 +12,6 @@ import { debounceTime } from 'rxjs/operators';
 
 export class ProductsService {
   filter: IProductsFilter = {};
-  products$ = new BehaviorSubject<{ data: IProduct[]; pages: number; total: number } | null>(null);
   loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -69,7 +68,7 @@ export class ProductsService {
 
   getProducts(params = {}) {
     this.loading$.next(true);
-    this.requestService.request<{ data: IProduct[]; pages: number; total: number }>('product/list', {
+    return this.requestService.request<{ data: IProduct[]; pages: number; total: number }>('product/list', {
       ...this.filter,
       brands: this.filter.brand,
       ...params
@@ -77,10 +76,8 @@ export class ProductsService {
       .pipe(
         tap(res => {
           this.loading$.next(false);
-          this.products$.next(res);
         })
-      )
-      .subscribe();
+      );
   }
 
   async getProduct(slug: string): Promise<IProduct> {

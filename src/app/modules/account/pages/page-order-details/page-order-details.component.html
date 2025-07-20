@@ -13,7 +13,7 @@
       <h5 class="order-header__title">{{ 'order'| translate }} #{{ orderDetails?.orderCode }}</h5>
       <div class="order-header__subtitle">
         {{ 'order.created.at'| translate }}: <strong>{{ orderDetails?.createdAt| date: 'dd.MM.YYYY HH:mm' }}</strong> |
-        {{ 'status'| translate }}: <strong>{{ ('order.status.' + orderDetails?.status)| translate }}</strong>
+        {{ 'status'| translate }}: <strong>{{ orderDetails?.status?.name }}</strong>
       </div>
     </div>
     <div class="card-divider"></div>
