@@ -13,6 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 export class ProductsService {
   filter: IProductsFilter = {};
   loading$ = new BehaviorSubject<boolean>(false);
+  products$ = new BehaviorSubject<{ data: IProduct[]; pages: number; total: number } | null>(null);
 
   constructor(
     private requestService: RequestService
@@ -25,7 +26,7 @@ export class ProductsService {
         distinctUntilChanged(),
         debounceTime(300)
       )
-      .subscribe(params => {
+      .subscribe(async params => {
         if (params && params['category']) {
           this.filter.category = params['category'];
         } else {
@@ -62,7 +63,7 @@ export class ProductsService {
           this.filter.sort = 'high-rating';
         }
 
-        this.getProducts();
+        await firstValueFrom(this.getProducts());
       });
   }
 
@@ -76,6 +77,7 @@ export class ProductsService {
       .pipe(
         tap(res => {
           this.loading$.next(false);
+          this.products$.next(res);
         })
       );
   }

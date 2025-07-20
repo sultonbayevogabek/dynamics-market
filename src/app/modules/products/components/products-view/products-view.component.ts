@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProductsSidebarService } from '../../services/products-sidebar.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ProductsService } from '@shared/services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '@shared/interfaces/product';
+import { takeUntil } from 'rxjs/operators';
 
 export type Layout = 'grid' | 'grid-with-features' | 'list';
 
@@ -52,6 +52,15 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
     });
 
     this.setValueFromQueryToForm();
+
+    this.productsService.products$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(products => {
+        if (products) {
+          this.loaded = true;
+          this.products = products;
+        }
+      })
   }
 
   async filter(pagination = false) {
