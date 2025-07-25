@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IProductsFilter } from '@shared/interfaces/filter';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, distinctUntilChanged, firstValueFrom, tap } from 'rxjs';
-import { IProduct } from '@shared/interfaces/product';
+import { IProduct, IProductsListResponse } from '@shared/interfaces/product';
 import { RequestService } from '@shared/services/request.service';
 import { debounceTime } from 'rxjs/operators';
 
@@ -13,7 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 export class ProductsService {
   filter: IProductsFilter = {};
   loading$ = new BehaviorSubject<boolean>(false);
-  products$ = new BehaviorSubject<{ data: IProduct[]; pages: number; total: number } | null>(null);
+  products$ = new BehaviorSubject<IProductsListResponse | null>(null);
 
   constructor(
     private requestService: RequestService
@@ -69,7 +69,7 @@ export class ProductsService {
 
   getProducts(params = {}) {
     this.loading$.next(true);
-    return this.requestService.request<{ data: IProduct[]; pages: number; total: number }>('product/list', {
+    return this.requestService.request<IProductsListResponse>('product/list', {
       ...this.filter,
       brands: this.filter.brand,
       ...params

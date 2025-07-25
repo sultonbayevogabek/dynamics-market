@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ProductsService } from '@shared/services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProduct } from '@shared/interfaces/product';
+import { IProduct, IProductsListResponse } from '@shared/interfaces/product';
 import { takeUntil } from 'rxjs/operators';
 
 export type Layout = 'grid' | 'grid-with-features' | 'list';
@@ -18,14 +18,12 @@ export class ProductsViewComponent implements OnInit, OnDestroy {
   @Input() layout: Layout = 'grid-with-features';
   @Input() grid: 'grid-3-sidebar' | 'grid-4-full' | 'grid-5-full' = 'grid-3-sidebar';
   @Input() offcanvas: 'always' | 'mobile' = 'mobile';
-  products: {
-    data: IProduct[];
-    pages: number;
-    total: number;
-  } = {
+  products: IProductsListResponse = {
     data: [],
     pages: 0,
     total: 0,
+    start: 0,
+    end: 0
   }
 
   destroy$: Subject<void> = new Subject<void>();

@@ -49,7 +49,7 @@
         <span *ngIf="product.availability === 'on_demand'" class="text-primary">{{ 'on.order'| translate }}</span>
         <span *ngIf="product.availability === 'out_of_stock'" class="text-danger">{{ 'out.of.stock'| translate }}</span>
       </li>
-      <li *ngFor="let attribute of product?.attributes?.slice(0, 5)">
+      <li *ngFor="let attribute of product?.attributes?.slice(0, 3)">
         {{ attribute.name }}: {{ attribute.value }}
       </li>
     </ul>

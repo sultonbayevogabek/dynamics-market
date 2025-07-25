@@ -28,6 +28,14 @@ export interface ProductAttribute {
   customFields: CustomFields;
 }
 
+export interface IProductsListResponse {
+  data: IProduct[];
+  pages: number;
+  total: number;
+  start: number;
+  end: number;
+}
+
 export interface Product {
   id: number;
   slug: string;

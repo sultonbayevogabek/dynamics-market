@@ -35,8 +35,8 @@
         <div class="view-options__legend">
           {{
             'pagination.result.text'| translate: {
-              interval: 1 + '-' + 12,
-              total: 7
+              interval: products.start + '-' + products.end,
+              total: products?.total
             }
           }}
         </div>
