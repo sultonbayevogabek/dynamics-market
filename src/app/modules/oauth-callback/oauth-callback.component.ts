@@ -5,8 +5,7 @@ import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'oauth-callback',
-  templateUrl: './oauth-callback.component.html',
-  styleUrls: [ './oauth-callback.component.scss' ]
+  templateUrl: './oauth-callback.component.html'
 })
 
 export class OAuthCallbackComponent implements OnInit {

@@ -140,5 +140,6 @@
   "no.information.found.for.your.query": "Qidiruvingiz bo'yicha ma'lumot topilmadi",
   "publication.date": "Yangilik joylangan sana",
   "show.all": "Hammasini ko'rish",
-  "terms.of.use.last.updated": "Foydalanish shartlari oxirgi marta {{ date }} da yangilangan"
+  "terms.of.use.last.updated": "Foydalanish shartlari oxirgi marta {{ date }} da yangilangan",
+  "location": "Joylashuv"
 }

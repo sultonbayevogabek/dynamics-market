@@ -3,7 +3,13 @@
   <div class="topbar__container container">
     <div class="topbar__row">
       <div class="topbar__item topbar__item--link">
-        <a class="topbar-link" routerLink="/contact-us">{{ 'contacts'| translate }}</a>
+        <app-icon class="mr-1 opacity-80" name="location" size="16x16"></app-icon>
+        <a class="topbar-link" *ngIf="currentAddress">
+          {{ currentAddress[currentLanguage] }}
+        </a>
+        <a class="topbar-link" *ngIf="!currentAddress">
+          {{ 'location'| translate }}
+        </a>
       </div>
       <div class="topbar__spring"></div>
       <div class="topbar__item">

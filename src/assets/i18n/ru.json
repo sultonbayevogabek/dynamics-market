@@ -140,5 +140,6 @@
   "no.information.found.for.your.query": "Информация по вашему запросу не найдена",
   "publication.date": "Дата размещения новости",
   "show.all": "Показать все",
-  "terms.of.use.last.updated": "Пользовательское соглашение было\n в последний раз обновлено\n {{ date }}"
+  "terms.of.use.last.updated": "Пользовательское соглашение было\n в последний раз обновлено\n {{ date }}",
+  "location": "Расположение"
 }

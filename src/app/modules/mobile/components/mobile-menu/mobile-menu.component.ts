@@ -7,8 +7,7 @@ import { LanguageService } from '@shared/services/language.service';
 
 @Component({
   selector: 'app-mobile-menu',
-  templateUrl: './mobile-menu.component.html',
-  styleUrls: [ './mobile-menu.component.scss' ]
+  templateUrl: './mobile-menu.component.html'
 })
 
 export class MobileMenuComponent implements OnDestroy, OnInit {
@@ -29,11 +28,6 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
       .subscribe(isOpen => this.isOpen = isOpen);
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   onItemClick(event: MobileMenuItemLink): void {
     if (['category-link', 'page-link'].includes(event.type!)) {
       this.mobileMenuService.close();
@@ -42,5 +36,10 @@ export class MobileMenuComponent implements OnDestroy, OnInit {
     if (event.data && event.data.language) {
       this.languageService.setLanguage(event.data.language);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

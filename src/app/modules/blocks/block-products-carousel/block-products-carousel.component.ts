@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject, NgZone,
+  Inject,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -95,7 +95,6 @@ export class BlockProductsCarouselComponent implements OnChanges, AfterViewInit,
     );
     this.loading = false;
     this.products = response?.data;
-    console.log('Procuts', this.products);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
