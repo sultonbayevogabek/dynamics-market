@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from '@shared/services/currency.service';
 import { LanguageService } from '@shared/services/language.service';
-import { GeolocationService, LocationData } from '@shared/services/geolocation.service';
+import { GeolocationService } from '@shared/services/geolocation.service';
 import { MultiLanguageAddress } from '@shared/services/multilanguage-geocoding.service';
 import { firstValueFrom, interval } from 'rxjs';
 import { Language } from '@shared/interfaces/language';
