@@ -3,7 +3,7 @@ import { CurrencyService } from '@shared/services/currency.service';
 import { LanguageService } from '@shared/services/language.service';
 import { GeolocationService, LocationData } from '@shared/services/geolocation.service';
 import { MultiLanguageAddress } from '@shared/services/multilanguage-geocoding.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, interval } from 'rxjs';
 import { Language } from '@shared/interfaces/language';
 
 interface Currency {
@@ -19,7 +19,6 @@ interface Currency {
 })
 
 export class TopbarComponent implements OnInit {
-  isGeolocationSupported = false;
   currentAddress: MultiLanguageAddress | null = null;
   currentLanguage: Language = 'uz';
 
@@ -37,27 +36,37 @@ export class TopbarComponent implements OnInit {
 
   async ngOnInit() {
     this.currentLanguage = <Language>this.languageService.currentLang;
-    await this.getCurrentLocation();
+
+    if (localStorage.getItem('currentAddress')) {
+      this.currentAddress = JSON.parse(localStorage.getItem('currentAddress')!);
+      return;
+    }
+
+    interval(10000).subscribe(async () => {
+      await this.getCurrentLocation();
+    });
   }
 
   async getCurrentLocation() {
     try {
-      const location = await firstValueFrom(this.geolocationService.getCurrentPosition());
-      console.log('Joylashuv aniqlandi:', location);
+      const location = await firstValueFrom(
+        this.geolocationService.getCurrentPosition()
+      );
 
       try {
-        const address = await firstValueFrom(this.geolocationService.getMultiLanguageAddress(location!));
+        const address = await firstValueFrom(
+          this.geolocationService.getMultiLanguageAddress(location!)
+        );
         if (address) {
           this.currentAddress = address;
-          console.log('Ko\'p tilli manzil:', address);
         } else {
           this.currentAddress = this.geolocationService.getFallbackAddress(location!);
-          console.log('Fallback manzil:', this.currentAddress);
         }
       } catch (error) {
-        console.error('Manzil olishda xatolik:', error);
         this.currentAddress = this.geolocationService.getFallbackAddress(location!);
       }
+
+      localStorage.setItem('currentAddress', JSON.stringify(this.currentAddress));
     } catch (error) {
       console.error('Geolocation xatoligi:', error);
     }
