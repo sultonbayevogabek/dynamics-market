@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ProductsService } from '@shared/services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProduct, IProductsListResponse } from '@shared/interfaces/product';
+import { IProductsListResponse } from '@shared/interfaces/product';
 import { takeUntil } from 'rxjs/operators';
 
 export type Layout = 'grid' | 'grid-with-features' | 'list';
