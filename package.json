@@ -14,6 +14,10 @@
     "build:ssr": "ng build && ng run dynamics-market:server",
     "prerender": "ng run dynamics-market:prerender"
   },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
   "private": true,
   "dependencies": {
     "@angular-slider/ngx-slider": "^13.0.0",
