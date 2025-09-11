@@ -16,10 +16,8 @@ export type SocialLinksShape = 'circle' | 'rounded';
 export class SocialLinksComponent {
 
   items: SocialLinksItem[] = [
-    { type: 'instagram', url: '/', icon: 'fab fa-instagram' },
-    { type: 'youtube', url: '/', icon: 'fab fa-youtube' },
-    { type: 'facebook', url: '/', icon: 'fab fa-facebook-f' },
-    { type: 'twitter', url: '/', icon: 'fab fa-twitter' },
+    { type: 'telegram', url: 'https://t.me/dynamicsmarket', icon: 'fab fa-telegram' },
+    { type: 'youtube', url: 'https://www.linkedin.com/company/dynamics-engineering-uz/', icon: 'fab fa-linkedin' }
   ];
 
   @Input() shape: SocialLinksShape = 'circle';
